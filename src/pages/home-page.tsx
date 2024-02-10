@@ -1,8 +1,20 @@
-import React from 'react'
+import useAuth from "@/context/use-auth"
+import { Link } from "react-router-dom"
 
 function HomePage() {
+  const { user } = useAuth()
+
   return (
-    <div>HomePage</div>
+    <>
+      {user ? (
+        <div>Hello {user.firstName}</div>
+      ) : (
+        <div>
+          <Link to="/sign-up">Signup</Link>
+          <Link to="/login">Login</Link>
+        </div>
+      )}
+    </>
   )
 }
 
