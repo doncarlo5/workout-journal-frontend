@@ -7,10 +7,10 @@ import SignupPage from "./pages/signup-page"
 
 function App() {
   return (
-    <div className=" h-dvh bg-slate-500">
+    <div className="">
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/sign-up" element={<SignupPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
