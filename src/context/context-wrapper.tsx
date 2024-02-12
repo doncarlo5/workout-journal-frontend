@@ -1,6 +1,6 @@
 // import { AuthContext } from './auth-context';
 
-import React, { createContext, useState } from "react"
+import React, { createContext, useEffect, useState } from "react"
 
 import { User } from "@/types/user"
 import myApi from "@/lib/api-handler"
@@ -43,6 +43,10 @@ const AuthContextWrapper = ({ children }: WrapperProps) => {
       setUser(null)
     }
   }
+
+  useEffect(() => {
+    authenticateUser()
+  }, [])
   return (
     <AuthContext.Provider value={{ user, isLoggedIn, isLoading, authenticateUser }}>{children}</AuthContext.Provider>
   )

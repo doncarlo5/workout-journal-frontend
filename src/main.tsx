@@ -7,10 +7,14 @@ import "./index.css"
 
 import { BrowserRouter } from "react-router-dom"
 
+import AuthContextWrapper from "./context/context-wrapper.tsx"
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthContextWrapper>
+        <App />
+      </AuthContextWrapper>
     </BrowserRouter>
   </React.StrictMode>
 )

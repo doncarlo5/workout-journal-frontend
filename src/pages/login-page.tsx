@@ -74,7 +74,7 @@ const LoginPage = () => {
         <div className="mx-auto max-w-sm space-y-6">
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-gray-500 dark:text-gray-400">Bon retour! 👋 Connecte toi avec ton compte</p>
+            <p className="text-gray-500 dark:text-gray-400">De retour! 👋 Connecte toi avec ton compte</p>
           </div>
           <div className="space-y-4">
             <div className="flex flex-col gap-2">
