@@ -8,7 +8,7 @@ const IsNotAuthenticated = () => {
     return <p>Loading</p>
   }
   if (isLoggedIn) {
-    return <Navigate to="/signup" />
+    return <Navigate to="/" />
   }
 
   return <Outlet />
