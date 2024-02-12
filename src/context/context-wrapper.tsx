@@ -18,7 +18,7 @@ interface IAuthContext {
   authenticateUser: () => void
 }
 
-export const AuthContext = createContext({
+const AuthContext = createContext({
   user: null,
   isLoggedIn: false,
   isLoading: true,
@@ -27,11 +27,14 @@ export const AuthContext = createContext({
 
 const AuthContextWrapper = ({ children }: WrapperProps) => {
   // const { user, login, logout, setUser } = useAuth();
+
   const [user, setUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+
   async function authenticateUser() {
     const token = localStorage.getItem("token")
+
     if (token) {
       const response = await myApi.get("/auth/verify")
       setUser(response.data)
@@ -47,9 +50,12 @@ const AuthContextWrapper = ({ children }: WrapperProps) => {
   useEffect(() => {
     authenticateUser()
   }, [])
+
   return (
     <AuthContext.Provider value={{ user, isLoggedIn, isLoading, authenticateUser }}>{children}</AuthContext.Provider>
   )
 }
+
+export { AuthContext }
 
 export default AuthContextWrapper
