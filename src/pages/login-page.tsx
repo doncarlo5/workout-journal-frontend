@@ -28,7 +28,7 @@ const LoginPage = () => {
       console.log(response)
       localStorage.setItem("token", response.data.token)
       await authenticateUser()
-      navigate("/profile")
+      navigate("/settings")
     } catch (error: any) {
       // console.log(error)
 
