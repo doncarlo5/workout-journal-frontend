@@ -34,16 +34,19 @@ const AuthContextWrapper = ({ children }: WrapperProps) => {
 
   async function authenticateUser() {
     const token = localStorage.getItem("token")
-
-    if (token) {
-      const response = await myApi.get("/auth/verify")
-      setUser(response.data)
-      setIsLoggedIn(true)
-      setIsLoading(false)
-    } else {
-      setIsLoading(false)
-      setIsLoggedIn(false)
-      setUser(null)
+    try {
+      if (token) {
+        const response = await myApi.get("/auth/verify")
+        setUser(response.data)
+        setIsLoggedIn(true)
+        setIsLoading(false)
+      } else {
+        setIsLoading(false)
+        setIsLoggedIn(false)
+        setUser(null)
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 

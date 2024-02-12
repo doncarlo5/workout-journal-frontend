@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -19,13 +19,16 @@ const LoginPage = () => {
 
   const [error, setError] = useState("")
 
+  const navigate = useNavigate()
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
       const response = await myApi.post("/auth/login", formState)
       console.log(response)
       localStorage.setItem("token", response.data.token)
-      authenticateUser()
+      await authenticateUser()
+      navigate("/profile")
     } catch (error: any) {
       // console.log(error)
 

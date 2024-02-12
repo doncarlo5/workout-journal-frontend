@@ -1,27 +1,47 @@
+import useAuth from "@/context/use-auth"
 import { Link } from "react-router-dom"
 
 function Navbar() {
+  const { isLoggedIn } = useAuth()
+
   return (
     <header className="border-b p-4">
       <div className="container flex items-center justify-between px-4 md:px-6">
         <Link className="flex items-center space-x-2" to="/">
           <FlagIcon className="h-8 w-8" />
-          <span className="text-xl font-bold">Workout Journal</span>
+          <span className="text-xl font-bold transition-transform hover:scale-105">Workout Journal</span>
         </Link>
-        <nav className="space-x-4">
-          <Link
-            className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-            to="/signup"
-          >
-            Sign up
-          </Link>
-          <Link
-            className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-            to="/login"
-          >
-            Log in
-          </Link>
-        </nav>
+        {!isLoggedIn ? (
+          <nav className="space-x-4">
+            <Link
+              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+              to="/signup"
+            >
+              Sign up
+            </Link>
+            <Link
+              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+              to="/login"
+            >
+              Log in
+            </Link>
+          </nav>
+        ) : (
+          <nav className="space-x-4">
+            <Link
+              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+              to="/session"
+            >
+              Séance
+            </Link>
+            <Link
+              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+              to="/settings"
+            >
+              Options
+            </Link>
+          </nav>
+        )}
       </div>
     </header>
   )
