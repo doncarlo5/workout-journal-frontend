@@ -9,17 +9,18 @@ export function ExercicesList() {
   const [exercise, setExercise] = useState([] as any[])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchExercises = async () => {
-      try {
-        const response = await myApi.get("/exercise-user")
-        console.log(response)
-        setExercise(response.data)
-        setLoading(false)
-      } catch (error) {
-        console.error("Fetch error: ", error)
-      }
+  const fetchExercises = async () => {
+    try {
+      const response = await myApi.get("/exercise-user")
+      console.log(response)
+      setExercise(response.data)
+      setLoading(false)
+    } catch (error) {
+      console.error("Fetch error: ", error)
     }
+  }
+
+  useEffect(() => {
     fetchExercises()
   }, [])
 
