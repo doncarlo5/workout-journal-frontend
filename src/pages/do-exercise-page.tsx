@@ -98,6 +98,9 @@ const DoExercisePage = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        <div>
+          <p>{exerciceType?.advice}</p>
+        </div>
         <div className="space-y-4">
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
