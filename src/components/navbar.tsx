@@ -29,10 +29,16 @@ function Navbar() {
         ) : (
           <nav className="space-x-4">
             <Link
-              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-              to="/session"
+              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-colors hover:bg-green-color hover:text-stone-color dark:bg-gray-800"
+              to="/doexercise"
             >
-              Séance
+              Faire un exercice
+            </Link>
+            <Link
+              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+              to="/exerciseslist"
+            >
+              Liste des exercices
             </Link>
             <Link
               className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
