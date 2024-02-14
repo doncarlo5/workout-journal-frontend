@@ -74,6 +74,21 @@ const DoExercisePage = () => {
   //   return false
   // }
 
+  function formatTime(seconds: number): string {
+    const minutes = Math.floor(seconds / 60)
+    const remainingSeconds = seconds % 60
+
+    if (minutes === 0 && remainingSeconds === 0) {
+      return ""
+    } else if (minutes === 0) {
+      return `${remainingSeconds} sec`
+    } else {
+      const minutesString = minutes > 0 ? `${minutes} min` : ""
+      const secondsString = remainingSeconds > 0 ? ` ${remainingSeconds} sec` : ""
+      return `${minutesString}${secondsString}`
+    }
+  }
+
   return (
     <>
       <div className="mb-10 flex flex-col">
@@ -81,8 +96,7 @@ const DoExercisePage = () => {
       </div>
       <div className="mx-auto max-w-sm space-y-6">
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Create an Exercise</h1>
-          <p className="text-gray-500 dark:text-gray-400">Fill out the form to add a new exercise.</p>
+          <h1 className="text-3xl font-bold">Lance un exercice</h1>
         </div>
         <Select onValueChange={setExerciceType}>
           <SelectTrigger className="w-[180px]">
@@ -99,15 +113,16 @@ const DoExercisePage = () => {
           </SelectContent>
         </Select>
         <div>
-          <p>{exerciceType?.advice}</p>
+          <p className="text-gray-500 dark:text-gray-400">Conseil: {exerciceType?.advice}</p>
+          <p className="text-gray-500 dark:text-gray-400">Temps de repos: {formatTime(exerciceType?.timer)}</p>
         </div>
         <div className="space-y-4">
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="rep1">Rep 1</Label>
+              <Label htmlFor="rep1">Répétition 1</Label>
               <Input
                 id="rep1"
-                placeholder="Rep 1"
+                placeholder="Exemple: 12"
                 value={formState.rep1}
                 onChange={handleChange}
                 required
@@ -115,10 +130,10 @@ const DoExercisePage = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="weight1">Weight 1</Label>
+              <Label htmlFor="weight1">Poids 1</Label>
               <Input
                 id="weight1"
-                placeholder="Weight 1"
+                placeholder="Exemple: 20"
                 value={formState.weight1}
                 onChange={handleChange}
                 required
@@ -126,21 +141,14 @@ const DoExercisePage = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="rep2">Rep 2</Label>
-              <Input
-                id="rep2"
-                placeholder="Rep 2"
-                value={formState.rep2}
-                onChange={handleChange}
-                required
-                type="text"
-              />
+              <Label htmlFor="rep2">Répétition 2</Label>
+              <Input id="rep2" placeholder="" value={formState.rep2} onChange={handleChange} required type="text" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="weight2">Weight 2</Label>
+              <Label htmlFor="weight2">Poids 2</Label>
               <Input
                 id="weight2"
-                placeholder="Weight 2"
+                placeholder=""
                 value={formState.weight2}
                 onChange={handleChange}
                 required
@@ -148,21 +156,14 @@ const DoExercisePage = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="repRange2">Rep 3</Label>
-              <Input
-                id="rep3"
-                placeholder="Rep 3"
-                value={formState.rep3}
-                onChange={handleChange}
-                required
-                type="text"
-              />
+              <Label htmlFor="repRange2">Répétition 3</Label>
+              <Input id="rep3" placeholder="" value={formState.rep3} onChange={handleChange} required type="text" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="weight3">Weight 3</Label>
+              <Label htmlFor="weight3">Poids 3</Label>
               <Input
                 id="weight3"
-                placeholder="Weight 3"
+                placeholder=""
                 value={formState.weight3}
                 onChange={handleChange}
                 required
@@ -170,7 +171,7 @@ const DoExercisePage = () => {
               />
             </div>
             <Button className="col-span-2 w-full" type="submit">
-              Add Exercise
+              Enregistrer l'exercise
             </Button>
           </form>
         </div>
