@@ -1,8 +1,10 @@
 import useAuth from "@/context/use-auth"
 import { Link } from "react-router-dom"
 
+import { Button } from "./ui/button"
+
 function Navbar() {
-  const { isLoggedIn } = useAuth()
+  const { isLoggedIn, handleLogout } = useAuth()
 
   return (
     <header className="border-b p-4">
@@ -30,7 +32,7 @@ function Navbar() {
           <nav className="space-x-4">
             <Link
               className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-colors hover:bg-green-color hover:text-stone-color dark:bg-gray-800"
-              to="/doexercise"
+              to="/do-exercise"
             >
               Faire un exercice
             </Link>
@@ -38,13 +40,20 @@ function Navbar() {
               className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
               to="/exerciseslist"
             >
-              Liste des exercices
+              Exercices enregistrés
             </Link>
             <Link
               className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
               to="/settings"
             >
               Options
+            </Link>
+            <Link
+              to="/welcome"
+              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-black dark:bg-gray-800"
+              onClick={handleLogout}
+            >
+              ⍈
             </Link>
           </nav>
         )}

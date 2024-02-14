@@ -15,6 +15,7 @@ interface IAuthContext {
   user: User | null
   isLoggedIn: boolean
   isLoading: boolean
+  handleLogout: () => void
   authenticateUser: () => void
 }
 
@@ -54,8 +55,16 @@ const AuthContextWrapper = ({ children }: WrapperProps) => {
     authenticateUser()
   }, [])
 
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    setIsLoggedIn(false)
+    setUser(null)
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, isLoading, authenticateUser }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, isLoggedIn, isLoading, authenticateUser, handleLogout }}>
+      {children}
+    </AuthContext.Provider>
   )
 }
 
