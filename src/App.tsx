@@ -7,6 +7,7 @@ import LoginPage from "./pages/login-page"
 // import SessionPage from "./pages/session-page"
 import SettingsPage from "./pages/settings-page"
 import SignupPage from "./pages/signup-page"
+import WelcomePage from "./pages/welcome-page"
 import IsAuthenticated from "./routing/is-authenticated"
 import IsNotAuthenticated from "./routing/is-not-authenticated"
 
@@ -14,14 +15,18 @@ function App() {
   return (
     <div className="">
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route element={<IsAuthenticated redirect={"/welcome"} />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
+        <Route path="/welcome" element={<WelcomePage />} />
+
         <Route element={<IsNotAuthenticated />}>
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Route>
-        <Route element={<IsAuthenticated />}>
+        <Route element={<IsAuthenticated redirect={"/"} />}>
           <Route path="/exerciseslist" element={<ExercicesList />} />
-          <Route path="/doexercise" element={<DoExercisePage />} />
+          <Route path="/do-exercise" element={<DoExercisePage />} />
           {/* <Route path="/session" element={<SessionPage />} /> */}
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
