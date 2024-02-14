@@ -1,7 +1,11 @@
 import useAuth from "@/context/use-auth"
 import { Navigate, Outlet } from "react-router-dom"
 
-const IsAuthenticated = () => {
+type IsAuthenticatedProps = {
+  redirect: string
+}
+
+const IsAuthenticated = ({ redirect }: IsAuthenticatedProps) => {
   const { isLoggedIn, isLoading } = useAuth()
 
   if (isLoading) {
@@ -9,7 +13,7 @@ const IsAuthenticated = () => {
   }
 
   if (!isLoggedIn) {
-    return <Navigate to="/" />
+    return <Navigate to={redirect} />
   }
 
   return <Outlet />

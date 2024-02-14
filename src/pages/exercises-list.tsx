@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
+import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 
 // const { user } = useAuth()
@@ -34,6 +36,22 @@ export function ExercicesList() {
             <h2>{exercise.type.name}</h2>
           </div>
         ))}
+        {exercise.length === 0 && (
+          <main className="flex flex-1 items-center justify-center">
+            <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
+              <div className="text-center">
+                <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
+                  Tu n'as pas encore d'exercices
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <Link className="w-[150px]" to="/do-exercise">
+                  <Button className="w-full">Lancer un exercice</Button>
+                </Link>
+              </div>
+            </div>
+          </main>
+        )}
       </main>
     </div>
   )
