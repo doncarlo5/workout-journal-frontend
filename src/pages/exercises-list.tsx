@@ -19,7 +19,8 @@ import { Navbar } from "@/components/navbar"
 
 export function ExercicesList() {
   const [exercise, setExercise] = useState([] as any[])
-  const fetchExercises = async () => {
+
+  const fetchUserExercises = async () => {
     try {
       const response = await myApi.get("/exercise-user")
       setExercise(response.data)
@@ -29,14 +30,14 @@ export function ExercicesList() {
   }
 
   useEffect(() => {
-    fetchExercises()
+    fetchUserExercises()
   }, [])
 
   const handleDelete = async (id: string) => {
     try {
       const response = await myApi.delete(`/exercise-user/${id}`)
       console.log(response)
-      fetchExercises()
+      fetchUserExercises()
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -46,7 +47,6 @@ export function ExercicesList() {
     return new Date(dateString).toLocaleDateString()
   }
 
-  console.log("hfkehfkfhkhk", exercise)
   return (
     <div className="flex h-screen flex-col">
       <Navbar />
@@ -55,7 +55,7 @@ export function ExercicesList() {
           <h1 className="mb-10 text-3xl font-bold">Mes exercices terminés 📃</h1>
         </div>
         <div>
-          <Table className="  ">
+          <Table>
             <TableCaption>Liste de tes exercices passés</TableCaption>
             <TableHeader>
               <TableRow>
