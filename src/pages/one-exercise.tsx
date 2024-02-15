@@ -90,6 +90,15 @@ const OneExercise = () => {
     }
   }
 
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const { target } = event
+    if (target instanceof HTMLInputElement) {
+      const key = target.id
+      const value = target.value
+      setFormState({ ...formState, [key]: value })
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
@@ -109,19 +118,6 @@ const OneExercise = () => {
     }
   }
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const { target } = event
-    if (target instanceof HTMLInputElement) {
-      const key = target.id
-      const value = target.value
-      setFormState({ ...formState, [key]: value })
-    }
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
-  }
-
   const handleDelete = async (id: string) => {
     try {
       const response = await myApi.delete(`/exercise-user/${id}`)
@@ -131,6 +127,10 @@ const OneExercise = () => {
     } catch (error) {
       console.error("Fetch error: ", error)
     }
+  }
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString()
   }
 
   return (
