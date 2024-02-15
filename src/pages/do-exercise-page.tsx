@@ -11,6 +11,7 @@ import myApi from "../lib/api-handler"
 
 const DoExercisePage = () => {
   const [oneExerciseType, setOneExerciseType] = useState(null as any)
+  const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
 
   const [formState, setFormState] = useState({
     rep1: "",
@@ -21,9 +22,9 @@ const DoExercisePage = () => {
     weight3: "",
   })
 
-  const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
+  const navigate = useNavigate()
 
-  const fetchExerciseTypes = async () => {
+  const fetchAllExerciseTypes = async () => {
     try {
       const response = await myApi.get("/exercise-type")
       setAllExerciseTypes(response.data)
@@ -33,10 +34,17 @@ const DoExercisePage = () => {
   }
 
   useEffect(() => {
-    fetchExerciseTypes()
+    fetchAllExerciseTypes()
   }, [])
 
-  const navigate = useNavigate()
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const { target } = event
+    if (target instanceof HTMLInputElement) {
+      const key = target.id
+      const value = target.value
+      setFormState({ ...formState, [key]: value })
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -53,24 +61,6 @@ const DoExercisePage = () => {
       console.log(error)
     }
   }
-
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const { target } = event
-    if (target instanceof HTMLInputElement) {
-      const key = target.id
-      const value = target.value
-      setFormState({ ...formState, [key]: value })
-    }
-  }
-
-  // function validateInput(value: string) {
-  //   console.log(value)
-  //   const [firstRange, secondRange] = value.split("-")
-  //   if (typeof +firstRange === "number" && typeof +secondRange === "number") {
-  //     return value
-  //   }
-  //   return false
-  // }
 
   function formatTime(seconds: number): string {
     const minutes = Math.floor(seconds / 60)
