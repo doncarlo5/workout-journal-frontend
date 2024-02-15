@@ -26,7 +26,6 @@ const DoExercisePage = () => {
   const fetchExerciseTypes = async () => {
     try {
       const response = await myApi.get("/exercise-type")
-      console.log(response)
       setAllExerciseTypes(response.data)
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -48,7 +47,7 @@ const DoExercisePage = () => {
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
       })
-      console.log(response)
+      console.log("response is:", response)
       navigate("/exercises-list/")
     } catch (error: any) {
       console.log(error)

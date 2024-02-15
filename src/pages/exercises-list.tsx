@@ -25,8 +25,6 @@ export function ExercicesList() {
   const fetchExercises = async () => {
     try {
       const response = await myApi.get("/exercise-user")
-      console.log(response.data)
-      console.log("HEYYY")
       setExercise(response.data)
       setLoading(false)
     } catch (error) {

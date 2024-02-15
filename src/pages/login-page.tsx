@@ -31,8 +31,7 @@ const LoginPage = () => {
       await authenticateUser()
       navigate("/exercises-list/")
     } catch (error: any) {
-      // console.log(error)
-
+      console.log(error)
       setError("Mot de passe incorrect")
       setTimeout(() => {
         setError("")

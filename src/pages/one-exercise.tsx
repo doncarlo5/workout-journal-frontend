@@ -66,7 +66,6 @@ const OneExercise = () => {
         updatedAt: response.data.updatedAt,
       })
 
-      console.log("🔔 response data type", response.data.type)
       const newExercise = response.data.type
       setExercise(newExercise)
       setOneExerciseType(newExercise)
