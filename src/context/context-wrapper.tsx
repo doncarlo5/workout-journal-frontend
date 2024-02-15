@@ -1,11 +1,7 @@
-// import { AuthContext } from './auth-context';
-
 import React, { createContext, useEffect, useState } from "react"
 
 import { User } from "@/types/user"
 import myApi from "@/lib/api-handler"
-
-// import { useAuth } from '../hooks/use-auth';
 
 type WrapperProps = {
   children: React.ReactNode
@@ -27,8 +23,6 @@ const AuthContext = createContext({
 } as IAuthContext)
 
 const AuthContextWrapper = ({ children }: WrapperProps) => {
-  // const { user, login, logout, setUser } = useAuth();
-
   const [user, setUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
