@@ -17,16 +17,12 @@ import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navbar } from "@/components/navbar"
 
-// const { user } = useAuth()
-
 export function ExercicesList() {
   const [exercise, setExercise] = useState([] as any[])
-  const [loading, setLoading] = useState(true)
   const fetchExercises = async () => {
     try {
       const response = await myApi.get("/exercise-user")
       setExercise(response.data)
-      setLoading(false)
     } catch (error) {
       console.error("Fetch error: ", error)
     }

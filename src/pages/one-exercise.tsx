@@ -103,6 +103,7 @@ const OneExercise = () => {
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
       })
+      console.log(response)
       fetchOneExercise()
       fetchExerciseTypes()
     } catch (error) {
