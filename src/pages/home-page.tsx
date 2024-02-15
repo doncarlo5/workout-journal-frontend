@@ -1,10 +1,7 @@
-// import useAuth from "@/context/use-auth"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
-
-// const { user } = useAuth()
 
 export function HomePage() {
   return (
@@ -19,7 +16,7 @@ export function HomePage() {
           </div>
           <div className="text-center">
             <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
-              Jette un oeil à tes exercices réalisés et lance un nouvel entraînement!
+              Jette un oeil à tes exercices réalisés ou lance un nouvel entraînement!
             </p>
           </div>
           <div className="mt-5 flex gap-4">
