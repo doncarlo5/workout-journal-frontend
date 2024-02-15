@@ -11,16 +11,23 @@ import { AuthContext } from "../context/context-wrapper"
 import myApi from "../lib/api-handler"
 
 const LoginPage = () => {
-  const { authenticateUser } = useContext(AuthContext)
-
+  const [error, setError] = useState("")
   const [formState, setFormState] = useState({
     email: "",
     password: "",
   })
 
-  const [error, setError] = useState("")
-
+  const { authenticateUser } = useContext(AuthContext)
   const navigate = useNavigate()
+
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const { target } = event
+    if (target instanceof HTMLInputElement) {
+      const key = target.id
+      const value = target.value
+      setFormState({ ...formState, [key]: value })
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -36,15 +43,6 @@ const LoginPage = () => {
       setTimeout(() => {
         setError("")
       }, 3000)
-    }
-  }
-
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const { target } = event
-    if (target instanceof HTMLInputElement) {
-      const key = target.id
-      const value = target.value
-      setFormState({ ...formState, [key]: value })
     }
   }
 
