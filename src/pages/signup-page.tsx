@@ -1,5 +1,7 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -8,6 +10,8 @@ import { Navbar } from "@/components/navbar"
 import myApi from "../lib/api-handler"
 
 const SignupPage = () => {
+  const navigate = useNavigate()
+
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
@@ -23,6 +27,7 @@ const SignupPage = () => {
     try {
       const response = await myApi.post("/auth/signup", formState)
       console.log(response)
+      navigate("/login")
     } catch (error: any) {
       setError(error.response.data.message)
       setTimeout(() => {
@@ -80,7 +85,7 @@ const SignupPage = () => {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                placeholder="johnny.bravo@cartoon.com"
+                placeholder="johnny.bravo@email.com"
                 value={formState.email}
                 onChange={handleChange}
                 required
@@ -89,15 +94,27 @@ const SignupPage = () => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Mot de passe</Label>
-              <Input id="password" value={formState.password} onChange={handleChange} required type="password" />
+              <Input
+                id="password"
+                placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                value={formState.password}
+                onChange={handleChange}
+                required
+                type="password"
+              />
             </div>
             <Button className="w-full" type="submit">
               Créer mon compte
             </Button>
+            {error && (
+              <Alert variant="destructive">
+                <AlertTitle>Erreur</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
           </div>
         </div>
       </form>
-      {error && <p>{error}</p>}
     </>
   )
 }
