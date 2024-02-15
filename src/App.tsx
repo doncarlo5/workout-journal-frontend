@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 
+import { ThemeProvider } from "./components/theme-provider"
 import DoExercisePage from "./pages/do-exercise-page"
 import ExercicesList from "./pages/exercises-list"
 import HomePage from "./pages/home-page"
@@ -15,25 +16,27 @@ import IsNotAuthenticated from "./routing/is-not-authenticated"
 function App() {
   return (
     <div className="">
-      <Routes>
-        <Route element={<IsAuthenticated redirect={"/welcome"} />}>
-          <Route path="/" element={<HomePage />} />
-        </Route>
-        <Route path="/welcome" element={<WelcomePage />} />
+      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+        <Routes>
+          <Route element={<IsAuthenticated redirect={"/welcome"} />}>
+            <Route path="/" element={<HomePage />} />
+          </Route>
+          <Route path="/welcome" element={<WelcomePage />} />
 
-        <Route element={<IsNotAuthenticated />}>
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage />} />
-        </Route>
-        <Route element={<IsAuthenticated redirect={"/"} />}>
-          <Route path="/exercises-list" element={<ExercicesList />} />
-          <Route path="/exercises-list/:exerciseId" element={<OneExercise />} />
-          <Route path="/do-exercise" element={<DoExercisePage />} />
+          <Route element={<IsNotAuthenticated />}>
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/login" element={<LoginPage />} />
+          </Route>
+          <Route element={<IsAuthenticated redirect={"/"} />}>
+            <Route path="/exercises-list" element={<ExercicesList />} />
+            <Route path="/exercises-list/:exerciseId" element={<OneExercise />} />
+            <Route path="/do-exercise" element={<DoExercisePage />} />
 
-          {/* <Route path="/session" element={<SessionPage />} /> */}
-          <Route path="/settings" element={<SettingsPage />} />
-        </Route>
-      </Routes>
+            {/* <Route path="/session" element={<SessionPage />} /> */}
+            <Route path="/settings" element={<SettingsPage />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
     </div>
   )
 }

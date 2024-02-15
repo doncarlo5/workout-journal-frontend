@@ -1,6 +1,8 @@
 import useAuth from "@/context/use-auth"
 import { Link } from "react-router-dom"
 
+import { ModeToggle } from "./mode-toggle"
+
 // import { Button } from "./ui/button"
 
 function Navbar() {
@@ -29,32 +31,35 @@ function Navbar() {
             </Link>
           </nav>
         ) : (
-          <nav className="space-x-4">
-            <Link
-              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-colors hover:bg-green-color hover:text-stone-color dark:bg-gray-800"
-              to="/do-exercise"
-            >
-              Faire un exercice
-            </Link>
-            <Link
-              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-              to="/exercises-list"
-            >
-              Exercices enregistrés
-            </Link>
-            <Link
-              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-              to="/settings"
-            >
-              Options
-            </Link>
-            <Link
-              to="/welcome"
-              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-black dark:bg-gray-800"
-              onClick={handleLogout}
-            >
-              ⍈
-            </Link>
+          <nav>
+            <div className=" flex items-center justify-center gap-4">
+              <Link
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium hover:animate-pulse dark:bg-gray-800"
+                to="/do-exercise"
+              >
+                Faire un exercice
+              </Link>
+              <Link
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+                to="/exercises-list"
+              >
+                Exercices enregistrés
+              </Link>
+              <Link
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+                to="/settings"
+              >
+                Options
+              </Link>
+              <Link
+                to="/welcome"
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-black dark:bg-gray-800"
+                onClick={handleLogout}
+              >
+                ⍈
+              </Link>
+              <ModeToggle />
+            </div>
           </nav>
         )}
       </div>
