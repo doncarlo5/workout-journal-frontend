@@ -21,39 +21,39 @@ function Navbar() {
               className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
               to="/signup"
             >
-              Sign up
+              S'inscrire
             </Link>
             <Link
               className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
               to="/login"
             >
-              Log in
+              Se connecter
             </Link>
           </nav>
         ) : (
           <nav>
             <div className=" flex items-center justify-center gap-4">
               <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium hover:animate-pulse dark:bg-gray-800"
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:animate-pulse hover:shadow-sm dark:bg-gray-800"
                 to="/do-exercise"
               >
                 Faire un exercice
               </Link>
               <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:animate-pulse hover:shadow-sm dark:bg-gray-800"
                 to="/exercises-list"
               >
-                Exercices enregistrés
+                Exercices réalisés
               </Link>
               <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:animate-pulse hover:shadow-sm dark:bg-gray-800"
                 to="/settings"
               >
                 Options
               </Link>
               <Link
                 to="/welcome"
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-black dark:bg-gray-800"
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-black transition-shadow hover:animate-pulse hover:shadow-sm dark:bg-gray-800"
                 onClick={handleLogout}
               >
                 ⍈
