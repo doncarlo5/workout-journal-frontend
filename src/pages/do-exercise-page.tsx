@@ -95,7 +95,7 @@ const DoExercisePage = () => {
       </div>
       <div className="mx-auto max-w-sm space-y-6">
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Lance un exercice</h1>
+          <h1 className="text-3xl font-bold">Lance un exercice 🏁</h1>
         </div>
         <Select onValueChange={setOneExerciseType}>
           <SelectTrigger className="w-[180px]">
