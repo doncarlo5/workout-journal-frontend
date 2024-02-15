@@ -65,7 +65,7 @@ const LoginPage = () => {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
-                  placeholder="johnny.bravo@cartoon.com"
+                  placeholder="johnny.bravo@email.com"
                   value={formState.email}
                   onChange={handleChange}
                   required
@@ -74,10 +74,17 @@ const LoginPage = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Mot de passe</Label>
-                <Input id="password" value={formState.password} onChange={handleChange} required type="password" />
+                <Input
+                  id="password"
+                  placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                  value={formState.password}
+                  onChange={handleChange}
+                  required
+                  type="password"
+                />
               </div>
               {error && (
-                <Alert className=" animate-pulse" variant="destructive">
+                <Alert variant="destructive">
                   <AlertTitle>Erreur</AlertTitle>
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
