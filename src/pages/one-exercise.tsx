@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { AxiosError } from "axios"
-import { useNavigate, useParams } from "react-router-dom"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 import {
   AlertDialog,
@@ -92,7 +93,6 @@ const OneExercise = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      console.log("🔔", oneExerciseType)
       const response = await myApi.put(`/exercise-user/${exerciseId}`, {
         date: new Date(),
         type: oneExerciseType,
@@ -102,6 +102,7 @@ const OneExercise = () => {
       console.log(response)
       fetchOneExercise()
       fetchExerciseTypes()
+      setIsEditable(false)
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
@@ -138,8 +139,16 @@ const OneExercise = () => {
         <Navbar />
       </div>
       <div className="mx-auto max-w-sm space-y-6">
-        <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Ton exercice de {exercise?.name}</h1>
+        <div className="flex items-center space-y-2 text-left">
+          <Link to="/exercises-list">
+            <Button variant="outline" size="icon">
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+          </Link>
+          <div>
+            <h1 className="ml-5 text-3xl font-medium">Ton exercice de </h1>
+            <h1 className="ml-5 text-3xl font-bold">{exercise?.name}</h1>
+          </div>
         </div>
         <div>
           <p className="text-gray-500 dark:text-gray-400">Créé le: {formatDate(formState.date)}</p>
@@ -240,6 +249,7 @@ const OneExercise = () => {
             <Button disabled={!isEditable} className="col-span-2 w-full" type="submit">
               Mettre à jour
             </Button>
+
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="destructive" className="col-span-2 mb-5 w-full">
