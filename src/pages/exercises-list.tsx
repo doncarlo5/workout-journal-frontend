@@ -50,84 +50,86 @@ export function ExercicesList() {
   return (
     <div className="flex h-screen flex-col">
       <Navbar />
-      <main className="flex flex-1 flex-col items-center justify-center">
-        <div className="space-y-2 text-center">
-          <h1 className="mb-10 text-3xl font-bold">Mes exercices terminés 📃</h1>
-        </div>
-        <div>
-          <Table>
-            <TableCaption>Liste de tes exercices passés</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead></TableHead>
-                <TableHead></TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Nom</TableHead>
-                <TableHead>Poids 1</TableHead>
-                <TableHead>Poids 2</TableHead>
-                <TableHead>Poids 3</TableHead>
-                <TableHead>Rep 1</TableHead>
-                <TableHead>Rep 2</TableHead>
-                <TableHead>Rep 3</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {exercise.map((exercise) => (
-                <TableRow key={exercise._id}>
-                  <TableCell>
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button variant="ghost">✕</Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Es-tu sûr de vouloir supprimer ton exercice ?</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            Tu ne pourras pas récupérer cet exercice une fois supprimé.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Annuler</AlertDialogCancel>
-                          <AlertDialogAction onClick={() => handleDelete(exercise._id)}>Confirmer</AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  </TableCell>
-                  <TableCell>
-                    <Link to={`/exercises-list/${exercise._id}`} key={exercise._id}>
-                      <Button variant="ghost">✍️</Button>
-                    </Link>
-                  </TableCell>
-                  <TableCell>{formatDate(exercise.date)}</TableCell>
-                  <TableCell>{exercise.type.name}</TableCell>
-                  <TableCell>{exercise.weight[0]}</TableCell>
-                  <TableCell>{exercise.weight[1]}</TableCell>
-                  <TableCell>{exercise.weight[2]}</TableCell>
-                  <TableCell>{exercise.rep[0]}</TableCell>
-                  <TableCell>{exercise.rep[1]}</TableCell>
-                  <TableCell>{exercise.rep[2]}</TableCell>
+      {exercise.length !== 0 && (
+        <main className="flex flex-1 flex-col items-center justify-center">
+          <div className="space-y-2 text-center">
+            <h1 className="mb-10 text-3xl font-bold">Mes exercices terminés 📃</h1>
+          </div>
+          <div>
+            <Table>
+              <TableCaption>Liste de tes exercices passés</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead></TableHead>
+                  <TableHead></TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Nom</TableHead>
+                  <TableHead>Poids 1</TableHead>
+                  <TableHead>Poids 2</TableHead>
+                  <TableHead>Poids 3</TableHead>
+                  <TableHead>Rep 1</TableHead>
+                  <TableHead>Rep 2</TableHead>
+                  <TableHead>Rep 3</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-        {exercise.length === 0 && (
-          <main className="flex flex-1 items-center justify-center">
-            <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
-              <div className="text-center">
-                <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
-                  Tu n'as pas encore d'exercices
-                </p>
-              </div>
-              <div className="flex gap-4">
-                <Link className="w-[150px]" to="/do-exercise">
-                  <Button className="w-full">Lancer un exercice</Button>
-                </Link>
-              </div>
+              </TableHeader>
+              <TableBody>
+                {exercise.map((exercise) => (
+                  <TableRow key={exercise._id}>
+                    <TableCell>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="ghost">✕</Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Es-tu sûr de vouloir supprimer ton exercice ?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Tu ne pourras pas récupérer cet exercice une fois supprimé.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Annuler</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDelete(exercise._id)}>Confirmer</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </TableCell>
+                    <TableCell>
+                      <Link to={`/exercises-list/${exercise._id}`} key={exercise._id}>
+                        <Button variant="ghost">✍️</Button>
+                      </Link>
+                    </TableCell>
+                    <TableCell>{formatDate(exercise.date)}</TableCell>
+                    <TableCell>{exercise.type.name}</TableCell>
+                    <TableCell>{exercise.weight[0]}</TableCell>
+                    <TableCell>{exercise.weight[1]}</TableCell>
+                    <TableCell>{exercise.weight[2]}</TableCell>
+                    <TableCell>{exercise.rep[0]}</TableCell>
+                    <TableCell>{exercise.rep[1]}</TableCell>
+                    <TableCell>{exercise.rep[2]}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </main>
+      )}
+      {exercise.length === 0 && (
+        <main className="flex flex-1 items-center justify-center">
+          <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
+            <div className="text-center">
+              <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
+                Tu n'as pas encore d'exercices
+              </p>
             </div>
-          </main>
-        )}
-      </main>
+            <div className="flex gap-4">
+              <Link className="w-[150px]" to="/do-exercise">
+                <Button className="w-full">Lancer un exercice</Button>
+              </Link>
+            </div>
+          </div>
+        </main>
+      )}
     </div>
   )
 }
