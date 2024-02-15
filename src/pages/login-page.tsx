@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -32,7 +33,7 @@ const LoginPage = () => {
     } catch (error: any) {
       // console.log(error)
 
-      setError(error.response.data.message)
+      setError("Mot de passe incorrect")
       setTimeout(() => {
         setError("")
       }, 3000)
@@ -73,9 +74,15 @@ const LoginPage = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Mot de passe</Label>
                 <Input id="password" value={formState.password} onChange={handleChange} required type="password" />
               </div>
+              {error && (
+                <Alert className=" animate-pulse" variant="destructive">
+                  <AlertTitle>Erreur</AlertTitle>
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
             </div>
             <Button className="w-full" type="submit">
               Se connecter
@@ -89,7 +96,6 @@ const LoginPage = () => {
           </div>
         </div>
       </form>
-      {error && <p>{error}</p>}
     </>
   )
 }
