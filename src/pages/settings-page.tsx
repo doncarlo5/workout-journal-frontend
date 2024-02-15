@@ -92,7 +92,6 @@ const SettingsPage = () => {
             <Button
               className="mt-4 w-full"
               type="submit"
-              variant="outline"
               onClick={() => {
                 toast({
                   description: "Ton profil a bien été mis à jour! ✅",

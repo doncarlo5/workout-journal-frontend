@@ -36,6 +36,7 @@ const OneExercise = () => {
   // const [error, setError] = useState("")
 
   const [formState, setFormState] = useState({
+    id: "",
     name: "",
     date: "",
     rep1: "",
@@ -53,6 +54,7 @@ const OneExercise = () => {
       const response = await myApi.get(`/exercise-user/${exerciseId}`)
 
       setFormState({
+        id: response.data._id,
         name: response.data.type.name,
         date: response.data.date,
         rep1: response.data.rep[0],
@@ -63,6 +65,8 @@ const OneExercise = () => {
         weight3: response.data.weight[2],
         updatedAt: response.data.updatedAt,
       })
+
+      console.log("🔔 response data type", response.data.type)
       const newExercise = response.data.type
       setExercise(newExercise)
       setOneExerciseType(newExercise)
@@ -96,12 +100,12 @@ const OneExercise = () => {
       console.log("🔔", oneExerciseType)
       const response = await myApi.put(`/exercise-user/${exerciseId}`, {
         date: new Date(),
-        type: oneExerciseType._id,
+        type: oneExerciseType,
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
       })
-      console.log("✅", response)
-      // navigate("/exercises-list/")
+      fetchOneExercise()
+      fetchExerciseTypes()
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
@@ -132,7 +136,6 @@ const OneExercise = () => {
     }
   }
 
-  console.log("FORM STATE TYPE ID", exercise)
   return (
     <>
       <div className="mb-10 flex flex-col">
@@ -256,7 +259,7 @@ const OneExercise = () => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Annuler</AlertDialogCancel>
-                  {/* <AlertDialogAction onClick={() => handleDelete(formState.id)}>Confirmer</AlertDialogAction> */}
+                  <AlertDialogAction onClick={() => handleDelete(formState.id)}>Confirmer</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>

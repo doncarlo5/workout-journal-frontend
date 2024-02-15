@@ -22,15 +22,12 @@ import { Navbar } from "@/components/navbar"
 export function ExercicesList() {
   const [exercise, setExercise] = useState([] as any[])
   const [loading, setLoading] = useState(true)
-
-  console.log(loading)
-
   const fetchExercises = async () => {
     try {
       const response = await myApi.get("/exercise-user")
       console.log(response.data)
+      console.log("HEYYY")
       setExercise(response.data)
-      console.log(exercise)
       setLoading(false)
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -55,6 +52,7 @@ export function ExercicesList() {
     return new Date(dateString).toLocaleDateString()
   }
 
+  console.log("hfkehfkfhkhk", exercise)
   return (
     <div className="flex h-screen flex-col">
       <Navbar />
