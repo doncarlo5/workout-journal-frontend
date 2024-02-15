@@ -22,19 +22,8 @@ import { Navbar } from "@/components/navbar"
 import myApi from "../lib/api-handler"
 
 const OneExercise = () => {
-  const { exerciseId } = useParams()
-
-  const navigate = useNavigate()
-
   const [isEditable, setIsEditable] = useState(false)
-
-  const toggleIsEditable = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsEditable((current) => !current)
-  }
-
-  // const [error, setError] = useState("")
-
+  const [exercise, setExercise] = useState<any>({})
   const [formState, setFormState] = useState({
     id: "",
     name: "",
@@ -48,7 +37,14 @@ const OneExercise = () => {
     updatedAt: "",
   })
 
-  const [exercise, setExercise] = useState<any>({})
+  const { exerciseId } = useParams()
+  const navigate = useNavigate()
+
+  const toggleIsEditable = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsEditable((current) => !current)
+  }
+
   const fetchOneExercise = async () => {
     try {
       const response = await myApi.get(`/exercise-user/${exerciseId}`)
