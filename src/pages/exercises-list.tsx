@@ -58,7 +58,7 @@ export function ExercicesList() {
       <Navbar />
       <main className="flex flex-1 flex-col items-center justify-center">
         <div className="space-y-2 text-center">
-          <h1 className="mb-10 text-3xl font-bold">Mes exercices terminés</h1>
+          <h1 className="mb-10 text-3xl font-bold">Mes exercices terminés 📃</h1>
         </div>
         <div>
           <Table className="  ">
