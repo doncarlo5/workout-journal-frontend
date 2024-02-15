@@ -5,6 +5,7 @@ import DoExercisePage from "./pages/do-exercise-page"
 import ExercicesList from "./pages/exercises-list"
 import HomePage from "./pages/home-page"
 import LoginPage from "./pages/login-page"
+import NotFoundPage from "./pages/no-found-page"
 import OneExercise from "./pages/one-exercise"
 // import SessionPage from "./pages/session-page"
 import SettingsPage from "./pages/settings-page"
@@ -35,6 +36,7 @@ function App() {
             {/* <Route path="/session" element={<SessionPage />} /> */}
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </ThemeProvider>
     </div>
