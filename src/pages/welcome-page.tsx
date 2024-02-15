@@ -15,7 +15,7 @@ export function HomePage() {
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">Workout Journal</h1>
             <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
-              Enregistre tes progrès, fixe de nouveaux objectifs et deviens meilleur à chaque entrainement.
+              Enregistre tes progrès, fixe toi de nouveaux objectifs et deviens meilleur à chaque entrainement.
             </p>
           </div>
           <div className="flex gap-4">
