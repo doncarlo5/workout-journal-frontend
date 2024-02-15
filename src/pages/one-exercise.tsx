@@ -33,7 +33,7 @@ const OneExercise = () => {
     setIsEditable((current) => !current)
   }
 
-  const [error, setError] = useState("")
+  // const [error, setError] = useState("")
 
   const [formState, setFormState] = useState({
     name: "",
@@ -256,7 +256,7 @@ const OneExercise = () => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Annuler</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => handleDelete(formState.id)}>Confirmer</AlertDialogAction>
+                  {/* <AlertDialogAction onClick={() => handleDelete(formState.id)}>Confirmer</AlertDialogAction> */}
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
