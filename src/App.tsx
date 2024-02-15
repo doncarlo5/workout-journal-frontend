@@ -4,6 +4,7 @@ import DoExercisePage from "./pages/do-exercise-page"
 import ExercicesList from "./pages/exercises-list"
 import HomePage from "./pages/home-page"
 import LoginPage from "./pages/login-page"
+import OneExercise from "./pages/one-exercise"
 // import SessionPage from "./pages/session-page"
 import SettingsPage from "./pages/settings-page"
 import SignupPage from "./pages/signup-page"
@@ -25,8 +26,10 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
         </Route>
         <Route element={<IsAuthenticated redirect={"/"} />}>
-          <Route path="/exerciseslist" element={<ExercicesList />} />
+          <Route path="/exercises-list" element={<ExercicesList />} />
+          <Route path="/exercises-list/:exerciseId" element={<OneExercise />} />
           <Route path="/do-exercise" element={<DoExercisePage />} />
+
           {/* <Route path="/session" element={<SessionPage />} /> */}
           <Route path="/settings" element={<SettingsPage />} />
         </Route>

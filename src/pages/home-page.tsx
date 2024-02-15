@@ -21,7 +21,7 @@ export function HomePage() {
             </p>
           </div>
           <div className="flex gap-4">
-            <Link className="w-[150px]" to="/exerciseslist">
+            <Link className="w-[150px]" to="/exercises-list">
               <Button className="w-full">Exercices réalisés</Button>
             </Link>
           </div>

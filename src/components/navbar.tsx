@@ -1,7 +1,7 @@
 import useAuth from "@/context/use-auth"
 import { Link } from "react-router-dom"
 
-import { Button } from "./ui/button"
+// import { Button } from "./ui/button"
 
 function Navbar() {
   const { isLoggedIn, handleLogout } = useAuth()
@@ -38,7 +38,7 @@ function Navbar() {
             </Link>
             <Link
               className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-              to="/exerciseslist"
+              to="/exercises-list"
             >
               Exercices enregistrés
             </Link>

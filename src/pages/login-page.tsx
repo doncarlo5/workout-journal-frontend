@@ -28,7 +28,7 @@ const LoginPage = () => {
       console.log(response)
       localStorage.setItem("token", response.data.token)
       await authenticateUser()
-      navigate("/settings")
+      navigate("/exercises-list/")
     } catch (error: any) {
       // console.log(error)
 
@@ -56,8 +56,8 @@ const LoginPage = () => {
       <form onSubmit={handleSubmit}>
         <div className="mx-auto max-w-sm space-y-6">
           <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-gray-500 dark:text-gray-400">De retour! 👋 Connecte toi avec ton compte</p>
+            <h1 className="text-3xl font-bold">Se connecter</h1>
+            <p className="text-gray-500 dark:text-gray-400">Connecte toi avec tes informations</p>
           </div>
           <div className="space-y-4">
             <div className="flex flex-col gap-2">
@@ -78,12 +78,12 @@ const LoginPage = () => {
               </div>
             </div>
             <Button className="w-full" type="submit">
-              Login
+              Se connecter
             </Button>
             <div className="text-center text-sm">
               Tu n'as pas de compte ?
-              <Link className="ml-1 underline" to="/signup">
-                En créer un
+              <Link className="ml-1 underline hover:animate-pulse" to="/signup">
+                Créer un compte
               </Link>
             </div>
           </div>

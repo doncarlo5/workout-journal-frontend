@@ -10,7 +10,7 @@ import { Navbar } from "@/components/navbar"
 import myApi from "../lib/api-handler"
 
 const DoExercisePage = () => {
-  const [exerciceType, setExerciceType] = useState(null as any)
+  const [oneExerciseType, setOneExerciseType] = useState(null as any)
 
   const [formState, setFormState] = useState({
     rep1: "",
@@ -21,13 +21,13 @@ const DoExercisePage = () => {
     weight3: "",
   })
 
-  const [exerciseTypes, setExerciseTypes] = useState([] as any[])
+  const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
 
   const fetchExerciseTypes = async () => {
     try {
       const response = await myApi.get("/exercise-type")
       console.log(response)
-      setExerciseTypes(response.data)
+      setAllExerciseTypes(response.data)
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -42,15 +42,14 @@ const DoExercisePage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      console.log(formState)
       const response = await myApi.post("/exercise-user", {
         date: new Date(),
-        type: exerciceType._id,
+        type: oneExerciseType._id,
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
       })
       console.log(response)
-      navigate("/exerciseslist/")
+      navigate("/exercises-list/")
     } catch (error: any) {
       console.log(error)
     }
@@ -98,13 +97,13 @@ const DoExercisePage = () => {
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold">Lance un exercice</h1>
         </div>
-        <Select onValueChange={setExerciceType}>
+        <Select onValueChange={setOneExerciseType}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Type d'exercice" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {exerciseTypes.map((type) => (
+              {allExerciseTypes.map((type) => (
                 <SelectItem key={type._id} value={type}>
                   {type.name}
                 </SelectItem>
@@ -113,8 +112,8 @@ const DoExercisePage = () => {
           </SelectContent>
         </Select>
         <div>
-          <p className="text-gray-500 dark:text-gray-400">Conseil: {exerciceType?.advice}</p>
-          <p className="text-gray-500 dark:text-gray-400">Temps de repos: {formatTime(exerciceType?.timer)}</p>
+          <p className="text-gray-500 dark:text-gray-400">Conseil: {oneExerciseType?.advice}</p>
+          <p className="text-gray-500 dark:text-gray-400">Temps de repos: {formatTime(oneExerciseType?.timer)}</p>
         </div>
         <div className="space-y-4">
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
