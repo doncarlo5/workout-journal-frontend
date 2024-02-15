@@ -20,6 +20,15 @@ const SettingsPage = () => {
   })
   const [error, setError] = useState("")
 
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const { target } = event
+    if (target instanceof HTMLInputElement) {
+      const key = target.id
+      const value = target.value
+      setFormState({ ...formState, [key]: value })
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
@@ -30,15 +39,6 @@ const SettingsPage = () => {
       setTimeout(() => {
         setError("")
       }, 3000)
-    }
-  }
-
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const { target } = event
-    if (target instanceof HTMLInputElement) {
-      const key = target.id
-      const value = target.value
-      setFormState({ ...formState, [key]: value })
     }
   }
 
