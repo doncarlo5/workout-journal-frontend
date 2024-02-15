@@ -10,20 +10,27 @@ import { Navbar } from "@/components/navbar"
 import myApi from "../lib/api-handler"
 
 const SignupPage = () => {
-  const navigate = useNavigate()
-
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   })
-
   const [error, setError] = useState("")
+
+  const navigate = useNavigate()
+
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const { target } = event
+    if (target instanceof HTMLInputElement) {
+      const key = target.id
+      const value = target.value
+      setFormState({ ...formState, [key]: value })
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     try {
       const response = await myApi.post("/auth/signup", formState)
       console.log(response)
@@ -33,15 +40,6 @@ const SignupPage = () => {
       setTimeout(() => {
         setError("")
       }, 3000)
-    }
-  }
-
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const { target } = event
-    if (target instanceof HTMLInputElement) {
-      const key = target.id
-      const value = target.value
-      setFormState({ ...formState, [key]: value })
     }
   }
 
