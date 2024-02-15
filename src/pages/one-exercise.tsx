@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { AxiosError } from "axios"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import {
