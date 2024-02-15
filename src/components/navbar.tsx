@@ -3,8 +3,6 @@ import { Link } from "react-router-dom"
 
 import { ModeToggle } from "./mode-toggle"
 
-// import { Button } from "./ui/button"
-
 function Navbar() {
   const { isLoggedIn, handleLogout } = useAuth()
 
