@@ -17,18 +17,21 @@ function Navbar() {
         </Link>
         {!isLoggedIn ? (
           <nav className="space-x-4">
-            <Link
-              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-              to="/signup"
-            >
-              S'inscrire
-            </Link>
-            <Link
-              className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-              to="/login"
-            >
-              Se connecter
-            </Link>
+            <div className=" flex items-center justify-center gap-4">
+              <Link
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+                to="/signup"
+              >
+                S'inscrire
+              </Link>
+              <Link
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
+                to="/login"
+              >
+                Se connecter
+              </Link>
+              <ModeToggle />
+            </div>
           </nav>
         ) : (
           <nav>
