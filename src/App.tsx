@@ -23,7 +23,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
           </Route>
           <Route path="/welcome" element={<WelcomePage />} />
-
           <Route element={<IsNotAuthenticated />}>
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -32,8 +31,6 @@ function App() {
             <Route path="/exercises-list" element={<ExercicesList />} />
             <Route path="/exercises-list/:exerciseId" element={<OneExercise />} />
             <Route path="/do-exercise" element={<DoExercisePage />} />
-
-            {/* <Route path="/session" element={<SessionPage />} /> */}
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
