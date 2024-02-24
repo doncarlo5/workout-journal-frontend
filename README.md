@@ -1,6 +1,4 @@
-# Workout Journal 🏋️‍♂️ - by Julien THOMAS
-
-### Frontend
+# Workout Journal 🏋️‍♂️ - by Julien THOMAS ~ Frontend
 
 <a href="https://workout-journal-pro.netlify.app/"><img src="public/cover-img.png" width="60%" /></a>
 
