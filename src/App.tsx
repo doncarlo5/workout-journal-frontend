@@ -1,3 +1,4 @@
+// import SessionPage from "./pages/session-page"
 import { Route, Routes } from "react-router-dom"
 
 import { ThemeProvider } from "./components/theme-provider"
@@ -7,7 +8,6 @@ import HomePage from "./pages/home-page"
 import LoginPage from "./pages/login-page"
 import NotFoundPage from "./pages/no-found-page"
 import OneExercise from "./pages/one-exercise"
-// import SessionPage from "./pages/session-page"
 import SettingsPage from "./pages/settings-page"
 import SignupPage from "./pages/signup-page"
 import WelcomePage from "./pages/welcome-page"
