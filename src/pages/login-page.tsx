@@ -97,6 +97,11 @@ const LoginPage = () => {
                 Créer un compte
               </Link>
             </div>
+            <div>
+              <p>Info compte :</p>
+              <p>email: pro.julien.thomas</p>
+              <p>password: password</p>
+            </div>
           </div>
         </div>
       </form>
