@@ -94,14 +94,17 @@ const DoExercisePage = () => {
         </div>
       )
     }
+
+    console.log("remainingTime is:", remainingTime)
     const minutes = Math.floor(remainingTime / 60)
     const seconds = remainingTime % 60
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
 
     return (
       <div className="flex flex-col">
         <div className=" cursor-pointer" onClick={() => setIsTimerPlaying(!isTimerPlaying)}>
           <div className="flex justify-center text-xs">Temps restant</div>
-          <div className="flex justify-center text-2xl font-black">{`${minutes}:${seconds}`}</div>
+          <div className="flex justify-center text-2xl font-black">{`${minutes}:${formattedSeconds}`}</div>
           {isTimerPlaying ? (
             <div className="flex justify-center">
               <button
