@@ -90,7 +90,9 @@ export function ExercicesList() {
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel>Annuler</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => handleDelete(exercise._id)}>Confirmer</AlertDialogAction>
+                            <AlertDialogAction variant="destructive" onClick={() => handleDelete(exercise._id)}>
+                              Confirmer
+                            </AlertDialogAction>{" "}
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
