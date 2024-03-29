@@ -23,6 +23,7 @@ export function ExercicesList() {
   const fetchUserExercises = async () => {
     try {
       const response = await myApi.get("/exercise-user")
+      console.log("👋 response data", response.data)
       setExercise(response.data)
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -99,7 +100,7 @@ export function ExercicesList() {
                         <Button variant="ghost">✍️</Button>
                       </Link>
                     </TableCell>
-                    <TableCell>{formatDate(exercise.date)}</TableCell>
+                    <TableCell>{formatDate(exercise.createdAt)}</TableCell>
                     <TableCell>{exercise.type.name}</TableCell>
                     <TableCell>{exercise.weight[0]}</TableCell>
                     <TableCell>{exercise.weight[1]}</TableCell>
