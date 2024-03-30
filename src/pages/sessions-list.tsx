@@ -80,7 +80,7 @@ export function SessionsList() {
                     <TableCell>{formatDate(oneSession.date_session)}</TableCell>
                     <TableCell>{oneSession.exercise_user_list.length}</TableCell>
                     <TableCell>
-                      <Link to={`/session/${oneSession._id}`} key={oneSession._id}>
+                      <Link to={`/sessions-list/${oneSession._id}`} key={oneSession._id}>
                         <Button variant="ghost">✍️</Button>
                       </Link>
                     </TableCell>
