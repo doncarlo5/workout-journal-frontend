@@ -15,9 +15,16 @@ export function HomePage() {
               Enregistre tes progrès, fixe toi de nouveaux objectifs et deviens meilleur à chaque entrainement.
             </p>
           </div>
-          <div className="flex gap-4">
+          <div className="mt-3 flex gap-4">
             <Link className="w-[150px]" to="/signup">
               <Button className="w-full">Créer un compte</Button>
+            </Link>
+          </div>
+          <div className="flex gap-4">
+            <Link className="w-[150px]" to="/login">
+              <Button variant="secondary" className="w-full">
+                Se connecter
+              </Button>
             </Link>
           </div>
         </div>
