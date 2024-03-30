@@ -89,9 +89,9 @@ export function ExercicesList() {
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Annuler</AlertDialogCancel>
+                            <AlertDialogCancel>Conserver</AlertDialogCancel>
                             <AlertDialogAction variant="destructive" onClick={() => handleDelete(exercise._id)}>
-                              Confirmer
+                              Supprimer
                             </AlertDialogAction>{" "}
                           </AlertDialogFooter>
                         </AlertDialogContent>
