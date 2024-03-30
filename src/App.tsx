@@ -9,6 +9,7 @@ import HomePage from "./pages/home-page"
 import LoginPage from "./pages/login-page"
 import NotFoundPage from "./pages/no-found-page"
 import OneExercise from "./pages/one-exercise"
+import OneSession from "./pages/one-session"
 import SessionsList from "./pages/sessions-list"
 import SettingsPage from "./pages/settings-page"
 import SignupPage from "./pages/signup-page"
@@ -32,6 +33,7 @@ function App() {
             <Route path="/welcome" element={<WelcomePage />} />
             <Route element={<IsAuthenticated redirect={"/"} />}>
               <Route path="/sessions-list" element={<SessionsList />} />
+              <Route path="/sessions-list/:sessionId" element={<OneSession />} />
               <Route path="/exercises-list" element={<ExercicesList />} />
               <Route path="/exercises-list/:exerciseId" element={<OneExercise />} />
               <Route path="/do-exercise" element={<DoExercisePage />} />
