@@ -26,12 +26,14 @@ import { Label } from "@/components/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import ExerciseCard from "@/components/exercise-card"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
 
 const OneSession = () => {
   const [oneSessionType, setOneSessionType] = useState(null as any)
+  const [isLoading, setIsLoading] = useState(true)
   const [field, setField] = useState({ value: null } as any)
   const [isEditable, setIsEditable] = useState(false)
   const [session, setSession] = useState<any>({})
@@ -70,6 +72,7 @@ const OneSession = () => {
 
       const newSession = response.data
       setSession(newSession)
+      setIsLoading(false)
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
@@ -200,38 +203,17 @@ const OneSession = () => {
             <div className=" col-span-2 ">
               <div className="space-y-4">
                 <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950 dark:shadow-sm">
-                  <h2 className="text-lg font-semibold">Exercises</h2>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <Card>
-                      <CardHeader className="pb-0">
-                        <CardTitle>Squats</CardTitle>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <div className="grid grid-cols-3 gap-2 text-sm">
-                          <div>Set 1</div>
-                          <div>Set 2</div>
-                          <div>Set 3</div>
-                          <div>20 kg x 12</div>
-                          <div>25 kg x 10</div>
-                          <div>30 kg x 8</div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardHeader className="pb-0">
-                        <CardTitle>Push-ups</CardTitle>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <div className="grid grid-cols-3 gap-2 text-sm">
-                          <div>Set 1</div>
-                          <div>Set 2</div>
-                          <div>Set 3</div>
-                          <div>10 x 12</div>
-                          <div>10 x 10</div>
-                          <div>10 x 8</div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                  <h2 className="mb-3 text-lg font-semibold">Exercises</h2>
+                  <div className="grid gap-4 ">
+                    {isLoading ? (
+                      <div className="col-span-full flex items-center justify-center">
+                        <p>Loading...</p>
+                      </div>
+                    ) : (
+                      formState.exercise_user_list.map((exercise: any) => (
+                        <ExerciseCard exercise={exercise} key={exercise.id} />
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
