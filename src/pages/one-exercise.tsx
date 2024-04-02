@@ -123,7 +123,7 @@ const OneExercise = () => {
       const response = await myApi.delete(`/exercise-user/${id}`)
       console.log(response)
       fetchOneExercise()
-      navigate("/exercises-list/")
+      navigate("/exercises/")
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -140,7 +140,7 @@ const OneExercise = () => {
       </div>
       <div className="mx-auto max-w-sm space-y-6">
         <div className="flex items-center space-y-2 text-left">
-          <Link to="/exercises-list">
+          <Link to="/exercises">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
