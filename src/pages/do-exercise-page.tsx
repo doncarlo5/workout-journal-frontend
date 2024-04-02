@@ -133,14 +133,16 @@ const DoExercisePage = () => {
           {isTimerPlaying ? (
             <div className="flex justify-center">
               <button
-                className="mt-2 rounded-xl bg-orange-100 px-6 py-0.5 text-orange-600 hover:bg-orange-200"
+                className="mt-2	select-none rounded-xl bg-orange-100 px-6 py-0.5 text-orange-600 hover:bg-orange-200"
                 onClick={() => setKey((prevKey) => prevKey + 1)}
               >
                 Stop
               </button>
             </div>
           ) : (
-            <div className="mt-2 rounded-xl bg-green-100 px-6 py-0.5 text-green-600 hover:bg-green-200">Play</div>
+            <div className="mt-2	select-none rounded-xl bg-green-100 px-6 py-0.5 text-green-600 hover:bg-green-200">
+              Play
+            </div>
           )}
         </div>
       </div>
@@ -179,8 +181,8 @@ const DoExercisePage = () => {
               key={key}
               isPlaying={isTimerPlaying}
               duration={oneExerciseType?.timer}
-              colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-              colorsTime={[10, 6, 3, 0]}
+              colors={["#D19F55", "#B99C70", "#B99C70"]}
+              colorsTime={[30, 10, 7]}
               onComplete={() => ({ shouldRepeat: false, delay: 1, newInitialRemainingTime: oneExerciseType?.timer })}
             >
               {renderTime}
@@ -189,7 +191,6 @@ const DoExercisePage = () => {
         )}
         <div>
           <p className="text-gray-500 dark:text-gray-400">Conseil: {oneExerciseType?.advice}</p>
-          <p className="text-gray-500 dark:text-gray-400">Temps de repos: {formatTime(oneExerciseType?.timer)}</p>
         </div>
         <div className="space-y-4">
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
