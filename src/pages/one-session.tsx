@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, LucidePlusCircle } from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -214,6 +214,15 @@ const OneSession = () => {
                         <ExerciseCard exercise={exercise} key={exercise.id} />
                       ))
                     )}
+                  </div>
+                  <div className="mt-auto p-4">
+                    <Link to={`/sessions/${sessionId}/do-exercise`}>
+                      <Button className="w-full">
+                        {" "}
+                        <LucidePlusCircle className=" mr-2 size-5" />
+                        Ajouter un exercise{" "}
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
