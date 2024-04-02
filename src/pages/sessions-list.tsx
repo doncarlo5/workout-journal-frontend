@@ -24,7 +24,7 @@ export function SessionsList() {
 
   const fetchUserSessions = async () => {
     try {
-      const response = await myApi.get("/session")
+      const response = await myApi.get("/sessions")
       console.log("👋 response data", response.data)
       setSession(response.data)
       console.log("👋 session", session)
@@ -39,7 +39,7 @@ export function SessionsList() {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/session/${id}`)
+      const response = await myApi.delete(`/sessions/${id}`)
       console.log(response)
       fetchUserSessions()
     } catch (error) {
@@ -80,7 +80,7 @@ export function SessionsList() {
                     <TableCell>{formatDate(oneSession.date_session)}</TableCell>
                     <TableCell>{oneSession.exercise_user_list.length}</TableCell>
                     <TableCell>
-                      <Link to={`/sessions-list/${oneSession._id}`} key={oneSession._id}>
+                      <Link to={`/sessions/${oneSession._id}`} key={oneSession._id}>
                         <Button variant="ghost">✍️</Button>
                       </Link>
                     </TableCell>
