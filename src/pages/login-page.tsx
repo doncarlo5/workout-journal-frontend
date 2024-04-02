@@ -36,7 +36,7 @@ const LoginPage = () => {
       console.log(response)
       localStorage.setItem("token", response.data.token)
       await authenticateUser()
-      navigate("/exercises-list/")
+      navigate("/exercises/")
     } catch (error: any) {
       console.log(error)
       setError("Mot de passe incorrect")
