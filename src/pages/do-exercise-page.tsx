@@ -59,7 +59,7 @@ const DoExercisePage = () => {
         weight: [formState.weight1, formState.weight2, formState.weight3],
       })
       console.log("response is:", response)
-      navigate("/exercises-list/")
+      navigate("/exercises/")
     } catch (error: any) {
       console.log(error)
     }
