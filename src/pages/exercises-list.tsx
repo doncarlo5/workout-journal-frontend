@@ -90,15 +90,15 @@ export function ExercicesList() {
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel>Conserver</AlertDialogCancel>
-                            <AlertDialogAction variant="destructive" onClick={() => handleDelete(exercise._id)}>
-                              Supprimer
+                            <AlertDialogAction asChild onClick={() => handleDelete(exercise._id)}>
+                              <Button variant="destructive">Confirmer</Button>
                             </AlertDialogAction>{" "}
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
                     </TableCell>
                     <TableCell>
-                      <Link to={`/exercises-list/${exercise._id}`} key={exercise._id}>
+                      <Link to={`/exercises/${exercise._id}`} key={exercise._id}>
                         <Button variant="ghost">✍️</Button>
                       </Link>
                     </TableCell>
