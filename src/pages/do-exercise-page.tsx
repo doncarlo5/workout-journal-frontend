@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { CountdownCircleTimer } from "react-countdown-circle-timer"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -25,20 +25,45 @@ const DoExercisePage = () => {
     weight3: "",
   })
 
+  let { sessionId } = useParams()
+  console.log("exerciseId is:", sessionId)
+
+  // fetch the sessionid from the url
+
+  const [session, setSession] = useState<any>({})
+
+  const fetchOneSession = async () => {
+    try {
+      const response = await myApi.get(`/sessions/${sessionId}`)
+      console.log("👋 session data", response.data)
+      return response.data
+    } catch (error) {
+      console.error("Fetch error: ", error)
+    }
+  }
+
   const navigate = useNavigate()
 
-  const fetchAllExerciseTypes = async () => {
+  const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
-      const response = await myApi.get("/exercise-type")
-      setAllExerciseTypes(response.data)
+      const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}`)
+      return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
     }
   }
 
   useEffect(() => {
-    fetchAllExerciseTypes()
+    const init = async () => {
+      const sessionData = await fetchOneSession()
+      setSession(sessionData)
+      const exerciseTypeData = await fetchAllExerciseTypes(sessionData)
+      setAllExerciseTypes(exerciseTypeData)
+    }
+    init()
   }, [])
+
+  console.log("👋 allExerciseTypes", allExerciseTypes)
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const { target } = event
@@ -128,18 +153,21 @@ const DoExercisePage = () => {
         <Navbar />
       </div>
       <div className="mx-auto max-w-sm space-y-6">
-        <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Lance un exercice 🏁</h1>
+        <div className="flex justify-between">
+          <h1 className="w-2/5 text-3xl font-light">{session.type_session}</h1>
+          <h1 className=" text-right text-3xl font-bold">{oneExerciseType?.name}</h1>
         </div>
         <Select onValueChange={setOneExerciseType}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Type d'exercice" />
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Nom de l'exercice" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               {allExerciseTypes.map((type) => (
                 <SelectItem key={type._id} value={type}>
-                  {type.name}
+                  {type.name} {"("}
+                  {type.type}
+                  {")"}
                 </SelectItem>
               ))}
             </SelectGroup>
