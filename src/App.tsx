@@ -32,11 +32,11 @@ function App() {
             </Route>
             <Route path="/welcome" element={<WelcomePage />} />
             <Route element={<IsAuthenticated redirect={"/"} />}>
-              <Route path="/sessions-list" element={<SessionsList />} />
-              <Route path="/sessions-list/:sessionId" element={<OneSession />} />
-              <Route path="/exercises-list" element={<ExercicesList />} />
-              <Route path="/exercises-list/:exerciseId" element={<OneExercise />} />
-              <Route path="/do-exercise" element={<DoExercisePage />} />
+              <Route path="/sessions" element={<SessionsList />} />
+              <Route path="/sessions/:sessionId" element={<OneSession />} />
+              <Route path="/sessions/:sessionId/do-exercise" element={<DoExercisePage />} />
+              <Route path="/exercises" element={<ExercicesList />} />
+              <Route path="/exercises/:exerciseId" element={<OneExercise />} />
               <Route path="/settings" element={<SettingsPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
