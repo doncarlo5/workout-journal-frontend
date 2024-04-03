@@ -109,7 +109,7 @@ const DoExercisePage = () => {
     if (remainingTime === 0) {
       return (
         <div className=" flex flex-col justify-center">
-          <p className="flex justify-center">Go !</p>
+          <p className="flex	select-none justify-center">Go !</p>
           <button
             className="mt-2 rounded-xl bg-slate-100 px-6 py-0.5 text-slate-600 hover:bg-slate-200"
             onClick={() => setKey((prevKey) => prevKey + 1)}
@@ -128,8 +128,8 @@ const DoExercisePage = () => {
     return (
       <div className="flex flex-col">
         <div className=" cursor-pointer" onClick={() => setIsTimerPlaying(!isTimerPlaying)}>
-          <div className="flex justify-center text-xs">Temps restant</div>
-          <div className="flex justify-center text-2xl font-black">{`${minutes}:${formattedSeconds}`}</div>
+          <div className=" flex	select-none justify-center text-xs">Temps restant</div>
+          <div className="flex	select-none justify-center text-2xl font-black">{`${minutes}:${formattedSeconds}`}</div>
           {isTimerPlaying ? (
             <div className="flex justify-center">
               <button
