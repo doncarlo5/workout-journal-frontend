@@ -22,7 +22,7 @@ export function ExercicesList() {
 
   const fetchUserExercises = async () => {
     try {
-      const response = await myApi.get("/exercise-user")
+      const response = await myApi.get("/exercise-user?limit=1000&sort=-updatedAt")
       console.log("👋 response data", response.data)
       setExercise(response.data)
     } catch (error) {
