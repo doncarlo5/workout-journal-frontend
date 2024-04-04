@@ -75,7 +75,11 @@ export function SessionsList() {
               <TableBody>
                 {session.map((oneSession) => (
                   <TableRow key={oneSession._id}>
-                    <TableCell></TableCell>
+                    <TableCell>
+                      <div
+                        className={`me-2 h-2.5 w-2.5 rounded-full ${oneSession.isDone ? "bg-green-500" : "bg-red-500"}`}
+                      ></div>
+                    </TableCell>
                     <TableCell>{oneSession.type_session}</TableCell>
                     <TableCell>{formatDate(oneSession.date_session)}</TableCell>
                     <TableCell>{oneSession.exercise_user_list.length}</TableCell>
