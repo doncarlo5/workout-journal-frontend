@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { LucideCalendarClock, LucideHistory } from "lucide-react"
 import { CountdownCircleTimer } from "react-countdown-circle-timer"
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -12,25 +13,40 @@ import myApi from "../lib/api-handler"
 
 const DoExercisePage = () => {
   const [oneExerciseType, setOneExerciseType] = useState(null as any)
+  const [lastExercise, setLastExercise] = useState(null as any)
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
   const [isTimerPlaying, setIsTimerPlaying] = useState(false)
   const [key, setKey] = useState(0)
+  const [session, setSession] = useState<any>({})
 
   const [formState, setFormState] = useState({
-    rep1: "",
-    rep2: "",
-    rep3: "",
-    weight1: "",
-    weight2: "",
-    weight3: "",
+    rep1: lastExercise?.rep[0] || "",
+    rep2: lastExercise?.rep[1] || "",
+    rep3: lastExercise?.rep[2] || "",
+    weight1: lastExercise?.weight[0] || "",
+    weight2: lastExercise?.weight[1] || "",
+    weight3: lastExercise?.weight[2] || "",
   })
 
+  useEffect(() => {
+    setFormState({
+      rep1: lastExercise?.rep[0] || "",
+      weight1: lastExercise?.weight[0] || "",
+      rep2: lastExercise?.rep[1] || "",
+      weight2: lastExercise?.weight[1] || "",
+      rep3: lastExercise?.rep[2] || "",
+      weight3: lastExercise?.weight[2] || "",
+    })
+  }, [lastExercise])
+
+  const onExerciseTypeChange = async (value: any) => {
+    setOneExerciseType(value)
+    const response = await myApi.get(`/exercise-user?limit=1&sort=-createdAt&type=${value._id}`)
+    setLastExercise(response.data[0])
+    console.log("lastExercise is:", response.data[0])
+  }
+
   let { sessionId } = useParams()
-  console.log("exerciseId is:", sessionId)
-
-  // fetch the sessionid from the url
-
-  const [session, setSession] = useState<any>({})
 
   const fetchOneSession = async () => {
     try {
@@ -88,6 +104,18 @@ const DoExercisePage = () => {
     } catch (error: any) {
       console.log(error)
     }
+  }
+
+  // format lastexercise.createdAt
+
+  function formatDateFrench(dateString: string) {
+    const date = new Date(dateString)
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+    return date.toLocaleString("fr-FR", options)
   }
 
   function formatTime(seconds: number): string {
@@ -159,7 +187,12 @@ const DoExercisePage = () => {
           <h1 className="w-2/5 text-3xl font-light">{session.type_session}</h1>
           <h1 className=" text-right text-3xl font-bold">{oneExerciseType?.name}</h1>
         </div>
-        <Select onValueChange={setOneExerciseType}>
+        {lastExercise && (
+          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+            <LucideCalendarClock className=" size-4" /> <div>Fait le {formatDateFrench(lastExercise?.createdAt)}</div>
+          </div>
+        )}
+        <Select onValueChange={onExerciseTypeChange}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Nom de l'exercice" />
           </SelectTrigger>
@@ -198,7 +231,7 @@ const DoExercisePage = () => {
               <Label htmlFor="rep1">Répétition 1</Label>
               <Input
                 id="rep1"
-                placeholder="Exemple: 12"
+                placeholder={lastExercise?.rep[0] || "Exemple: 5"}
                 value={formState.rep1}
                 onChange={handleChange}
                 required
@@ -209,7 +242,7 @@ const DoExercisePage = () => {
               <Label htmlFor="weight1">Poids 1</Label>
               <Input
                 id="weight1"
-                placeholder="Exemple: 20"
+                placeholder={lastExercise?.weight[0] || "Exemple: 20"}
                 value={formState.weight1}
                 onChange={handleChange}
                 required
@@ -218,13 +251,20 @@ const DoExercisePage = () => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="rep2">Répétition 2</Label>
-              <Input id="rep2" placeholder="" value={formState.rep2} onChange={handleChange} required type="text" />
+              <Input
+                id="rep2"
+                placeholder={lastExercise?.rep[1] || "Exemple: 7"}
+                value={formState.rep2}
+                onChange={handleChange}
+                required
+                type="text"
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="weight2">Poids 2</Label>
               <Input
                 id="weight2"
-                placeholder=""
+                placeholder={lastExercise?.weight[1] || "Exemple: 18"}
                 value={formState.weight2}
                 onChange={handleChange}
                 required
@@ -233,13 +273,20 @@ const DoExercisePage = () => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="repRange2">Répétition 3</Label>
-              <Input id="rep3" placeholder="" value={formState.rep3} onChange={handleChange} required type="text" />
+              <Input
+                id="rep3"
+                placeholder={lastExercise?.rep[2] || "Exemple: 10"}
+                value={formState.rep3}
+                onChange={handleChange}
+                required
+                type="text"
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="weight3">Poids 3</Label>
               <Input
                 id="weight3"
-                placeholder=""
+                placeholder={lastExercise?.weight[2] || "Exemple: 16"}
                 value={formState.weight3}
                 onChange={handleChange}
                 required
