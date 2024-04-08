@@ -203,7 +203,6 @@ const OneSession = () => {
             <div className=" col-span-2 ">
               <div className="space-y-4">
                 <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950 dark:shadow-sm">
-                  <h2 className="mb-3 text-lg font-semibold">Exercices</h2>
                   <div className="grid gap-4 ">
                     {isLoading ? (
                       <div className="col-span-full flex items-center justify-center">
