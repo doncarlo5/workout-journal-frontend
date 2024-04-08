@@ -57,7 +57,7 @@ export function SessionsList() {
       {session.length !== 0 && (
         <main className="flex flex-1 flex-col items-center justify-center">
           <div className="space-y-2 text-center">
-            <h1 className="mb-10 text-3xl font-bold">Mes séances</h1>
+            <h1 className="mb-5 mt-5 text-3xl font-bold">Mes séances</h1>
           </div>
           <div>
             <Table>
