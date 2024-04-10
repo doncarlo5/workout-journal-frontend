@@ -40,7 +40,7 @@ interface FormState {
   type_session: string
   body_weight: string
   exercise_user_list: any[]
-  isDone: boolean
+  is_done: boolean
 }
 
 const OneSession = () => {
@@ -56,7 +56,7 @@ const OneSession = () => {
     type_session: "",
     body_weight: "",
     exercise_user_list: [],
-    isDone: false,
+    is_done: false,
   })
 
   const { sessionId } = useParams()
@@ -78,7 +78,7 @@ const OneSession = () => {
         type_session: response.data.type_session,
         body_weight: response.data.body_weight,
         exercise_user_list: response.data.exercise_user_list,
-        isDone: response.data.isDone,
+        is_done: response.data.is_done,
       })
 
       console.log("👋 formState hehehehe", formState.exercise_user_list)
@@ -117,7 +117,7 @@ const OneSession = () => {
         type_session: formState.type_session,
         body_weight: formState.body_weight,
         exercise_user_list: formState.exercise_user_list,
-        isDone: formState.isDone,
+        is_done: formState.is_done,
       })
       console.log("👋 response", response)
       fetchOneSession()
@@ -148,7 +148,7 @@ const OneSession = () => {
 
   const handleCheckboxChange: (isChecked: CheckedState) => void = (isChecked) => {
     setIsChecked(!isChecked)
-    setFormState({ ...formState, isDone: Boolean(isChecked) })
+    setFormState({ ...formState, is_done: Boolean(isChecked) })
   }
 
   console.log("👋 formState.exercise_user_list", formState.exercise_user_list)
@@ -247,14 +247,14 @@ const OneSession = () => {
 
             <div className="flex w-full flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
               <Checkbox
-                defaultChecked={formState.isDone}
+                defaultChecked={formState.is_done}
                 disabled={!isEditable}
-                checked={formState.isDone}
+                checked={formState.is_done}
                 onCheckedChange={handleCheckboxChange}
-                id="isDone"
+                id="is_done"
               />
               <label
-                htmlFor="isDone"
+                htmlFor="is_done"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 Séance terminée
