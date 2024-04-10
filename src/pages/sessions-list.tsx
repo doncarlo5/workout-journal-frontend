@@ -77,7 +77,7 @@ export function SessionsList() {
                   <TableRow key={oneSession._id}>
                     <TableCell>
                       <div
-                        className={`me-2 h-2.5 w-2.5 rounded-full ${oneSession.isDone ? "bg-green-500" : "bg-red-500"}`}
+                        className={`me-2 h-2.5 w-2.5 rounded-full ${oneSession.is_done ? "bg-green-500" : "bg-red-500"}`}
                       ></div>
                     </TableCell>
                     <TableCell>{oneSession.type_session}</TableCell>
