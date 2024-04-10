@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { CheckedState } from "@radix-ui/react-checkbox"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
@@ -21,29 +22,41 @@ import {
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import ExerciseCard from "@/components/exercise-card"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
 
+interface FormState {
+  id: string
+  date_session: string
+  type_session: string
+  body_weight: string
+  exercise_user_list: any[]
+  isDone: boolean
+}
+
 const OneSession = () => {
   const [oneSessionType, setOneSessionType] = useState(null as any)
   const [isLoading, setIsLoading] = useState(true)
   const [field, setField] = useState({ value: null } as any)
+  const [isChecked, setIsChecked] = useState(false)
   const [isEditable, setIsEditable] = useState(false)
   const [session, setSession] = useState<any>({})
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<FormState>({
     id: "",
     date_session: "",
     type_session: "",
     body_weight: "",
     exercise_user_list: [],
-    isDone: "",
+    isDone: false,
   })
 
   const { sessionId } = useParams()
@@ -86,23 +99,27 @@ const OneSession = () => {
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const { target } = event
     if (target instanceof HTMLInputElement) {
-      const key = target.id
-      const value = target.value
-      setFormState({ ...formState, [key]: value })
+      const { name, value, type, checked } = target
+      if (type === "checkbox") {
+        setFormState({ ...formState, [name]: checked })
+      } else {
+        setFormState({ ...formState, [name]: value })
+      }
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log("👋 handleSubmit")
     try {
       const response = await myApi.put(`/sessions/${sessionId}`, {
         date_session: new Date(),
+        type_session: formState.type_session,
         body_weight: formState.body_weight,
         exercise_user_list: formState.exercise_user_list,
         isDone: formState.isDone,
       })
-      console.log(response)
-      console.log("👋 exercise", formState.exercise_user_list)
+      console.log("👋 response", response)
       fetchOneSession()
       setIsEditable(false)
     } catch (error) {
@@ -129,8 +146,9 @@ const OneSession = () => {
     }
   }
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
+  const handleCheckboxChange: (isChecked: CheckedState) => void = (isChecked) => {
+    setIsChecked(!isChecked)
+    setFormState({ ...formState, isDone: Boolean(isChecked) })
   }
 
   console.log("👋 formState.exercise_user_list", formState.exercise_user_list)
@@ -210,7 +228,7 @@ const OneSession = () => {
                       </div>
                     ) : (
                       formState.exercise_user_list.map((exercise: any) => (
-                        <ExerciseCard exercise={exercise} key={exercise.id} />
+                        <ExerciseCard exercise={exercise} key={exercise._id} />
                       ))
                     )}
                   </div>
@@ -225,6 +243,22 @@ const OneSession = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="flex w-full flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+              <Checkbox
+                defaultChecked={formState.isDone}
+                disabled={!isEditable}
+                checked={formState.isDone}
+                onCheckedChange={handleCheckboxChange}
+                id="isDone"
+              />
+              <label
+                htmlFor="isDone"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Séance terminée
+              </label>
             </div>
             <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
               Éditer
