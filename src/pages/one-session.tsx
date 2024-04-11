@@ -21,14 +21,10 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import ExerciseCard from "@/components/exercise-card"
 import { Navbar } from "@/components/navbar"
 
@@ -47,6 +43,8 @@ const OneSession = () => {
   const [oneSessionType, setOneSessionType] = useState(null as any)
   const [isLoading, setIsLoading] = useState(true)
   const [field, setField] = useState({ value: null } as any)
+  const [weight, setWeight] = useState(null as any)
+  const [date, setDate] = useState<Date>()
   const [isChecked, setIsChecked] = useState(false)
   const [isEditable, setIsEditable] = useState(false)
   const [session, setSession] = useState<any>({})
@@ -70,7 +68,6 @@ const OneSession = () => {
   const fetchOneSession = async () => {
     try {
       const response = await myApi.get(`/sessions/${sessionId}`)
-      console.log("👋 response data", response.data)
 
       setFormState({
         id: response.data._id,
@@ -80,8 +77,6 @@ const OneSession = () => {
         exercise_user_list: response.data.exercise_user_list,
         is_done: response.data.is_done,
       })
-
-      console.log("👋 formState hehehehe", formState.exercise_user_list)
 
       const newSession = response.data
       setSession(newSession)
@@ -113,13 +108,13 @@ const OneSession = () => {
     console.log("👋 handleSubmit")
     try {
       const response = await myApi.put(`/sessions/${sessionId}`, {
-        date_session: new Date(),
+        date_session: formState.date_session,
         type_session: formState.type_session,
         body_weight: formState.body_weight,
         exercise_user_list: formState.exercise_user_list,
         is_done: formState.is_done,
       })
-      console.log("👋 response", response)
+      console.log("👋 response", response.data)
       fetchOneSession()
       setIsEditable(false)
     } catch (error) {
@@ -140,10 +135,8 @@ const OneSession = () => {
   }
 
   const handleSelectDate: SelectSingleEventHandler = (date: Date | undefined) => {
-    if (date) {
-      setField(date)
-      setFormState({ ...formState, date_session: date.toISOString() })
-    }
+    setDate(date)
+    setFormState({ ...formState, date_session: date?.toString() || "" })
   }
 
   const handleCheckboxChange: (isChecked: CheckedState) => void = (isChecked) => {
@@ -151,7 +144,14 @@ const OneSession = () => {
     setFormState({ ...formState, is_done: Boolean(isChecked) })
   }
 
-  console.log("👋 formState.exercise_user_list", formState.exercise_user_list)
+  const handleSelectWeight = (event: React.FormEvent<HTMLInputElement>) => {
+    const { target } = event
+    if (target instanceof HTMLInputElement) {
+      const { value } = target
+      setWeight(value)
+      setFormState({ ...formState, body_weight: value })
+    }
+  }
 
   return (
     <>
@@ -160,7 +160,7 @@ const OneSession = () => {
       </div>
       <div className="mx-auto max-w-sm space-y-6">
         <div className="flex items-center space-y-2 text-left">
-          <Link to="/exercises">
+          <Link to="/sessions">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -185,12 +185,13 @@ const OneSession = () => {
                       !formState.date_session && "text-muted-foreground"
                     )}
                   >
-                    {formState.date_session ? format(formState.date_session, "PPP") : <span>Pick a date</span>}
+                    {formState.date_session ? format(formState.date_session, "PPP") : <span>Choisir une date</span>}
                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
+                    id="session_date"
                     mode="single"
                     selected={formState.date_session ? new Date(formState.date_session) : undefined}
                     onSelect={handleSelectDate}
@@ -209,7 +210,7 @@ const OneSession = () => {
                 id="body_weight"
                 placeholder="`${formState.body_weight}`"
                 value={formState.body_weight}
-                onChange={handleChange}
+                onChange={handleSelectWeight}
                 required
                 type="number"
                 disabled={!isEditable}
@@ -253,12 +254,12 @@ const OneSession = () => {
                 onCheckedChange={handleCheckboxChange}
                 id="is_done"
               />
-              <label
+              <Label
                 htmlFor="is_done"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 Séance terminée
-              </label>
+              </Label>
             </div>
             <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
               Éditer
