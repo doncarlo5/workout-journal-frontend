@@ -1,7 +1,23 @@
 import useAuth from "@/context/use-auth"
+import { ArrowBigDown, ArrowBigUp, MinusIcon, PlusIcon } from "lucide-react"
 import { Link } from "react-router-dom"
+import { Bar, BarChart, ResponsiveContainer } from "recharts"
 
+import IconChest from "./chest-icon"
+import IconLegs from "./legs-icon"
 import { ModeToggle } from "./mode-toggle"
+import NewSessionButton from "./new-session-button"
+import { Button } from "./ui/button"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "./ui/drawer"
 
 function Navbar() {
   const { isLoggedIn, handleLogout } = useAuth()
@@ -34,12 +50,7 @@ function Navbar() {
         ) : (
           <nav>
             <div className=" flex items-center justify-center gap-4">
-              <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
-                to="/do-exercise"
-              >
-                Faire un exercice
-              </Link>
+              <NewSessionButton />
               <Link
                 className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
                 to="/exercises"
