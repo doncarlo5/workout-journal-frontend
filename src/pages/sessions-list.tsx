@@ -24,7 +24,7 @@ export function SessionsList() {
 
   const fetchUserSessions = async () => {
     try {
-      const response = await myApi.get("/sessions")
+      const response = await myApi.get("/sessions?limit=1000&sort=-updatedAt")
       console.log("👋 response data", response.data)
       setSession(response.data)
       console.log("👋 session", session)
