@@ -18,7 +18,21 @@ import {
 } from "./ui/drawer"
 
 function NewSessionButton() {
+  const [weight, setWeight] = React.useState(null)
   const navigate = useNavigate()
+
+  // Fetch the last exercise user to get the last weight
+
+  React.useEffect(() => {
+    fetchLastSessionUser()
+  }, [])
+
+  const fetchLastSessionUser = async () => {
+    console.log("fetchLastSessionUser")
+    const response = await myApi.get(`/sessions?limit=1&sort=-createdAt`)
+    setWeight(response.data[0].body_weight)
+    console.log("LastSessionUser is:", response.data)
+  }
 
   const handleCreateSession = async (e: React.FormEvent, userChoice: string) => {
     e.preventDefault()
@@ -26,7 +40,7 @@ function NewSessionButton() {
       const response = await myApi.post("/sessions", {
         date_session: new Date(),
         type_session: userChoice,
-        body_weight: 30,
+        body_weight: weight,
         exercise_user_list: [],
         is_done: false,
         comment: "",
