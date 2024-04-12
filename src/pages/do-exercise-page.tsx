@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { LucideCalendarClock, LucideHistory } from "lucide-react"
+import { LucideCalendarClock } from "lucide-react"
 import { CountdownCircleTimer } from "react-countdown-circle-timer"
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -26,6 +26,7 @@ const DoExercisePage = () => {
     weight1: lastExercise?.weight[0] || "",
     weight2: lastExercise?.weight[1] || "",
     weight3: lastExercise?.weight[2] || "",
+    comment: lastExercise?.comment || "",
   })
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const DoExercisePage = () => {
       weight2: lastExercise?.weight[1] || "",
       rep3: lastExercise?.rep[2] || "",
       weight3: lastExercise?.weight[2] || "",
+      comment: lastExercise?.comment || "",
     })
   }, [lastExercise])
 
@@ -94,13 +96,14 @@ const DoExercisePage = () => {
     e.preventDefault()
     try {
       const response = await myApi.post("/exercise-user", {
-        date: new Date(),
         type: oneExerciseType._id,
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
+        comment: formState.comment,
       })
-      console.log("response is:", response)
-      navigate("/exercises/")
+      console.log("👋 formState", formState)
+      console.log("↗️ response is:", response.data)
+      // navigate("/exercises/")
     } catch (error: any) {
       console.log(error)
     }
@@ -290,6 +293,16 @@ const DoExercisePage = () => {
                 value={formState.weight3}
                 onChange={handleChange}
                 required
+                type="text"
+              />
+            </div>
+            <div className="col-span-2 space-y-2">
+              <Label htmlFor="comment">Notes</Label>
+              <Input
+                id="comment"
+                placeholder={lastExercise?.comment || "Ton ressenti sur l'exercice?"}
+                value={formState.comment}
+                onChange={handleChange}
                 type="text"
               />
             </div>
