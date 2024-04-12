@@ -35,6 +35,7 @@ const OneExercise = () => {
     weight1: "",
     weight2: "",
     weight3: "",
+    comment: "",
     updatedAt: "",
   })
 
@@ -60,6 +61,7 @@ const OneExercise = () => {
         weight1: response.data.weight[0],
         weight2: response.data.weight[1],
         weight3: response.data.weight[2],
+        comment: response.data.comment,
         updatedAt: response.data.updatedAt,
       })
 
@@ -103,10 +105,10 @@ const OneExercise = () => {
     e.preventDefault()
     try {
       const response = await myApi.put(`/exercise-user/${exerciseId}`, {
-        date: new Date(),
         type: oneExerciseType,
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
+        comment: formState.comment,
       })
       console.log(response)
       fetchOneExercise()
@@ -237,6 +239,18 @@ const OneExercise = () => {
                 id="weight3"
                 placeholder=""
                 value={formState.weight3}
+                onChange={handleChange}
+                required
+                type="text"
+                disabled={!isEditable}
+              />
+            </div>
+            <div className="col-span-2 space-y-2">
+              <Label htmlFor="comment">Notes</Label>
+              <Input
+                id="comment"
+                placeholder="Aucune note."
+                value={formState.comment}
                 onChange={handleChange}
                 required
                 type="text"
