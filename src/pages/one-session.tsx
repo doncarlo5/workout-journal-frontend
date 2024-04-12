@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { CheckedState } from "@radix-ui/react-checkbox"
-import { CalendarIcon } from "@radix-ui/react-icons"
+import { CalendarIcon, DragHandleHorizontalIcon, Pencil1Icon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
-import { ChevronLeft, LucidePlusCircle } from "lucide-react"
+import { ChevronLeft, LucidePlusCircle, MessageSquareMore } from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -37,6 +37,7 @@ interface FormState {
   body_weight: string
   exercise_user_list: any[]
   is_done: boolean
+  comment?: string
 }
 
 const OneSession = () => {
@@ -46,6 +47,7 @@ const OneSession = () => {
   const [weight, setWeight] = useState(null as any)
   const [date, setDate] = useState<Date>()
   const [isChecked, setIsChecked] = useState(false)
+  const [comment, setComment] = useState(null as any)
   const [isEditable, setIsEditable] = useState(false)
   const [session, setSession] = useState<any>({})
   const [formState, setFormState] = useState<FormState>({
@@ -55,6 +57,7 @@ const OneSession = () => {
     body_weight: "",
     exercise_user_list: [],
     is_done: false,
+    comment: "",
   })
 
   const { sessionId } = useParams()
@@ -76,6 +79,7 @@ const OneSession = () => {
         body_weight: response.data.body_weight,
         exercise_user_list: response.data.exercise_user_list,
         is_done: response.data.is_done,
+        comment: response.data.comment,
       })
 
       const newSession = response.data
@@ -113,6 +117,7 @@ const OneSession = () => {
         body_weight: formState.body_weight,
         exercise_user_list: formState.exercise_user_list,
         is_done: formState.is_done,
+        comment: formState.comment,
       })
       console.log("👋 response", response.data)
       fetchOneSession()
@@ -150,6 +155,15 @@ const OneSession = () => {
       const { value } = target
       setWeight(value)
       setFormState({ ...formState, body_weight: value })
+    }
+  }
+
+  const handleCommentChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const { target } = event
+    if (target instanceof HTMLInputElement) {
+      const { value } = target
+      setComment(value)
+      setFormState({ ...formState, comment: value })
     }
   }
 
@@ -245,8 +259,21 @@ const OneSession = () => {
                 </div>
               </div>
             </div>
+            <div className="resize space-y-2">
+              <Label htmlFor="comment">Notes</Label>
+              <Input
+                id="comment"
+                placeholder=""
+                value={formState.comment}
+                onChange={handleCommentChange}
+                type="text"
+                disabled={!isEditable}
+              />
+            </div>
 
-            <div className="flex w-full flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+            <div></div>
+
+            <div className="flex w-full items-center justify-between rounded-lg border p-3 shadow-sm">
               <Checkbox
                 defaultChecked={formState.is_done}
                 disabled={!isEditable}
