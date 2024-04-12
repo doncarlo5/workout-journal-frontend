@@ -48,12 +48,9 @@ const DoExercisePage = () => {
     console.log("lastExercise is:", response.data[0])
   }
 
-  let { sessionId } = useParams()
-
   const fetchOneSession = async () => {
     try {
       const response = await myApi.get(`/sessions/${sessionId}`)
-      console.log("👋 session data", response.data)
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -75,6 +72,7 @@ const DoExercisePage = () => {
     const init = async () => {
       const sessionData = await fetchOneSession()
       setSession(sessionData)
+      console.log("👋 sessionData", sessionData)
       const exerciseTypeData = await fetchAllExerciseTypes(sessionData)
       setAllExerciseTypes(exerciseTypeData)
     }
@@ -92,6 +90,8 @@ const DoExercisePage = () => {
     }
   }
 
+  let { sessionId } = useParams()
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
@@ -101,9 +101,15 @@ const DoExercisePage = () => {
         weight: [formState.weight1, formState.weight2, formState.weight3],
         comment: formState.comment,
       })
-      console.log("👋 formState", formState)
-      console.log("↗️ response is:", response.data)
-      // navigate("/exercises/")
+
+      const updatedSession = {
+        ...session,
+        exercise_user_list: [...session.exercise_user_list, response.data.id],
+      }
+
+      const responseSession = await myApi.put(`/sessions/${sessionId}`, updatedSession)
+
+      navigate(`/sessions/${sessionId}`)
     } catch (error: any) {
       console.log(error)
     }
