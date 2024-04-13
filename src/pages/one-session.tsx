@@ -25,6 +25,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Textarea } from "@/components/ui/textarea"
 import ExerciseCard from "@/components/exercise-card"
 import { Navbar } from "@/components/navbar"
 
@@ -158,13 +159,10 @@ const OneSession = () => {
     }
   }
 
-  const handleCommentChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const { target } = event
-    if (target instanceof HTMLInputElement) {
-      const { value } = target
-      setComment(value)
-      setFormState({ ...formState, comment: value })
-    }
+  const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = event.target
+    setComment(value)
+    setFormState({ ...formState, comment: value })
   }
 
   return (
@@ -261,12 +259,12 @@ const OneSession = () => {
             </div>
             <div className="resize space-y-2">
               <Label htmlFor="comment">Notes</Label>
-              <Input
+              <Textarea
                 id="comment"
                 placeholder=""
                 value={formState.comment}
                 onChange={handleCommentChange}
-                type="text"
+                maxLength={200}
                 disabled={!isEditable}
               />
             </div>

@@ -251,8 +251,7 @@ const OneExercise = () => {
                 placeholder="Aucune note."
                 value={formState.comment}
                 onChange={handleChange}
-                required
-                type="text"
+                maxLength={200}
                 disabled={!isEditable}
               />
             </div>

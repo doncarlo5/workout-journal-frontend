@@ -309,7 +309,7 @@ const DoExercisePage = () => {
                 placeholder={lastExercise?.comment ? `Note précédente: ${lastExercise?.comment}` : "Pas de notes."}
                 value={formState.comment}
                 onChange={handleChange}
-                type="text"
+                maxLength={200}
               />
             </div>
             <Button className="col-span-2 w-full" type="submit">
