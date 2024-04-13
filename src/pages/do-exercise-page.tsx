@@ -37,7 +37,7 @@ const DoExercisePage = () => {
       weight2: lastExercise?.weight[1] || "",
       rep3: lastExercise?.rep[2] || "",
       weight3: lastExercise?.weight[2] || "",
-      comment: lastExercise?.comment || "",
+      comment: "",
     })
   }, [lastExercise])
 
@@ -100,14 +100,15 @@ const DoExercisePage = () => {
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
         comment: formState.comment,
+        session: sessionId,
       })
 
       const updatedSession = {
-        ...session,
         exercise_user_list: [...session.exercise_user_list, response.data.id],
       }
 
       const responseSession = await myApi.put(`/sessions/${sessionId}`, updatedSession)
+      console.log(responseSession)
 
       navigate(`/sessions/${sessionId}`)
     } catch (error: any) {
@@ -306,7 +307,7 @@ const DoExercisePage = () => {
               <Label htmlFor="comment">Notes</Label>
               <Input
                 id="comment"
-                placeholder={lastExercise?.comment || "Ton ressenti sur l'exercice?"}
+                placeholder={lastExercise?.comment ? `Note précédente: ${lastExercise?.comment}` : "Pas de notes."}
                 value={formState.comment}
                 onChange={handleChange}
                 type="text"
