@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
@@ -81,13 +82,11 @@ const DoExercisePage = () => {
 
   console.log("👋 allExerciseTypes", allExerciseTypes)
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { target } = event
-    if (target instanceof HTMLInputElement) {
-      const key = target.id
-      const value = target.value
-      setFormState({ ...formState, [key]: value })
-    }
+    const key = target.id
+    const value = target.value
+    setFormState({ ...formState, [key]: value })
   }
 
   let { sessionId } = useParams()
@@ -305,7 +304,7 @@ const DoExercisePage = () => {
             </div>
             <div className="col-span-2 space-y-2">
               <Label htmlFor="comment">Notes</Label>
-              <Input
+              <Textarea
                 id="comment"
                 placeholder={lastExercise?.comment ? `Note précédente: ${lastExercise?.comment}` : "Pas de notes."}
                 value={formState.comment}
