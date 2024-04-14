@@ -217,7 +217,7 @@ const OneSession = () => {
             <div className="space-y-2"></div>
 
             <div className="space-y-2">
-              <Label htmlFor="body_weight">Poids</Label>
+              <Label htmlFor="body_weight">{`Poids du corps (en kg)`}</Label>
               <Input
                 id="body_weight"
                 placeholder="`${formState.body_weight}`"
@@ -257,7 +257,7 @@ const OneSession = () => {
                 </div>
               </div>
             </div>
-            <div className="resize space-y-2">
+            <div className="col-span-2 resize space-y-2">
               <Label htmlFor="comment">Notes</Label>
               <Textarea
                 id="comment"
@@ -268,8 +268,6 @@ const OneSession = () => {
                 disabled={!isEditable}
               />
             </div>
-
-            <div></div>
 
             <div className="flex w-full items-center justify-between rounded-lg border p-3 shadow-sm">
               <Checkbox
