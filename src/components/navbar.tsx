@@ -55,13 +55,19 @@ function Navbar() {
                 className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
                 to="/exercises"
               >
-                Exercices réalisés
+                Mes exercices
               </Link>
               <Link
                 className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
                 to="/sessions"
               >
-                Séances réalisés
+                Mes séances
+              </Link>
+              <Link
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+                to="/types"
+              >
+                Types
               </Link>
               <Link
                 className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
