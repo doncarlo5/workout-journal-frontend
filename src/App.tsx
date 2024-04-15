@@ -15,7 +15,7 @@ import OneType from "./pages/one-type"
 import SessionsList from "./pages/sessions-list"
 import SettingsPage from "./pages/settings-page"
 import SignupPage from "./pages/signup-page"
-import TypesPage from "./pages/types-page"
+import TypesList from "./pages/types-list"
 import WelcomePage from "./pages/welcome-page"
 import IsAuthenticated from "./routing/is-authenticated"
 import IsNotAuthenticated from "./routing/is-not-authenticated"
@@ -40,7 +40,7 @@ function App() {
               <Route path="/sessions/:sessionId/do-exercise" element={<DoExercisePage />} />
               <Route path="/exercises" element={<ExercicesList />} />
               <Route path="/exercises/:exerciseId" element={<OneExercise />} />
-              <Route path="/types" element={<TypesPage />} />
+              <Route path="/types" element={<TypesList />} />
               <Route path="/types/:typeId" element={<OneType />} />
               <Route path="/types/new-type" element={<NewType />} />
               <Route path="/settings" element={<SettingsPage />} />
