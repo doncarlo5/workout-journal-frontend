@@ -17,12 +17,12 @@ import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navbar } from "@/components/navbar"
 
-export function TypesPage() {
+export function TypesList() {
   const [type, setType] = useState([] as any[])
 
   const fetchTypes = async () => {
     try {
-      const response = await myApi.get("/exercise-type")
+      const response = await myApi.get("/exercise-type?limit=1000&sort=-updatedAt")
       console.log("👋 response data", response.data)
       setType(response.data)
     } catch (error) {
@@ -62,9 +62,9 @@ export function TypesPage() {
           <div>
             <Table>
               <TableCaption>
-                Liste de tes types d'exercices
-                <Button asChild variant="outline">
-                  <Link to="/types/new-type">New</Link>
+                Total: {type.length > 0 && `${type.length}`} exercices
+                <Button asChild variant="link">
+                  <Link to="/types/new-type">Nouvel exercice</Link>
                 </Button>
               </TableCaption>
               <TableHeader>
@@ -141,4 +141,4 @@ export function TypesPage() {
   )
 }
 
-export default TypesPage
+export default TypesList
