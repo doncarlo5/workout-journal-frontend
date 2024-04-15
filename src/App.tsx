@@ -7,9 +7,11 @@ import ErrorBoundary from "./pages/error-boundary"
 import ExercicesList from "./pages/exercises-list"
 import HomePage from "./pages/home-page"
 import LoginPage from "./pages/login-page"
+import NewType from "./pages/new-type"
 import NotFoundPage from "./pages/no-found-page"
 import OneExercise from "./pages/one-exercise"
 import OneSession from "./pages/one-session"
+import OneType from "./pages/one-type"
 import SessionsList from "./pages/sessions-list"
 import SettingsPage from "./pages/settings-page"
 import SignupPage from "./pages/signup-page"
@@ -39,6 +41,8 @@ function App() {
               <Route path="/exercises" element={<ExercicesList />} />
               <Route path="/exercises/:exerciseId" element={<OneExercise />} />
               <Route path="/types" element={<TypesPage />} />
+              <Route path="/types/:typeId" element={<OneType />} />
+              <Route path="/types/new-type" element={<NewType />} />
               <Route path="/settings" element={<SettingsPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
