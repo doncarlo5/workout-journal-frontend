@@ -53,12 +53,20 @@ export function TypesPage() {
       <Navbar />
       {type.length !== 0 && (
         <main className="flex flex-1 flex-col items-center justify-center">
-          <div className="space-y-2 text-center">
+          <div className="flex items-center gap-3 space-y-2 text-center">
             <h1 className="mb-5 mt-5 text-3xl font-bold">Mes types d'exercices</h1>
+            <Button className="" asChild variant="outline">
+              <Link to="/types/new-type">New</Link>
+            </Button>
           </div>
           <div>
             <Table>
-              <TableCaption>Liste de tes types d'exercices</TableCaption>
+              <TableCaption>
+                Liste de tes types d'exercices
+                <Button asChild variant="outline">
+                  <Link to="/types/new-type">New</Link>
+                </Button>
+              </TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead></TableHead>
@@ -95,7 +103,7 @@ export function TypesPage() {
                       </AlertDialog>
                     </TableCell>
                     <TableCell>
-                      <Link to={`/exercise-type/${type._id}`} key={type._id}>
+                      <Link to={`/types/${type._id}`} key={type._id}>
                         <Button variant="ghost">✍️</Button>
                       </Link>
                     </TableCell>
