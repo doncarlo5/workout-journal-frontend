@@ -71,6 +71,12 @@ function Navbar() {
               </Link>
               <Link
                 className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+                to="/charts"
+              >
+                Charts
+              </Link>
+              <Link
+                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
                 to="/settings"
               >
                 Options
