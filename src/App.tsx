@@ -2,6 +2,7 @@
 import { Route, Routes } from "react-router-dom"
 
 import { ThemeProvider } from "./components/theme-provider"
+import ChartsPage from "./pages/charts-page"
 import DoExercisePage from "./pages/do-exercise-page"
 import ErrorBoundary from "./pages/error-boundary"
 import ExercicesList from "./pages/exercises-list"
@@ -43,6 +44,7 @@ function App() {
               <Route path="/types" element={<TypesList />} />
               <Route path="/types/:typeId" element={<OneType />} />
               <Route path="/types/new-type" element={<NewType />} />
+              <Route path="/charts" element={<ChartsPage />} />
               <Route path="/settings" element={<SettingsPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
