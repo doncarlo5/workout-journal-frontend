@@ -30,7 +30,7 @@ function NewSessionButton() {
   const fetchLastSessionUser = async () => {
     console.log("fetchLastSessionUser")
     const response = await myApi.get(`/sessions?limit=1&sort=-createdAt`)
-    setWeight(response.data[0].body_weight)
+    setWeight(response.data[0]?.body_weight)
     console.log("LastSessionUser is:", response.data)
   }
 
@@ -64,7 +64,7 @@ function NewSessionButton() {
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader className=" text-left">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
-            <DrawerDescription>Créer une séance pour choisir tes exercises.</DrawerDescription>
+            <DrawerDescription>Créer une séance pour réaliser tes exercises.</DrawerDescription>
           </DrawerHeader>
           <div className="p-4 pb-0">
             <div className="flex items-center justify-between space-x-2">
