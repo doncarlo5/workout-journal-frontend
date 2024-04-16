@@ -130,8 +130,8 @@ export function TypesList() {
               </p>
             </div>
             <div className="flex gap-4">
-              <Link className="w-[150px]" to="/do-exercise">
-                <Button className="w-full">Créer un exercice type</Button>
+              <Link className="w-[150px]" to="/types/new-type">
+                <Button className="w-full">Nouveau type</Button>
               </Link>
             </div>
           </div>
