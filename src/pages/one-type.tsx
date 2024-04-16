@@ -198,6 +198,7 @@ const OneType = () => {
             <div className="space-y-2">
               <Label htmlFor="timer">Timer</Label>
               <Input
+                required
                 id="timer"
                 placeholder="`${formState.timer}`"
                 value={formState.timer}
@@ -211,6 +212,7 @@ const OneType = () => {
             <div className="space-y-2">
               <Label htmlFor="repRange1">Rep Range 1</Label>
               <Input
+                required
                 id="repRange1"
                 placeholder={formState.repRange1}
                 value={formState.repRange1}
@@ -223,6 +225,7 @@ const OneType = () => {
             <div className="space-y-2">
               <Label htmlFor="repRange2">Rep Range 2</Label>
               <Input
+                required
                 id="repRange2"
                 placeholder={formState.repRange2}
                 value={formState.repRange2}
@@ -236,6 +239,7 @@ const OneType = () => {
             <div className="space-y-2">
               <Label htmlFor="repRange3">Rep Range 3</Label>
               <Input
+                required
                 id="repRange3"
                 placeholder={formState.repRange3}
                 value={formState.repRange3}
