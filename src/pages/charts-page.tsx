@@ -31,29 +31,37 @@ function ChartsPage() {
   return (
     <div className="flex h-screen flex-col">
       <Navbar />
-      <main className="flex flex-1 flex-col items-center justify-center">
-        <h1 className="mb-5 mt-5 text-3xl font-bold">Évolution</h1>
-        <ResponsiveContainer width="60%" height="60%">
-          <LineChart
-            width={500}
-            height={300}
-            data={session}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="createdAt" tickFormatter={dateFormatter} />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="body_weight" stroke="#8884d8" activeDot={{ r: 8 }} />
-          </LineChart>
-        </ResponsiveContainer>
-      </main>
+      {session.length !== 0 && (
+        <main className="flex flex-1 flex-col items-center justify-center">
+          <h1 className="mb-5 mt-5 text-3xl font-bold">Évolution</h1>
+          <ResponsiveContainer width="60%" height="60%">
+            <LineChart
+              width={500}
+              height={300}
+              data={session}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="createdAt" tickFormatter={dateFormatter} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="body_weight" stroke="#8884d8" activeDot={{ r: 8 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </main>
+      )}
+      {session.length === 0 && (
+        <main className="flex flex-1 flex-col items-center justify-center">
+          <h1 className="mb-5 mt-5 text-3xl font-bold">Évolution</h1>
+          <p>En attente de nouveaux exercices...</p>
+        </main>
+      )}
     </div>
   )
 }
