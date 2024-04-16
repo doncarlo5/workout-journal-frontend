@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navbar } from "@/components/navbar"
+import NewSessionButton from "@/components/new-session-button"
 
 export function ExercicesList() {
   const [exercise, setExercise] = useState([] as any[])
@@ -125,10 +126,8 @@ export function ExercicesList() {
                 Tu n'as pas encore d'exercices
               </p>
             </div>
-            <div className="flex gap-4">
-              <Link className="w-[150px]" to="/do-exercise">
-                <Button className="w-full">Lancer un exercice</Button>
-              </Link>
+            <div className="flex flex-col gap-4 ">
+              <NewSessionButton />
             </div>
           </div>
         </main>
