@@ -23,8 +23,8 @@ export function ExercicesList() {
   const fetchUserExercises = async () => {
     try {
       const response = await myApi.get("/exercise-user?limit=1000&sort=-updatedAt")
-      console.log("👋 response data", response.data)
       setExercise(response.data)
+      console.log("👋 response", response.data)
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -103,7 +103,7 @@ export function ExercicesList() {
                       </Link>
                     </TableCell>
                     <TableCell>{formatDate(exercise.createdAt)}</TableCell>
-                    <TableCell>{exercise.type.name}</TableCell>
+                    <TableCell>{exercise.type?.name}</TableCell>
                     <TableCell>{exercise.weight[0]}</TableCell>
                     <TableCell>{exercise.weight[1]}</TableCell>
                     <TableCell>{exercise.weight[2]}</TableCell>
