@@ -103,7 +103,7 @@ const NewType = () => {
             </Button>
           </Link>
           <div>
-            <h1 className="ml-5 text-3xl font-bold">Nouvel exercice </h1>
+            <h1 className="ml-5 text-3xl font-bold">Nouveau type</h1>
           </div>
         </div>
 
