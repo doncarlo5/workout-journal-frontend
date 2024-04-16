@@ -150,7 +150,7 @@ const OneType = () => {
             </Button>
           </Link>
           <div>
-            <h1 className="ml-5 text-3xl font-medium">Ton exercice </h1>
+            <h1 className="ml-5 text-3xl font-medium">Ton exercice type</h1>
             <h1 className="ml-5 text-3xl font-bold">{type?.name}</h1>
           </div>
         </div>
