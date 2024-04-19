@@ -1,18 +1,28 @@
+import { ChatBubbleIcon, TextAlignRightIcon } from "@radix-ui/react-icons"
 import { Link } from "react-router-dom"
 
+import { Button } from "./ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 
 function ExerciseCard({ exercise }: { exercise: any }) {
   return (
     <Link to={`/exercises/${exercise._id}`}>
       <Card className="transition ease-in-out hover:-translate-y-1 hover:shadow-lg">
-        <CardHeader className=" mb-2 p-4 pb-2">
-          <CardTitle className="flex items-center ">
-            {" "}
-            {exercise.type.name} {"("}
-            {exercise.type.type}
-            {")"}
-          </CardTitle>
+        <CardHeader className="  flex flex-row justify-between px-4 py-2 ">
+          <CardTitle className="flex items-center  ">{exercise.type.name}</CardTitle>
+          {exercise.comment && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="flex transition hover:scale-110">
+                    <ChatBubbleIcon className="" />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>{exercise.comment}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </CardHeader>
         <CardContent className="">
           <div className="relative overflow-x-auto">
@@ -23,11 +33,11 @@ function ExerciseCard({ exercise }: { exercise: any }) {
                     ①
                   </th>
                   <td className="border-r border-black border-r-slate-400 bg-clip-text px-3 py-2 ">
-                    <span className="text-2xl font-bold">{exercise.rep[2]}</span>{" "}
+                    <span className="text-2xl font-bold">{exercise.rep[0]}</span>{" "}
                     <span className="text-sm text-gray-700">REPS</span>{" "}
                   </td>
                   <td className=" px-3 py-2">
-                    <span className=" text-2xl font-bold">{exercise.weight[2]}</span>{" "}
+                    <span className=" text-2xl font-bold">{exercise.weight[0]}</span>{" "}
                     <span className="text-sm text-gray-700">KG</span>
                   </td>
                   <td className="px-3 py-2 font-light tracking-tighter text-gray-700">
@@ -61,11 +71,11 @@ function ExerciseCard({ exercise }: { exercise: any }) {
                     ③
                   </th>
                   <td className="border-r border-black border-r-slate-400 bg-clip-text px-3 py-2 ">
-                    <span className="text-2xl font-bold">{exercise.rep[0]}</span>{" "}
+                    <span className="text-2xl font-bold">{exercise.rep[2]}</span>{" "}
                     <span className="text-sm text-gray-700">REPS</span>{" "}
                   </td>
                   <td className=" px-3 py-2">
-                    <span className=" text-2xl font-bold">{exercise.weight[0]}</span>{" "}
+                    <span className=" text-2xl font-bold">{exercise.weight[2]}</span>{" "}
                     <span className="text-sm text-gray-700">KG</span>
                   </td>
                   <td className="px-3 py-2 font-light tracking-tighter text-gray-700">
