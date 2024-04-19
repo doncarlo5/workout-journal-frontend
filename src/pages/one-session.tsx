@@ -3,6 +3,7 @@ import { CheckedState } from "@radix-ui/react-checkbox"
 import { CalendarIcon, DragHandleHorizontalIcon, Pencil1Icon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format, set } from "date-fns"
+import { fr } from "date-fns/locale/fr"
 import {
   ChevronLeft,
   LucideArrowBigLeftDash,
@@ -206,12 +207,17 @@ const OneSession = () => {
                       !formState.date_session && "text-muted-foreground"
                     )}
                   >
-                    {formState.date_session ? format(formState.date_session, "PPP") : <span>Choisir une date</span>}
+                    {formState.date_session ? (
+                      format(formState.date_session, "PPP", { locale: fr })
+                    ) : (
+                      <span>Choisir une date</span>
+                    )}
                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
+                    locale={fr}
                     id="session_date"
                     mode="single"
                     selected={formState.date_session ? new Date(formState.date_session) : undefined}
