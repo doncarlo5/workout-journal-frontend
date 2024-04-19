@@ -199,8 +199,8 @@ const DoExercisePage = () => {
         </div>
 
         <Select onValueChange={onExerciseTypeChange}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Nom de l'exercice" />
+          <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700">
+            <SelectValue className=" " placeholder="Sélectionne un exercice..." />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -231,107 +231,111 @@ const DoExercisePage = () => {
             <LucideInfo className="mr-1 size-4" /> <div>{oneExerciseType?.advice}</div>
           </div>
         )}
-        <div className="space-y-4">
-          <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="rep1">Rep 1</Label>
-              <Input
-                id="rep1"
-                placeholder={lastExercise?.rep[0] || "Exemple: 5"}
-                value={formState.rep1}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight1">Poids 1 {`(kg)`}</Label>
-              <Input
-                id="weight1"
-                placeholder={lastExercise?.weight[0] || "Exemple: 20"}
-                value={formState.weight1}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="repRange1">Rep Range 1</Label>
-              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
-                {oneExerciseType?.repRange1}
-              </Badge>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="rep2">Rep 2</Label>
-              <Input
-                id="rep2"
-                placeholder={lastExercise?.rep[1] || "Exemple: 7"}
-                value={formState.rep2}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight2">Poids 2 {`(kg)`}</Label>
-              <Input
-                id="weight2"
-                placeholder={lastExercise?.weight[1] || "Exemple: 18"}
-                value={formState.weight2}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="repRange1">Rep Range 2</Label>
-              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
-                {oneExerciseType?.repRange2}
-              </Badge>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="repRange2">Rep 3</Label>
-              <Input
-                id="rep3"
-                placeholder={lastExercise?.rep[2] || "Exemple: 10"}
-                value={formState.rep3}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight3">Poids 3 {`(kg)`}</Label>
-              <Input
-                id="weight3"
-                placeholder={lastExercise?.weight[2] || "Exemple: 16"}
-                value={formState.weight3}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="repRange1">Rep Range 3</Label>
-              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
-                {oneExerciseType?.repRange3}
-              </Badge>
-            </div>
-            <div className="col-span-3 space-y-2">
-              <Label htmlFor="comment">Notes</Label>
-              <Textarea
-                id="comment"
-                placeholder={lastExercise?.comment ? `Note précédente: ${lastExercise?.comment}` : "Pas de notes."}
-                value={formState.comment}
-                onChange={handleChange}
-                maxLength={200}
-              />
-            </div>
-            <Button className="col-span-3 mb-5 w-full" type="submit">
-              Valider
-            </Button>
-          </form>
-        </div>
+        {oneExerciseType ? (
+          <div className="space-y-4">
+            <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="rep1">Rep 1</Label>
+                <Input
+                  id="rep1"
+                  placeholder={lastExercise?.rep[0] || "Exemple: 5"}
+                  value={formState.rep1}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="weight1">Poids 1 {`(kg)`}</Label>
+                <Input
+                  id="weight1"
+                  placeholder={lastExercise?.weight[0] || "Exemple: 20"}
+                  value={formState.weight1}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="repRange1">Rep Range 1</Label>
+                <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+                  {oneExerciseType?.repRange1}
+                </Badge>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="rep2">Rep 2</Label>
+                <Input
+                  id="rep2"
+                  placeholder={lastExercise?.rep[1] || "Exemple: 7"}
+                  value={formState.rep2}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="weight2">Poids 2 {`(kg)`}</Label>
+                <Input
+                  id="weight2"
+                  placeholder={lastExercise?.weight[1] || "Exemple: 18"}
+                  value={formState.weight2}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="repRange1">Rep Range 2</Label>
+                <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+                  {oneExerciseType?.repRange2}
+                </Badge>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="repRange2">Rep 3</Label>
+                <Input
+                  id="rep3"
+                  placeholder={lastExercise?.rep[2] || "Exemple: 10"}
+                  value={formState.rep3}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="weight3">Poids 3 {`(kg)`}</Label>
+                <Input
+                  id="weight3"
+                  placeholder={lastExercise?.weight[2] || "Exemple: 16"}
+                  value={formState.weight3}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="repRange1">Rep Range 3</Label>
+                <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+                  {oneExerciseType?.repRange3}
+                </Badge>
+              </div>
+              <div className="col-span-3 space-y-2">
+                <Label htmlFor="comment">Notes</Label>
+                <Textarea
+                  id="comment"
+                  placeholder={lastExercise?.comment ? `Note précédente: ${lastExercise?.comment}` : "Pas de notes."}
+                  value={formState.comment}
+                  onChange={handleChange}
+                  maxLength={200}
+                />
+              </div>
+              <Button className="col-span-3 mb-5 w-full" type="submit">
+                Valider
+              </Button>
+            </form>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </>
   )
