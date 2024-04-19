@@ -306,7 +306,7 @@ const OneSession = () => {
             ) : (
               <Button className="col-span-2 w-full" type="submit">
                 <LucideArrowBigLeftDash className="mr-2 size-5" />
-                Revenir plus tard
+                Finir plus tard...
               </Button>
             )}
 
