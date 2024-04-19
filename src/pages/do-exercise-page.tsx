@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import CountDownTimer from "@/components/countdown-timer"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
@@ -18,8 +19,6 @@ const DoExercisePage = () => {
   const [oneExerciseType, setOneExerciseType] = useState(null as any)
   const [lastExercise, setLastExercise] = useState(null as any)
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
-  const [isTimerPlaying, setIsTimerPlaying] = useState(false)
-  const [key, setKey] = useState(0)
   const [session, setSession] = useState<any>({})
 
   const [formState, setFormState] = useState({
@@ -136,50 +135,6 @@ const DoExercisePage = () => {
     }
   }
 
-  const renderTime = ({ remainingTime }: { remainingTime: number }) => {
-    if (remainingTime === 0) {
-      return (
-        <div className=" flex flex-col justify-center">
-          <p className="flex	select-none justify-center">Go !</p>
-          <button
-            className="mt-2 rounded-xl bg-slate-100 px-6 py-0.5 text-slate-600 hover:bg-slate-200"
-            onClick={() => setKey((prevKey) => prevKey + 1)}
-          >
-            Restart
-          </button>
-        </div>
-      )
-    }
-
-    console.log("remainingTime is:", remainingTime)
-    const minutes = Math.floor(remainingTime / 60)
-    const seconds = remainingTime % 60
-    const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
-
-    return (
-      <div className="flex flex-col">
-        <div className=" cursor-pointer" onClick={() => setIsTimerPlaying(!isTimerPlaying)}>
-          <div className=" flex	select-none justify-center text-xs">Temps restant</div>
-          <div className="flex	select-none justify-center text-2xl font-black">{`${minutes}:${formattedSeconds}`}</div>
-          {isTimerPlaying ? (
-            <div className="flex justify-center">
-              <button
-                className="mt-2	select-none rounded-xl bg-orange-100 px-6 py-0.5 text-orange-600 hover:bg-orange-200"
-                onClick={() => setKey((prevKey) => prevKey + 1)}
-              >
-                Stop
-              </button>
-            </div>
-          ) : (
-            <div className="mt-2	select-none rounded-xl bg-green-100 px-6 py-0.5 text-green-600 hover:bg-green-200">
-              Play
-            </div>
-          )}
-        </div>
-      </div>
-    )
-  }
-
   return (
     <>
       <div className="mb-10 flex flex-col">
@@ -212,20 +167,7 @@ const DoExercisePage = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {oneExerciseType && (
-          <div className=" flex justify-center">
-            <CountdownCircleTimer
-              key={key}
-              isPlaying={isTimerPlaying}
-              duration={oneExerciseType?.timer}
-              colors={["#D19F55", "#B99C70", "#B99C70"]}
-              colorsTime={[30, 10, 7]}
-              onComplete={() => ({ shouldRepeat: false, delay: 1, newInitialRemainingTime: oneExerciseType?.timer })}
-            >
-              {renderTime}
-            </CountdownCircleTimer>
-          </div>
-        )}
+        {oneExerciseType && <CountDownTimer exerciseTypeTimer={oneExerciseType.timer} />}
         {oneExerciseType?.advice && (
           <div className=" flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
             <LucideInfo className="mr-1 size-4" /> <div>{oneExerciseType?.advice}</div>
