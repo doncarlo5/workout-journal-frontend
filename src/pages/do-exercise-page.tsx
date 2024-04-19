@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import { LucideCalendarClock } from "lucide-react"
+import { format } from "date-fns"
+import { ChevronLeft, LucideCalendarClock, LucideInfo, LucidePlusCircle, MessageSquareMore } from "lucide-react"
 import { CountdownCircleTimer } from "react-countdown-circle-timer"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -30,6 +32,8 @@ const DoExercisePage = () => {
     comment: lastExercise?.comment || "",
   })
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     setFormState({
       rep1: lastExercise?.rep[0] || "",
@@ -46,6 +50,7 @@ const DoExercisePage = () => {
     setOneExerciseType(value)
     const response = await myApi.get(`/exercise-user?limit=1&sort=-createdAt&type=${value._id}`)
     setLastExercise(response.data[0])
+
     console.log("lastExercise is:", response.data[0])
   }
 
@@ -58,11 +63,9 @@ const DoExercisePage = () => {
     }
   }
 
-  const navigate = useNavigate()
-
   const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
-      const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}`)
+      const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -83,6 +86,7 @@ const DoExercisePage = () => {
   console.log("👋 allExerciseTypes", allExerciseTypes)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    console.log("event.target", event.target.value)
     const { target } = event
     const key = target.id
     const value = target.value
@@ -116,16 +120,6 @@ const DoExercisePage = () => {
   }
 
   // format lastexercise.createdAt
-
-  function formatDateFrench(dateString: string) {
-    const date = new Date(dateString)
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }
-    return date.toLocaleString("fr-FR", options)
-  }
 
   function formatTime(seconds: number): string {
     const minutes = Math.floor(seconds / 60)
@@ -192,15 +186,23 @@ const DoExercisePage = () => {
         <Navbar />
       </div>
       <div className="mx-auto max-w-sm space-y-6">
-        <div className="flex justify-between">
-          <h1 className="w-2/5 text-3xl font-light">{session.type_session}</h1>
-          <h1 className=" text-right text-3xl font-bold">{oneExerciseType?.name}</h1>
-        </div>
-        {lastExercise && (
-          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-            <LucideCalendarClock className=" size-4" /> <div>Fait le {formatDateFrench(lastExercise?.createdAt)}</div>
+        <div className="flex items-center space-y-2 text-left">
+          <Link to={`/sessions/${sessionId}`}>
+            <Button variant="outline" size="icon">
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+          </Link>
+          <div>
+            <h1 className="ml-5 text-3xl font-medium">{session.type_session}</h1>
+            <h1 className="ml-5 text-3xl font-bold">{oneExerciseType?.name}</h1>
           </div>
-        )}
+        </div>
+
+        {/* {lastExercise && (
+          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+            <LucideCalendarClock className=" size-4" /> <div>Fait le {format(session?.date_session, "dd/MM/yyyy")}</div>
+          </div>
+        )} */}
         <Select onValueChange={onExerciseTypeChange}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Nom de l'exercice" />
@@ -209,9 +211,7 @@ const DoExercisePage = () => {
             <SelectGroup>
               {allExerciseTypes.map((type) => (
                 <SelectItem key={type._id} value={type}>
-                  {type.name} {"("}
-                  {type.type}
-                  {")"}
+                  {type.name}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -231,24 +231,26 @@ const DoExercisePage = () => {
             </CountdownCircleTimer>
           </div>
         )}
-        <div>
-          <p className="text-gray-500 dark:text-gray-400">Conseil: {oneExerciseType?.advice}</p>
-        </div>
+        {oneExerciseType?.advice && (
+          <div className=" flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+            <LucideInfo className="mr-1 size-4" /> <div>{oneExerciseType?.advice}</div>
+          </div>
+        )}
         <div className="space-y-4">
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="rep1">Répétition 1</Label>
+              <Label htmlFor="rep1">Rep 1</Label>
               <Input
                 id="rep1"
                 placeholder={lastExercise?.rep[0] || "Exemple: 5"}
                 value={formState.rep1}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="weight1">Poids 1</Label>
+              <Label htmlFor="weight1">Poids 1 {`(kg)`}</Label>
               <Input
                 id="weight1"
                 placeholder={lastExercise?.weight[0] || "Exemple: 20"}
@@ -259,7 +261,13 @@ const DoExercisePage = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="rep2">Répétition 2</Label>
+              <Label htmlFor="repRange1">Rep Range 1</Label>
+              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+                {oneExerciseType?.repRange1}
+              </Badge>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="rep2">Rep 2</Label>
               <Input
                 id="rep2"
                 placeholder={lastExercise?.rep[1] || "Exemple: 7"}
@@ -270,7 +278,7 @@ const DoExercisePage = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="weight2">Poids 2</Label>
+              <Label htmlFor="weight2">Poids 2 {`(kg)`}</Label>
               <Input
                 id="weight2"
                 placeholder={lastExercise?.weight[1] || "Exemple: 18"}
@@ -281,7 +289,13 @@ const DoExercisePage = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="repRange2">Répétition 3</Label>
+              <Label htmlFor="repRange1">Rep Range 2</Label>
+              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+                {oneExerciseType?.repRange2}
+              </Badge>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="repRange2">Rep 3</Label>
               <Input
                 id="rep3"
                 placeholder={lastExercise?.rep[2] || "Exemple: 10"}
@@ -292,7 +306,7 @@ const DoExercisePage = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="weight3">Poids 3</Label>
+              <Label htmlFor="weight3">Poids 3 {`(kg)`}</Label>
               <Input
                 id="weight3"
                 placeholder={lastExercise?.weight[2] || "Exemple: 16"}
@@ -302,7 +316,13 @@ const DoExercisePage = () => {
                 type="text"
               />
             </div>
-            <div className="col-span-2 space-y-2">
+            <div className="space-y-2">
+              <Label htmlFor="repRange1">Rep Range 3</Label>
+              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+                {oneExerciseType?.repRange3}
+              </Badge>
+            </div>
+            <div className="col-span-3 space-y-2">
               <Label htmlFor="comment">Notes</Label>
               <Textarea
                 id="comment"
@@ -312,8 +332,8 @@ const DoExercisePage = () => {
                 maxLength={200}
               />
             </div>
-            <Button className="col-span-2 w-full" type="submit">
-              Enregistrer l'exercise
+            <Button className="col-span-3 mb-5 w-full" type="submit">
+              Valider
             </Button>
           </form>
         </div>
