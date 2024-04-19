@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { CheckedState } from "@radix-ui/react-checkbox"
 import { CalendarIcon, DragHandleHorizontalIcon, Pencil1Icon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
-import { format } from "date-fns"
+import { format, set } from "date-fns"
 import { ChevronLeft, LucidePlusCircle, MessageSquareMore } from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
@@ -42,14 +42,9 @@ interface FormState {
 }
 
 const OneSession = () => {
-  const [oneSessionType, setOneSessionType] = useState(null as any)
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+
   const [isLoading, setIsLoading] = useState(true)
-  const [field, setField] = useState({ value: null } as any)
-  const [weight, setWeight] = useState(null as any)
-  const [date, setDate] = useState<Date>()
-  const [isChecked, setIsChecked] = useState(false)
-  const [comment, setComment] = useState(null as any)
-  const [isEditable, setIsEditable] = useState(false)
   const [session, setSession] = useState<any>({})
   const [formState, setFormState] = useState<FormState>({
     id: "",
@@ -64,15 +59,14 @@ const OneSession = () => {
   const { sessionId } = useParams()
   const navigate = useNavigate()
 
-  const toggleIsEditable = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsEditable((current) => !current)
-  }
+  // const toggleIsEditable = (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   setIsEditable((current) => !current)
+  // }
 
   const fetchOneSession = async () => {
     try {
       const response = await myApi.get(`/sessions/${sessionId}`)
-
       setFormState({
         id: response.data._id,
         date_session: response.data.date_session,
@@ -82,6 +76,8 @@ const OneSession = () => {
         is_done: response.data.is_done,
         comment: response.data.comment,
       })
+
+      console.log("response user list from fetch", response.data.exercise_user_list)
 
       const newSession = response.data
       setSession(newSession)
@@ -122,11 +118,25 @@ const OneSession = () => {
       })
       console.log("👋 response", response.data)
       fetchOneSession()
-      setIsEditable(false)
+      navigate("/sessions/")
+      // setIsEditable(false)
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
     }
+  }
+
+  const handleSelectDate: SelectSingleEventHandler = async (date: Date | undefined) => {
+    setFormState({ ...formState, date_session: date?.toString() || "" })
+    try {
+      await myApi.put(`/sessions/${sessionId}`, {
+        date_session: date,
+      })
+    } catch (error) {
+      const err = error as AxiosError
+      console.error(err.response?.data)
+    }
+    setIsCalendarOpen(false)
   }
 
   const handleDelete = async (id: string) => {
@@ -134,19 +144,13 @@ const OneSession = () => {
       const response = await myApi.delete(`/sessions/${id}`)
       console.log(response)
       fetchOneSession()
-      navigate("/session/")
+      navigate("/sessions/")
     } catch (error) {
       console.error("Fetch error: ", error)
     }
   }
 
-  const handleSelectDate: SelectSingleEventHandler = (date: Date | undefined) => {
-    setDate(date)
-    setFormState({ ...formState, date_session: date?.toString() || "" })
-  }
-
   const handleCheckboxChange: (isChecked: CheckedState) => void = (isChecked) => {
-    setIsChecked(!isChecked)
     setFormState({ ...formState, is_done: Boolean(isChecked) })
   }
 
@@ -154,14 +158,12 @@ const OneSession = () => {
     const { target } = event
     if (target instanceof HTMLInputElement) {
       const { value } = target
-      setWeight(value)
       setFormState({ ...formState, body_weight: value })
     }
   }
 
   const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target
-    setComment(value)
     setFormState({ ...formState, comment: value })
   }
 
@@ -187,10 +189,9 @@ const OneSession = () => {
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="session_date">Date</Label>
-              <Popover>
+              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                 <PopoverTrigger asChild>
                   <Button
-                    disabled={!isEditable}
                     variant={"outline"}
                     className={cn(
                       "w-[240px] pl-3 text-left font-normal",
@@ -225,7 +226,7 @@ const OneSession = () => {
                 onChange={handleSelectWeight}
                 required
                 type="number"
-                disabled={!isEditable}
+                // disabled={!isEditable}
               />
             </div>
 
@@ -265,14 +266,14 @@ const OneSession = () => {
                 value={formState.comment}
                 onChange={handleCommentChange}
                 maxLength={200}
-                disabled={!isEditable}
+                // disabled={!isEditable}
               />
             </div>
 
             <div className="flex w-full items-center justify-between rounded-lg border p-3 shadow-sm">
               <Checkbox
                 defaultChecked={formState.is_done}
-                disabled={!isEditable}
+                // disabled={!isEditable}
                 checked={formState.is_done}
                 onCheckedChange={handleCheckboxChange}
                 id="is_done"
@@ -284,11 +285,11 @@ const OneSession = () => {
                 Séance terminée
               </Label>
             </div>
-            <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
+            {/* <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
               Éditer
-            </Button>
-            <Button disabled={!isEditable} className="col-span-2 w-full" type="submit">
-              Mettre à jour
+            </Button> */}
+            <Button className="col-span-2 w-full" type="submit">
+              Valider
             </Button>
 
             <AlertDialog>
@@ -306,7 +307,9 @@ const OneSession = () => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Annuler</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => handleDelete(formState.id)}>Confirmer</AlertDialogAction>
+                  <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
+                    Confirmer
+                  </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
