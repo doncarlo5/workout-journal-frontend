@@ -198,11 +198,6 @@ const DoExercisePage = () => {
           </div>
         </div>
 
-        {/* {lastExercise && (
-          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-            <LucideCalendarClock className=" size-4" /> <div>Fait le {format(session?.date_session, "dd/MM/yyyy")}</div>
-          </div>
-        )} */}
         <Select onValueChange={onExerciseTypeChange}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Nom de l'exercice" />
@@ -257,7 +252,7 @@ const DoExercisePage = () => {
                 value={formState.weight1}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
               />
             </div>
             <div className="space-y-2">
@@ -274,7 +269,7 @@ const DoExercisePage = () => {
                 value={formState.rep2}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
               />
             </div>
             <div className="space-y-2">
@@ -285,7 +280,7 @@ const DoExercisePage = () => {
                 value={formState.weight2}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
               />
             </div>
             <div className="space-y-2">
@@ -302,7 +297,7 @@ const DoExercisePage = () => {
                 value={formState.rep3}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
               />
             </div>
             <div className="space-y-2">
@@ -313,7 +308,7 @@ const DoExercisePage = () => {
                 value={formState.weight3}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
               />
             </div>
             <div className="space-y-2">
