@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { format } from "date-fns"
 import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
@@ -20,6 +21,7 @@ import NewSessionButton from "@/components/new-session-button"
 
 export function ExercicesList() {
   const [exercise, setExercise] = useState([] as any[])
+  const [session, setSession] = useState([] as any[])
 
   const fetchUserExercises = async () => {
     try {
@@ -31,8 +33,18 @@ export function ExercicesList() {
     }
   }
 
+  // const fetchOneSession = async () => {
+  //   try {
+  //     const response = await myApi.get(`/sessions/${exercise.session}`)
+  //     return response.data[0]
+  //   } catch (error) {
+  //     console.error("Fetch error: ", error)
+  //   }
+  // }
+
   useEffect(() => {
     fetchUserExercises()
+    // fetchOneSession()
   }, [])
 
   const handleDelete = async (id: string) => {
@@ -46,7 +58,10 @@ export function ExercicesList() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
+    if (!dateString) {
+      return ""
+    }
+    return format(dateString, "dd/MM/yyyy")
   }
 
   return (
@@ -84,15 +99,15 @@ export function ExercicesList() {
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Es-tu sûr de vouloir supprimer ton exercice ?</AlertDialogTitle>
+                            <AlertDialogTitle>Supprimer cet exercice ?</AlertDialogTitle>
                             <AlertDialogDescription>
                               Tu ne pourras pas récupérer cet exercice une fois supprimé.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel>Conserver</AlertDialogCancel>
-                            <AlertDialogAction asChild onClick={() => handleDelete(exercise._id)}>
-                              <Button variant="destructive">Confirmer</Button>
+                            <AlertDialogAction variant="destructive" asChild onClick={() => handleDelete(exercise._id)}>
+                              <Button>Confirmer</Button>
                             </AlertDialogAction>{" "}
                           </AlertDialogFooter>
                         </AlertDialogContent>
@@ -103,7 +118,8 @@ export function ExercicesList() {
                         <Button variant="ghost">✍️</Button>
                       </Link>
                     </TableCell>
-                    <TableCell>{formatDate(exercise.createdAt)}</TableCell>
+
+                    <TableCell>{formatDate(exercise.session.date_session)}</TableCell>
                     <TableCell>{exercise.type?.name}</TableCell>
                     <TableCell>{exercise.weight[0]}</TableCell>
                     <TableCell>{exercise.weight[1]}</TableCell>
