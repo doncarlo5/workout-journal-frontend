@@ -48,7 +48,7 @@ const NewType = () => {
     id: "",
     name: "",
     advice: "",
-    timer: 0,
+    timer: "",
     repRange1: "",
     repRange2: "",
     repRange3: "",
@@ -83,7 +83,7 @@ const NewType = () => {
         repRange3: formState.repRange3,
         advice: formState.advice,
       })
-      navigate(`/types/${response.data.id}`)
+      navigate(`/types`)
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
