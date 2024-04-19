@@ -3,7 +3,15 @@ import { CheckedState } from "@radix-ui/react-checkbox"
 import { CalendarIcon, DragHandleHorizontalIcon, Pencil1Icon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format, set } from "date-fns"
-import { ChevronLeft, LucidePlusCircle, MessageSquareMore } from "lucide-react"
+import {
+  ChevronLeft,
+  LucideArrowBigLeftDash,
+  LucideCheck,
+  LucideCheckCheck,
+  LucideCheckCircle,
+  LucidePlusCircle,
+  MessageSquareMore,
+} from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -266,14 +274,13 @@ const OneSession = () => {
                 value={formState.comment}
                 onChange={handleCommentChange}
                 maxLength={200}
-                // disabled={!isEditable}
+                disabled={formState.is_done}
               />
             </div>
 
-            <div className="flex w-full items-center justify-between rounded-lg border p-3 shadow-sm">
+            <div className="col-span-2 flex items-center justify-between rounded-lg border p-3 shadow-sm">
               <Checkbox
                 defaultChecked={formState.is_done}
-                // disabled={!isEditable}
                 checked={formState.is_done}
                 onCheckedChange={handleCheckboxChange}
                 id="is_done"
@@ -285,12 +292,17 @@ const OneSession = () => {
                 Séance terminée
               </Label>
             </div>
-            {/* <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
-              Éditer
-            </Button> */}
-            <Button className="col-span-2 w-full" type="submit">
-              Valider
-            </Button>
+            {formState.is_done ? (
+              <Button className="col-span-2 w-full" type="submit">
+                <LucideCheckCircle className="mr-2 size-5" />
+                Valider la séance
+              </Button>
+            ) : (
+              <Button className="col-span-2 w-full" type="submit">
+                <LucideArrowBigLeftDash className="mr-2 size-5" />
+                Revenir plus tard
+              </Button>
+            )}
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
@@ -300,10 +312,8 @@ const OneSession = () => {
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Es-tu sûr de vouloir supprimer ta séance ?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Tu ne pourras pas récupérer cette séance une fois supprimée.
-                  </AlertDialogDescription>
+                  <AlertDialogTitle>Supprimer cette séance ?</AlertDialogTitle>
+                  <AlertDialogDescription>Les exercices seront également supprimés.</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Annuler</AlertDialogCancel>
