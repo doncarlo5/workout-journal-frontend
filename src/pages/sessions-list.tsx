@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
 import {
@@ -23,6 +23,8 @@ import ErrorBoundary from "./error-boundary"
 export function SessionsList() {
   const [session, setSession] = useState([] as any[])
 
+  const navigate = useNavigate()
+
   const fetchUserSessions = async () => {
     try {
       const response = await myApi.get("/sessions?limit=1000&sort=-updatedAt")
@@ -43,6 +45,7 @@ export function SessionsList() {
       const response = await myApi.delete(`/sessions/${id}`)
       console.log(response)
       fetchUserSessions()
+      navigate("/sessions")
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -96,8 +99,8 @@ export function SessionsList() {
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Es-tu sûr de vouloir supprimer cette séance ?</AlertDialogTitle>
-                            <AlertDialogDescription>Les données seront totalement supprimées.</AlertDialogDescription>
+                            <AlertDialogTitle>Supprimer cette séance ?</AlertDialogTitle>
+                            <AlertDialogDescription>Les exercices seront également supprimés.</AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel>Annuler</AlertDialogCancel>
