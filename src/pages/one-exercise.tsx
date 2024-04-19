@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { AxiosError } from "axios"
-import { ChevronLeft } from "lucide-react"
+import { format, parseISO, toDate } from "date-fns"
+import { ChevronLeft, LucideCalendarCheck2, LucideCalendarClock } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import {
@@ -25,11 +26,13 @@ import myApi from "../lib/api-handler"
 
 const OneExercise = () => {
   const [isEditable, setIsEditable] = useState(false)
+  const [session, setSession] = useState([] as any)
   const [exercise, setExercise] = useState<any>({})
+  const [oneExerciseType, setOneExerciseType] = useState(null as any)
+  const [exerciseTypes, setExerciseTypes] = useState([] as any[])
   const [formState, setFormState] = useState({
     id: "",
     name: "",
-    date: "",
     rep1: "",
     rep2: "",
     rep3: "",
@@ -37,7 +40,6 @@ const OneExercise = () => {
     weight2: "",
     weight3: "",
     comment: "",
-    updatedAt: "",
   })
 
   const { exerciseId } = useParams()
@@ -55,7 +57,6 @@ const OneExercise = () => {
       setFormState({
         id: response.data._id,
         name: response.data.type.name,
-        date: response.data.date,
         rep1: response.data.rep[0],
         rep2: response.data.rep[1],
         rep3: response.data.rep[2],
@@ -63,35 +64,58 @@ const OneExercise = () => {
         weight2: response.data.weight[1],
         weight3: response.data.weight[2],
         comment: response.data.comment,
-        updatedAt: response.data.updatedAt,
       })
+
+      console.log("👋 response formstate", response.data)
 
       const newExercise = response.data.type
       setExercise(newExercise)
       setOneExerciseType(newExercise)
+      return response.data
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
     }
   }
 
-  useEffect(() => {
-    fetchOneExercise()
-    fetchExerciseTypes()
-  }, [])
-
-  const [oneExerciseType, setOneExerciseType] = useState(null as any)
-
-  const [exerciseTypes, setExerciseTypes] = useState([] as any[])
-
-  const fetchExerciseTypes = async () => {
+  const fetchOneSession = async (sessionId: string) => {
     try {
-      const response = await myApi.get("/exercise-type")
-      setExerciseTypes(response.data)
+      const response = await myApi.get(`/sessions/${sessionId}`)
+      return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
     }
   }
+
+  const fetchAllExerciseTypes = async (sessionData: any) => {
+    try {
+      // const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
+      const response = await myApi.get(`/exercise-type?limit=1000`)
+      console.log("👁️‍🗨️ sessionData Type Session", sessionData.type_session)
+      return response.data
+    } catch (error) {
+      console.error("Fetch error: ", error)
+    }
+  }
+
+  // useEffect(() => {
+  //   fetchOneExercise()
+  //   fetchOneSession()
+  //   fetchExerciseTypes()
+  // }, [])
+
+  useEffect(() => {
+    const init = async () => {
+      const oneExercise = await fetchOneExercise()
+      console.log("👋 oneExercise", oneExercise)
+      const sessionData = await fetchOneSession(oneExercise.session)
+      setSession(sessionData)
+      console.log("👋 sessionData", sessionData)
+      const exerciseTypeData = await fetchAllExerciseTypes(sessionData)
+      setExerciseTypes(exerciseTypeData)
+    }
+    init()
+  }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { target } = event
@@ -110,8 +134,8 @@ const OneExercise = () => {
         comment: formState.comment,
       })
       console.log(response)
+      // fetchOneSession()
       fetchOneExercise()
-      fetchExerciseTypes()
       setIsEditable(false)
     } catch (error) {
       const err = error as AxiosError
@@ -124,14 +148,10 @@ const OneExercise = () => {
       const response = await myApi.delete(`/exercise-user/${id}`)
       console.log(response)
       fetchOneExercise()
-      navigate("/exercises/")
+      navigate(`/sessions/${session._id}`)
     } catch (error) {
       console.error("Fetch error: ", error)
     }
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
   }
 
   return (
@@ -151,12 +171,19 @@ const OneExercise = () => {
             <h1 className="ml-5 text-3xl font-bold">{exercise?.name}</h1>
           </div>
         </div>
-        <div>
-          <p className="text-gray-500 dark:text-gray-400">Créé le: {formatDate(formState.date)}</p>
-          <p className="text-gray-500 dark:text-gray-400">Mis à jour le: {formatDate(formState.updatedAt)}</p>
-        </div>
+        {session._id && (
+          <div>
+            <Link
+              className="flex items-center gap-1 text-sm text-gray-500 hover:underline dark:text-gray-400"
+              to={`/sessions/${session._id}`}
+            >
+              <LucideCalendarClock className="size-4" />{" "}
+              <div>Séance du {format(session?.date_session, "dd/MM/yyyy")}</div>
+            </Link>
+          </div>
+        )}
         <Select disabled={!isEditable} onValueChange={setOneExerciseType}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full">
             <SelectValue placeholder={formState.name} />
           </SelectTrigger>
           <SelectContent>
@@ -256,7 +283,7 @@ const OneExercise = () => {
               />
             </div>
             <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
-              Éditer
+              {isEditable ? "Annuler" : "Modifier"}
             </Button>
             <Button disabled={!isEditable} className="col-span-2 w-full" type="submit">
               Mettre à jour
@@ -277,7 +304,9 @@ const OneExercise = () => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Annuler</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => handleDelete(formState.id)}>Confirmer</AlertDialogAction>
+                  <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
+                    Confirmer
+                  </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
