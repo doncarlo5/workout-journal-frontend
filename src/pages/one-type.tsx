@@ -34,7 +34,7 @@ interface FormState {
   id: string
   name: string
   advice: string
-  timer: number
+  timer: string
   repRange1: string
   repRange2: string
   repRange3: string
@@ -109,10 +109,11 @@ const OneType = () => {
     e.preventDefault()
     try {
       console.log("send response when submit", formState)
+      const timerValue = parseInt(formState.timer)
       const response = await myApi.put(`/exercise-type/${typeId}`, {
         name: formState.name,
         advice: formState.advice,
-        timer: formState.timer,
+        timer: timerValue,
         repRange1: formState.repRange1,
         repRange2: formState.repRange2,
         repRange3: formState.repRange3,
@@ -285,7 +286,9 @@ const OneType = () => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Annuler</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => handleDelete(formState.id)}>Confirmer</AlertDialogAction>
+                  <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
+                    Confirmer
+                  </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
