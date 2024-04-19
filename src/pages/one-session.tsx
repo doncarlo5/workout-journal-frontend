@@ -248,8 +248,8 @@ const OneSession = () => {
 
             <div className=" col-span-2 ">
               <div className="space-y-4">
-                <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950 dark:shadow-sm">
-                  <div className="grid gap-4 ">
+                <div className=" rounded-lg border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 dark:shadow-sm">
+                  <div className="mb-4 flex flex-col gap-4">
                     {isLoading ? (
                       <div className="col-span-full flex items-center justify-center">
                         <p>Loading...</p>
@@ -260,12 +260,12 @@ const OneSession = () => {
                       ))
                     )}
                   </div>
-                  <div className="mt-auto p-4">
+                  <div className="px-4">
                     <Link to={`/sessions/${sessionId}/do-exercise`}>
-                      <Button className="w-full">
+                      <Button className=" w-full">
                         {" "}
                         <LucidePlusCircle className=" mr-2 size-5" />
-                        Ajouter un exercise{" "}
+                        Ajouter un exercice{" "}
                       </Button>
                     </Link>
                   </div>
