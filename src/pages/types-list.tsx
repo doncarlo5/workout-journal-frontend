@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { MessageSquarePlusIcon, PlusSquare, SquareAsterisk, SquareAsteriskIcon, SquareDotIcon } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
@@ -53,17 +54,23 @@ export function TypesList() {
       <Navbar />
       {type.length !== 0 && (
         <main className="flex flex-1 flex-col items-center justify-center">
-          <div className="flex items-center gap-3 space-y-2 text-center">
+          <div className="flex items-center gap-3 text-center">
             <h1 className="mb-5 mt-5 text-3xl font-bold">Mes types d'exercices</h1>
-            <Button className="" asChild variant="outline">
-              <Link to="/types/new-type">New</Link>
+            <Button className=" border-none px-2 shadow-none hover:border-solid  " asChild variant="outline">
+              <Link to="/types/new-type">
+                <PlusSquare />
+              </Link>
             </Button>
           </div>
           <div>
             <Table>
               <TableCaption>
-                Total: {type.length > 0 && `${type.length}`} exercices
-                <Button asChild variant="link">
+                Total de {type.length > 0 && `${type.length}`} exercices.
+                <Button
+                  className="m-0 ml-1 p-0 text-sm font-normal text-gray-500 dark:text-gray-400"
+                  asChild
+                  variant="link"
+                >
                   <Link to="/types/new-type">Nouvel exercice</Link>
                 </Button>
               </TableCaption>
@@ -125,14 +132,12 @@ export function TypesList() {
         <main className="flex flex-1 items-center justify-center">
           <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
             <div className="text-center">
-              <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
+              <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
                 Tu n'as pas encore de type exercice.
-              </p>
-            </div>
-            <div className="flex gap-4">
-              <Link className="w-[150px]" to="/types/new-type">
-                <Button className="w-full">Nouveau type</Button>
-              </Link>
+                <Link className="w-[150px]" to="/types/new-type">
+                  <Button className=" w-full">Nouveau type</Button>
+                </Link>
+              </div>
             </div>
           </div>
         </main>
