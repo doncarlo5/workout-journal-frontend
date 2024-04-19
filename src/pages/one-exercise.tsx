@@ -207,7 +207,7 @@ const OneExercise = () => {
                 value={formState.rep1}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
                 disabled={!isEditable}
               />
             </div>
@@ -219,7 +219,7 @@ const OneExercise = () => {
                 value={formState.weight1}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
                 disabled={!isEditable}
               />
             </div>
@@ -231,7 +231,7 @@ const OneExercise = () => {
                 value={formState.rep2}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
                 disabled={!isEditable}
               />
             </div>
@@ -243,7 +243,7 @@ const OneExercise = () => {
                 value={formState.weight2}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
                 disabled={!isEditable}
               />
             </div>
@@ -255,7 +255,7 @@ const OneExercise = () => {
                 value={formState.rep3}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
                 disabled={!isEditable}
               />
             </div>
@@ -267,7 +267,7 @@ const OneExercise = () => {
                 value={formState.weight3}
                 onChange={handleChange}
                 required
-                type="text"
+                type="number"
                 disabled={!isEditable}
               />
             </div>
