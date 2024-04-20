@@ -65,10 +65,10 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
           </button>
         ) : (
           <button
-            className="flex h-12 w-28 cursor-pointer items-center justify-center rounded-xl bg-[#D19F55] px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:bg-[#D19F55] hover:text-[#FFFF] hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
+            className="group flex h-12 w-28 cursor-pointer items-center justify-center rounded-xl bg-[#D19F55] px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:bg-[#D19F55] hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
             onClick={() => setIsTimerPlaying(true)}
           >
-            <LucidePlay className="h-6 w-6" />
+            <LucidePlay className="h-6 w-6 transition ease-in-out group-hover:scale-110" />
           </button>
         )}
       </div>
