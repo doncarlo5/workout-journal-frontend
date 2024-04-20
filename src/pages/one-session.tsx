@@ -52,7 +52,6 @@ interface FormState {
 
 const OneSession = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
-
   const [isLoading, setIsLoading] = useState(true)
   const [session, setSession] = useState<any>({})
   const [formState, setFormState] = useState<FormState>({
@@ -85,9 +84,7 @@ const OneSession = () => {
         is_done: response.data.is_done,
         comment: response.data.comment,
       })
-
-      console.log("response user list from fetch", response.data.exercise_user_list)
-
+      console.log("👋 FetchOneSession body weight", response.data.body_weight)
       const newSession = response.data
       setSession(newSession)
       setIsLoading(false)
@@ -125,7 +122,6 @@ const OneSession = () => {
         is_done: formState.is_done,
         comment: formState.comment,
       })
-      console.log("👋 response", response.data)
       fetchOneSession()
       navigate("/sessions/")
       // setIsEditable(false)
@@ -166,6 +162,7 @@ const OneSession = () => {
   const handleSelectWeight = (event: React.FormEvent<HTMLInputElement>) => {
     const { target } = event
     if (target instanceof HTMLInputElement) {
+      console.log("target", target.value)
       const { value } = target
       setFormState({ ...formState, body_weight: value })
     }
@@ -235,11 +232,12 @@ const OneSession = () => {
               <Label htmlFor="body_weight">{`Poids du corps (en kg)`}</Label>
               <Input
                 id="body_weight"
-                placeholder="`${formState.body_weight}`"
+                placeholder={`${formState.body_weight}`}
                 value={formState.body_weight}
                 onChange={handleSelectWeight}
                 required
                 type="number"
+                onWheel={(e) => e.currentTarget.blur()}
                 // disabled={!isEditable}
               />
             </div>
