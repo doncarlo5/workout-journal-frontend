@@ -41,10 +41,8 @@ export function SessionsList() {
 
   const fetchUserSessions = async () => {
     try {
-      const response = await myApi.get("/sessions?limit=1000&sort=-updatedAt")
-      console.log("👋 response data", response.data)
+      const response = await myApi.get("/sessions?limit=1000&sort=-date_session")
       setSession(response.data)
-      console.log("👋 session", session)
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -93,7 +91,7 @@ export function SessionsList() {
                   <TableHead>Date</TableHead>
                   <TableHead>Type</TableHead>
                   <TableHead>Nbr d'ex.</TableHead>
-                  <TableHead></TableHead>
+                  <TableHead>Kg</TableHead>
                   <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
@@ -115,6 +113,7 @@ export function SessionsList() {
                     <TableCell>{formatDate(oneSession.date_session)}</TableCell>
                     <TableCell>{oneSession.type_session}</TableCell>
                     <TableCell className=" text-center">{oneSession.exercise_user_list.length}</TableCell>
+                    <TableCell className=" text-center">{oneSession.body_weight}</TableCell>
 
                     {/* <TableCell>
                         <AlertDialog>
