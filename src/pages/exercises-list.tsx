@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
+import {
+  LucideAArrowUp,
+  LucideArrowBigUp,
+  LucideArrowRightCircle,
+  LucideMessageSquareText,
+  LucideTrash,
+  LucideTrash2,
+} from "lucide-react"
 import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
@@ -87,15 +95,18 @@ export function ExercicesList() {
                   <TableHead>Rep 1</TableHead>
                   <TableHead>Rep 2</TableHead>
                   <TableHead>Rep 3</TableHead>
+                  <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {exercise.map((exercise) => (
-                  <TableRow key={exercise._id}>
+                  <TableRow className=" group " key={exercise._id}>
                     <TableCell>
                       <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button variant="ghost">✕</Button>
+                        <AlertDialogTrigger asChild className="">
+                          <Button className="" variant="ghost">
+                            <LucideTrash2 size={15} />
+                          </Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
@@ -113,12 +124,12 @@ export function ExercicesList() {
                         </AlertDialogContent>
                       </AlertDialog>
                     </TableCell>
-                    <TableCell>
-                      <Link to={`/exercises/${exercise._id}`} key={exercise._id}>
-                        <Button variant="ghost">✍️</Button>
-                      </Link>
+                    <TableCell className=" content-center">
+                      <div>
+                        {" "}
+                        {exercise.comment ? <LucideMessageSquareText className="mx-1 mt-0.5" size={16} /> : ""}
+                      </div>
                     </TableCell>
-
                     <TableCell>{formatDate(exercise.session.date_session)}</TableCell>
                     <TableCell>{exercise.type?.name}</TableCell>
                     <TableCell>{exercise.weight[0]}</TableCell>
@@ -127,6 +138,14 @@ export function ExercicesList() {
                     <TableCell>{exercise.rep[0]}</TableCell>
                     <TableCell>{exercise.rep[1]}</TableCell>
                     <TableCell>{exercise.rep[2]}</TableCell>
+
+                    <TableCell>
+                      <Button asChild variant="ghost">
+                        <Link to={`/exercises/${exercise._id}`} key={exercise._id}>
+                          <LucideArrowRightCircle size={16} />
+                        </Link>
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
