@@ -1,4 +1,5 @@
 import { ChatBubbleIcon, TextAlignRightIcon } from "@radix-ui/react-icons"
+import { LucideMessageSquareText } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Badge } from "./ui/badge"
@@ -63,9 +64,9 @@ function ExerciseCard({ exercise }: { exercise: any }) {
           </div>
         </CardContent>
         {exercise.comment && (
-          <CardContent className="px-4 pb-4">
+          <CardContent className="border-t border-dotted px-4 pb-4 pt-3">
             <div className="flex items-center gap-2">
-              <ChatBubbleIcon className="h-6 w-6" />
+              <LucideMessageSquareText size={18} color="#64748B" />
               <CardDescription>{exercise.comment}</CardDescription>
             </div>
           </CardContent>
