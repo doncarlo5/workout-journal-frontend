@@ -49,7 +49,7 @@ const OneType = () => {
     id: "",
     name: "",
     advice: "",
-    timer: 0,
+    timer: "",
     repRange1: "",
     repRange2: "",
     repRange3: "",
