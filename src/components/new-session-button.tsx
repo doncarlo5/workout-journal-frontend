@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { PlusIcon } from "@radix-ui/react-icons"
+import { LucideBadgePlus } from "lucide-react"
 import { useNavigate, useParams } from "react-router-dom"
 
 import myApi from "../lib/api-handler"
@@ -67,79 +68,78 @@ function NewSessionButton() {
   }
 
   return (
-    <>
-      <Drawer>
-        <DrawerTrigger asChild>
-          <Button className=" rounded-2xl" variant="outline">
-            <PlusIcon />
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent>
-          <div className="mx-auto w-full max-w-sm">
-            <DrawerHeader className=" text-left">
-              <DrawerTitle>Nouvelle séance</DrawerTitle>
-              <DrawerDescription>Créer une séance pour réaliser tes exercises.</DrawerDescription>
-            </DrawerHeader>
-            <div className="p-4 pb-0">
-              <div className="flex items-center justify-between space-x-2">
-                <Button
-                  onClick={(e) => handleCreateSession(e, "Upper A")}
-                  variant="outline"
-                  size="icon"
-                  className="flex h-24 w-24 flex-col rounded-md"
-                >
-                  <p className="mb-1 mt-4 text-lg">Upper A</p>
-                  <IconChest className="mt-3" />
-                  <span className="sr-only">Upper A</span>
-                </Button>
-                <Button
-                  onClick={(e) => handleCreateSession(e, "Lower")}
-                  variant="outline"
-                  size="icon"
-                  className="flex h-24 w-24 flex-col rounded-md"
-                >
-                  <p className="mb-1 mt-4 text-lg">Lower</p>
-                  <IconLegs className="mt-3" />
-                  <span className="sr-only">Lower</span>
-                </Button>
-                <Button
-                  onClick={(e) => handleCreateSession(e, "Upper B")}
-                  variant="outline"
-                  size="icon"
-                  className="flex h-24 w-24 flex-col rounded-md"
-                >
-                  <p className="mb-1 mt-4 text-lg">Upper B</p>
-                  <IconChest className="mt-3" />
-                  <span className="sr-only">Upper B</span>
-                </Button>
-              </div>
-              <div className="mt-3 h-2"></div>
+    <Drawer>
+      <DrawerTrigger asChild>
+        <div className="inline-block w-full cursor-pointer justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500">
+          <LucideBadgePlus className="mb-1 inline-block" size={24} />
+          <span className="tab tab-account block text-xs">New</span>
+        </div>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-sm">
+          <DrawerHeader className=" text-left">
+            <DrawerTitle>Nouvelle séance</DrawerTitle>
+            <DrawerDescription>Créer une séance pour réaliser tes exercises.</DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4 pb-0">
+            <div className="flex items-center justify-between space-x-2">
+              <Button
+                onClick={(e) => handleCreateSession(e, "Upper A")}
+                variant="outline"
+                size="icon"
+                className="flex h-24 w-24 flex-col rounded-md"
+              >
+                <p className="mb-1 mt-4 text-lg">Upper A</p>
+                <IconChest className="mt-3" />
+                <span className="sr-only">Upper A</span>
+              </Button>
+              <Button
+                onClick={(e) => handleCreateSession(e, "Lower")}
+                variant="outline"
+                size="icon"
+                className="flex h-24 w-24 flex-col rounded-md"
+              >
+                <p className="mb-1 mt-4 text-lg">Lower</p>
+                <IconLegs className="mt-3" />
+                <span className="sr-only">Lower</span>
+              </Button>
+              <Button
+                onClick={(e) => handleCreateSession(e, "Upper B")}
+                variant="outline"
+                size="icon"
+                className="flex h-24 w-24 flex-col rounded-md"
+              >
+                <p className="mb-1 mt-4 text-lg">Upper B</p>
+                <IconChest className="mt-3" />
+                <span className="sr-only">Upper B</span>
+              </Button>
             </div>
+            <div className="mt-3 h-2"></div>
           </div>
-        </DrawerContent>
-        {showDialog && (
-          <div>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle className=" mb-5">Veuillez renseigner votre poids {`(en kg)`}</DialogTitle>
-                <DialogDescription>
-                  <Input
-                    className=" w-1/4"
-                    type="number"
-                    id="body_weight"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                  />
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <Button onClick={() => setShowDialog(false)}>Valider</Button>
-              </DialogFooter>
-            </DialogContent>
-          </div>
-        )}
-      </Drawer>
-    </>
+        </div>
+      </DrawerContent>
+      {showDialog && (
+        <div>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className=" mb-5">Veuillez renseigner votre poids {`(en kg)`}</DialogTitle>
+              <DialogDescription>
+                <Input
+                  className=" w-1/4"
+                  type="number"
+                  id="body_weight"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
+                />
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button onClick={() => setShowDialog(false)}>Valider</Button>
+            </DialogFooter>
+          </DialogContent>
+        </div>
+      )}
+    </Drawer>
   )
 }
 
