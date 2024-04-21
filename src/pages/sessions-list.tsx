@@ -74,7 +74,7 @@ export function SessionsList() {
   }
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex flex-col sm:w-screen">
       <Navbar />
       {session.length !== 0 && (
         <main className="flex flex-1 flex-col items-center justify-center">
