@@ -13,8 +13,8 @@ import NotFoundPage from "./pages/no-found-page"
 import OneExercise from "./pages/one-exercise"
 import OneSession from "./pages/one-session"
 import OneType from "./pages/one-type"
+import ProfilePage from "./pages/profile-page"
 import SessionsList from "./pages/sessions-list"
-import SettingsPage from "./pages/settings-page"
 import SignupPage from "./pages/signup-page"
 import TypesList from "./pages/types-list"
 import WelcomePage from "./pages/welcome-page"
@@ -23,7 +23,7 @@ import IsNotAuthenticated from "./routing/is-not-authenticated"
 
 function App() {
   return (
-    <div className="">
+    <div className="flex h-dvh w-screen">
       <ErrorBoundary>
         <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
           <Routes>
@@ -45,7 +45,7 @@ function App() {
               <Route path="/types/:typeId" element={<OneType />} />
               <Route path="/types/new-type" element={<NewType />} />
               <Route path="/charts" element={<ChartsPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
