@@ -1,6 +1,19 @@
 import useAuth from "@/context/use-auth"
-import { ArrowBigDown, ArrowBigUp, MinusIcon, PlusIcon } from "lucide-react"
-import { Link } from "react-router-dom"
+import {
+  ArrowBigDown,
+  ArrowBigUp,
+  LucideBadgePlus,
+  LucideCircleUser,
+  LucideHome,
+  LucideLineChart,
+  LucideListChecks,
+  LucideLogIn,
+  LucideRocket,
+  LucideSun,
+  MinusIcon,
+  PlusIcon,
+} from "lucide-react"
+import { Link, NavLink } from "react-router-dom"
 import { Bar, BarChart, ResponsiveContainer } from "recharts"
 
 import IconChest from "./chest-icon"
@@ -20,79 +33,142 @@ import {
 } from "./ui/drawer"
 
 function Navbar() {
-  const { isLoggedIn, handleLogout } = useAuth()
+  const { isLoggedIn } = useAuth()
+  const activeLink = "text-teal-500"
+  const inactiveLink = ""
 
   return (
-    <header className="border-b p-4">
-      <div className="container flex items-center justify-between px-4 md:px-6">
-        <Link className="flex items-center space-x-2" to="/">
-          <FlagIcon className="h-8 w-8" />
-          <span className="text-xl font-bold transition-transform hover:scale-105">Workout Journal</span>
-        </Link>
+    <header className=" ">
+      <div className="">
+        {/* <section id="bottom-navigation" className="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"> // if shown only tablet/mobile  */}
+
+        <section
+          id="bottom-navigation"
+          className="fixed inset-x-0 bottom-1 z-10 m-auto block max-w-2xl rounded-xl border-t border-gray-200 bg-white bg-opacity-30  shadow backdrop-blur-lg backdrop-filter dark:border-none"
+        >
+          <div id="tabs" className="flex justify-between">
+            <ModeToggle />
+
+            {!isLoggedIn ? (
+              <>
+                <NavLink
+                  className={({ isActive }) =>
+                    (isActive ? activeLink : inactiveLink) +
+                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+                  }
+                  to="/welcome"
+                >
+                  <LucideHome className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Home</span>
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    (isActive ? activeLink : inactiveLink) +
+                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+                  }
+                  to="/signup"
+                >
+                  <LucideRocket className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Se connecter</span>
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  className={({ isActive }) =>
+                    (isActive ? activeLink : inactiveLink) +
+                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+                  }
+                  to="/profile"
+                >
+                  <LucideCircleUser className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Profile</span>
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    (isActive ? activeLink : inactiveLink) +
+                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+                  }
+                  to="/charts"
+                >
+                  <LucideLineChart className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Stats</span>
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    (isActive ? activeLink : inactiveLink) +
+                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+                  }
+                  to="/exercises"
+                >
+                  <LucideListChecks className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">List</span>
+                </NavLink>
+                <NewSessionButton />
+              </>
+            )}
+          </div>
+        </section>
+      </div>
+      {/* <Link className="w-full text-3xl font-bold " to="/">
+        <FlagIcon className="" />
+        <span className="hidden text-xl font-bold ">Workout Journal</span>
+      </Link> */}
+      {/* <div className=" flex">
         {!isLoggedIn ? (
-          <nav className="space-x-4">
-            <div className=" flex items-center justify-center gap-4">
-              <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-                to="/signup"
-              >
-                S'inscrire
-              </Link>
-              <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium dark:bg-gray-800"
-                to="/login"
-              >
-                Se connecter
-              </Link>
-              <ModeToggle />
-            </div>
+          <nav>
+            <Link className=" rounded-lg bg-gray-100 py-3 text-sm font-medium dark:bg-gray-800" to="/signup">
+              S'inscrire
+            </Link>
+            <Link className=" rounded-lg bg-gray-100 py-3 text-sm font-medium dark:bg-gray-800" to="/login">
+              Se connecter
+            </Link>
+            <ModeToggle />
           </nav>
         ) : (
           <nav>
-            <div className=" flex items-center justify-center gap-4">
-              <NewSessionButton />
-              <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
-                to="/exercises"
-              >
-                Mes exercices
-              </Link>
-              <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
-                to="/sessions"
-              >
-                Mes séances
-              </Link>
-              <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
-                to="/types"
-              >
-                Types
-              </Link>
-              <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
-                to="/charts"
-              >
-                Charts
-              </Link>
-              <Link
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
-                to="/settings"
-              >
-                Options
-              </Link>
-              <Link
-                to="/welcome"
-                className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-black transition-shadow hover:shadow-sm dark:bg-gray-800"
-                onClick={handleLogout}
-              >
-                ⍈
-              </Link>
-              <ModeToggle />
-            </div>
+            <NewSessionButton />
+            <Link
+              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              to="/exercises"
+            >
+              Mes exercices
+            </Link>
+            <Link
+              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              to="/sessions"
+            >
+              Mes séances
+            </Link>
+            <Link
+              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              to="/types"
+            >
+              Types
+            </Link>
+            <Link
+              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              to="/charts"
+            >
+              Charts
+            </Link>
+            <Link
+              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              to="/settings"
+            >
+              Options
+            </Link>
+            <Link
+              to="/welcome"
+              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium text-black transition-shadow hover:shadow-sm dark:bg-gray-800"
+              onClick={handleLogout}
+            >
+              ⍈
+            </Link>
+            <ModeToggle />
           </nav>
         )}
-      </div>
+      </div> */}
     </header>
   )
 }
