@@ -5,8 +5,11 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Navbar } from "@/components/navbar"
 
+import LoginComponent from "../components/login-component"
+import SignupComponent from "../components/signup-component"
 import myApi from "../lib/api-handler"
 
 const SignupPage = () => {
@@ -44,76 +47,23 @@ const SignupPage = () => {
   }
 
   return (
-    <>
+    <div className=" m-auto ">
       <div className="mb-10 flex flex-col">
         <Navbar />
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="mx-auto max-w-sm space-y-6">
-          <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold">Créer ton compte 👤</h1>
-            <p className="text-gray-500 dark:text-gray-400">Entre tes informations pour t'inscrire</p>
-          </div>
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">Prénom</Label>
-                <Input
-                  id="firstName"
-                  placeholder="Johnny"
-                  value={formState.firstName}
-                  onChange={handleChange}
-                  required
-                  type="text"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Nom</Label>
-                <Input
-                  id="lastName"
-                  placeholder="Bravo"
-                  value={formState.lastName}
-                  onChange={handleChange}
-                  required
-                  type="text"
-                />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                placeholder="johnny.bravo@email.com"
-                value={formState.email}
-                onChange={handleChange}
-                required
-                type="email"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Mot de passe</Label>
-              <Input
-                id="password"
-                placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-                value={formState.password}
-                onChange={handleChange}
-                required
-                type="password"
-              />
-            </div>
-            <Button className="w-full" type="submit">
-              Créer mon compte
-            </Button>
-            {error && (
-              <Alert variant="destructive">
-                <AlertTitle>Erreur</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-          </div>
-        </div>
-      </form>
-    </>
+      <Tabs defaultValue="signup" className="relative w-[400px]  ">
+        <TabsList className="grid w-full max-w-2xl grid-cols-2 rounded-xl ">
+          <TabsTrigger value="signup">S'inscrire</TabsTrigger>
+          <TabsTrigger value="signin">Se connecter</TabsTrigger>
+        </TabsList>
+        <TabsContent value="signup">
+          <SignupComponent />
+        </TabsContent>
+        <TabsContent value="signin">
+          <LoginComponent />
+        </TabsContent>
+      </Tabs>
+    </div>
   )
 }
 
