@@ -4,6 +4,7 @@ import {
   ArrowBigUp,
   LucideBadgePlus,
   LucideCircleUser,
+  LucideHistory,
   LucideHome,
   LucideLineChart,
   LucideListChecks,
@@ -44,7 +45,7 @@ function Navbar() {
 
         <section
           id="bottom-navigation"
-          className="fixed inset-x-0 bottom-1 z-10 m-auto block max-w-2xl rounded-xl border-t border-gray-200 bg-white bg-opacity-30  shadow backdrop-blur-lg backdrop-filter dark:border-none"
+          className="fixed inset-x-1 bottom-1 z-10 m-auto block max-w-2xl rounded-xl border-t border-gray-200 bg-white bg-opacity-30  shadow backdrop-blur-lg backdrop-filter dark:border-none"
         >
           <div id="tabs" className="flex justify-between">
             <ModeToggle />
@@ -89,7 +90,7 @@ function Navbar() {
                     (isActive ? activeLink : inactiveLink) +
                     " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
                   }
-                  to="/charts"
+                  to="/stats"
                 >
                   <LucideLineChart className="mb-1 inline-block" size={24} />
                   <span className="tab tab-whishlist block text-xs">Stats</span>
@@ -99,12 +100,19 @@ function Navbar() {
                     (isActive ? activeLink : inactiveLink) +
                     " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
                   }
-                  to="/exercises"
+                  to="/history"
                 >
-                  <LucideListChecks className="mb-1 inline-block" size={24} />
-                  <span className="tab tab-whishlist block text-xs">List</span>
+                  <LucideHistory className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Historique</span>
                 </NavLink>
-                <NewSessionButton />
+                <NewSessionButton
+                  Children={
+                    <div className="inline-block w-full cursor-pointer justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500">
+                      <LucideBadgePlus className="mb-1 inline-block" size={24} />
+                      <span className="tab tab-account block text-xs">New</span>
+                    </div>
+                  }
+                />
               </>
             )}
           </div>
