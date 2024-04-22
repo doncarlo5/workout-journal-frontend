@@ -64,7 +64,7 @@ const NewType = () => {
         advice: formState.advice,
       })
       console.log("response", response)
-      navigate(`/type`)
+      navigate(`/profile`)
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
@@ -73,23 +73,20 @@ const NewType = () => {
 
   return (
     <>
-      <div className="mb-10 flex flex-col">
-        <Navbar />
-      </div>
-      <div className="mx-auto max-w-sm space-y-6">
+      <Navbar />
+      <div className="mx-auto max-w-sm space-y-6 p-4">
         <div className="flex items-center space-y-2 text-left">
-          <Link to="/profile/type">
+          <Link to="/history">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
           </Link>
           <div>
-            <h1 className="ml-5 text-3xl font-bold">Nouveau type</h1>
+            <h1 className="ml-5 text-3xl font-medium">Nouveau type </h1>
           </div>
         </div>
-
-        <div className="space-y-4">
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+        <div className="space-y-4 ">
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 px-5 pb-14">
             <div className="col-span-2 space-y-2">
               <Label htmlFor="name">Nom</Label>
               <Input
