@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { LucidePlay, LucideRotate3D, LucideRotateCcw } from "lucide-react"
+import { LucidePlay, LucideRotateCcw } from "lucide-react"
 import { CountdownCircleTimer } from "react-countdown-circle-timer"
-import { Button } from "react-day-picker"
 
 function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
   const [isTimerPlaying, setIsTimerPlaying] = useState(false)

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { format, set } from "date-fns"
+import { useEffect, useState } from "react"
+import { format } from "date-fns"
 import { Area, AreaChart, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 import myApi from "@/lib/api-handler"

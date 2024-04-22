@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { AxiosError } from "axios"
 import { ChevronLeft } from "lucide-react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -35,7 +35,6 @@ const NewType = () => {
     type_session: "",
   })
 
-  const { typeId } = useParams()
   const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

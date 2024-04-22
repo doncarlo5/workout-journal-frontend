@@ -1,39 +1,9 @@
 import { useEffect, useState } from "react"
-import {
-  LucideArrowRight,
-  LucideCross,
-  LucideLoader2,
-  LucideMessageSquareDashed,
-  LucideMessageSquareDot,
-  LucideMessageSquareHeart,
-  LucideMessageSquareOff,
-  LucideMessageSquarePlus,
-  LucideMessageSquareText,
-  LucideMessageSquareWarning,
-  LucideTrash2,
-  MessageCircle,
-  X,
-} from "lucide-react"
-import { Link, useNavigate } from "react-router-dom"
+import { LucideArrowRight, LucideLoader2, LucideMessageSquareText } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Navbar } from "@/components/navbar"
-import NewSessionButton from "@/components/new-session-button"
-
-import ErrorBoundary from "../pages/error-boundary"
 
 export function SessionComponent() {
   const [session, setSession] = useState([] as any[])

@@ -1,11 +1,8 @@
-import { ChatBubbleIcon, TextAlignRightIcon } from "@radix-ui/react-icons"
 import { LucideMessageSquareText } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Badge } from "./ui/badge"
-import { Button } from "./ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 
 function ExerciseCard({ exercise }: { exercise: any }) {
   return (

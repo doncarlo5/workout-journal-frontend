@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
-import { format } from "date-fns"
-import { ChevronLeft, LucideCalendarClock, LucideInfo, LucidePlusCircle, MessageSquareMore } from "lucide-react"
-import { CountdownCircleTimer } from "react-countdown-circle-timer"
+import { ChevronLeft, LucideInfo } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { Badge } from "@/components/ui/badge"
@@ -118,22 +116,20 @@ const DoExercisePage = () => {
     }
   }
 
-  // format lastexercise.createdAt
+  // function formatTime(seconds: number): string {
+  //   const minutes = Math.floor(seconds / 60)
+  //   const remainingSeconds = seconds % 60
 
-  function formatTime(seconds: number): string {
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = seconds % 60
-
-    if (minutes === 0 && remainingSeconds === 0) {
-      return ""
-    } else if (minutes === 0) {
-      return `${remainingSeconds} sec`
-    } else {
-      const minutesString = minutes > 0 ? `${minutes} min` : ""
-      const secondsString = remainingSeconds > 0 ? ` ${remainingSeconds} sec` : ""
-      return `${minutesString}${secondsString}`
-    }
-  }
+  //   if (minutes === 0 && remainingSeconds === 0) {
+  //     return ""
+  //   } else if (minutes === 0) {
+  //     return `${remainingSeconds} sec`
+  //   } else {
+  //     const minutesString = minutes > 0 ? `${minutes} min` : ""
+  //     const secondsString = remainingSeconds > 0 ? ` ${remainingSeconds} sec` : ""
+  //     return `${minutesString}${secondsString}`
+  //   }
+  // }
 
   return (
     <>

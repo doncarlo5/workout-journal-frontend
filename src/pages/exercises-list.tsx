@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
-import {
-  LucideAArrowUp,
-  LucideArrowBigUp,
-  LucideArrowRightCircle,
-  LucideMessageSquareText,
-  LucideTrash,
-  LucideTrash2,
-} from "lucide-react"
+import { LucideArrowRightCircle, LucideMessageSquareText, LucideTrash2 } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
@@ -25,11 +18,9 @@ import {
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navbar } from "@/components/navbar"
-import NewSessionButton from "@/components/new-session-button"
 
 export function ExercicesList() {
   const [exercise, setExercise] = useState([] as any[])
-  const [session, setSession] = useState([] as any[])
 
   const fetchUserExercises = async () => {
     try {

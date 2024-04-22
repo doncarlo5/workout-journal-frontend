@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { LucideFilePlus2, LucideFileType2, PlusSquare } from "lucide-react"
+import { LucideFilePlus2 } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
 import myApi from "../lib/api-handler"

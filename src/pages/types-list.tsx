@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { MessageSquarePlusIcon, PlusSquare, SquareAsterisk, SquareAsteriskIcon, SquareDotIcon } from "lucide-react"
+import { PlusSquare } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
@@ -43,10 +43,6 @@ export function TypesList() {
     } catch (error) {
       console.error("Fetch error: ", error)
     }
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
   }
 
   return (

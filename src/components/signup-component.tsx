@@ -5,11 +5,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
-import LoginComponent from "./login-component"
 
 const SignupComponent = () => {
   const [formState, setFormState] = useState({
