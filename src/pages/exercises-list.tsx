@@ -73,7 +73,7 @@ export function ExercicesList() {
   }
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex w-screen flex-col">
       <Navbar />
       {exercise.length !== 0 && (
         <main className="flex flex-1 flex-col items-center justify-center">
@@ -89,12 +89,10 @@ export function ExercicesList() {
                   <TableHead></TableHead>
                   <TableHead>Date</TableHead>
                   <TableHead>Nom</TableHead>
-                  <TableHead>Poids 1</TableHead>
-                  <TableHead>Poids 2</TableHead>
-                  <TableHead>Poids 3</TableHead>
-                  <TableHead>Rep 1</TableHead>
-                  <TableHead>Rep 2</TableHead>
-                  <TableHead>Rep 3</TableHead>
+                  <TableHead>Série 1</TableHead>
+                  <TableHead>Série 2</TableHead>
+                  <TableHead>Série 3</TableHead>
+
                   <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
@@ -132,12 +130,15 @@ export function ExercicesList() {
                     </TableCell>
                     <TableCell>{formatDate(exercise.session.date_session)}</TableCell>
                     <TableCell>{exercise.type?.name}</TableCell>
-                    <TableCell>{exercise.weight[0]}</TableCell>
-                    <TableCell>{exercise.weight[1]}</TableCell>
-                    <TableCell>{exercise.weight[2]}</TableCell>
-                    <TableCell>{exercise.rep[0]}</TableCell>
-                    <TableCell>{exercise.rep[1]}</TableCell>
-                    <TableCell>{exercise.rep[2]}</TableCell>
+                    <TableCell>
+                      {exercise.rep[0]}x{exercise.weight[0]}
+                    </TableCell>
+                    <TableCell>
+                      {exercise.rep[1]}x{exercise.weight[1]}
+                    </TableCell>
+                    <TableCell>
+                      {exercise.rep[2]}x{exercise.weight[2]}
+                    </TableCell>
 
                     <TableCell>
                       <Button asChild variant="ghost">
@@ -161,9 +162,7 @@ export function ExercicesList() {
                 Tu n'as pas encore d'exercices
               </p>
             </div>
-            <div className="flex flex-col gap-4 ">
-              <NewSessionButton />
-            </div>
+            <div className="flex flex-col gap-4 "></div>
           </div>
         </main>
       )}
