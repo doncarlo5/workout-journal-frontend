@@ -1,25 +1,13 @@
-import React, { Children, useState } from "react"
-import { PlusIcon } from "@radix-ui/react-icons"
-import { LucideBadgePlus } from "lucide-react"
-import { useNavigate, useParams } from "react-router-dom"
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import myApi from "../lib/api-handler"
 import IconChest from "./chest-icon"
 import IconLegs from "./legs-icon"
 import { Button } from "./ui/button"
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog"
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "./ui/drawer"
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer"
 import { Input } from "./ui/input"
-import { Label } from "./ui/label"
 
 function NewSessionButton({ Children }: { Children: any }) {
   const [weight, setWeight] = React.useState("")
@@ -59,6 +47,7 @@ function NewSessionButton({ Children }: { Children: any }) {
         is_done: false,
         comment: "",
       })
+      console.log("typeSession", typeSession)
       console.log("response is:", response)
       const newSessionId = response.data._id
       navigate(`/sessions/${newSessionId}`)

@@ -1,31 +1,13 @@
-import React, { useEffect, useState } from "react"
-import { CheckedState } from "@radix-ui/react-checkbox"
-import { CalendarIcon, DragHandleHorizontalIcon, Pencil1Icon } from "@radix-ui/react-icons"
+import React, { useState } from "react"
 import { AxiosError } from "axios"
-import { format } from "date-fns"
-import { ChevronLeft, LucidePlusCircle, MessageSquareMore } from "lucide-react"
-import { SelectSingleEventHandler } from "react-day-picker"
+import { ChevronLeft } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
-import { cn } from "@/lib/utils"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
-import ExerciseCard from "@/components/exercise-card"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
@@ -42,8 +24,6 @@ interface FormState {
 }
 
 const NewType = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [type, setType] = useState<any>({})
   const [formState, setFormState] = useState<FormState>({
     id: "",
     name: "",
@@ -83,6 +63,7 @@ const NewType = () => {
         repRange3: formState.repRange3,
         advice: formState.advice,
       })
+      console.log("response", response)
       navigate(`/type`)
     } catch (error) {
       const err = error as AxiosError

@@ -1,29 +1,9 @@
 import { useEffect, useState } from "react"
-import {
-  LucidePlusCircle,
-  MessageSquarePlusIcon,
-  PlusSquare,
-  SquareAsterisk,
-  SquareAsteriskIcon,
-  SquareDotIcon,
-} from "lucide-react"
+import { LucidePlusCircle } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Navbar } from "@/components/navbar"
 
 import ExerciseTypeCard from "./exercise-type-card"
 
@@ -45,20 +25,6 @@ export function TypeComponent() {
   useEffect(() => {
     fetchTypes()
   }, [])
-
-  const handleDelete = async (id: string) => {
-    try {
-      const response = await myApi.delete(`/exercise-type/${id}`)
-      console.log(response)
-      fetchTypes()
-    } catch (error) {
-      console.error("Fetch error: ", error)
-    }
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
-  }
 
   return (
     <>

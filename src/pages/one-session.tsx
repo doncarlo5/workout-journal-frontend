@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { CheckedState } from "@radix-ui/react-checkbox"
-import { CalendarIcon, DragHandleHorizontalIcon, Pencil1Icon } from "@radix-ui/react-icons"
+import { CalendarIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
-import { format, set } from "date-fns"
+import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
-import {
-  ChevronLeft,
-  LucideArrowBigLeftDash,
-  LucideCheck,
-  LucideCheckCheck,
-  LucideCheckCircle,
-  LucidePlusCircle,
-  MessageSquareMore,
-} from "lucide-react"
+import { ChevronLeft, LucideArrowBigLeftDash, LucideCheckCircle, LucidePlusCircle } from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -98,18 +90,6 @@ const OneSession = () => {
     fetchOneSession()
   }, [])
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const { target } = event
-    if (target instanceof HTMLInputElement) {
-      const { name, value, type, checked } = target
-      if (type === "checkbox") {
-        setFormState({ ...formState, [name]: checked })
-      } else {
-        setFormState({ ...formState, [name]: value })
-      }
-    }
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     console.log("👋 handleSubmit")
@@ -122,6 +102,7 @@ const OneSession = () => {
         is_done: formState.is_done,
         comment: formState.comment,
       })
+      console.log("👋 response", response)
       fetchOneSession()
       navigate("/history/")
       // setIsEditable(false)

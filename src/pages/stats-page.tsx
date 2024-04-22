@@ -1,23 +1,5 @@
-import React, { PureComponent, useEffect, useState } from "react"
-import { format } from "date-fns"
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  Label,
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts"
-
-import myApi from "@/lib/api-handler"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import BodyWeightChart from "@/components/body-weight-chart"
-import TractionsChart from "@/components/exercise-chart"
 import ExerciseChart from "@/components/exercise-chart"
 import { Navbar } from "@/components/navbar"
 
