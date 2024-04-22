@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { LucideFilePlus2, LucideFileType2, PlusSquare } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
 
 import myApi from "../lib/api-handler"
 import IconChest from "./chest-icon"
@@ -50,7 +51,7 @@ function NewSessionButton({ Children }: { Children: any }) {
       console.log("typeSession", typeSession)
       console.log("response is:", response)
       const newSessionId = response.data._id
-      navigate(`/sessions/${newSessionId}`)
+      navigate(`/history/session/${newSessionId}`)
     } catch (error: any) {
       console.log(error)
     }
@@ -65,7 +66,12 @@ function NewSessionButton({ Children }: { Children: any }) {
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader className=" text-left">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
-            <DrawerDescription>Créer une séance pour réaliser tes exercises.</DrawerDescription>
+            <DrawerDescription>
+              <Link className=" flex items-center" to="/profile/type/new-type">
+                Tu peux également créer <span className="ml-1 underline">un exercice type.</span>{" "}
+                <LucideFilePlus2 className=" ml-1" size={16} />{" "}
+              </Link>
+            </DrawerDescription>
           </DrawerHeader>
           <div className="p-4 pb-0">
             <div className="flex items-center justify-between space-x-2">
