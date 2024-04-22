@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { Children, useState } from "react"
 import { PlusIcon } from "@radix-ui/react-icons"
 import { LucideBadgePlus } from "lucide-react"
 import { useNavigate, useParams } from "react-router-dom"
@@ -21,7 +21,7 @@ import {
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 
-function NewSessionButton() {
+function NewSessionButton({ Children }: { Children: any }) {
   const [weight, setWeight] = React.useState("")
   const [showDialog, setShowDialog] = useState(false)
   const [typeSession, setTypeSession] = useState("")
@@ -69,13 +69,10 @@ function NewSessionButton() {
 
   return (
     <Drawer>
-      <DrawerTrigger asChild>
-        <div className="inline-block w-full cursor-pointer justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500">
-          <LucideBadgePlus className="mb-1 inline-block" size={24} />
-          <span className="tab tab-account block text-xs">New</span>
-        </div>
+      <DrawerTrigger className=" select-none" asChild>
+        {Children}
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className=" select-none">
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader className=" text-left">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
