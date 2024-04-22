@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/components/ui/use-toast"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
@@ -129,6 +130,11 @@ const OneExercise = () => {
         comment: formState.comment,
       })
       console.log(response)
+      // launch toast if success
+      toast({
+        title: "Exercice mis à jour.",
+      })
+
       // fetchOneSession()
       fetchOneExercise()
       setIsEditable(false)
@@ -143,7 +149,7 @@ const OneExercise = () => {
       const response = await myApi.delete(`/exercise-user/${id}`)
       console.log(response)
       fetchOneExercise()
-      navigate(`/sessions/${session._id}`)
+      navigate(`/history/session/${session._id}`)
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -289,12 +295,10 @@ const OneExercise = () => {
                   Supprimer
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className=" w-10/12">
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Es-tu sûr de vouloir supprimer ton exercice ?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Tu ne pourras pas récupérer cet exercice une fois supprimé.
-                  </AlertDialogDescription>
+                  <AlertDialogTitle>Supprimer ton exercice ?</AlertDialogTitle>
+                  <AlertDialogDescription></AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Annuler</AlertDialogCancel>
