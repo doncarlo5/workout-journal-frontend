@@ -1,4 +1,4 @@
-export default function IconLegs(props: React.SVGProps<SVGSVGElement>) {
+export default function IconLegs(_props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       className=" fill-slate-900 dark:fill-white"
