@@ -112,7 +112,7 @@ const DoExercisePage = () => {
       const responseSession = await myApi.put(`/sessions/${sessionId}`, updatedSession)
       console.log(responseSession)
 
-      navigate(`/sessions/${sessionId}`)
+      navigate(`/history/session/${sessionId}`)
     } catch (error: any) {
       console.log(error)
     }
@@ -140,9 +140,9 @@ const DoExercisePage = () => {
       <div className="mb-10 flex flex-col">
         <Navbar />
       </div>
-      <div className="mx-auto max-w-sm space-y-6">
+      <div className="mx-auto max-w-sm space-y-6 px-4 pb-14">
         <div className="flex items-center space-y-2 text-left">
-          <Link to={`/sessions/${sessionId}`}>
+          <Link to={`/history/session/${sessionId}`}>
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
