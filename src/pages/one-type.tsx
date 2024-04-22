@@ -126,7 +126,7 @@ const OneType = () => {
       const response = await myApi.delete(`/exercise-type/${id}`)
       console.log(response)
       fetchOneType()
-      navigate("/profile/type/")
+      navigate("/profile/")
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -270,11 +270,11 @@ const OneType = () => {
                     Supprimer
                   </Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent>
+                <AlertDialogContent className=" w-10/12">
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Es-tu sûr de vouloir supprimer ta séance ?</AlertDialogTitle>
+                    <AlertDialogTitle>Supprimer ce type ?</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Tu ne pourras pas récupérer cette séance une fois supprimée.
+                      Tu ne pourras pas récupérer ce type d'exercice une fois supprimé.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
