@@ -83,7 +83,7 @@ const NewType = () => {
         repRange3: formState.repRange3,
         advice: formState.advice,
       })
-      navigate(`/types`)
+      navigate(`/type`)
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
@@ -97,7 +97,7 @@ const NewType = () => {
       </div>
       <div className="mx-auto max-w-sm space-y-6">
         <div className="flex items-center space-y-2 text-left">
-          <Link to="/types">
+          <Link to="/profile/type">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
