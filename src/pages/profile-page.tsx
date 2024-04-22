@@ -36,8 +36,16 @@ const ProfilePage = () => {
     e.preventDefault()
     try {
       const response = await myApi.patch("/auth/settings", formState)
+      toast({
+        title: "Profil mis à jour!",
+      })
+
       console.log(response)
     } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Une erreur est survenue! ❌",
+      })
       setError(error.response.data.message)
       setTimeout(() => {
         setError("")
