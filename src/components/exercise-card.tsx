@@ -9,7 +9,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/t
 
 function ExerciseCard({ exercise }: { exercise: any }) {
   return (
-    <Link to={`/exercises/${exercise._id}`}>
+    <Link to={`/history/exercise/${exercise._id}`}>
       <Card className="w-full max-w-sm">
         <CardHeader className="px-4 pb-0 pt-4">
           <CardTitle className="text-lg">{exercise.type.name}</CardTitle>
