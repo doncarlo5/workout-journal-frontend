@@ -62,19 +62,10 @@ export function HistoryPage() {
       const response = await myApi.delete(`/sessions/${id}`)
       console.log(response)
       fetchUserSessions()
-      navigate("/sessions")
+      navigate("/history/session")
     } catch (error) {
       console.error("Fetch error: ", error)
     }
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
-  }
-
-  const handleLink = (id: string) => {
-    // console log target
-    navigate(`/sessions/${id}`)
   }
 
   return (
