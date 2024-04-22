@@ -238,7 +238,7 @@ const OneSession = () => {
                     )}
                   </div>
                   <div className="px-4">
-                    <Link to={`/sessions/${sessionId}/do-exercise`}>
+                    <Link to={`/history/session/${sessionId}/do-exercise`}>
                       <Button className=" w-full">
                         {" "}
                         <LucidePlusCircle className=" mr-2 size-5" />
@@ -295,7 +295,7 @@ const OneSession = () => {
                   Supprimer
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className=" w-10/12">
                 <AlertDialogHeader>
                   <AlertDialogTitle>Supprimer cette séance ?</AlertDialogTitle>
                   <AlertDialogDescription>Les exercices seront également supprimés.</AlertDialogDescription>
