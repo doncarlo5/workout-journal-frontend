@@ -123,7 +123,7 @@ const OneSession = () => {
         comment: formState.comment,
       })
       fetchOneSession()
-      navigate("/sessions/")
+      navigate("/history/")
       // setIsEditable(false)
     } catch (error) {
       const err = error as AxiosError
@@ -149,7 +149,7 @@ const OneSession = () => {
       const response = await myApi.delete(`/sessions/${id}`)
       console.log(response)
       fetchOneSession()
-      navigate("/sessions/")
+      navigate("/history/")
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -175,12 +175,10 @@ const OneSession = () => {
 
   return (
     <>
-      <div className="mb-10 flex flex-col">
-        <Navbar />
-      </div>
-      <div className="mx-auto max-w-sm space-y-6">
+      <Navbar />
+      <div className="mx-auto max-w-sm space-y-6 p-4">
         <div className="flex items-center space-y-2 text-left">
-          <Link to="/sessions">
+          <Link to="/history">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -192,7 +190,7 @@ const OneSession = () => {
         </div>
 
         <div className="space-y-4">
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 pb-14">
             <div className="space-y-2">
               <Label htmlFor="session_date">Date</Label>
               <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
@@ -271,7 +269,9 @@ const OneSession = () => {
               </div>
             </div>
             <div className="col-span-2 resize space-y-2">
-              <Label htmlFor="comment">Notes</Label>
+              <Label htmlFor="comment" className={formState.is_done ? "text-slate-300" : ""}>
+                Notes
+              </Label>
               <Textarea
                 id="comment"
                 placeholder=""
@@ -293,7 +293,7 @@ const OneSession = () => {
                 htmlFor="is_done"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                Séance terminée
+                {formState.is_done ? "Séance terminée" : "Séance en cours..."}
               </Label>
             </div>
             {formState.is_done ? (
