@@ -66,7 +66,7 @@ const OneSession = () => {
 
   const fetchOneSession = async () => {
     try {
-      const response = await myApi.get(`/sessions/${sessionId}`)
+      const response = await myApi.get(`/api/sessions/${sessionId}`)
       setFormState({
         id: response.data._id,
         date_session: response.data.date_session,
@@ -94,7 +94,7 @@ const OneSession = () => {
     e.preventDefault()
     console.log("👋 handleSubmit")
     try {
-      const response = await myApi.put(`/sessions/${sessionId}`, {
+      const response = await myApi.put(`/api/sessions/${sessionId}`, {
         date_session: formState.date_session,
         type_session: formState.type_session,
         body_weight: formState.body_weight,
@@ -115,7 +115,7 @@ const OneSession = () => {
   const handleSelectDate: SelectSingleEventHandler = async (date: Date | undefined) => {
     setFormState({ ...formState, date_session: date?.toString() || "" })
     try {
-      await myApi.put(`/sessions/${sessionId}`, {
+      await myApi.put(`/api/sessions/${sessionId}`, {
         date_session: date,
       })
     } catch (error) {
@@ -127,7 +127,7 @@ const OneSession = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/sessions/${id}`)
+      const response = await myApi.delete(`/api/sessions/${id}`)
       console.log(response)
       fetchOneSession()
       navigate("/history/")

@@ -25,7 +25,7 @@ function NewSessionButton({ Children }: { Children: any }) {
 
   const fetchLastSessionUser = async () => {
     try {
-      const response = await myApi.get(`/sessions?limit=1&sort=-createdAt`)
+      const response = await myApi.get(`/api/sessions?limit=1&sort=-createdAt`)
       if (response.data && response.data.length > 0) {
         setWeight(response.data[0].body_weight)
       } else {
@@ -40,7 +40,7 @@ function NewSessionButton({ Children }: { Children: any }) {
     e.preventDefault()
     try {
       setTypeSession(userChoice)
-      const response = await myApi.post("/sessions", {
+      const response = await myApi.post("/api/sessions", {
         date_session: new Date(),
         type_session: userChoice,
         body_weight: weight,

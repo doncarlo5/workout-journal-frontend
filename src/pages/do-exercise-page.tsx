@@ -45,7 +45,7 @@ const DoExercisePage = () => {
 
   const onExerciseTypeChange = async (value: any) => {
     setOneExerciseType(value)
-    const response = await myApi.get(`/exercise-user?limit=1&sort=-createdAt&type=${value._id}`)
+    const response = await myApi.get(`/api/exercise-user?limit=1&sort=-createdAt&type=${value._id}`)
     setLastExercise(response.data[0])
 
     console.log("lastExercise is:", response.data[0])
@@ -53,7 +53,7 @@ const DoExercisePage = () => {
 
   const fetchOneSession = async () => {
     try {
-      const response = await myApi.get(`/sessions/${sessionId}`)
+      const response = await myApi.get(`/api/sessions/${sessionId}`)
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -62,7 +62,7 @@ const DoExercisePage = () => {
 
   const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
-      const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
+      const response = await myApi.get(`/api/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -95,7 +95,7 @@ const DoExercisePage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await myApi.post("/exercise-user", {
+      const response = await myApi.post("/api/exercise-user", {
         type: oneExerciseType._id,
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
@@ -107,7 +107,7 @@ const DoExercisePage = () => {
         exercise_user_list: [...session.exercise_user_list, response.data.id],
       }
 
-      const responseSession = await myApi.put(`/sessions/${sessionId}`, updatedSession)
+      const responseSession = await myApi.put(`/api/sessions/${sessionId}`, updatedSession)
       console.log(responseSession)
 
       navigate(`/history/session/${sessionId}`)

@@ -9,7 +9,7 @@ function BodyWeightChart() {
 
   const fetchUserSessions = async () => {
     try {
-      const response = await myApi.get("/sessions?limit=1000&sort=date_session")
+      const response = await myApi.get("/api/sessions?limit=1000&sort=date_session")
       console.log("👋 response data", response.data)
       setSession(response.data)
       console.log("👋 session", session)

@@ -24,7 +24,7 @@ export function ExercicesList() {
 
   const fetchUserExercises = async () => {
     try {
-      const response = await myApi.get("/exercise-user?limit=1000&sort=-updatedAt")
+      const response = await myApi.get("/api/exercise-user?limit=1000&sort=-updatedAt")
       setExercise(response.data)
       console.log("👋 response", response.data)
     } catch (error) {
@@ -48,7 +48,7 @@ export function ExercicesList() {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/exercise-user/${id}`)
+      const response = await myApi.delete(`/api/exercise-user/${id}`)
       console.log(response)
       fetchUserExercises()
     } catch (error) {

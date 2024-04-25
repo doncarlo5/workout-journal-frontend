@@ -14,7 +14,7 @@ export function ExerciseComponent() {
 
   const fetchUserExercises = async () => {
     try {
-      const response = await myApi.get("/exercise-user?limit=1000&sort=-updatedAt")
+      const response = await myApi.get("/api/exercise-user?limit=1000&sort=-updatedAt")
       setExercise(response.data)
       console.log("👋 response", response.data)
       setIsLoading(false)

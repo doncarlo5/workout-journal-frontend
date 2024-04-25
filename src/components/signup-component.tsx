@@ -31,7 +31,7 @@ const SignupComponent = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await myApi.post("/auth/signup", formState)
+      const response = await myApi.post("/api/auth/signup", formState)
       console.log(response)
       navigate("/login")
     } catch (error: any) {
@@ -43,7 +43,7 @@ const SignupComponent = () => {
   }
 
   return (
-    <div className=" m-auto">
+    <div className=" m-auto ">
       <form onSubmit={handleSubmit}>
         <div className="mx-auto max-w-sm space-y-6">
           <div className="space-y-2 text-center">

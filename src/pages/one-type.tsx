@@ -59,7 +59,7 @@ const OneType = () => {
 
   const fetchOneType = async () => {
     try {
-      const response = await myApi.get(`/exercise-type/${typeId}`)
+      const response = await myApi.get(`/api/exercise-type/${typeId}`)
 
       setFormState({
         id: response.data._id,
@@ -103,7 +103,7 @@ const OneType = () => {
     try {
       console.log("send response when submit", formState)
       const timerValue = parseInt(formState.timer)
-      const response = await myApi.put(`/exercise-type/${typeId}`, {
+      const response = await myApi.put(`/api/exercise-type/${typeId}`, {
         name: formState.name,
         advice: formState.advice,
         timer: timerValue,
@@ -123,7 +123,7 @@ const OneType = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/exercise-type/${id}`)
+      const response = await myApi.delete(`/api/exercise-type/${id}`)
       console.log(response)
       fetchOneType()
       navigate("/profile/")

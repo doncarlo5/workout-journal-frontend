@@ -12,7 +12,7 @@ function ExerciseChart() {
 
   const fetchAllExerciseTypes = async () => {
     try {
-      const response = await myApi.get(`/exercise-type?limit=1000`)
+      const response = await myApi.get(`/api/exercise-type?limit=1000`)
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -28,7 +28,7 @@ function ExerciseChart() {
   }, [])
 
   const AllExercisesTypeChange = async (value: any) => {
-    const response = await myApi.get(`/exercise-user?limit=1000&sort=-createdAt&type=${value._id}`)
+    const response = await myApi.get(`/api/exercise-user?limit=1000&sort=-createdAt&type=${value._id}`)
     setExercise(response.data)
 
     // loop through the response data to access date_session from each object index - session - date_session

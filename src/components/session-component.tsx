@@ -13,7 +13,7 @@ export function SessionComponent() {
 
   const fetchUserSessions = async () => {
     try {
-      const response = await myApi.get("/sessions?limit=1000&sort=-date_session")
+      const response = await myApi.get("/api/sessions?limit=1000&sort=-date_session")
       setSession(response.data)
       setIsLoading(false)
     } catch (error) {

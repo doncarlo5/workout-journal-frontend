@@ -35,7 +35,7 @@ const ProfilePage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await myApi.patch("/auth/settings", formState)
+      const response = await myApi.patch("/api/auth/settings", formState)
       toast({
         title: "Profil mis à jour!",
       })

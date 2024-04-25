@@ -10,9 +10,9 @@ export function HomePage() {
       <main className="flex flex-1 items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">Workout Journal</h1>
+            <h1 className="mb-2 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">Workout Journal</h1>
             <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
-              Enregistre tes progrès, fixe toi de nouveaux objectifs et deviens meilleur à chaque entrainement.
+              Enregistre ta progression et deviens meilleur à chaque entraînement.
             </p>
           </div>
           <div className="mt-3 flex gap-4">
@@ -21,7 +21,7 @@ export function HomePage() {
             </Link>
           </div>
           <div className="flex gap-4">
-            <Link className="w-[150px]" to="/login">
+            <Link className="w-[150px]" to="/signup">
               <Button variant="secondary" className="w-full">
                 Se connecter
               </Button>

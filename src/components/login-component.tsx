@@ -31,11 +31,11 @@ const LoginComponent = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await myApi.post("/auth/login", formState)
+      const response = await myApi.post("/api/auth/login", formState)
       console.log(response)
       localStorage.setItem("token", response.data.token)
       await authenticateUser()
-      navigate("/exercises/")
+      navigate("/")
     } catch (error: any) {
       console.log(error)
       setError("Mot de passe incorrect")

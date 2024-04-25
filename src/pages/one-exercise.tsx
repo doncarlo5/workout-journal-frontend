@@ -54,7 +54,7 @@ const OneExercise = () => {
   const fetchOneExercise = async () => {
     try {
       console.log("👋 exerciseId", exerciseId)
-      const response = await myApi.get(`/exercise-user/${exerciseId}`)
+      const response = await myApi.get(`/api/exercise-user/${exerciseId}`)
 
       setFormState({
         id: response.data._id,
@@ -82,7 +82,7 @@ const OneExercise = () => {
 
   const fetchOneSession = async (sessionId: string) => {
     try {
-      const response = await myApi.get(`/sessions/${sessionId}`)
+      const response = await myApi.get(`/api/sessions/${sessionId}`)
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -92,7 +92,7 @@ const OneExercise = () => {
   const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
       // const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
-      const response = await myApi.get(`/exercise-type?limit=1000`)
+      const response = await myApi.get(`/api/exercise-type?limit=1000`)
       console.log("👁️‍🗨️ sessionData Type Session", sessionData.type_session)
       return response.data
     } catch (error) {
@@ -123,7 +123,7 @@ const OneExercise = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await myApi.put(`/exercise-user/${exerciseId}`, {
+      const response = await myApi.put(`/api/exercise-user/${exerciseId}`, {
         type: oneExerciseType,
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
@@ -146,7 +146,7 @@ const OneExercise = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/exercise-user/${id}`)
+      const response = await myApi.delete(`/api/exercise-user/${id}`)
       console.log(response)
       fetchOneExercise()
       navigate(`/history/session/${session._id}`)

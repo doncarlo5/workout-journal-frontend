@@ -23,7 +23,7 @@ export function TypesList() {
 
   const fetchTypes = async () => {
     try {
-      const response = await myApi.get("/exercise-type?limit=1000&sort=-updatedAt")
+      const response = await myApi.get("/api/exercise-type?limit=1000&sort=-updatedAt")
       console.log("👋 response data", response.data)
       setType(response.data)
     } catch (error) {
@@ -37,7 +37,7 @@ export function TypesList() {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/exercise-type/${id}`)
+      const response = await myApi.delete(`/api/exercise-type/${id}`)
       console.log(response)
       fetchTypes()
     } catch (error) {
