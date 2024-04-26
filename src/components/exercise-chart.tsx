@@ -23,6 +23,7 @@ function ExerciseChart() {
     const init = async () => {
       const exerciseTypeData = await fetchAllExerciseTypes()
       setAllExerciseTypes(exerciseTypeData)
+      console.log("exerciseTypeData", exerciseTypeData)
     }
     init()
   }, [])
@@ -54,73 +55,81 @@ function ExerciseChart() {
 
   return (
     <>
-      <h1 className="mb-5 mt-5 text-3xl font-bold">Exercice</h1>
+      <div className=" mt-5">
+        {allExerciseTypes.length === 0 && (
+          <div className="mt-5 text-center">
+            <p>En attente de nouvelles séances...</p>
+          </div>
+        )}
+        {allExerciseTypes && allExerciseTypes.length > 0 && (
+          <div>
+            <Select onValueChange={AllExercisesTypeChange}>
+              <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700">
+                <SelectValue className=" " placeholder="Sélectionne un exercice..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {allExerciseTypes.map((type) => (
+                    <SelectItem key={type._id} value={type}>
+                      {type.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <ResponsiveContainer width="100%" height="70%">
+              <AreaChart
+                width={500}
+                height={300}
+                data={exercise}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <defs>
+                  <linearGradient id="datahere" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#B99C70" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="#B99C70" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="datahere" tickFormatter={(tick) => formatXAxis(tick)} />
+                <YAxis name="Kg" domain={["auto", "auto"]}>
+                  <Label
+                    style={{
+                      textAnchor: "middle",
+                      fontSize: "100%",
+                      fill: "#666666",
+                    }}
+                    position="left"
+                    value={"Kg"}
+                  />
+                </YAxis>
+                <Tooltip
+                  labelFormatter={(value) => {
+                    return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
+                  }}
+                  animationEasing={"ease-out"}
+                />
 
-      <Select onValueChange={AllExercisesTypeChange}>
-        <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700">
-          <SelectValue className=" " placeholder="Sélectionne un exercice..." />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {allExerciseTypes.map((type) => (
-              <SelectItem key={type._id} value={type}>
-                {type.name}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-
-      <ResponsiveContainer width="100%" height="70%">
-        <AreaChart
-          width={500}
-          height={300}
-          data={exercise}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <defs>
-            <linearGradient id="datahere" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#B99C70" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#B99C70" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="datahere" tickFormatter={(tick) => formatXAxis(tick)} />
-          <YAxis name="Kg" domain={["auto", "auto"]}>
-            <Label
-              style={{
-                textAnchor: "middle",
-                fontSize: "100%",
-                fill: "#666666",
-              }}
-              position="left"
-              value={"Kg"}
-            />
-          </YAxis>
-          <Tooltip
-            labelFormatter={(value) => {
-              return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
-            }}
-            animationEasing={"ease-out"}
-          />
-
-          <Area
-            name="Poids"
-            dot={false}
-            type="monotone"
-            dataKey="datahere"
-            stroke="#B99C70"
-            strokeWidth={2}
-            fillOpacity={1}
-            fill="url(#datahere)"
-            activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+                <Area
+                  name="Poids"
+                  dot={false}
+                  type="monotone"
+                  dataKey="datahere"
+                  stroke="#B99C70"
+                  strokeWidth={2}
+                  fillOpacity={1}
+                  fill="url(#datahere)"
+                  activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+      </div>
     </>
   )
 }
