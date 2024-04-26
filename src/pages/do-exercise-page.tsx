@@ -46,6 +46,7 @@ const DoExercisePage = () => {
   const onExerciseTypeChange = async (value: any) => {
     setOneExerciseType(value)
     const response = await myApi.get(`/api/exercise-user?limit=1&sort=-createdAt&type=${value._id}`)
+
     setLastExercise(response.data[0])
 
     console.log("lastExercise is:", response.data[0])
@@ -63,6 +64,7 @@ const DoExercisePage = () => {
   const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
       const response = await myApi.get(`/api/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
+      console.log("👋 fetchAllExerciseTypes", response.data)
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
