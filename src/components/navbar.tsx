@@ -27,7 +27,7 @@ function Navbar() {
           className="fixed inset-x-1 bottom-1 z-10 m-auto block max-w-2xl rounded-xl border-t border-gray-200 bg-white bg-opacity-30  shadow backdrop-blur-lg backdrop-filter dark:border-none"
         >
           <div id="tabs" className="flex justify-between">
-            <ModeToggle />
+            {/* <ModeToggle /> */}
 
             {!isLoggedIn ? (
               <>
