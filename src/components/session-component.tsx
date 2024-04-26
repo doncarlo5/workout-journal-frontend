@@ -92,7 +92,7 @@ export function SessionComponent() {
         <main className="flex flex-1 items-center justify-center">
           <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
             <div className="text-center">
-              <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">Aucune séance.</p>
+              <p className="max-w-[600px] py-5 text-gray-500 dark:text-gray-400 md:text-xl">Aucune séance.</p>
             </div>
             <div className="flex flex-col gap-4 "></div>
           </div>

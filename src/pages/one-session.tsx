@@ -4,7 +4,7 @@ import { CalendarIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
-import { ChevronLeft, LucideArrowBigLeftDash, LucideCheckCircle, LucidePlusCircle } from "lucide-react"
+import { ChevronLeft, LucideArrowBigLeftDash, LucideCheckCircle, LucideLoader2, LucidePlusCircle } from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -228,8 +228,10 @@ const OneSession = () => {
                 <div className=" rounded-lg border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 dark:shadow-sm">
                   <div className="mb-4 flex flex-col gap-4">
                     {isLoading ? (
-                      <div className="col-span-full flex items-center justify-center">
-                        <p>Loading...</p>
+                      <div className="container flex flex-col items-center justify-center p-20">
+                        <div className="">
+                          <LucideLoader2 className=" animate-spin " size={32} />
+                        </div>
                       </div>
                     ) : (
                       formState.exercise_user_list.map((exercise: any) => (

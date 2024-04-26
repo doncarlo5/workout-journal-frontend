@@ -1,5 +1,7 @@
 import React, { useState } from "react"
+import { ReloadIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
+import { set } from "date-fns"
 import { ChevronLeft } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
@@ -8,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/components/ui/use-toast"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
@@ -34,6 +37,7 @@ const NewType = () => {
     repRange3: "",
     type_session: "",
   })
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -51,6 +55,7 @@ const NewType = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      setIsLoading(true)
       console.log("send response when submit", formState)
       const timerValue = parseInt(formState.timer)
       const response = await myApi.post(`/api/exercise-type`, {
@@ -64,7 +69,12 @@ const NewType = () => {
       })
       console.log("response", response)
       navigate(`/profile`)
+      toast({
+        title: "Type d'exercice créé.",
+        description: "Vous pouvez maintenant l'ajouter à vos séances.",
+      })
     } catch (error) {
+      setIsLoading(false)
       const err = error as AxiosError
       console.error(err.response?.data)
     }
@@ -184,9 +194,16 @@ const NewType = () => {
                 maxLength={200}
               />
             </div>
-            <Button className="col-span-2 mb-5 w-full" type="submit">
-              Valider
-            </Button>
+            {isLoading ? (
+              <Button disabled className="w-full">
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                Chargement
+              </Button>
+            ) : (
+              <Button className="col-span-2 w-full" type="submit">
+                Créer
+              </Button>
+            )}
           </form>
         </div>
       </div>

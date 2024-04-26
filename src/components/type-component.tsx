@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { LucidePlusCircle } from "lucide-react"
+import { LucideLoader2, LucidePlusCircle } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
@@ -40,7 +40,11 @@ export function TypeComponent() {
                   <div className="mb-4 grid grid-cols-2 gap-4">
                     {isLoading ? (
                       <div className="col-span-full flex items-center justify-center">
-                        <p>Loading...</p>
+                        <div className="container flex flex-col items-center justify-center p-20">
+                          <div className="">
+                            <LucideLoader2 className=" animate-spin " size={32} />
+                          </div>
+                        </div>
                       </div>
                     ) : (
                       exerciseType.map((exerciseType: any) => (
@@ -49,7 +53,7 @@ export function TypeComponent() {
                     )}
                   </div>
                   <div className="px-4">
-                    <Link to={`/profile/type/new-type`}>
+                    <Link to={`/type/new-type`}>
                       <Button className=" w-full">
                         {" "}
                         <LucidePlusCircle className=" mr-2 size-5" />

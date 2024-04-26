@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { LucideFilePlus2 } from "lucide-react"
+import { LucideFilePlus2, LucidePencilRuler, LucideWeight } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
 import myApi from "../lib/api-handler"
@@ -66,10 +66,10 @@ function NewSessionButton({ Children }: { Children: any }) {
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader className=" text-left">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
-            <DrawerDescription>
-              <Link className=" flex items-center" to="/profile/type/new-type">
-                Tu peux également créer <span className="ml-1 underline">un exercice type.</span>{" "}
-                <LucideFilePlus2 className=" ml-1" size={16} />{" "}
+            <DrawerDescription className=" flex items-center gap-1">
+              <LucidePencilRuler className=" ml-1" size={16} />{" "}
+              <Link className=" flex items-center" to="/type/new-type">
+                Créer un <span className="ml-1 underline">exercice type</span>.{" "}
               </Link>
             </DrawerDescription>
           </DrawerHeader>
@@ -112,17 +112,26 @@ function NewSessionButton({ Children }: { Children: any }) {
       </DrawerContent>
       {showDialog && (
         <div>
-          <DialogContent>
+          <DialogContent className=" w-11/12 rounded-md">
             <DialogHeader>
-              <DialogTitle className=" mb-5">Veuillez renseigner votre poids {`(en kg)`}</DialogTitle>
+              <DialogTitle className=" flex items-end text-left">
+                <LucideWeight className=" mr-2" size={20} />
+                Poids de corps
+              </DialogTitle>
               <DialogDescription>
-                <Input
-                  className=" w-1/4"
-                  type="number"
-                  id="body_weight"
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
-                />
+                <p className=" text-left text-gray-500 dark:text-gray-400">Renseigne ton poids pour continuer.</p>
+              </DialogDescription>
+              <DialogDescription className=" flex justify-center py-2  ">
+                <div className=" flex w-3/5 items-end justify-center gap-2 text-xl font-light">
+                  <Input
+                    className=" w-1/4"
+                    type="number"
+                    id="body_weight"
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)}
+                  />
+                  KG
+                </div>
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>

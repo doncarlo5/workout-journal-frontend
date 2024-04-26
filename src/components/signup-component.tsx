@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { ReloadIcon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -7,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 import myApi from "../lib/api-handler"
+import { toast } from "./ui/use-toast"
 
 const SignupComponent = () => {
   const [formState, setFormState] = useState({
@@ -16,6 +18,7 @@ const SignupComponent = () => {
     password: "",
   })
   const [error, setError] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -31,10 +34,16 @@ const SignupComponent = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      setIsLoading(true)
       const response = await myApi.post("/api/auth/signup", formState)
       console.log(response)
-      navigate("/login")
+      navigate("/")
+      toast({
+        title: "Compte créé.",
+        description: "Vous pouvez maintenant vous connecter.",
+      })
     } catch (error: any) {
+      setIsLoading(false)
       setError(error.response.data.message)
       setTimeout(() => {
         setError("")
@@ -43,9 +52,9 @@ const SignupComponent = () => {
   }
 
   return (
-    <div className=" m-auto ">
+    <div className=" ">
       <form onSubmit={handleSubmit}>
-        <div className="mx-auto max-w-sm space-y-6">
+        <div className="mx-auto max-w-sm space-y-6 pb-5">
           <div className="mt-8 space-y-2 text-left">
             <h1 className="text-3xl font-bold">S'inscrire</h1>
             <p className="text-gray-500 dark:text-gray-400">Inscrit toi pour continuer.</p>
@@ -98,9 +107,16 @@ const SignupComponent = () => {
                 autoComplete="on"
               />
             </div>
-            <Button className="w-full" type="submit">
-              Créer mon compte
-            </Button>
+            {isLoading ? (
+              <Button disabled className="w-full">
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                Chargement
+              </Button>
+            ) : (
+              <Button className="w-full" type="submit">
+                Inscription
+              </Button>
+            )}
             {error && (
               <Alert variant="destructive">
                 <AlertTitle>Erreur</AlertTitle>

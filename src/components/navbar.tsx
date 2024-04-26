@@ -5,6 +5,7 @@ import {
   LucideHistory,
   LucideHome,
   LucideLineChart,
+  LucidePencilRuler,
   LucideRocket,
 } from "lucide-react"
 import { NavLink } from "react-router-dom"
@@ -63,6 +64,16 @@ function Navbar() {
                 >
                   <LucideCircleUser className="mb-1 inline-block" size={24} />
                   <span className="tab tab-whishlist block text-xs">Profile</span>
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    (isActive ? activeLink : inactiveLink) +
+                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+                  }
+                  to="/type"
+                >
+                  <LucidePencilRuler className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Types</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>

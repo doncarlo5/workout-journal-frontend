@@ -1,13 +1,15 @@
 import { useState } from "react"
 import useAuth from "@/context/use-auth"
-import { LucideLogOut } from "lucide-react"
+import { LucideLogOut, Trophy } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useToast } from "@/components/ui/use-toast"
+import { ModeToggle } from "@/components/mode-toggle"
 import { Navbar } from "@/components/navbar"
+import TrophyComponent from "@/components/trophy-component"
 import TypeComponent from "@/components/type-component"
 
 import myApi from "../lib/api-handler"
@@ -61,10 +63,10 @@ const ProfilePage = () => {
         <div className="space-y-2 text-center">
           <h1 className="mb-5 mt-5 text-3xl font-bold">Profile</h1>
         </div>
-        <Tabs defaultValue="exercise-type" className=" w-80 pb-16">
+        <Tabs defaultValue="info" className=" w-80 pb-16">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="info">Informations</TabsTrigger>
-            <TabsTrigger value="exercise-type">Mes types d'ex.</TabsTrigger>
+            <TabsTrigger value="trophy">Trophées</TabsTrigger>
           </TabsList>
           <TabsContent asChild className="" value="info">
             <div className=" flex flex-1 flex-col items-center justify-center">
@@ -122,8 +124,11 @@ const ProfilePage = () => {
                     </Button>
                   </div>
                 </form>
+                <div className=" m-8 flex justify-center">
+                  <ModeToggle />
+                </div>
                 <div className=" flex justify-center">
-                  <Button onClick={handleLogout} variant={"outline"} className=" m-8 flex  ">
+                  <Button onClick={handleLogout} variant={"outline"} className=" flex  ">
                     <LucideLogOut className=" " size={16} />
                   </Button>
                 </div>
@@ -131,8 +136,8 @@ const ProfilePage = () => {
               </div>
             </div>
           </TabsContent>
-          <TabsContent asChild className="" value="exercise-type">
-            <TypeComponent />
+          <TabsContent asChild className="" value="trophy">
+            <TrophyComponent />
           </TabsContent>
         </Tabs>
       </main>
