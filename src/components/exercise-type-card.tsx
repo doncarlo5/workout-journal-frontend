@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 
 function ExerciseTypeCard({ exerciseType }: { exerciseType: any }) {
   return (
-    <Link to={`/profile/type/${exerciseType._id}`}>
+    <Link to={`/type/${exerciseType._id}`}>
       <Card className="h-full w-full max-w-md transform-gpu">
         <CardHeader className=" p-4">
           <CardTitle>{exerciseType.name}</CardTitle>
