@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import { LucideMail } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -38,7 +39,7 @@ const LoginComponent = () => {
       navigate("/")
     } catch (error: any) {
       console.log(error)
-      setError("Mot de passe incorrect")
+      setError(error.response.data.message)
       setTimeout(() => {
         setError("")
       }, 3000)
@@ -48,10 +49,10 @@ const LoginComponent = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="mx-auto max-w-sm space-y-6">
-          <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold">Se connecter 👤</h1>
-            <p className="text-gray-500 dark:text-gray-400">Connecte toi avec tes informations</p>
+        <div className="mx-auto w-full space-y-6">
+          <div className="mt-8 space-y-2 text-left">
+            <h1 className="text-3xl font-bold">Se connecter</h1>
+            <p className="text-gray-500 dark:text-gray-400">Connecte toi pour continuer.</p>
           </div>
           <div className="space-y-4">
             <div className="flex flex-col gap-2">
@@ -59,7 +60,7 @@ const LoginComponent = () => {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
-                  placeholder="johnny.bravo@email.com"
+                  placeholder="Ton email"
                   value={formState.email}
                   onChange={handleChange}
                   required
@@ -70,7 +71,7 @@ const LoginComponent = () => {
                 <Label htmlFor="password">Mot de passe</Label>
                 <Input
                   id="password"
-                  placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                  placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
                   value={formState.password}
                   onChange={handleChange}
                   required
@@ -78,22 +79,16 @@ const LoginComponent = () => {
                   autoComplete="on"
                 />
               </div>
-              {error && (
-                <Alert variant="destructive">
-                  <AlertTitle>Erreur</AlertTitle>
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
             </div>
             <Button className="w-full" type="submit">
-              Se connecter
+              Connexion
             </Button>
-            <div className="text-center text-sm">
-              Tu n'as pas de compte ?
-              <Link className="ml-1 underline hover:animate-pulse" to="/signup">
-                Créer un compte
-              </Link>
-            </div>
+            {error && (
+              <Alert variant="destructive">
+                <AlertTitle>Erreur</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
           </div>
         </div>
       </form>
