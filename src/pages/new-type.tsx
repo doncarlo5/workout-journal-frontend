@@ -85,7 +85,7 @@ const NewType = () => {
       <Navbar />
       <div className="mx-auto max-w-sm space-y-6 p-4">
         <div className="flex items-center space-y-2 text-left">
-          <Link to="/history">
+          <Link to="/type">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -185,7 +185,7 @@ const NewType = () => {
             <div className="grid grid-flow-col grid-rows-3"></div>
 
             <div className="col-span-2 resize space-y-2">
-              <Label htmlFor="advice">Conseil</Label>
+              <Label htmlFor="advice">Conseil {`(optionnel)`}</Label>
               <Textarea
                 id="advice"
                 placeholder="Rétraction scapulaire, lever les fesses pour prendre la barre, etc."
@@ -194,16 +194,18 @@ const NewType = () => {
                 maxLength={200}
               />
             </div>
-            {isLoading ? (
-              <Button disabled className="w-full">
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                Chargement
-              </Button>
-            ) : (
-              <Button className="col-span-2 w-full" type="submit">
-                Créer
-              </Button>
-            )}
+            <div className=" col-span-2 pb-5">
+              {isLoading ? (
+                <Button disabled className="w-full">
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  Chargement
+                </Button>
+              ) : (
+                <Button className="col-span-2 w-full" type="submit">
+                  Créer
+                </Button>
+              )}
+            </div>
           </form>
         </div>
       </div>

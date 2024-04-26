@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { format } from "date-fns"
+import { format, set } from "date-fns"
 import { Area, AreaChart, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 import myApi from "@/lib/api-handler"
@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 function ExerciseChart() {
   const [exercise, setExercise] = useState([] as any[])
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
+  const [isSelected, setIsSelected] = useState(false)
 
   const fetchAllExerciseTypes = async () => {
     try {
@@ -29,8 +30,10 @@ function ExerciseChart() {
   }, [])
 
   const AllExercisesTypeChange = async (value: any) => {
+    setIsSelected(true)
     const response = await myApi.get(`/api/exercise-user?limit=1000&sort=-createdAt&type=${value._id}`)
     setExercise(response.data)
+    console.log("exercise", exercise)
 
     // loop through the response data to access date_session from each object index - session - date_session
 
@@ -42,8 +45,6 @@ function ExerciseChart() {
       })
     }
     DateSession()
-
-    console.log("specific exercise", response.data)
 
     return response.data
   }
@@ -58,10 +59,10 @@ function ExerciseChart() {
       <div className=" mt-5">
         {allExerciseTypes.length === 0 && (
           <div className="mt-5 text-center">
-            <p>En attente de nouvelles séances...</p>
+            <p>Aucun exercice type.</p>
           </div>
         )}
-        {allExerciseTypes && allExerciseTypes.length > 0 && (
+        {allExerciseTypes.length > 0 && (
           <div>
             <Select onValueChange={AllExercisesTypeChange}>
               <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700">
@@ -77,56 +78,60 @@ function ExerciseChart() {
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <ResponsiveContainer width="100%" height="70%">
-              <AreaChart
-                width={500}
-                height={300}
-                data={exercise}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <defs>
-                  <linearGradient id="datahere" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#B99C70" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#B99C70" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="datahere" tickFormatter={(tick) => formatXAxis(tick)} />
-                <YAxis name="Kg" domain={["auto", "auto"]}>
-                  <Label
-                    style={{
-                      textAnchor: "middle",
-                      fontSize: "100%",
-                      fill: "#666666",
-                    }}
-                    position="left"
-                    value={"Kg"}
-                  />
-                </YAxis>
-                <Tooltip
-                  labelFormatter={(value) => {
-                    return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
+            {exercise.length === 0 && isSelected ? (
+              <div className=" mt-5 flex justify-center">Aucune données.</div>
+            ) : (
+              <ResponsiveContainer width="100%" height="70%">
+                <AreaChart
+                  width={500}
+                  height={300}
+                  data={exercise}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
                   }}
-                  animationEasing={"ease-out"}
-                />
+                >
+                  <defs>
+                    <linearGradient id="datahere" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#B99C70" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#B99C70" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="datahere" tickFormatter={(tick) => formatXAxis(tick)} />
+                  <YAxis name="Kg" domain={["auto", "auto"]}>
+                    <Label
+                      style={{
+                        textAnchor: "middle",
+                        fontSize: "100%",
+                        fill: "#666666",
+                      }}
+                      position="left"
+                      value={"Kg"}
+                    />
+                  </YAxis>
+                  <Tooltip
+                    labelFormatter={(value) => {
+                      return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
+                    }}
+                    animationEasing={"ease-out"}
+                  />
 
-                <Area
-                  name="Poids"
-                  dot={false}
-                  type="monotone"
-                  dataKey="datahere"
-                  stroke="#B99C70"
-                  strokeWidth={2}
-                  fillOpacity={1}
-                  fill="url(#datahere)"
-                  activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+                  <Area
+                    name="Poids"
+                    dot={false}
+                    type="monotone"
+                    dataKey="datahere"
+                    stroke="#B99C70"
+                    strokeWidth={2}
+                    fillOpacity={1}
+                    fill="url(#datahere)"
+                    activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            )}
           </div>
         )}
       </div>
