@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import { ReloadIcon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -10,6 +11,7 @@ import { AuthContext } from "../context/context-wrapper"
 import myApi from "../lib/api-handler"
 
 const LoginComponent = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [formState, setFormState] = useState({
     email: "",
@@ -31,6 +33,7 @@ const LoginComponent = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      setIsLoading(true)
       const response = await myApi.post("/api/auth/login", formState)
       console.log(response)
       localStorage.setItem("token", response.data.token)
@@ -79,9 +82,17 @@ const LoginComponent = () => {
                 />
               </div>
             </div>
-            <Button className="w-full" type="submit">
-              Connexion
-            </Button>
+
+            {isLoading ? (
+              <Button disabled className="w-full">
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                Chargement
+              </Button>
+            ) : (
+              <Button className="w-full" type="submit">
+                Connexion
+              </Button>
+            )}
             {error && (
               <Alert variant="destructive">
                 <AlertTitle>Erreur</AlertTitle>
