@@ -28,8 +28,11 @@ function BodyWeightChart() {
   }, [])
   return (
     <>
-      <h1 className="mb-5 mt-5 text-3xl font-bold">Poids du corps</h1>
-
+      {session.length === 0 && (
+        <div className="mt-5 text-center">
+          <p>En attente de nouvelles séances...</p>
+        </div>
+      )}
       <ResponsiveContainer width="100%" height="70%">
         <AreaChart
           width={500}
