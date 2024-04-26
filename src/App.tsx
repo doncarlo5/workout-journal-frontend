@@ -41,9 +41,9 @@ function App() {
               <Route path="/history/session/:sessionId" element={<OneSession />} />
               <Route path="/history/session/:sessionId/do-exercise" element={<DoExercisePage />} />
               {/* <Route path="/exercises" element={<ExercicesList />} /> */}
-              <Route path="/profile/type" element={<TypesList />} />
-              <Route path="/profile/type/:typeId" element={<OneType />} />
-              <Route path="/profile/type/new-type" element={<NewType />} />
+              <Route path="/type" element={<TypesList />} />
+              <Route path="/type/:typeId" element={<OneType />} />
+              <Route path="/type/new-type" element={<NewType />} />
               <Route path="/stats" element={<StatsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>
