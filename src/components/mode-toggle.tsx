@@ -11,18 +11,18 @@ export function ModeToggle() {
 
   return (
     <div
-      className="inline-block w-full cursor-pointer justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+      className=" flex cursor-pointer items-center justify-center rounded-md bg-slate-100 px-6 py-2 text-center hover:text-teal-500 focus:text-teal-500 dark:bg-gray-800 dark:text-gray-100 dark:hover:text-teal-500 dark:focus:text-teal-500"
       onClick={toggleTheme}
     >
       {theme === "light" ? (
         <>
-          <Moon className="mb-1 inline-block transition-all dark:rotate-0 dark:scale-100" size={24} />
-          <span className="tab tab-home block text-xs ">Dark</span>
+          <Moon className=" inline-block transition-all dark:rotate-0 dark:scale-100" size={24} />
+          {/* <span className="tab tab-home block select-none text-xs">Dark</span> */}
         </>
       ) : (
         <>
-          <Sun className="mb-1 inline-block " size={24} />
-          <span className="tab tab-home block text-xs ">Light</span>
+          <Sun className=" inline-block " size={24} />
+          {/* <span className="tab tab-home block select-none text-xs  ">Light</span> */}
         </>
       )}
       <span className="sr-only">Toggle theme</span>
