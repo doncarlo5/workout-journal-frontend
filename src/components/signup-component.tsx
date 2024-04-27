@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { AuthContext } from "@/context/context-wrapper"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 
@@ -11,6 +12,8 @@ import myApi from "../lib/api-handler"
 import { toast } from "./ui/use-toast"
 
 const SignupComponent = () => {
+  const { authenticateUser } = useContext(AuthContext)
+
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
@@ -36,11 +39,13 @@ const SignupComponent = () => {
     try {
       setIsLoading(true)
       const response = await myApi.post("/api/auth/signup", formState)
+      localStorage.setItem("token", response.data.token)
+      await authenticateUser()
       console.log(response)
       navigate("/")
       toast({
         title: "Compte créé.",
-        description: "Vous pouvez maintenant vous connecter.",
+        description: "Vous êtes maintenant inscrit.",
       })
     } catch (error: any) {
       setIsLoading(false)
@@ -107,7 +112,7 @@ const SignupComponent = () => {
                 autoComplete="on"
               />
             </div>
-            <div className=" mb-5">
+            <div className=" mt-10">
               {isLoading ? (
                 <Button disabled className="w-full">
                   <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
