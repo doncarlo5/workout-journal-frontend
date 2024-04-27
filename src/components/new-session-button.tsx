@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { LucideFilePlus2, LucidePencilRuler, LucideWeight } from "lucide-react"
+import { LucidePencilRuler, LucideWeight } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
 import myApi from "../lib/api-handler"
@@ -79,7 +79,7 @@ function NewSessionButton({ Children }: { Children: any }) {
                 onClick={(e) => handleCreateSession(e, "Upper A")}
                 variant="outline"
                 size="icon"
-                className="flex h-24 w-24 flex-col rounded-md"
+                className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
                 <p className="mb-1 mt-4 text-lg">Upper A</p>
                 <IconChest className="mt-3" />
@@ -89,7 +89,7 @@ function NewSessionButton({ Children }: { Children: any }) {
                 onClick={(e) => handleCreateSession(e, "Lower")}
                 variant="outline"
                 size="icon"
-                className="flex h-24 w-24 flex-col rounded-md"
+                className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
                 <p className="mb-1 mt-4 text-lg">Lower</p>
                 <IconLegs className="mt-3" />
@@ -99,7 +99,7 @@ function NewSessionButton({ Children }: { Children: any }) {
                 onClick={(e) => handleCreateSession(e, "Upper B")}
                 variant="outline"
                 size="icon"
-                className="flex h-24 w-24 flex-col rounded-md"
+                className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
                 <p className="mb-1 mt-4 text-lg">Upper B</p>
                 <IconChest className="mt-3" />
