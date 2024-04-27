@@ -39,8 +39,8 @@ export function HomePage() {
                   strokeWidth={1.5}
                 />
                 <p className="tab tab-whishlist block text-sm dark:text-gray-900  ">
-                  Créer un <span className=" font-bold"> exercice type </span> avec un temps de repos et des objectifs
-                  de répétitions.
+                  Créé un <span className=" font-bold"> exercice type </span> et personnalise-le avec un temps de repos,
+                  des répétitions et un conseil.
                 </p>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
@@ -59,7 +59,9 @@ export function HomePage() {
                       strokeWidth={1.5}
                     />
                     <p className="tab tab-whishlist block text-sm dark:text-gray-900">
-                      Réalise une nouvelle<span className=" font-bold"> séance </span> avec tes exercices types.
+                      Réalise une <span className=" font-bold"> séance </span>{" "}
+                      <span className=" italic">Upper A/B</span> ou <span className=" italic">Lower</span> avec tes
+                      exercices types personnalisés.
                     </p>
                   </div>
                   <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
@@ -86,8 +88,8 @@ export function HomePage() {
                   strokeWidth={1.5}
                 />
                 <p className="tab tab-whishlist block text-sm dark:text-gray-900">
-                  Regarde ta progression sur ton <span className=" font-bold"> profile </span> et obtient de nouveaux
-                  trophées.
+                  Consulte ton <span className=" font-bold"> profile </span> pour voir tes statistiques et tes derniers
+                  trophées obtenus.
                 </p>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
@@ -97,7 +99,7 @@ export function HomePage() {
               className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-inner"
               to="/history"
             >
-              <div className=" flex items-center gap-4 pl-4">
+              <div className="flex h-14 items-center gap-4 pl-4">
                 <LucideHistory
                   color="rgb(107 114 128)"
                   className=" group-hover:stroke-teal-500"
@@ -106,8 +108,7 @@ export function HomePage() {
                   strokeWidth={1.5}
                 />
                 <p className="tab tab-whishlist block text-sm dark:text-gray-900">
-                  Retrouve toutes tes<span className=" font-bold"> séances </span> avec les détails sur chaque exercice.
-                  trophées.
+                  Retrouve une séance à l'aide de ton <span className=" font-bold"> historique</span>.
                 </p>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
