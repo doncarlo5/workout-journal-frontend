@@ -49,6 +49,7 @@ const SignupPage = () => {
       navigate("/")
     } catch (error: any) {
       console.log(error)
+      setIsLoading(false)
       setError(error.response.data.message)
       setTimeout(() => {
         setError("")
