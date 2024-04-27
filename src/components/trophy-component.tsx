@@ -1,11 +1,11 @@
-import React from "react"
+import { LucideTrophy } from "lucide-react"
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion"
 
 function TrophyComponent() {
   return (
-    <div className=" mt-5">
-      <Accordion type="single" collapsible className="w-full">
+    <div className=" mt-5 w-2/3">
+      <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
           <AccordionTrigger>Overhead Press - 10 reps</AccordionTrigger>
           <AccordionContent>
@@ -118,6 +118,14 @@ function TrophyComponent() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+      <div>
+        <div className=" mt-10 flex items-center justify-center ">
+          <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-3xl  border-2 border-dotted border-gray-200 dark:border-gray-800">
+            <LucideTrophy strokeWidth={1} size={25} className="text-gray-300 dark:text-gray-400" />
+            <span className="text-xs  italic text-gray-300 dark:text-gray-400">À venir...</span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
