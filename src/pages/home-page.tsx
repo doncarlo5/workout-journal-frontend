@@ -27,7 +27,7 @@ export function HomePage() {
           </div>
           <div className=" flex max-w-sm flex-col gap-3  ">
             <Link
-              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3  shadow-inner hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none"
+              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3  hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-inner"
               to="/history"
             >
               <div className=" flex items-center gap-4 pl-4">
@@ -49,7 +49,7 @@ export function HomePage() {
 
             <NewSessionButton
               Children={
-                <div className="group flex h-[84px] w-full cursor-pointer items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none">
+                <div className="group flex h-[84px] w-full cursor-pointer items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-inner">
                   <div className=" flex items-center gap-4 pl-4">
                     <LucideBadgePlus
                       color="rgb(107 114 128)"
@@ -74,7 +74,7 @@ export function HomePage() {
             />
 
             <Link
-              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none"
+              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-inner"
               to="/profile"
             >
               <div className=" flex items-center gap-4 pl-4">
@@ -94,7 +94,7 @@ export function HomePage() {
               <LucideArrowRight className=" inline-block" color="rgb(107 114 128)" height={40} width={80} />
             </Link>
             <Link
-              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none"
+              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-inner"
               to="/history"
             >
               <div className=" flex items-center gap-4 pl-4">
