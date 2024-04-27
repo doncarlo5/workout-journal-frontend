@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
+import { LucideLoader2 } from "lucide-react"
 import { Area, AreaChart, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 import myApi from "@/lib/api-handler"
 
 function BodyWeightChart() {
   const [session, setSession] = useState([] as any[])
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchUserSessions = async () => {
     try {
@@ -13,6 +15,7 @@ function BodyWeightChart() {
       console.log("👋 response data", response.data)
       setSession(response.data)
       console.log("👋 session", session)
+      setIsLoading(false)
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -28,7 +31,16 @@ function BodyWeightChart() {
   }, [])
   return (
     <>
-      {session.length === 0 && (
+      {isLoading && (
+        <main className="flex flex-1 items-center justify-center">
+          <div className="container flex flex-col items-center justify-center p-20">
+            <div className="">
+              <LucideLoader2 className=" animate-spin " size={32} />
+            </div>
+          </div>
+        </main>
+      )}
+      {session.length === 0 && !isLoading && (
         <div className="mt-5 text-center">
           <p>En attente de nouvelles séances...</p>
         </div>
