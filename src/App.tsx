@@ -1,6 +1,7 @@
 // import SessionPage from "./pages/session-page"
 import { Route, Routes } from "react-router-dom"
 
+import SettingsPage from "./components/settings-page"
 import { ThemeProvider } from "./components/theme-provider"
 import DoExercisePage from "./pages/do-exercise-page"
 import ErrorBoundary from "./pages/error-boundary"
@@ -15,6 +16,8 @@ import OneType from "./pages/one-type"
 import ProfilePage from "./pages/profile-page"
 import SignupPage from "./pages/signup-page"
 import StatsPage from "./pages/stats-page"
+import TimerPage from "./pages/timer-page"
+import TrophyPage from "./pages/trophy-page"
 import TypesList from "./pages/types-list"
 import WelcomePage from "./pages/welcome-page"
 import IsAuthenticated from "./routing/is-authenticated"
@@ -44,8 +47,11 @@ function App() {
               <Route path="/type" element={<TypesList />} />
               <Route path="/type/:typeId" element={<OneType />} />
               <Route path="/type/new-type" element={<NewType />} />
-              <Route path="/stats" element={<StatsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/stats" element={<StatsPage />} />
+              <Route path="/profile/trophy" element={<TrophyPage />} />
+              <Route path="/profile/timer" element={<TimerPage />} />
+              <Route path="/profile/settings" element={<SettingsPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
