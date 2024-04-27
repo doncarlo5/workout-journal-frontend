@@ -11,13 +11,18 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
       return (
         <div className="flex ">
           <div className=" items-center justify-center">
-            <p className="flex select-none  justify-center">Go !</p>
-            <button
-              className="mt-2 rounded-xl bg-slate-100 px-6 py-0.5 text-slate-600 hover:bg-slate-200"
-              onClick={() => setKey((prevKey) => prevKey + 1)}
-            >
-              Restart
-            </button>
+            <p className="flex select-none  justify-center text-3xl font-black tracking-tighter">GO !</p>
+          </div>
+        </div>
+      )
+    }
+    if (Number.isNaN(remainingTime)) {
+      return (
+        <div className="flex ">
+          <div className="flex items-center justify-center">
+            <p className="flex w-3/4 select-none  justify-center text-center font-semibold tracking-tighter">
+              En attente de secondes...
+            </p>
           </div>
         </div>
       )
@@ -67,7 +72,7 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
             className="group flex h-12 w-28 cursor-pointer items-center justify-center rounded-xl bg-[#D19F55] px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:bg-[#D19F55] hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
             onClick={() => setIsTimerPlaying(true)}
           >
-            <LucidePlay className="h-6 w-6 transition ease-in-out group-hover:scale-110" />
+            <LucidePlay className="h-6 w-6 stroke-white transition ease-in-out group-hover:scale-110" />
           </button>
         )}
       </div>
