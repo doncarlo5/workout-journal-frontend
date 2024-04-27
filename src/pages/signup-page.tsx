@@ -8,7 +8,7 @@ const SignupPage = () => {
   return (
     <div className=" mx-auto">
       <Navbar />
-      <main className="flex flex-1 flex-col items-center justify-center">
+      <main className="flex flex-1 flex-col items-center justify-center pb-5">
         <Tabs
           defaultValue="login"
           className="container flex flex-col items-center justify-center gap-4 px-10  pt-20 md:px-6"
