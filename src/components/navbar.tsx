@@ -4,18 +4,16 @@ import {
   LucideCircleUser,
   LucideHistory,
   LucideHome,
-  LucideLineChart,
   LucidePencilRuler,
   LucideRocket,
 } from "lucide-react"
 import { NavLink } from "react-router-dom"
 
-import { ModeToggle } from "./mode-toggle"
 import NewSessionButton from "./new-session-button"
 
 function Navbar() {
   const { isLoggedIn } = useAuth()
-  const activeLink = "text-teal-500"
+  const activeLink = "text-teal-500 stroke-[5px]"
   const inactiveLink = ""
 
   return (
@@ -39,7 +37,7 @@ function Navbar() {
                   }
                   to="/welcome"
                 >
-                  <LucideHome className="mb-1 inline-block" size={24} />
+                  <LucideHome strokeWidth={1.5} className="mb-1 inline-block" size={24} />
                   <span className="tab tab-whishlist block text-xs">Home</span>
                 </NavLink>
                 <NavLink
@@ -63,7 +61,7 @@ function Navbar() {
                   to="/profile"
                 >
                   <LucideCircleUser className="mb-1 inline-block" size={24} />
-                  <span className="tab tab-whishlist block text-xs">Profile</span>
+                  <span className="tab tab-whishlist block text-xs">Profil</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
@@ -72,7 +70,7 @@ function Navbar() {
                   }
                   to="/type"
                 >
-                  <LucidePencilRuler className="mb-1 inline-block" size={24} />
+                  <LucidePencilRuler strokeWidth={1.8} className="mb-1 inline-block" size={24} />
                   <span className="tab tab-whishlist block text-xs">Types</span>
                 </NavLink>
                 <NavLink
@@ -80,10 +78,10 @@ function Navbar() {
                     (isActive ? activeLink : inactiveLink) +
                     " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
                   }
-                  to="/stats"
+                  to="/"
                 >
-                  <LucideLineChart className="mb-1 inline-block" size={24} />
-                  <span className="tab tab-whishlist block text-xs">Stats</span>
+                  <LucideHome className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Home</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
