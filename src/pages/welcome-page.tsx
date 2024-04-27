@@ -1,7 +1,15 @@
-import { ModeToggle } from "@/components/mode-toggle"
+import { Moon, Sun } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
+import { useTheme } from "@/components/theme-provider"
 
 export function HomePage() {
+  const { theme, setTheme } = useTheme()
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light")
+  }
   return (
     <div className="flex h-screen flex-col">
       <Navbar />
@@ -20,7 +28,18 @@ export function HomePage() {
             <div className="h-[0.05rem] w-1/4 rounded-lg bg-gray-900 dark:bg-gray-800"></div>
           </div>
           <div className=" flex ">
-            <ModeToggle />
+            <Button variant={"outline"} className="px-8 py-5" onClick={toggleTheme}>
+              {theme === "light" ? (
+                <>
+                  <Moon strokeWidth={1.1} size={30} />
+                </>
+              ) : (
+                <>
+                  <Sun strokeWidth={1.1} size={30} />
+                </>
+              )}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
           </div>
         </div>
       </main>

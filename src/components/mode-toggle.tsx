@@ -12,7 +12,7 @@ export function ModeToggle() {
   }
 
   return (
-    <Button className=" shadow-none group-hover:bg-transparent" onClick={toggleTheme}>
+    <Button onClick={toggleTheme}>
       {theme === "light" ? (
         <>
           <Moon size={32} />
