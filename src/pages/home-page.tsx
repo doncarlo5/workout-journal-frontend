@@ -1,6 +1,6 @@
+import { LucideArrowRight, LucideBadgePlus, LucideCircleUser, LucideHistory, LucidePencilRuler } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import NewSessionButton from "@/components/new-session-button"
 
@@ -25,24 +25,94 @@ export function HomePage() {
               Jette un oeil à tes exercices réalisés ou lance une nouvelle séance.
             </p>
           </div>
-
-          <div className="mt-5 flex gap-4">
-            <Link className="w-[150px]" to="/history">
-              <Button variant="secondary" className="w-full">
-                Exercices réalisés
-              </Button>
+          <div className=" flex max-w-sm flex-col gap-3  ">
+            <Link
+              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none"
+              to="/type"
+            >
+              <div className=" flex items-center gap-4 pl-4">
+                <LucidePencilRuler
+                  color="rgb(107 114 128)"
+                  className=" group-hover:stroke-teal-500"
+                  height={40}
+                  width={80}
+                  strokeWidth={1.5}
+                />
+                <p className="tab tab-whishlist block text-sm">
+                  Créer un <span className=" font-bold"> exercice type </span> avec un temps de repos et des objectifs
+                  de répétitions.
+                </p>
+              </div>
+              <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
+              <LucideArrowRight className=" inline-block" color="rgb(107 114 128)" height={40} width={80} />
             </Link>
-          </div>
-          <div className="flex gap-4">
-            <Button className="group w-[150px]">
-              <NewSessionButton
-                Children={
-                  <div className=" cursor-pointer justify-center text-center focus:text-teal-500 group-hover:text-teal-500">
-                    <span className="">Nouvelle séance</span>
+
+            <NewSessionButton
+              Children={
+                <div className="group flex h-20 w-full cursor-pointer items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none">
+                  <div className=" flex items-center gap-4 pl-4">
+                    <LucideBadgePlus
+                      color="rgb(107 114 128)"
+                      className=" group-hover:stroke-teal-500"
+                      height={40}
+                      width={80}
+                      strokeWidth={1.5}
+                    />
+                    <p className="tab tab-whishlist block text-sm">
+                      Réalise une nouvelle<span className=" font-bold"> séance </span> avec tes exercices types.
+                    </p>
                   </div>
-                }
-              ></NewSessionButton>{" "}
-            </Button>
+                  <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
+                  <LucideArrowRight
+                    className="inline-block group-hover:stroke-teal-500"
+                    color="rgb(107 114 128)"
+                    height={40}
+                    width={80}
+                  />
+                </div>
+              }
+            />
+
+            <Link
+              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none"
+              to="/profile"
+            >
+              <div className=" flex items-center gap-4 pl-4">
+                <LucideCircleUser
+                  color="rgb(107 114 128)"
+                  className=" group-hover:stroke-teal-500"
+                  height={40}
+                  width={80}
+                  strokeWidth={1.5}
+                />
+                <p className="tab tab-whishlist block text-sm">
+                  Regarde ta progression sur ton <span className=" font-bold"> profile </span> et obtient de nouveaux
+                  trophées.
+                </p>
+              </div>
+              <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
+              <LucideArrowRight className=" inline-block" color="rgb(107 114 128)" height={40} width={80} />
+            </Link>
+            <Link
+              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none"
+              to="/history"
+            >
+              <div className=" flex items-center gap-4 pl-4">
+                <LucideHistory
+                  color="rgb(107 114 128)"
+                  className=" group-hover:stroke-teal-500"
+                  height={40}
+                  width={80}
+                  strokeWidth={1.5}
+                />
+                <p className="tab tab-whishlist block text-sm">
+                  Retrouve toutes tes<span className=" font-bold"> séances </span> avec les détails sur chaque exercice.
+                  trophées.
+                </p>
+              </div>
+              <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
+              <LucideArrowRight className=" inline-block" color="rgb(107 114 128)" height={40} width={80} />
+            </Link>
           </div>
         </div>
       </main>
