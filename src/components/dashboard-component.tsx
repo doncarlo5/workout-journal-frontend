@@ -16,10 +16,11 @@ function DashboardComponent() {
   return (
     <div className="mt-10 h-4/5">
       <div className="grid h-4/5 grid-cols-2 grid-rows-3 gap-10 ">
-        <Button variant={"outline"} asChild className=" h-24 w-40">
+        <Button variant={"outline"} asChild className=" h-24">
           <Link to="/profile/stats">
             <div className="flex  flex-col items-center justify-center gap-1">
               <LucideLineChart strokeWidth={1.1} size={40} />
+              Stats
             </div>
           </Link>
         </Button>
@@ -27,6 +28,7 @@ function DashboardComponent() {
           <Link to="/profile/trophy">
             <div className="flex  flex-col items-center justify-center gap-1">
               <LucideTrophy strokeWidth={1.1} size={40} />
+              Trophées
             </div>
           </Link>
         </Button>
@@ -34,6 +36,7 @@ function DashboardComponent() {
           <Link to="/profile/timer">
             <div className="flex  flex-col items-center justify-center gap-1">
               <LucideTimer strokeWidth={1.1} size={40} />
+              Timer
             </div>
           </Link>
         </Button>
@@ -41,23 +44,27 @@ function DashboardComponent() {
           <Link to="/profile/settings">
             <div className="flex  flex-col items-center justify-center gap-1">
               <LucideUserRoundCog strokeWidth={1.1} size={40} />
+              Modifier
             </div>
           </Link>
         </Button>
         <Button variant={"outline"} className=" h-24" onClick={toggleTheme}>
           {theme === "light" ? (
-            <>
+            <div className="flex flex-col gap-1">
               <Moon strokeWidth={1.1} size={40} />
-            </>
+              Dark
+            </div>
           ) : (
-            <>
+            <div className="flex flex-col gap-1">
               <Sun strokeWidth={1.1} size={40} />
-            </>
+              Light
+            </div>
           )}
           <span className="sr-only">Toggle theme</span>
         </Button>
-        <Button variant={"outline"} onClick={handleLogout} className="group h-24">
+        <Button variant={"outline"} onClick={handleLogout} className="flex h-24 flex-col gap-1">
           <LucideLogOut strokeWidth={1.1} size={40} />
+          Déconnexion
         </Button>
       </div>
     </div>
