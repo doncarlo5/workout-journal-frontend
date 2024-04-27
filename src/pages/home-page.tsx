@@ -27,7 +27,7 @@ export function HomePage() {
           </div>
           <div className=" flex max-w-sm flex-col gap-3  ">
             <Link
-              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3  hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-inner"
+              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg  hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-inner"
               to="/history"
             >
               <div className=" flex items-center gap-4 pl-4">
