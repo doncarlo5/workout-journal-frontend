@@ -2,9 +2,6 @@ import { ChevronLeft } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import BodyWeightChart from "@/components/body-weight-chart"
-import ExerciseChart from "@/components/exercise-chart"
 import { Navbar } from "@/components/navbar"
 import TrophyComponent from "@/components/trophy-component"
 

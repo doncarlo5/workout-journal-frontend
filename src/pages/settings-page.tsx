@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import useAuth from "@/context/use-auth"
-import { ChevronLeft, LucideLogOut } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
 
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
-import { useToast } from "./ui/use-toast"
+import { Button } from "../components/ui/button"
+import { Input } from "../components/ui/input"
+import { Label } from "../components/ui/label"
+import { useToast } from "../components/ui/use-toast"
 
 function SettingsPage() {
   const { toast } = useToast()

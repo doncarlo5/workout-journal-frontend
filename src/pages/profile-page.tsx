@@ -1,11 +1,7 @@
-import { useState } from "react"
 import useAuth from "@/context/use-auth"
 
-import { useToast } from "@/components/ui/use-toast"
 import DashboardComponent from "@/components/dashboard-component"
 import { Navbar } from "@/components/navbar"
-
-import myApi from "../lib/api-handler"
 
 const ProfilePage = () => {
   const { user } = useAuth()
