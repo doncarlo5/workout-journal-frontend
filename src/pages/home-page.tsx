@@ -25,7 +25,7 @@ export function HomePage() {
               Jette un oeil à tes exercices réalisés ou lance une nouvelle séance.
             </p>
           </div>
-          <div className=" flex max-w-sm flex-col gap-3  ">
+          <div className=" flex max-w-sm flex-col justify-around gap-2  ">
             <Link
               className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg  hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-inner"
               to="/history"
