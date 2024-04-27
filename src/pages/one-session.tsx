@@ -4,7 +4,14 @@ import { CalendarIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
-import { ChevronLeft, LucideArrowBigLeftDash, LucideCheckCircle, LucideLoader2, LucidePlusCircle } from "lucide-react"
+import {
+  ChevronLeft,
+  LucideArrowBigLeftDash,
+  LucideCheckCircle,
+  LucideLoader2,
+  LucidePlusCircle,
+  LucideTrash,
+} from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -279,37 +286,38 @@ const OneSession = () => {
                 {formState.is_done ? "Séance terminée" : "Séance en cours..."}
               </Label>
             </div>
-            {formState.is_done ? (
-              <Button className="col-span-2 w-full" type="submit">
-                <LucideCheckCircle className="mr-2 size-5" />
-                Valider la séance
-              </Button>
-            ) : (
-              <Button className="col-span-2 w-full" type="submit">
-                <LucideArrowBigLeftDash className="mr-2 size-5" />
-                Finir plus tard...
-              </Button>
-            )}
-
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="destructive" className="col-span-2 mb-5 w-full">
-                  Supprimer
+            <div className=" col-span-2 flex gap-2 pb-5">
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant={"outline"} className="flex-none">
+                    <LucideTrash size={20} />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="w-10/12 rounded-md">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Supprimer cette séance ?</AlertDialogTitle>
+                    <AlertDialogDescription>Les exercices seront également supprimés.</AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Annuler</AlertDialogCancel>
+                    <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
+                      Confirmer
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+              {formState.is_done ? (
+                <Button className="col-span-3 w-full" type="submit">
+                  <LucideCheckCircle className="mr-2 size-5" />
+                  Valider la séance
                 </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className=" w-10/12">
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Supprimer cette séance ?</AlertDialogTitle>
-                  <AlertDialogDescription>Les exercices seront également supprimés.</AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Annuler</AlertDialogCancel>
-                  <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
-                    Confirmer
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+              ) : (
+                <Button className="col-span-3 w-full" type="submit">
+                  <LucideArrowBigLeftDash className="mr-2 size-5" />
+                  Finir plus tard...
+                </Button>
+              )}
+            </div>
           </form>
         </div>
       </div>
