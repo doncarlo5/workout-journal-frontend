@@ -107,22 +107,24 @@ const SignupComponent = () => {
                 autoComplete="on"
               />
             </div>
-            {isLoading ? (
-              <Button disabled className="w-full">
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                Chargement
-              </Button>
-            ) : (
-              <Button className="w-full" type="submit">
-                Inscription
-              </Button>
-            )}
-            {error && (
-              <Alert variant="destructive">
-                <AlertTitle>Erreur</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+            <div className=" mb-5">
+              {isLoading ? (
+                <Button disabled className="w-full">
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  Chargement
+                </Button>
+              ) : (
+                <Button className="w-full" type="submit">
+                  Inscription
+                </Button>
+              )}
+              {error && (
+                <Alert variant="destructive">
+                  <AlertTitle>Erreur</AlertTitle>
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+            </div>
           </div>
         </div>
       </form>
