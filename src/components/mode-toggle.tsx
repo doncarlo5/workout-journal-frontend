@@ -12,15 +12,15 @@ export function ModeToggle() {
   }
 
   return (
-    <Button variant={"outline"} onClick={toggleTheme}>
+    <Button className=" shadow-none group-hover:bg-transparent" onClick={toggleTheme}>
       {theme === "light" ? (
         <>
-          <Moon className=" inline-block transition-all dark:rotate-0 dark:scale-100" size={16} />
+          <Moon size={32} />
           {/* <span className="tab tab-home block select-none text-xs">Dark</span> */}
         </>
       ) : (
         <>
-          <Sun className=" inline-block " size={16} />
+          <Sun size={32} />
           {/* <span className="tab tab-home block select-none text-xs  ">Light</span> */}
         </>
       )}
