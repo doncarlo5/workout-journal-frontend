@@ -27,8 +27,8 @@ export function HomePage() {
           </div>
           <div className=" flex max-w-sm flex-col gap-3  ">
             <Link
-              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none"
-              to="/type"
+              className="group flex w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3  shadow-inner hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none"
+              to="/history"
             >
               <div className=" flex items-center gap-4 pl-4">
                 <LucidePencilRuler
@@ -38,7 +38,7 @@ export function HomePage() {
                   width={80}
                   strokeWidth={1.5}
                 />
-                <p className="tab tab-whishlist block text-sm">
+                <p className="tab tab-whishlist block text-sm dark:text-gray-900  ">
                   Créer un <span className=" font-bold"> exercice type </span> avec un temps de repos et des objectifs
                   de répétitions.
                 </p>
@@ -49,16 +49,16 @@ export function HomePage() {
 
             <NewSessionButton
               Children={
-                <div className="group flex h-20 w-full cursor-pointer items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none">
+                <div className="group flex h-[84px] w-full cursor-pointer items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500 active:translate-y-0.5 active:shadow-none">
                   <div className=" flex items-center gap-4 pl-4">
                     <LucideBadgePlus
                       color="rgb(107 114 128)"
-                      className=" group-hover:stroke-teal-500"
+                      className=" inline-block group-hover:stroke-teal-500"
                       height={40}
                       width={80}
                       strokeWidth={1.5}
                     />
-                    <p className="tab tab-whishlist block text-sm">
+                    <p className="tab tab-whishlist block text-sm dark:text-gray-900">
                       Réalise une nouvelle<span className=" font-bold"> séance </span> avec tes exercices types.
                     </p>
                   </div>
@@ -85,7 +85,7 @@ export function HomePage() {
                   width={80}
                   strokeWidth={1.5}
                 />
-                <p className="tab tab-whishlist block text-sm">
+                <p className="tab tab-whishlist block text-sm dark:text-gray-900">
                   Regarde ta progression sur ton <span className=" font-bold"> profile </span> et obtient de nouveaux
                   trophées.
                 </p>
@@ -105,7 +105,7 @@ export function HomePage() {
                   width={80}
                   strokeWidth={1.5}
                 />
-                <p className="tab tab-whishlist block text-sm">
+                <p className="tab tab-whishlist block text-sm dark:text-gray-900">
                   Retrouve toutes tes<span className=" font-bold"> séances </span> avec les détails sur chaque exercice.
                   trophées.
                 </p>
