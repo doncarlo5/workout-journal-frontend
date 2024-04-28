@@ -7,7 +7,7 @@ const ProfilePage = () => {
   const { user } = useAuth()
 
   return (
-    <div className=" mx-auto">
+    <div className=" pb-24">
       <Navbar />
 
       <main className="flex flex-1 flex-col items-center justify-center">
