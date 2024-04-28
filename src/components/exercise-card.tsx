@@ -11,50 +11,60 @@ function ExerciseCard({ exercise }: { exercise: any }) {
         <CardHeader className="px-4 pb-0 pt-4">
           <CardTitle className="text-lg">{exercise.type.name}</CardTitle>
         </CardHeader>
-        <CardContent className="ml-3 mt-2 px-4 pb-4">
-          <div className="mb-4 flex items-center gap-4">
-            <div className="flex w-28 items-baseline gap-1 text-2xl font-bold">
+        <CardContent className="ml-3 mt-2 px-1 pb-4">
+          <div className="mb-1 ml-1 flex items-center gap-4">
+            <div className="flex w-28 items-baseline gap-0.5 font-bold sm:text-xl md:text-2xl">
               {exercise.rep[0]}
-              <span className="text-xs font-normal text-gray-700"> REPS</span>
+              <span className="text-xs font-normal text-gray-700"> REPS </span>{" "}
+              <span className=" ml-2 font-normal"> x</span>
             </div>
-            <div className="flex w-40 items-baseline gap-1 text-2xl font-bold">
+            <div className="flex w-40 items-baseline gap-0.5 font-bold sm:text-xl md:text-2xl">
               {exercise.weight[0]}
               <span className="text-xs font-normal text-gray-700"> KG</span>
             </div>
-            <div className="flex w-40 items-center text-sm font-medium">
-              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+            <div className="flex w-40 items-center text-sm font-medium sm:text-xl md:text-base">
+              <Badge
+                className=" min-h-10 min-w-8 select-none justify-center text-xs font-light sm:text-xl "
+                variant="secondary"
+              >
                 {exercise.type.repRange1}
               </Badge>
             </div>
           </div>
-
-          <div className="mb-4 flex items-center gap-4">
-            <div className="flex w-28 items-baseline gap-1 text-2xl font-bold">
+          <div className="mb-1 ml-1 flex items-center gap-4">
+            <div className="flex w-28 items-baseline gap-0.5 font-bold sm:text-xl md:text-2xl">
               {exercise.rep[1]}
-              <span className="text-xs font-normal text-gray-700"> REPS</span>
+              <span className="text-xs font-normal text-gray-700"> REPS </span>{" "}
+              <span className=" ml-2 font-normal"> x</span>
             </div>
-            <div className="flex w-40 items-baseline gap-1 text-2xl font-bold">
+            <div className="flex w-40 items-baseline gap-0.5 font-bold sm:text-xl md:text-2xl">
               {exercise.weight[1]}
               <span className="text-xs font-normal text-gray-700"> KG</span>
             </div>
-            <div className="flex w-40 items-center text-sm font-medium">
-              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+            <div className="flex w-40 items-center text-sm font-medium sm:text-xl md:text-base">
+              <Badge
+                className=" min-h-10 min-w-8 select-none justify-center text-xs font-light sm:text-xl "
+                variant="secondary"
+              >
                 {exercise.type.repRange2}
               </Badge>
             </div>
           </div>
-
-          <div className="mb-4 flex items-center gap-4">
-            <div className="flex w-28 items-baseline gap-1 text-2xl font-bold">
+          <div className="mb-1 ml-1 flex items-center gap-4">
+            <div className="flex w-28 items-baseline gap-0.5 font-bold sm:text-xl md:text-2xl">
               {exercise.rep[2]}
-              <span className="text-xs font-normal text-gray-700"> REPS</span>
+              <span className="text-xs font-normal text-gray-700"> REPS </span>{" "}
+              <span className=" ml-2 font-normal"> x</span>
             </div>
-            <div className="flex w-40 items-baseline gap-1 text-2xl font-bold">
+            <div className="flex w-40 items-baseline gap-0.5 font-bold sm:text-xl md:text-2xl">
               {exercise.weight[2]}
               <span className="text-xs font-normal text-gray-700"> KG</span>
             </div>
-            <div className="flex w-40 items-center text-sm font-medium">
-              <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+            <div className="flex w-40 items-center text-sm font-medium sm:text-xl md:text-base">
+              <Badge
+                className=" min-h-10 min-w-8 select-none justify-center text-xs font-light sm:text-xl "
+                variant="secondary"
+              >
                 {exercise.type.repRange3}
               </Badge>
             </div>
