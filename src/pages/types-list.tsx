@@ -41,9 +41,9 @@ export function TypesList() {
           <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
             <div className="text-center">
               <div className="flex flex-col items-center gap-5 text-sm text-gray-500 dark:text-gray-400">
-                <p>Aucun type d'exercice.</p>
+                <p>Aucun exercice.</p>
                 <Link className="w-[150px]" to="/type/new-type">
-                  <Button className=" w-full">Créer un type</Button>
+                  <Button className=" w-full">Créer un exercice</Button>
                 </Link>
               </div>
             </div>
