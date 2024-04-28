@@ -17,13 +17,13 @@ function Navbar() {
   const inactiveLink = ""
 
   return (
-    <header className=" w-dvw ">
+    <header className="  ">
       <div className="">
         {/* <section id="bottom-navigation" className="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"> // if shown only tablet/mobile  */}
 
         <section
           id="bottom-navigation"
-          className="fixed inset-x-1 bottom-1 z-10 m-auto block max-w-2xl rounded-xl border-t border-gray-200 bg-white bg-opacity-30  shadow backdrop-blur-lg backdrop-filter dark:border-none"
+          className="fixed inset-x-1 bottom-1 z-10 mx-auto block w-11/12  max-w-2xl rounded-xl border-t border-gray-200 bg-white bg-opacity-30 shadow backdrop-blur-lg backdrop-filter dark:border-none"
         >
           <div id="tabs" className="flex justify-between">
             {/* <ModeToggle /> */}
@@ -53,6 +53,17 @@ function Navbar() {
               </>
             ) : (
               <>
+                {" "}
+                <NavLink
+                  className={({ isActive }) =>
+                    (isActive ? activeLink : inactiveLink) +
+                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+                  }
+                  to="/"
+                >
+                  <LucideHome className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Home</span>
+                </NavLink>
                 <NavLink
                   className={({ isActive }) =>
                     (isActive ? activeLink : inactiveLink) +
@@ -71,17 +82,7 @@ function Navbar() {
                   to="/type"
                 >
                   <LucidePencilRuler strokeWidth={1.8} className="mb-1 inline-block" size={24} />
-                  <span className="tab tab-whishlist block text-xs">Types</span>
-                </NavLink>
-                <NavLink
-                  className={({ isActive }) =>
-                    (isActive ? activeLink : inactiveLink) +
-                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
-                  }
-                  to="/"
-                >
-                  <LucideHome className="mb-1 inline-block" size={24} />
-                  <span className="tab tab-whishlist block text-xs">Home</span>
+                  <span className="tab tab-whishlist block text-xs">Exercices</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
