@@ -31,7 +31,7 @@ export function TypeComponent() {
       {!isLoading && exerciseType.length !== 0 && (
         <main className="mt-2 flex flex-1 flex-col items-center justify-center pb-20">
           <div className="space-y-2 text-center">
-            <h1 className="mb-5 mt-5 text-xl font-bold">Mes types d'exercices</h1>
+            <h1 className="mb-5 mt-5 text-xl font-bold">Mes exercices</h1>
           </div>
           <div className="px-4">
             <Link to={`/type/new-type`}>
