@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, LucideClock4 } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
@@ -96,7 +96,9 @@ const NewType = () => {
         <div className="space-y-4 ">
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 px-5 pb-14">
             <div className="col-span-2 space-y-2">
-              <Label htmlFor="name">Nom</Label>
+              <Label htmlFor="name">
+                Nom <span className=" text-red-800">*</span>
+              </Label>
               <Input
                 id="name"
                 placeholder="Ex: Développé couché - Haltères"
@@ -105,9 +107,10 @@ const NewType = () => {
                 required
               />
             </div>
-
             <div className="space-y-2">
-              <Label htmlFor="">Type de séance :</Label>
+              <Label htmlFor="">
+                Type de séance <span className=" text-red-800">*</span>
+              </Label>
               <RadioGroup
                 required
                 onValueChange={handleRadioChange}
@@ -128,66 +131,74 @@ const NewType = () => {
                 </div>
               </RadioGroup>
             </div>
-
             <div className="space-y-2"></div>
-
             <div className="space-y-2">
-              <Label htmlFor="timer">{`Timer (en s)`}</Label>
+              <Label className="" htmlFor="timer">
+                Temps de repos {`(en secondes)`}
+                <span className=" text-red-800"> *</span>
+              </Label>
               <Input
                 required
                 id="timer"
-                placeholder="Ex: 120"
+                placeholder="Ex: 120 s"
                 value={formState.timer}
                 onChange={handleChange}
                 type="number"
               />
             </div>
             <div className="space-y-2"></div>
+            <div className=" col-span-2 space-y-2 rounded-md bg-gray-50 p-5">
+              <h2 className="col-span-2 text-lg font-medium">Objectif Répétitions</h2>
 
-            <div className="space-y-2">
-              <Label htmlFor="repRange1">Rep Range 1</Label>
-              <Input
-                required
-                id="repRange1"
-                placeholder="4-6"
-                value={formState.repRange1}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
-            <div className="space-y-2"></div>
-            <div className="space-y-2">
-              <Label htmlFor="repRange2">Rep Range 2</Label>
-              <Input
-                required
-                id="repRange2"
-                placeholder="6-8"
-                value={formState.repRange2}
-                onChange={handleChange}
-                type="text"
-              />
-            </div>
-            <div className="space-y-2"></div>
+              <div className="space-y-2">
+                <Label htmlFor="repRange1">
+                  Série 1 <span className=" text-red-800">*</span>
+                </Label>
+                <Input
+                  required
+                  id="repRange1"
+                  placeholder="4-6"
+                  value={formState.repRange1}
+                  onChange={handleChange}
+                  type="text"
+                />
+              </div>
+              <div className="space-y-2"></div>
+              <div className="space-y-2">
+                <Label htmlFor="repRange2">
+                  Série 2 <span className=" text-red-800">*</span>
+                </Label>
+                <Input
+                  required
+                  id="repRange2"
+                  placeholder="6-8"
+                  value={formState.repRange2}
+                  onChange={handleChange}
+                  type="text"
+                />
+              </div>
+              <div className="space-y-2"></div>
 
-            <div className="space-y-2">
-              <Label htmlFor="repRange3">Rep Range 3</Label>
-              <Input
-                required
-                id="repRange3"
-                placeholder="8-10"
-                value={formState.repRange3}
-                onChange={handleChange}
-                type="text"
-              />
+              <div className="space-y-2">
+                <Label htmlFor="repRange3">
+                  Série 3 <span className=" text-red-800">*</span>
+                </Label>
+                <Input
+                  required
+                  id="repRange3"
+                  placeholder="8-10"
+                  value={formState.repRange3}
+                  onChange={handleChange}
+                  type="text"
+                />
+              </div>
             </div>
-
             <div className="grid grid-flow-col grid-rows-3"></div>
-
             <div className="col-span-2 resize space-y-2">
-              <Label htmlFor="advice">Conseil {`(optionnel)`}</Label>
+              <Label htmlFor="advice">Conseil / Note</Label>
               <Textarea
                 id="advice"
-                placeholder="Rétraction scapulaire, lever les fesses pour prendre la barre, etc."
+                placeholder="Rétraction scapulaire, chauffer les poignets, etc."
                 value={formState.advice}
                 onChange={handleChange}
                 maxLength={200}
