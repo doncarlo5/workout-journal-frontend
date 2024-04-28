@@ -106,7 +106,7 @@ const OneSession = () => {
         type_session: formState.type_session,
         body_weight: formState.body_weight,
         exercise_user_list: formState.exercise_user_list,
-        is_done: formState.is_done,
+        is_done: true,
         comment: formState.comment,
       })
       console.log("👋 response", response)
@@ -164,7 +164,7 @@ const OneSession = () => {
   return (
     <>
       <Navbar />
-      <div className="mx-auto max-w-sm space-y-6 p-4">
+      <div className=" container mx-auto max-w-md ">
         <div className="flex items-center space-y-2 text-left">
           <Link to="/history">
             <Button variant="outline" size="icon">
@@ -272,7 +272,7 @@ const OneSession = () => {
               />
             </div>
 
-            <div className="col-span-2 flex items-center justify-between rounded-lg border p-3 shadow-sm">
+            {/* <div className="col-span-2 flex items-center justify-between rounded-lg border p-3 shadow-sm">
               <Checkbox
                 defaultChecked={formState.is_done}
                 checked={formState.is_done}
@@ -285,7 +285,7 @@ const OneSession = () => {
               >
                 {formState.is_done ? "Séance terminée" : "Séance en cours..."}
               </Label>
-            </div>
+            </div> */}
             <div className=" col-span-2 flex gap-2 pb-5">
               <AlertDialog>
                 <AlertDialogTrigger asChild>
@@ -306,17 +306,10 @@ const OneSession = () => {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-              {formState.is_done ? (
-                <Button className="col-span-3 w-full" type="submit">
-                  <LucideCheckCircle className="mr-2 size-5" />
-                  Valider la séance
-                </Button>
-              ) : (
-                <Button className="col-span-3 w-full" type="submit">
-                  <LucideArrowBigLeftDash className="mr-2 size-5" />
-                  Finir plus tard...
-                </Button>
-              )}
+              <Button className="col-span-3 w-full" type="submit">
+                <LucideCheckCircle className="mr-2 size-5" />
+                Valider la séance
+              </Button>
             </div>
           </form>
         </div>
