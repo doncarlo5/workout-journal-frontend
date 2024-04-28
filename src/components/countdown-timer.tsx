@@ -8,6 +8,9 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     if (remainingTime === 0) {
+      const ding = new Audio("/public/ding.mp3")
+      ding.currentTime = 0
+      ding.play()
       return (
         <div className="flex ">
           <div className=" items-center justify-center">
@@ -16,6 +19,7 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
         </div>
       )
     }
+
     if (Number.isNaN(remainingTime)) {
       return (
         <div className="flex ">
@@ -49,11 +53,16 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
     <div className="flex justify-center gap-8">
       <div className="mb-4">
         <CountdownCircleTimer
+          isSmoothColorTransition={true}
+          isGrowing={true}
+          rotation="counterclockwise"
+          trailColor="#F5F5F5"
           key={key}
+          size={170}
+          strokeWidth={17}
           isPlaying={isTimerPlaying}
           duration={exerciseTypeTimer}
-          colors={["#D19F55", "#B99C70", "#B99C70"]}
-          colorsTime={[30, 10, 7]}
+          colors={{ 0: "#D19F55" }}
           onComplete={() => ({ shouldRepeat: false, delay: 1, newInitialRemainingTime: exerciseTypeTimer })}
         >
           {renderTime}
@@ -62,14 +71,14 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
       <div className="flex items-center justify-center pb-3">
         {isTimerPlaying ? (
           <button
-            className="flex h-12 w-28 cursor-pointer items-center justify-center rounded-xl bg-orange-100 px-6 py-0.5 text-orange-600 shadow-none transition-shadow duration-300 hover:bg-orange-500 hover:text-[#FFF] hover:shadow-lg  active:translate-y-0.5 active:shadow-inner "
+            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-[#BF8734] px-6 py-0.5 text-[#FFF] shadow-none transition-shadow  duration-300 hover:shadow-lg  active:translate-y-0.5 active:shadow-inner "
             onClick={() => restartFunction()}
           >
             <LucideRotateCcw className="h-6 w-6" />
           </button>
         ) : (
           <button
-            className="group flex h-12 w-28 cursor-pointer items-center justify-center rounded-xl bg-[#D19F55] px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:bg-[#D19F55] hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
+            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-[#D19F55] px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:bg-[#D19F55] hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
             onClick={() => setIsTimerPlaying(true)}
           >
             <LucidePlay className="h-6 w-6 stroke-white transition ease-in-out group-hover:scale-110" />
