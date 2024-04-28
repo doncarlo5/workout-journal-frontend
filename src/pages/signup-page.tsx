@@ -58,14 +58,14 @@ const SignupPage = () => {
   }
 
   return (
-    <div className=" mx-auto">
+    <div className="">
       <Navbar />
-      <main className="flex flex-1 flex-col items-center justify-center pb-5">
+      <main className="pb-24">
         <Tabs
           value={tab}
           onValueChange={onTabChange}
           defaultValue={tab}
-          className="container flex flex-col items-center justify-center gap-4 px-10  pt-20 md:px-6"
+          className="container flex flex-col items-center justify-center gap-4 px-10 pt-20 md:px-6"
         >
           <TabsList className="grid w-full max-w-2xl grid-cols-2 rounded-xl ">
             <TabsTrigger value="login">Connexion</TabsTrigger>
