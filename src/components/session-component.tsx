@@ -37,7 +37,7 @@ export function SessionComponent() {
     <>
       {" "}
       {!isLoading && session.length !== 0 && (
-        <main className="mt-5 flex flex-col items-center justify-center">
+        <main className="mt-5 flex flex-col items-center justify-center ">
           <div>
             <Table>
               <TableCaption>Liste de tes séances passées</TableCaption>
@@ -47,8 +47,7 @@ export function SessionComponent() {
                   <TableHead></TableHead>
                   <TableHead>Date</TableHead>
                   <TableHead>Type</TableHead>
-                  <TableHead>Nbr d'ex.</TableHead>
-                  <TableHead>Kg</TableHead>
+                  <TableHead>Nbr</TableHead>
                   <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
@@ -77,7 +76,6 @@ export function SessionComponent() {
                     <TableCell>{formatDate(oneSession.date_session)}</TableCell>
                     <TableCell>{oneSession.type_session}</TableCell>
                     <TableCell className=" text-center">{oneSession.exercise_user_list.length}</TableCell>
-                    <TableCell className=" text-center">{oneSession.body_weight}</TableCell>
                     <TableCell className="w-10 items-center justify-center">
                       <LucideArrowRight className="  text-slate-300 group-hover:text-slate-900" size={18} />{" "}
                     </TableCell>
