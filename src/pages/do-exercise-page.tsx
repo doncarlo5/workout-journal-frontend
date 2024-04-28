@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { ReloadIcon } from "@radix-ui/react-icons"
 import { ChevronLeft, LucideInfo } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -18,6 +19,7 @@ const DoExercisePage = () => {
   const [lastExercise, setLastExercise] = useState(null as any)
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
   const [session, setSession] = useState<any>({})
+  const [isLoading, setIsLoading] = useState(false)
 
   const [formState, setFormState] = useState({
     rep1: lastExercise?.rep[0] || "",
@@ -172,8 +174,8 @@ const DoExercisePage = () => {
           </div>
         )}
         {oneExerciseType ? (
-          <div className="space-y-4">
-            <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-4">
+          <div className="">
+            <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-1">
               <div className="space-y-2">
                 <Label htmlFor="rep1">Rep 1</Label>
                 <Input
@@ -196,9 +198,12 @@ const DoExercisePage = () => {
                   type="number"
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="repRange1">Rep Range 1</Label>
-                <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+              <div className="select-none space-y-2 text-center">
+                <Label htmlFor="repRange1">Série 1</Label>
+                <Badge
+                  className=" min-h-9 min-w-28 select-none justify-center text-lg font-light text-gray-500 "
+                  variant="secondary"
+                >
                   {oneExerciseType?.repRange1}
                 </Badge>
               </div>
@@ -224,9 +229,12 @@ const DoExercisePage = () => {
                   type="number"
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="repRange1">Rep Range 2</Label>
-                <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+              <div className="select-none space-y-2 text-center">
+                <Label htmlFor="repRange1">Série 2</Label>
+                <Badge
+                  className=" min-h-9 min-w-28 select-none justify-center text-lg font-light text-gray-500  "
+                  variant="secondary"
+                >
                   {oneExerciseType?.repRange2}
                 </Badge>
               </div>
@@ -252,9 +260,12 @@ const DoExercisePage = () => {
                   type="number"
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="repRange1">Rep Range 3</Label>
-                <Badge className=" min-h-9 min-w-28 select-none justify-center text-lg font-light " variant="secondary">
+              <div className="select-none space-y-2 text-center">
+                <Label htmlFor="repRange1">Série 3</Label>
+                <Badge
+                  className="min-h-9 min-w-28 select-none justify-center text-lg font-light text-gray-500 "
+                  variant="secondary"
+                >
                   {oneExerciseType?.repRange3}
                 </Badge>
               </div>
@@ -268,9 +279,18 @@ const DoExercisePage = () => {
                   maxLength={200}
                 />
               </div>
-              <Button className="col-span-3 mb-5 w-full" type="submit">
-                Valider
-              </Button>
+              <div className=" col-span-3 pb-5 pt-3">
+                {isLoading ? (
+                  <Button disabled className="w-full">
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                    Chargement
+                  </Button>
+                ) : (
+                  <Button className="w-full" type="submit">
+                    Valider
+                  </Button>
+                )}
+              </div>
             </form>
           </div>
         ) : (
