@@ -99,6 +99,7 @@ const DoExercisePage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      setIsLoading(true)
       const response = await myApi.post("/api/exercise-user", {
         type: oneExerciseType._id,
         rep: [formState.rep1, formState.rep2, formState.rep3],
@@ -116,6 +117,7 @@ const DoExercisePage = () => {
 
       navigate(`/history/session/${sessionId}`)
     } catch (error: any) {
+      setIsLoading(false)
       console.log(error)
     }
   }
