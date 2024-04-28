@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { CheckedState } from "@radix-ui/react-checkbox"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
-import {
-  ChevronLeft,
-  LucideArrowBigLeftDash,
-  LucideCheckCircle,
-  LucideLoader2,
-  LucidePlusCircle,
-  LucideTrash,
-} from "lucide-react"
+import { ChevronLeft, LucideCheckCircle, LucideLoader2, LucidePlusCircle, LucideTrash } from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -29,7 +21,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -143,9 +134,9 @@ const OneSession = () => {
     }
   }
 
-  const handleCheckboxChange: (isChecked: CheckedState) => void = (isChecked) => {
-    setFormState({ ...formState, is_done: Boolean(isChecked) })
-  }
+  // const handleCheckboxChange: (isChecked: CheckedState) => void = (isChecked) => {
+  //   setFormState({ ...formState, is_done: Boolean(isChecked) })
+  // }
 
   const handleSelectWeight = (event: React.FormEvent<HTMLInputElement>) => {
     const { target } = event
