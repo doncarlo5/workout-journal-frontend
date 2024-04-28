@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, LucideClock4 } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
@@ -11,29 +11,39 @@ function TimerPage() {
   const [customTimer, setCustomTimer] = useState(120)
 
   return (
-    <div className="mx-auto max-w-sm space-y-6 p-4">
-      <div className="">
-        <Navbar />
-        <main className="flex flex-1 flex-col items-center justify-center">
-          <div className="flex items-center space-y-2 text-left">
-            <Link to="/profile">
-              <Button variant="outline" size="icon">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-            </Link>
-            <div>
-              <h1 className="ml-5 py-5 text-3xl font-medium">Timer</h1>
-            </div>
+    <div className=" ">
+      <Navbar />
+      <main className="flex flex-1 flex-col items-center justify-center">
+        <div className="flex items-center space-y-2 text-left">
+          <Link to="/profile">
+            <Button variant="outline" size="icon">
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+          </Link>
+          <div>
+            <h1 className="ml-5 py-5 text-3xl font-medium">Minuteur</h1>
           </div>
+        </div>
+        <div className=" flex flex-col items-center justify-center">
           <CountDownTimer exerciseTypeTimer={customTimer} />
-          <div className=" mt-5">
-            <div className=" flex flex-col justify-center gap-3">
-              <h1 className="flex justify-center text-xl font-medium">Select Timer</h1>
-              <Input type="number" value={customTimer} onChange={(e) => setCustomTimer(parseInt(e.target.value))} />
+          <p className="mb-5 text-center text-gray-500 dark:text-gray-400 md:text-xl">Choisi ton temps en secondes</p>
+          <div className="flex">
+            <div className="relative ">
+              <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
+                <LucideClock4 className="h-5 w-5 text-gray-400" />
+              </div>
+              <Input
+                type="number"
+                value={customTimer}
+                onChange={(e) => setCustomTimer(parseInt(e.target.value))}
+                id="input-group-1"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-10 text-lg text-gray-900   dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400  "
+                placeholder="..."
+              />
             </div>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   )
 }
