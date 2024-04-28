@@ -25,7 +25,7 @@ import IsNotAuthenticated from "./routing/is-not-authenticated"
 
 function App() {
   return (
-    <div className=" px-5">
+    <div>
       <ErrorBoundary>
         <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
           <Routes>
