@@ -5,6 +5,7 @@ import {
   LucideHistory,
   LucideHome,
   LucidePencilRuler,
+  LucidePlus,
   LucideRocket,
 } from "lucide-react"
 import { NavLink } from "react-router-dom"
@@ -17,13 +18,13 @@ function Navbar() {
   const inactiveLink = ""
 
   return (
-    <header className="  ">
+    <header className="">
       <div className="">
-        {/* <section id="bottom-navigation" className="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"> // if shown only tablet/mobile  */}
+        {/* <section id="bottom-navigation" className="fixed inset-x-0 bottom-0 z-10 block bg-white shadow md:hidden"> // if shown only tablet/mobile  */}
 
         <section
           id="bottom-navigation"
-          className="fixed inset-x-1 bottom-1 z-10 mx-auto block w-11/12  max-w-2xl rounded-xl border-t border-gray-200 bg-white bg-opacity-30 shadow backdrop-blur-lg backdrop-filter dark:border-none"
+          className="fixed inset-x-1 bottom-1 z-10 mx-auto block w-11/12 max-w-2xl rounded-xl border-t border-gray-200 bg-white bg-opacity-30 shadow backdrop-blur-lg backdrop-filter dark:border-none"
         >
           <div id="tabs" className="flex justify-between">
             {/* <ModeToggle /> */}
@@ -97,8 +98,8 @@ function Navbar() {
                 <NewSessionButton
                   Children={
                     <div className="inline-block w-full cursor-pointer justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500">
-                      <LucideBadgePlus className="mb-1 inline-block" size={24} />
-                      <span className="tab tab-account block text-xs">New</span>
+                      <LucideRocket className="mb-1 inline-block" size={24} />
+                      <span className="tab tab-account block text-xs">Séance</span>
                     </div>
                   }
                 />
@@ -111,13 +112,13 @@ function Navbar() {
         <FlagIcon className="" />
         <span className="hidden text-xl font-bold ">Workout Journal</span>
       </Link> */}
-      {/* <div className=" flex">
+      {/* <div className="flex ">
         {!isLoggedIn ? (
           <nav>
-            <Link className=" rounded-lg bg-gray-100 py-3 text-sm font-medium dark:bg-gray-800" to="/signup">
+            <Link className="py-3 text-sm font-medium bg-gray-100 rounded-lg dark:bg-gray-800" to="/signup">
               S'inscrire
             </Link>
-            <Link className=" rounded-lg bg-gray-100 py-3 text-sm font-medium dark:bg-gray-800" to="/login">
+            <Link className="py-3 text-sm font-medium bg-gray-100 rounded-lg dark:bg-gray-800" to="/login">
               Se connecter
             </Link>
             <ModeToggle />
@@ -126,38 +127,38 @@ function Navbar() {
           <nav>
             <NewSessionButton />
             <Link
-              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              className="py-3 text-sm font-medium transition-shadow bg-gray-100 rounded-lg hover:shadow-sm dark:bg-gray-800"
               to="/exercises"
             >
               Mes exercices
             </Link>
             <Link
-              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              className="py-3 text-sm font-medium transition-shadow bg-gray-100 rounded-lg hover:shadow-sm dark:bg-gray-800"
               to="/sessions"
             >
               Mes séances
             </Link>
             <Link
-              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              className="py-3 text-sm font-medium transition-shadow bg-gray-100 rounded-lg hover:shadow-sm dark:bg-gray-800"
               to="/types"
             >
               Types
             </Link>
             <Link
-              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              className="py-3 text-sm font-medium transition-shadow bg-gray-100 rounded-lg hover:shadow-sm dark:bg-gray-800"
               to="/charts"
             >
               Charts
             </Link>
             <Link
-              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium transition-shadow hover:shadow-sm dark:bg-gray-800"
+              className="py-3 text-sm font-medium transition-shadow bg-gray-100 rounded-lg hover:shadow-sm dark:bg-gray-800"
               to="/settings"
             >
               Options
             </Link>
             <Link
               to="/welcome"
-              className=" rounded-lg bg-gray-100 py-3 text-sm font-medium text-black transition-shadow hover:shadow-sm dark:bg-gray-800"
+              className="py-3 text-sm font-medium text-black transition-shadow bg-gray-100 rounded-lg hover:shadow-sm dark:bg-gray-800"
               onClick={handleLogout}
             >
               ⍈
