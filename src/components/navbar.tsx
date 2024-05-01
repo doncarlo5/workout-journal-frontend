@@ -1,13 +1,5 @@
 import useAuth from "@/context/use-auth"
-import {
-  LucideBadgePlus,
-  LucideCircleUser,
-  LucideHistory,
-  LucideHome,
-  LucidePencilRuler,
-  LucidePlus,
-  LucideRocket,
-} from "lucide-react"
+import { LucideCircleUser, LucideHistory, LucideHome, LucidePencilRuler, LucideRocket } from "lucide-react"
 import { NavLink } from "react-router-dom"
 
 import NewSessionButton from "./new-session-button"

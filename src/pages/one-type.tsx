@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { ReloadIcon, UpdateIcon } from "@radix-ui/react-icons"
+import { UpdateIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
-import { ChevronLeft, Edit, LucideLoader2, LucideTrash, Trash } from "lucide-react"
+import { ChevronLeft, Edit, LucideLoader2, LucideTrash } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import {

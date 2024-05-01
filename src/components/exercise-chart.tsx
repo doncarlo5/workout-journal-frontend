@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 function ExerciseChart() {
   const [exercise, setExercise] = useState([] as any[])
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
-  const [isSelected, setIsSelected] = useState(false)
+  // const [isSelected, setIsSelected] = useState(false)
 
   const fetchAllExerciseTypes = async () => {
     try {
@@ -29,7 +29,7 @@ function ExerciseChart() {
   }, [])
 
   const AllExercisesTypeChange = async (value: any) => {
-    setIsSelected(true)
+    // setIsSelected(true)
     const response = await myApi.get(`/api/exercise-user?limit=1000&sort=createdAt&type=${value._id}`)
     setExercise(response.data)
     console.log("OneExercise 😀", exercise)
