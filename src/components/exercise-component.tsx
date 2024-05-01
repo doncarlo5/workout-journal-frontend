@@ -39,7 +39,7 @@ export function ExerciseComponent() {
   }
 
   return (
-    <main className="mt-5 flex flex-col items-center justify-center">
+    <div className="mt-5 flex flex-col items-center justify-center">
       {!isLoading && exercise.length !== 0 && (
         <div>
           <Table className=" size-px">
@@ -56,11 +56,7 @@ export function ExerciseComponent() {
             </TableHeader>
             <TableBody>
               {exercise.map((exercise) => (
-                <TableRow
-                  className=" group cursor-pointer "
-                  onClick={() => handleLink(exercise._id)}
-                  key={exercise._id}
-                >
+                <TableRow className="group cursor-pointer" onClick={() => handleLink(exercise._id)} key={exercise._id}>
                   <TableCell>
                     <div>
                       {" "}
@@ -81,7 +77,7 @@ export function ExerciseComponent() {
                     {exercise.rep[2]}x{exercise.weight[2]}
                   </TableCell>
                   <TableCell className="items-center justify-center">
-                    <LucideArrowRight className="  text-slate-300 group-hover:text-slate-900" size={18} />{" "}
+                    <LucideArrowRight className=" text-slate-300 group-hover:text-slate-900" size={18} />{" "}
                   </TableCell>
                 </TableRow>
               ))}
@@ -90,23 +86,23 @@ export function ExerciseComponent() {
         </div>
       )}
       {!isLoading && exercise.length === 0 && (
-        <main className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 items-center justify-center">
           <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
             <div className="text-center">
               <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">Aucun exercice.</p>
             </div>
             <div className="flex flex-col gap-4 "></div>
           </div>
-        </main>
+        </div>
       )}
       {isLoading && (
         <div className="container flex flex-col items-center justify-center p-20">
           <div className="">
-            <LucideLoader2 className=" animate-spin " size={32} />
+            <LucideLoader2 className=" animate-spin" size={32} />
           </div>
         </div>
       )}
-    </main>
+    </div>
   )
 }
 
