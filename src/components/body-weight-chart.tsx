@@ -12,9 +12,7 @@ function BodyWeightChart() {
   const fetchUserSessions = async () => {
     try {
       const response = await myApi.get("/api/sessions?limit=1000&sort=date_session")
-      console.log("👋 response data", response.data)
       setSession(response.data)
-      console.log("👋 session", session)
       setIsLoading(false)
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -35,7 +33,7 @@ function BodyWeightChart() {
         <main className="flex flex-1 items-center justify-center">
           <div className="container flex flex-col items-center justify-center p-20">
             <div className="">
-              <LucideLoader2 className=" animate-spin " size={32} />
+              <LucideLoader2 className=" animate-spin" size={32} />
             </div>
           </div>
         </main>
@@ -45,7 +43,7 @@ function BodyWeightChart() {
           <p>En attente de nouvelles séances...</p>
         </div>
       )}
-      <ResponsiveContainer width="100%" height="70%">
+      <ResponsiveContainer width="100%" height="75%">
         <AreaChart
           width={500}
           height={300}
@@ -72,7 +70,12 @@ function BodyWeightChart() {
                 fill: "#666666",
               }}
               position="left"
-              value={"Kg"}
+              value={"KG"}
+              offset={-2}
+              dx={-10}
+              dy={-10}
+              fontWeight={"bold"}
+              fontStretch={"ultra-condensed"}
             />
           </YAxis>
           <Tooltip
