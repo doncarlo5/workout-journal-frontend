@@ -27,31 +27,33 @@ export function TypesList() {
   }, [])
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="">
       <Navbar />
-      {isLoading && (
-        <div className="container flex flex-col items-center justify-center p-20">
-          <div className="">
-            <LucideLoader2 className=" animate-spin " size={32} />
-          </div>
-        </div>
-      )}
-      {!isLoading && type.length === 0 ? (
-        <main className="flex flex-1 items-center justify-center">
-          <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
-            <div className="text-center">
-              <div className="flex flex-col items-center gap-5 text-sm text-gray-500 dark:text-gray-400">
-                <p>Aucun exercice.</p>
-                <Link className="w-[150px]" to="/type/new-type">
-                  <Button className=" w-full">Créer un exercice</Button>
-                </Link>
-              </div>
+      <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
+        {isLoading && (
+          <div className="mx-auto my-auto">
+            <div className="">
+              <LucideLoader2 className=" animate-spin" size={32} />
             </div>
           </div>
-        </main>
-      ) : (
-        <TypeComponent />
-      )}
+        )}
+        {!isLoading && type.length === 0 && (
+          <main className="flex flex-1 items-center justify-center">
+            <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
+              <div className="text-center">
+                <div className="flex flex-col items-center gap-5 text-sm text-gray-500 dark:text-gray-400">
+                  <p>Aucun exercice.</p>
+                  <Link className="" to="/type/new-type">
+                    <Button className="w-full ">Créer un exercice</Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </main>
+        )}
+
+        {!isLoading && type.length > 0 && <TypeComponent />}
+      </main>
     </div>
   )
 }
