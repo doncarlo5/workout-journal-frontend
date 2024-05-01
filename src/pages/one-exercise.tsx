@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
+import { UpdateIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
-import { ChevronLeft, LucideCalendarClock } from "lucide-react"
+import { ChevronLeft, Edit, LucideCalendarClock, LucideTrash } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import {
@@ -150,7 +151,13 @@ const OneExercise = () => {
       console.log(response)
       fetchOneExercise()
       navigate(`/history/session/${session._id}`)
+      toast({
+        title: "Exercice supprimé.",
+      })
     } catch (error) {
+      toast({
+        title: "Erreur lors de la suppression.",
+      })
       console.error("Fetch error: ", error)
     }
   }
@@ -158,159 +165,167 @@ const OneExercise = () => {
   return (
     <>
       <Navbar />
-      <div className="mx-auto max-w-sm space-y-6 p-4">
-        <div className="flex items-center space-y-2 text-left">
-          <Link to="/history">
-            <Button variant="outline" size="icon">
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-          </Link>
-          <div>
-            <h1 className="ml-5 text-3xl font-medium">Ton exercice de </h1>
-            <h1 className="ml-5 text-3xl font-bold">{exercise?.name}</h1>
-          </div>
-        </div>
-
-        {session._id && (
-          <div>
-            <Link
-              className="flex items-center gap-1 text-sm text-gray-500 hover:underline dark:text-gray-400"
-              to={`/history/session/${session._id}`}
-            >
-              <LucideCalendarClock className="size-4" />{" "}
-              <div>Séance du {format(session?.date_session, "dd/MM/yyyy")}</div>
+      <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
+        <div className="space-y-6 ">
+          <div className="flex items-center space-y-2 pt-5">
+            <Link to="/history">
+              <Button variant="outline" size="icon">
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
             </Link>
+            <div>
+              <h1 className="ml-5 text-2xl font-medium md:text-4xl">Ton exercice de </h1>
+              <h1 className="ml-5 text-2xl font-bold md:text-4xl">{exercise?.name}</h1>
+            </div>
           </div>
-        )}
-        <Select disabled={!isEditable} onValueChange={setOneExerciseType}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder={formState.name} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {exerciseTypes.map((type) => (
-                <SelectItem key={type._id} value={type._id}>
-                  {type.name}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
 
-        <div className="space-y-4">
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 px-5 pb-14">
-            <div className="space-y-2">
-              <Label htmlFor="rep1">Répétition 1</Label>
-              <Input
-                id="rep1"
-                placeholder="`${formState.rep1}`"
-                value={formState.rep1}
-                onChange={handleChange}
-                required
-                type="number"
-                disabled={!isEditable}
-              />
+          {session._id && (
+            <div>
+              <Link
+                className="flex items-center gap-1 text-sm text-gray-500 hover:underline dark:text-gray-400"
+                to={`/history/session/${session._id}`}
+              >
+                <LucideCalendarClock className="size-4" />{" "}
+                <div>Séance du {format(session?.date_session, "dd/MM/yyyy")}</div>
+              </Link>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight1">Poids 1</Label>
-              <Input
-                id="weight1"
-                placeholder="Exemple: 20"
-                value={formState.weight1}
-                onChange={handleChange}
-                required
-                type="number"
-                disabled={!isEditable}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="rep2">Répétition 2</Label>
-              <Input
-                id="rep2"
-                placeholder=""
-                value={formState.rep2}
-                onChange={handleChange}
-                required
-                type="number"
-                disabled={!isEditable}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight2">Poids 2</Label>
-              <Input
-                id="weight2"
-                placeholder=""
-                value={formState.weight2}
-                onChange={handleChange}
-                required
-                type="number"
-                disabled={!isEditable}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="repRange2">Répétition 3</Label>
-              <Input
-                id="rep3"
-                placeholder=""
-                value={formState.rep3}
-                onChange={handleChange}
-                required
-                type="number"
-                disabled={!isEditable}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight3">Poids 3</Label>
-              <Input
-                id="weight3"
-                placeholder=""
-                value={formState.weight3}
-                onChange={handleChange}
-                required
-                type="number"
-                disabled={!isEditable}
-              />
-            </div>
-            <div className="col-span-2 space-y-2">
-              <Label htmlFor="comment">Notes</Label>
-              <Textarea
-                id="comment"
-                placeholder="Aucune note."
-                value={formState.comment}
-                onChange={handleChange}
-                maxLength={200}
-                disabled={!isEditable}
-              />
-            </div>
-            <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
-              {isEditable ? "Annuler" : "Modifier"}
-            </Button>
-            <Button disabled={!isEditable} className="col-span-2 w-full" type="submit">
-              Mettre à jour
-            </Button>
+          )}
+          <Select disabled={!isEditable} onValueChange={setOneExerciseType}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder={formState.name} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {exerciseTypes.map((type) => (
+                  <SelectItem key={type._id} value={type._id}>
+                    {type.name}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
 
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="destructive" className="col-span-2 mb-5 w-full">
-                  Supprimer
+          <div className="space-y-4">
+            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 px-5 pb-14">
+              <div className="space-y-2">
+                <Label htmlFor="rep1">Répétition 1</Label>
+                <Input
+                  id="rep1"
+                  placeholder="`${formState.rep1}`"
+                  value={formState.rep1}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                  disabled={!isEditable}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="weight1">Poids 1</Label>
+                <Input
+                  id="weight1"
+                  placeholder="Exemple: 20"
+                  value={formState.weight1}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                  disabled={!isEditable}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="rep2">Répétition 2</Label>
+                <Input
+                  id="rep2"
+                  placeholder=""
+                  value={formState.rep2}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                  disabled={!isEditable}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="weight2">Poids 2</Label>
+                <Input
+                  id="weight2"
+                  placeholder=""
+                  value={formState.weight2}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                  disabled={!isEditable}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="repRange2">Répétition 3</Label>
+                <Input
+                  id="rep3"
+                  placeholder=""
+                  value={formState.rep3}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                  disabled={!isEditable}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="weight3">Poids 3</Label>
+                <Input
+                  id="weight3"
+                  placeholder=""
+                  value={formState.weight3}
+                  onChange={handleChange}
+                  required
+                  type="number"
+                  disabled={!isEditable}
+                />
+              </div>
+              <div className="col-span-2 space-y-2">
+                <Label htmlFor="comment">Notes</Label>
+                <Textarea
+                  id="comment"
+                  placeholder="Aucune note."
+                  value={formState.comment}
+                  onChange={handleChange}
+                  maxLength={200}
+                  disabled={!isEditable}
+                />
+              </div>
+              <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
+                <Edit className="mr-2 h-4 w-4 " />
+                Éditer
+              </Button>
+
+              <div className="col-span-2 flex gap-2 pb-5 ">
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant={"outline"} className="flex-none">
+                      <LucideTrash size={20} />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className="w-10/12 rounded-md ">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Supprimer ce type ?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Tu ne pourras pas récupérer ce type d'exercice une fois supprimé.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Annuler</AlertDialogCancel>
+                      <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
+                        Confirmer
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+                <Button disabled={!isEditable} className="col-span-2 w-full" type="submit">
+                  <UpdateIcon className="mr-2 h-4 w-4 " />
+                  Mettre à jour
                 </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className=" w-10/12">
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Supprimer ton exercice ?</AlertDialogTitle>
-                  <AlertDialogDescription></AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Annuler</AlertDialogCancel>
-                  <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
-                    Confirmer
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </form>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      </main>
     </>
   )
 }
