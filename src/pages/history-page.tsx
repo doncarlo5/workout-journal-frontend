@@ -24,19 +24,18 @@ export function HistoryPage() {
   }, [])
 
   return (
-    <div className=" mx-auto">
+    <div className="">
       <Navbar />
-
-      <main className="flex flex-1 flex-col items-center justify-center">
-        <div className="space-y-2 text-center">
-          <h1 className="mb-5 mt-5 text-3xl font-bold">Historique</h1>
+      <main className="container mx-auto my-0 flex h-dvh max-w-md flex-col">
+        <div className="pt-10 ">
+          <h1 className="mb-5 text-4xl font-semibold tracking-tighter sm:text-5xl md:text-6xl/none">Mon historique.</h1>
         </div>
-        <Tabs defaultValue="session" className=" w-80 pb-16">
-          <TabsList className="grid w-full grid-cols-2">
+        <Tabs defaultValue="session" className="">
+          <TabsList className="grid grid-cols-2">
             <TabsTrigger value="session">Séances</TabsTrigger>
             <TabsTrigger value="exercise">Exercices</TabsTrigger>
           </TabsList>
-          <TabsContent asChild className=" " value="session">
+          <TabsContent asChild className="" value="session">
             <SessionComponent />
           </TabsContent>
           <TabsContent asChild className="" value="exercise">
