@@ -9,30 +9,29 @@ import { Navbar } from "@/components/navbar"
 
 function StatsPage() {
   return (
-    <div className="mx-auto max-w-sm space-y-6 p-4">
+    <div>
       <div className="">
         <Navbar />
-        <main className="flex flex-1 flex-col items-center justify-center">
-          <div className="flex items-center space-y-2 text-left">
+        <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
+          <div className="flex items-center pt-5">
             <Link to="/profile">
               <Button variant="outline" size="icon">
                 <ChevronLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <h1 className="ml-5 py-5 text-3xl font-medium">Statistiques</h1>
+              <h1 className="ml-5 text-3xl font-medium">Statistiques</h1>
             </div>
           </div>
-
-          <Tabs defaultValue="weight_body" className="size-80">
-            <TabsList className="my-5 grid w-full grid-cols-2">
+          <Tabs defaultValue="weight_body">
+            <TabsList className="my-5 grid grid-cols-2">
               <TabsTrigger value="weight_body">Poids du corps</TabsTrigger>
               <TabsTrigger value="exercise">Exercices</TabsTrigger>
             </TabsList>
-            <TabsContent asChild className="h-64" value="weight_body">
+            <TabsContent asChild className="" value="weight_body">
               <BodyWeightChart />
             </TabsContent>
-            <TabsContent asChild className="h-64" value="exercise">
+            <TabsContent asChild className="" value="exercise">
               <ExerciseChart />
             </TabsContent>
           </Tabs>
