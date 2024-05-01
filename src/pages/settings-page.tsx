@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import useAuth from "@/context/use-auth"
+import { ReloadIcon, UpdateIcon } from "@radix-ui/react-icons"
+import { set } from "date-fns"
 import { ChevronLeft } from "lucide-react"
 import { Link } from "react-router-dom"
 
@@ -20,6 +22,7 @@ function SettingsPage() {
     email: user?.email || "",
   })
   const [error, setError] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const { target } = event
@@ -33,6 +36,7 @@ function SettingsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      setIsLoading(true)
       const response = await myApi.patch("/api/auth/settings", formState)
       toast({
         title: "Profil mis à jour!",
@@ -40,9 +44,11 @@ function SettingsPage() {
 
       console.log(response)
     } catch (error: any) {
+      setIsLoading(false)
       toast({
         variant: "destructive",
         title: "Une erreur est survenue! ❌",
+        description: error.response.data.message,
       })
       setError(error.response.data.message)
       setTimeout(() => {
@@ -53,8 +59,8 @@ function SettingsPage() {
 
   return (
     <div>
-      <div className="mx-auto max-w-sm space-y-6 p-4">
-        <div className="flex items-center space-y-2 text-left">
+      <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
+        <div className="flex items-center py-5">
           <Link to="/profile">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
@@ -64,7 +70,7 @@ function SettingsPage() {
             <h1 className="ml-5 text-3xl font-medium">Modifier ton profil</h1>
           </div>
         </div>
-        <div className=" ">
+        <div className="">
           <form onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -102,23 +108,41 @@ function SettingsPage() {
                   type="email"
                 />
               </div>
-              <Button
-                className="mt-4 w-full"
-                type="submit"
-                onClick={() => {
-                  toast({
-                    description: "Ton profil a bien été mis à jour! ✅",
-                  })
-                }}
-              >
-                Mettre à jour
-              </Button>
+
+              {!isLoading ? (
+                <Button
+                  className="mt-4 w-full"
+                  type="submit"
+                  onClick={() => {
+                    toast({
+                      title: "✅ Profil mis à jour!",
+                    })
+                  }}
+                >
+                  <UpdateIcon className="mr-2 h-4 w-4" />
+                  Mettre à jour
+                </Button>
+              ) : (
+                <Button
+                  disabled
+                  className="mt-4 w-full"
+                  type="submit"
+                  onClick={() => {
+                    toast({
+                      title: "✅ Profil mis à jour!",
+                    })
+                  }}
+                >
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  Mettre à jour
+                </Button>
+              )}
             </div>
           </form>
 
           {error && <p>{error}</p>}
         </div>
-      </div>
+      </main>
     </div>
   )
 }
