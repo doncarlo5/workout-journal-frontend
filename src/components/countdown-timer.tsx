@@ -11,10 +11,12 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
       const ding = new Audio("/public/ding.mp3")
       ding.currentTime = 0
       ding.play()
+      setKey((prevKey) => prevKey + 1)
+      setIsTimerPlaying(false)
       return (
         <div className="flex ">
-          <div className=" items-center justify-center">
-            <p className="flex select-none  justify-center text-3xl font-black tracking-tighter">GO !</p>
+          <div className="items-center justify-center ">
+            <p className="flex select-none justify-center text-3xl font-black tracking-tighter">GO !</p>
           </div>
         </div>
       )
@@ -24,7 +26,7 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
       return (
         <div className="flex ">
           <div className="flex items-center justify-center">
-            <p className="flex w-3/4 select-none  justify-center text-center font-semibold tracking-tighter">
+            <p className="flex w-3/4 select-none justify-center text-center font-semibold tracking-tighter">
               En attente de secondes...
             </p>
           </div>
