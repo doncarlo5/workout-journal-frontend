@@ -37,7 +37,7 @@ export function SessionComponent() {
     <>
       {" "}
       {!isLoading && session.length !== 0 && (
-        <main className="mt-5 flex flex-col items-center justify-center ">
+        <div className="mt-5 flex flex-col items-center justify-center ">
           <div>
             <Table>
               <TableCaption>Liste de tes séances passées</TableCaption>
@@ -54,7 +54,7 @@ export function SessionComponent() {
               <TableBody>
                 {session.map((oneSession) => (
                   <TableRow
-                    className=" group cursor-pointer"
+                    className="group cursor-pointer"
                     onClick={() => handleLink(oneSession._id)}
                     key={oneSession._id}
                   >
@@ -75,35 +75,35 @@ export function SessionComponent() {
                     </TableCell>
                     <TableCell>{formatDate(oneSession.date_session)}</TableCell>
                     <TableCell>{oneSession.type_session}</TableCell>
-                    <TableCell className=" text-center">{oneSession.exercise_user_list.length}</TableCell>
+                    <TableCell className="text-center ">{oneSession.exercise_user_list.length}</TableCell>
                     <TableCell className="w-10 items-center justify-center">
-                      <LucideArrowRight className="  text-slate-300 group-hover:text-slate-900" size={18} />{" "}
+                      <LucideArrowRight className=" text-slate-300 group-hover:text-slate-900" size={18} />{" "}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
-        </main>
+        </div>
       )}
       {!isLoading && session.length === 0 && (
-        <main className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 items-center justify-center">
           <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
             <div className="text-center">
               <p className="max-w-[600px] py-5 text-gray-500 dark:text-gray-400 md:text-xl">Aucune séance.</p>
             </div>
             <div className="flex flex-col gap-4 "></div>
           </div>
-        </main>
+        </div>
       )}
       {isLoading && (
-        <main className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 items-center justify-center">
           <div className="container flex flex-col items-center justify-center p-20">
             <div className="">
-              <LucideLoader2 className=" animate-spin " size={32} />
+              <LucideLoader2 className=" animate-spin" size={32} />
             </div>
           </div>
-        </main>
+        </div>
       )}
     </>
   )
