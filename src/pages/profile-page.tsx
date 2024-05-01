@@ -7,14 +7,14 @@ const ProfilePage = () => {
   const { user } = useAuth()
 
   return (
-    <div className=" pb-24">
+    <div>
       <Navbar />
-
-      <main className="flex flex-1 flex-col items-center justify-center">
-        <div className="space-y-2 text-center">
-          <h1 className="mb-5 mt-5 text-3xl font-bold">Profil de {user?.firstName}</h1>
+      <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
+        <div className="pt-10 ">
+          <h1 className="mb-5 text-4xl font-semibold tracking-tighter sm:text-5xl md:text-6xl/none">
+            Profil de {user?.firstName}.
+          </h1>
         </div>
-
         <DashboardComponent />
       </main>
     </div>
