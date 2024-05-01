@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./
 
 function TrophyComponent() {
   return (
-    <div className=" mt-5 w-2/3">
+    <div className="pt-5">
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
           <AccordionTrigger>Overhead Press - 10 reps</AccordionTrigger>
@@ -36,7 +36,7 @@ function TrophyComponent() {
           <AccordionContent>
             <ul className="flex list-inside list-disc flex-col gap-2">
               <li>
-                <span className="">Poids du corps</span>
+                <span className="">Silver: Poids du corps</span>
               </li>
               <li>
                 <span className="">Gold: 10% du poids de corps</span>
@@ -119,10 +119,10 @@ function TrophyComponent() {
         </AccordionItem>
       </Accordion>
       <div>
-        <div className=" mt-10 flex items-center justify-center ">
-          <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-3xl  border-2 border-dotted border-gray-200 dark:border-gray-800">
+        <div className="mt-10 flex items-center justify-center ">
+          <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-3xl border-2 border-dotted border-gray-200 dark:border-gray-800">
             <LucideTrophy strokeWidth={1} size={25} className="text-gray-300 dark:text-gray-400" />
-            <span className="text-xs  italic text-gray-300 dark:text-gray-400">À venir...</span>
+            <span className="text-xs italic text-gray-300 dark:text-gray-400">À venir...</span>
           </div>
         </div>
       </div>
