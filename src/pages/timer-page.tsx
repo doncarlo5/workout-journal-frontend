@@ -11,20 +11,20 @@ function TimerPage() {
   const [customTimer, setCustomTimer] = useState(120)
 
   return (
-    <div className=" ">
+    <div className="">
       <Navbar />
-      <main className="flex flex-1 flex-col items-center justify-center">
-        <div className="flex items-center space-y-2 text-left">
+      <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
+        <div className="flex items-center pt-5">
           <Link to="/profile">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
           </Link>
           <div>
-            <h1 className="ml-5 py-5 text-3xl font-medium">Minuteur</h1>
+            <h1 className="ml-5 text-3xl font-medium">Minuteur</h1>
           </div>
         </div>
-        <div className=" flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center pt-5 ">
           <CountDownTimer exerciseTypeTimer={customTimer} />
           <p className="mb-5 text-center text-gray-500 dark:text-gray-400 md:text-xl">Choisi ton temps en secondes</p>
           <div className="flex">
