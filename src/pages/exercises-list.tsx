@@ -64,12 +64,12 @@ export function ExercicesList() {
   }
 
   return (
-    <div className="flex w-screen flex-col">
+    <div className="">
       <Navbar />
       {exercise.length !== 0 && (
-        <main className="flex flex-1 flex-col items-center justify-center">
+        <main className="container mx-auto my-0 flex h-dvh max-w-md flex-col">
           <div className="space-y-2 text-center">
-            <h1 className="mb-5 mt-5 text-3xl font-bold">Mes exercices</h1>
+            <h1 className="mb-5 mt-5 text-3xl font-medium">Mes exercices</h1>
           </div>
           <div>
             <Table>
@@ -89,7 +89,7 @@ export function ExercicesList() {
               </TableHeader>
               <TableBody>
                 {exercise.map((exercise) => (
-                  <TableRow className=" group " key={exercise._id}>
+                  <TableRow className=" group" key={exercise._id}>
                     <TableCell>
                       <AlertDialog>
                         <AlertDialogTrigger asChild className="">
@@ -113,7 +113,7 @@ export function ExercicesList() {
                         </AlertDialogContent>
                       </AlertDialog>
                     </TableCell>
-                    <TableCell className=" content-center">
+                    <TableCell className="content-center ">
                       <div>
                         {" "}
                         {exercise.comment ? <LucideMessageSquareText className="mx-1 mt-0.5" size={16} /> : ""}
@@ -146,8 +146,8 @@ export function ExercicesList() {
         </main>
       )}
       {exercise.length === 0 && (
-        <main className="flex flex-1 items-center justify-center">
-          <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6">
+        <main className="container mx-auto my-0 flex h-dvh max-w-md flex-col">
+          <div className="">
             <div className="text-center">
               <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
                 Tu n'as pas encore d'exercices
