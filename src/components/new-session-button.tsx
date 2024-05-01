@@ -59,16 +59,16 @@ function NewSessionButton({ Children }: { Children: any }) {
 
   return (
     <Drawer>
-      <DrawerTrigger className=" select-none" asChild>
+      <DrawerTrigger className="select-none " asChild>
         {Children}
       </DrawerTrigger>
-      <DrawerContent className=" select-none">
+      <DrawerContent className="select-none ">
         <div className="mx-auto w-full max-w-sm">
-          <DrawerHeader className=" text-left">
+          <DrawerHeader className="text-left ">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
-            <DrawerDescription className=" flex items-center gap-1">
-              <LucidePencilRuler className=" ml-1" size={16} />{" "}
-              <Link className=" flex items-center" to="/type/new-type">
+            <DrawerDescription className="flex items-center gap-1 ">
+              <LucidePencilRuler className="ml-1 " size={16} />{" "}
+              <Link className="flex items-center " to="/type/new-type">
                 ou créer un <span className="ml-1 underline">exercice</span>.{" "}
               </Link>
             </DrawerDescription>
@@ -114,17 +114,17 @@ function NewSessionButton({ Children }: { Children: any }) {
         <div>
           <DialogContent className="w-11/12 rounded-md">
             <DialogHeader>
-              <DialogTitle className=" flex items-end text-left">
-                <LucideWeight className=" mr-2" size={20} />
-                Quel est le poids de ton corps?
+              <DialogTitle className="flex items-end text-left ">
+                <LucideWeight className="mr-2 " size={20} />
+                Combien pèses-tu ?
               </DialogTitle>
               <DialogDescription>
-                <p className=" text-left text-gray-500 dark:text-gray-400">Renseigne ton poids pour continuer.</p>
+                <p className="text-left text-gray-500  dark:text-gray-400">Renseigne ton poids pour continuer.</p>
               </DialogDescription>
-              <DialogDescription className=" flex justify-center py-2  ">
-                <div className=" flex w-3/5 items-end justify-center gap-2 text-xl font-light">
+              <DialogDescription className="flex justify-center py-2 ">
+                <div className="flex w-3/5 items-end justify-center gap-2 text-xl font-light ">
                   <Input
-                    className=" w-1/4"
+                    className="w-1/4 "
                     type="number"
                     id="body_weight"
                     value={weight}
