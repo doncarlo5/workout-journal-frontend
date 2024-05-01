@@ -67,7 +67,7 @@ const NewType = () => {
         advice: formState.advice,
       })
       console.log("response", response)
-      navigate(`/profile`)
+      navigate(`/type`)
       toast({
         title: "Type d'exercice créé.",
         description: "Vous pouvez maintenant l'ajouter à vos séances.",
@@ -97,7 +97,7 @@ const NewType = () => {
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 px-5 pb-14">
             <div className="col-span-2 space-y-2">
               <Label htmlFor="name">
-                Nom <span className=" text-red-800">*</span>
+                Nom <span className="text-red-800 ">*</span>
               </Label>
               <Input
                 id="name"
@@ -109,7 +109,7 @@ const NewType = () => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="">
-                Type de séance <span className=" text-red-800">*</span>
+                Type de séance <span className="text-red-800 ">*</span>
               </Label>
               <RadioGroup
                 required
@@ -135,7 +135,7 @@ const NewType = () => {
             <div className="space-y-2">
               <Label className="" htmlFor="timer">
                 Temps de repos {`(en secondes)`}
-                <span className=" text-red-800"> *</span>
+                <span className="text-red-800 "> *</span>
               </Label>
               <Input
                 required
@@ -146,13 +146,12 @@ const NewType = () => {
                 type="number"
               />
             </div>
-            <div className="space-y-2"></div>
-            <div className=" col-span-2 space-y-2 rounded-md bg-gray-50 p-5">
-              <h2 className="col-span-2 text-lg font-medium">Objectif Répétitions</h2>
+            <div className="col-span-2 space-y-2 rounded-md bg-gray-50 p-5">
+              <h2 className="col-span-2 text-lg font-medium">{`Objectif Répétitions [Range]`}</h2>
 
               <div className="space-y-2">
                 <Label htmlFor="repRange1">
-                  Série 1 <span className=" text-red-800">*</span>
+                  Série 1 <span className="text-red-800 ">*</span>
                 </Label>
                 <Input
                   required
@@ -166,7 +165,7 @@ const NewType = () => {
               <div className="space-y-2"></div>
               <div className="space-y-2">
                 <Label htmlFor="repRange2">
-                  Série 2 <span className=" text-red-800">*</span>
+                  Série 2 <span className="text-red-800 ">*</span>
                 </Label>
                 <Input
                   required
@@ -181,7 +180,7 @@ const NewType = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="repRange3">
-                  Série 3 <span className=" text-red-800">*</span>
+                  Série 3 <span className="text-red-800 ">*</span>
                 </Label>
                 <Input
                   required
@@ -204,7 +203,7 @@ const NewType = () => {
                 maxLength={200}
               />
             </div>
-            <div className=" col-span-2 pb-5">
+            <div className="col-span-2 pb-5 ">
               {isLoading ? (
                 <Button disabled className="w-full">
                   <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
