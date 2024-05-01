@@ -24,27 +24,15 @@ function ExerciseChart() {
     const init = async () => {
       const exerciseTypeData = await fetchAllExerciseTypes()
       setAllExerciseTypes(exerciseTypeData)
-      console.log("exerciseTypeData", exerciseTypeData)
     }
     init()
   }, [])
 
   const AllExercisesTypeChange = async (value: any) => {
     setIsSelected(true)
-    const response = await myApi.get(`/api/exercise-user?limit=1000&sort=-createdAt&type=${value._id}`)
+    const response = await myApi.get(`/api/exercise-user?limit=1000&sort=createdAt&type=${value._id}`)
     setExercise(response.data)
-    console.log("exercise", exercise)
-
-    // loop through the response data to access date_session from each object index - session - date_session
-
-    function DateSession() {
-      response.data.map((exercise: any) => {
-        console.log("exercise", exercise)
-        console.log("date session", exercise.session.session_date)
-        return exercise.session.session_date
-      })
-    }
-    DateSession()
+    console.log("OneExercise 😀", exercise)
 
     return response.data
   }
@@ -56,85 +44,98 @@ function ExerciseChart() {
 
   return (
     <>
-      <div className=" mt-5">
-        {allExerciseTypes.length === 0 && (
-          <div className="mt-5 text-center">
-            <p>Aucun exercice type.</p>
-          </div>
-        )}
-        {allExerciseTypes.length > 0 && (
-          <div>
-            <Select onValueChange={AllExercisesTypeChange}>
-              <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700">
-                <SelectValue className=" " placeholder="Sélectionne un exercice..." />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {allExerciseTypes.map((type) => (
-                    <SelectItem key={type._id} value={type}>
-                      {type.name}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            {exercise.length === 0 && isSelected ? (
-              <div className=" mt-5 flex justify-center">Aucune données.</div>
-            ) : (
-              <ResponsiveContainer width="100%" height="70%">
-                <AreaChart
-                  width={500}
-                  height={300}
-                  data={exercise}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <defs>
-                    <linearGradient id="datahere" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#B99C70" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#B99C70" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="datahere" tickFormatter={(tick) => formatXAxis(tick)} />
-                  <YAxis name="Kg" domain={["auto", "auto"]}>
-                    <Label
-                      style={{
-                        textAnchor: "middle",
-                        fontSize: "100%",
-                        fill: "#666666",
-                      }}
-                      position="left"
-                      value={"Kg"}
-                    />
-                  </YAxis>
-                  <Tooltip
-                    labelFormatter={(value) => {
-                      return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
-                    }}
-                    animationEasing={"ease-out"}
-                  />
+      <Select onValueChange={AllExercisesTypeChange}>
+        <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700">
+          <SelectValue className="" placeholder="Sélectionne un exercice..." />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {allExerciseTypes.map((type) => (
+              <SelectItem key={type._id} value={type}>
+                {type.name}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
 
-                  <Area
-                    name="Poids"
-                    dot={false}
-                    type="monotone"
-                    dataKey="datahere"
-                    stroke="#B99C70"
-                    strokeWidth={2}
-                    fillOpacity={1}
-                    fill="url(#datahere)"
-                    activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            )}
-          </div>
-        )}
-      </div>
+      {/* <LineChart width={500} height={300} data={exercise} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+        {exercise.map((sym) => (
+          <Line
+            type="monotone"
+            dataKey={(sym) => sym.value.find((e: any) => e.session === sym).date_session}
+            name={sym}
+            stroke="#8884d8"
+            dot={false}
+          />
+        ))}
+        <XAxis dataKey="date_session" />
+        <Legend />
+        <YAxis />
+      </LineChart> */}
+
+      <ResponsiveContainer width="100%" height="75%">
+        <AreaChart
+          width={500}
+          height={300}
+          data={exercise}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          {exercise.map((sym) => {
+            console.log("sym", sym)
+            return (
+              <>
+                <defs>
+                  <linearGradient id={sym.session} x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#B99C70" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="#B99C70" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey={sym.session} tickFormatter={(tick) => formatXAxis(tick)} />
+              </>
+            )
+          })}
+
+          <YAxis name="Kg" domain={["auto", "auto"]}>
+            <Label
+              style={{
+                textAnchor: "middle",
+                fontSize: "100%",
+                fill: "#666666",
+              }}
+              position="left"
+              value={"KG"}
+              offset={-2}
+              dx={-10}
+              dy={-10}
+              fontWeight={"bold"}
+              fontStretch={"ultra-condensed"}
+            />
+          </YAxis>
+          <Tooltip
+            labelFormatter={(value) => {
+              return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
+            }}
+            animationEasing={"ease-out"}
+          />
+
+          <Area
+            name="Poids"
+            dot={false}
+            type="monotone"
+            dataKey="weight[0]"
+            stroke="#B99C70"
+            strokeWidth={2}
+            fillOpacity={1}
+            activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
     </>
   )
 }
