@@ -14,41 +14,41 @@ function DashboardComponent() {
   }
 
   return (
-    <div className="mt-10 h-4/5">
-      <div className="grid h-4/5 grid-cols-2 grid-rows-3 gap-10 ">
-        <Button variant={"outline"} asChild className=" h-24">
+    <div className="">
+      <div className="mx-auto grid max-w-sm grid-cols-2 grid-rows-3 gap-2">
+        <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/stats">
-            <div className="flex  flex-col items-center justify-center gap-1">
+            <div className="flex flex-col items-center justify-center gap-1">
               <LucideLineChart strokeWidth={1.1} size={40} />
               Stats
             </div>
           </Link>
         </Button>
-        <Button variant={"outline"} asChild className=" h-24">
+        <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/trophy">
-            <div className="flex  flex-col items-center justify-center gap-1">
+            <div className="flex flex-col items-center justify-center gap-1">
               <LucideTrophy strokeWidth={1.1} size={40} />
               Trophées
             </div>
           </Link>
         </Button>
-        <Button variant={"outline"} asChild className=" h-24">
+        <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/timer">
-            <div className="flex  flex-col items-center justify-center gap-1">
+            <div className="flex flex-col items-center justify-center gap-1">
               <LucideTimer strokeWidth={1.1} size={40} />
               Minuteur
             </div>
           </Link>
         </Button>
-        <Button variant={"outline"} asChild className=" h-24">
+        <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/settings">
-            <div className="flex  flex-col items-center justify-center gap-1">
+            <div className="flex flex-col items-center justify-center gap-1">
               <LucideUserRoundCog strokeWidth={1.1} size={40} />
               Modifier
             </div>
           </Link>
         </Button>
-        <Button variant={"outline"} className=" h-24" onClick={toggleTheme}>
+        <Button variant={"outline"} className="h-24 " onClick={toggleTheme}>
           {theme === "light" ? (
             <div className="flex flex-col gap-1">
               <Moon strokeWidth={1.1} size={40} />
