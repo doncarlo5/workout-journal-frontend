@@ -3,7 +3,15 @@ import { CalendarIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
-import { ChevronLeft, LucideCheckCircle, LucideLoader2, LucidePlusCircle, LucideTrash } from "lucide-react"
+import {
+  ChevronLeft,
+  LucideCheckCircle,
+  LucideLoader2,
+  LucidePlusCircle,
+  LucideTrash,
+  SaveIcon,
+  Weight,
+} from "lucide-react"
 import { SelectSingleEventHandler } from "react-day-picker"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -152,32 +160,44 @@ const OneSession = () => {
     setFormState({ ...formState, comment: value })
   }
 
+  const handleSaveComment = async () => {
+    try {
+      const response = await myApi.put(`/api/sessions/${sessionId}`, {
+        comment: formState.comment,
+      })
+      console.log("👋 response", response)
+    } catch (error) {
+      const err = error as AxiosError
+      console.error(err.response?.data)
+    }
+  }
+
   return (
     <>
       <Navbar />
-      <div className=" container mx-auto max-w-md ">
-        <div className="flex items-center space-y-2 text-left">
+      <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
+        <div className="flex items-center py-5">
           <Link to="/history">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
           </Link>
           <div>
-            <h1 className="ml-5 text-3xl font-medium">Ta séance </h1>
-            <h1 className="ml-5 text-3xl font-bold">{session?.type_session}</h1>
+            <h1 className="ml-5 text-2xl font-medium md:text-4xl">Ta séance </h1>
+            <h1 className="ml-5 text-2xl font-bold md:text-4xl">{session?.type_session}</h1>
           </div>
         </div>
 
         <div className="space-y-4">
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 pb-14">
-            <div className="space-y-2">
+            <div className="flex flex-col space-y-2">
               <Label htmlFor="session_date">Date</Label>
               <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant={"outline"}
                     className={cn(
-                      "w-[240px] pl-3 text-left font-normal",
+                      "w-36 pl-3 text-left font-normal",
                       !formState.date_session && "text-muted-foreground"
                     )}
                   >
@@ -205,79 +225,73 @@ const OneSession = () => {
 
             <div className="space-y-2"></div>
 
-            <div className="space-y-2">
-              <Label htmlFor="body_weight">{`Poids du corps (en kg)`}</Label>
-              <Input
-                id="body_weight"
-                placeholder={`${formState.body_weight}`}
-                value={formState.body_weight}
-                onChange={handleSelectWeight}
-                required
-                type="number"
-                onWheel={(e) => e.currentTarget.blur()}
-                // disabled={!isEditable}
-              />
+            <div className="w-36 space-y-2">
+              <Label htmlFor="body_weight">{`Ta pesée (KG)`}</Label>
+              <div className="relative w-full">
+                <Input
+                  id="body_weight"
+                  placeholder={`${formState.body_weight}`}
+                  value={formState.body_weight}
+                  onChange={handleSelectWeight}
+                  required
+                  type="number"
+                  onWheel={(e) => e.currentTarget.blur()}
+                  className="pr-9"
+
+                  // disabled={!isEditable}
+                />{" "}
+                <Weight className="absolute right-1.5 top-0 m-2.5 h-4 w-4 text-muted-foreground opacity-50" />
+              </div>
             </div>
 
             <div className="grid grid-flow-col grid-rows-3"></div>
 
-            <div className=" col-span-2 ">
-              <div className="space-y-4">
-                <div className=" rounded-lg border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 dark:shadow-sm">
-                  <div className="mb-4 flex flex-col gap-4">
-                    {isLoading ? (
-                      <div className="container flex flex-col items-center justify-center p-20">
-                        <div className="">
-                          <LucideLoader2 className=" animate-spin " size={32} />
-                        </div>
-                      </div>
-                    ) : (
-                      formState.exercise_user_list.map((exercise: any) => (
-                        <ExerciseCard exercise={exercise} key={exercise._id} />
-                      ))
-                    )}
-                  </div>
-                  <div className="px-4">
-                    <Link to={`/history/session/${sessionId}/do-exercise`}>
-                      <Button className=" w-full">
-                        {" "}
-                        <LucidePlusCircle className=" mr-2 size-5" />
-                        Ajouter un exercice{" "}
-                      </Button>
-                    </Link>
+            <div className="col-span-2 flex flex-col items-center justify-center ">
+              {isLoading ? (
+                <div className="container flex flex-col items-center justify-center p-20 md:grid md:grid-cols-2">
+                  <div className="">
+                    <LucideLoader2 className=" animate-spin" size={32} />
                   </div>
                 </div>
+              ) : (
+                formState.exercise_user_list.map((exercise: any) => (
+                  <ExerciseCard exercise={exercise} key={exercise._id} />
+                ))
+              )}
+              <div className="px-4">
+                <Link to={`/history/session/${sessionId}/do-exercise`}>
+                  <Button className="w-full ">
+                    {" "}
+                    <LucidePlusCircle className="mr-2 size-5" />
+                    Ajouter un exercice{" "}
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="col-span-2 resize space-y-2">
-              <Label htmlFor="comment" className={formState.is_done ? "text-slate-300" : ""}>
-                Notes
-              </Label>
-              <Textarea
-                id="comment"
-                placeholder=""
-                value={formState.comment}
-                onChange={handleCommentChange}
-                maxLength={200}
-                disabled={formState.is_done}
-              />
+              <Label htmlFor="comment">Notes</Label>
+              <div className="flex items-center gap-5 ">
+                <Textarea
+                  id="comment"
+                  placeholder=""
+                  value={formState.comment}
+                  onChange={handleCommentChange}
+                  maxLength={200}
+                  className="h-full w-4/5"
+                />
+                {formState.comment ? (
+                  <Button className="h-full rounded-full" onClick={handleSaveComment}>
+                    <SaveIcon className="size-5 " />
+                  </Button>
+                ) : (
+                  <Button disabled className="h-full rounded-full opacity-50">
+                    <SaveIcon className="size-5 text-gray-200 " />
+                  </Button>
+                )}
+              </div>
             </div>
 
-            {/* <div className="col-span-2 flex items-center justify-between rounded-lg border p-3 shadow-sm">
-              <Checkbox
-                defaultChecked={formState.is_done}
-                checked={formState.is_done}
-                onCheckedChange={handleCheckboxChange}
-                id="is_done"
-              />
-              <Label
-                htmlFor="is_done"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                {formState.is_done ? "Séance terminée" : "Séance en cours..."}
-              </Label>
-            </div> */}
-            <div className=" col-span-2 flex gap-2 pb-5">
+            <div className="col-span-2 flex gap-2 pb-5 ">
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant={"outline"} className="flex-none">
@@ -304,7 +318,7 @@ const OneSession = () => {
             </div>
           </form>
         </div>
-      </div>
+      </main>
     </>
   )
 }
