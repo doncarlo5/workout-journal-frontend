@@ -25,7 +25,7 @@ import IsNotAuthenticated from "./routing/is-not-authenticated"
 
 function App() {
   return (
-    <div>
+    <div className="flex-1 overflow-scroll">
       <ErrorBoundary>
         <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
           <Routes>
