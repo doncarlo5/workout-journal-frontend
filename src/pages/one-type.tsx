@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
+import { ReloadIcon, UpdateIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
-import { ChevronLeft, LucideLoader2 } from "lucide-react"
+import { ChevronLeft, Edit, LucideLoader2, LucideTrash, Trash } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import {
@@ -136,16 +137,16 @@ const OneType = () => {
     <>
       <Navbar />
       {!isLoading ? (
-        <div className="mx-auto max-w-sm space-y-6 p-4">
-          <div className="flex items-center space-y-2 text-left">
+        <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
+          <div className="flex items-center py-5 text-left">
             <Link to="/profile">
               <Button variant="outline" size="icon">
                 <ChevronLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <h1 className="ml-5 text-3xl font-medium">Ton exercice type</h1>
-              <h1 className="ml-5 text-3xl font-bold">{type?.name}</h1>
+              <h1 className="ml-5 text-xl font-medium md:text-3xl">Ton exercice type</h1>
+              <h1 className="ml-5 text-xl font-bold md:text-3xl">{type?.name}</h1>
             </div>
           </div>
 
@@ -164,7 +165,7 @@ const OneType = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="">Type d'exercice</Label>
+                <Label htmlFor="">Type de séance</Label>
                 <RadioGroup
                   required
                   onValueChange={handleRadioChange}
@@ -190,7 +191,7 @@ const OneType = () => {
               <div className="space-y-2"></div>
 
               <div className="space-y-2">
-                <Label htmlFor="timer">Timer</Label>
+                <Label htmlFor="timer">Temps de repos {`(en secondes)`}</Label>
                 <Input
                   required
                   id="timer"
@@ -203,50 +204,54 @@ const OneType = () => {
               </div>
               <div className="space-y-2"></div>
 
-              <div className="space-y-2">
-                <Label htmlFor="repRange1">Rep Range 1</Label>
-                <Input
-                  required
-                  id="repRange1"
-                  placeholder={formState.repRange1}
-                  value={formState.repRange1}
-                  onChange={handleChange}
-                  type="text"
-                  disabled={!isEditable}
-                />
-              </div>
-              <div className="space-y-2"></div>
-              <div className="space-y-2">
-                <Label htmlFor="repRange2">Rep Range 2</Label>
-                <Input
-                  required
-                  id="repRange2"
-                  placeholder={formState.repRange2}
-                  value={formState.repRange2}
-                  onChange={handleChange}
-                  type="text"
-                  disabled={!isEditable}
-                />
-              </div>
-              <div className="space-y-2"></div>
+              <div className="col-span-2 space-y-2 rounded-md bg-gray-50 p-5">
+                <h2 className="col-span-2 text-lg font-medium">{`Objectif Répétitions [Range]`}</h2>
 
-              <div className="space-y-2">
-                <Label htmlFor="repRange3">Rep Range 3</Label>
-                <Input
-                  required
-                  id="repRange3"
-                  placeholder={formState.repRange3}
-                  value={formState.repRange3}
-                  onChange={handleChange}
-                  type="text"
-                  disabled={!isEditable}
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="repRange1">Série 1</Label>
+                  <Input
+                    required
+                    id="repRange1"
+                    placeholder={formState.repRange1}
+                    value={formState.repRange1}
+                    onChange={handleChange}
+                    type="text"
+                    disabled={!isEditable}
+                  />
+                </div>
+                <div className="space-y-2"></div>
+                <div className="space-y-2">
+                  <Label htmlFor="repRange2">Série 2</Label>
+                  <Input
+                    required
+                    id="repRange2"
+                    placeholder={formState.repRange2}
+                    value={formState.repRange2}
+                    onChange={handleChange}
+                    type="text"
+                    disabled={!isEditable}
+                  />
+                </div>
+                <div className="space-y-2"></div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="repRange3">Série 3</Label>
+                  <Input
+                    required
+                    id="repRange3"
+                    placeholder={formState.repRange3}
+                    value={formState.repRange3}
+                    onChange={handleChange}
+                    type="text"
+                    disabled={!isEditable}
+                  />
+                </div>
               </div>
 
               <div className="grid grid-flow-col grid-rows-3"></div>
 
               <div className="col-span-2 resize space-y-2">
-                <Label htmlFor="advice">Conseil</Label>
+                <Label htmlFor="advice">Conseil / Note</Label>
                 <Textarea
                   id="advice"
                   placeholder="Pas de conseil."
@@ -258,40 +263,44 @@ const OneType = () => {
               </div>
 
               <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
+                <Edit className="mr-2 h-4 w-4 " />
                 Éditer
               </Button>
-              <Button disabled={!isEditable} className="col-span-2 w-full" type="submit">
-                Mettre à jour
-              </Button>
 
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="destructive" className="col-span-2 mb-5 w-full">
-                    Supprimer
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className=" w-10/12">
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Supprimer ce type ?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      Tu ne pourras pas récupérer ce type d'exercice une fois supprimé.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Annuler</AlertDialogCancel>
-                    <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
-                      Confirmer
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              <div className="col-span-2 flex gap-2 pb-5 ">
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant={"outline"} className="flex-none">
+                      <LucideTrash size={20} />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className="w-10/12 rounded-md ">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Supprimer ce type ?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Tu ne pourras pas récupérer ce type d'exercice une fois supprimé.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Annuler</AlertDialogCancel>
+                      <AlertDialogAction variant="destructive" onClick={() => handleDelete(formState.id)}>
+                        Confirmer
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+                <Button disabled={!isEditable} className="col-span-2 w-full" type="submit">
+                  <UpdateIcon className="mr-2 h-4 w-4 " />
+                  Mettre à jour
+                </Button>
+              </div>
             </form>
           </div>
-        </div>
+        </main>
       ) : (
         <div className="container flex flex-col items-center justify-center p-20">
           <div className="">
-            <LucideLoader2 className=" animate-spin " size={32} />
+            <LucideLoader2 className=" animate-spin" size={32} />
           </div>
         </div>
       )}
