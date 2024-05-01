@@ -13,6 +13,7 @@ import { toast } from "./ui/use-toast"
 
 const SignupComponent = () => {
   const { authenticateUser } = useContext(AuthContext)
+  const [showPassword, setShowPassword] = useState(false)
 
   const [formState, setFormState] = useState({
     firstName: "",
@@ -57,7 +58,7 @@ const SignupComponent = () => {
   }
 
   return (
-    <div className=" ">
+    <div className="">
       <form onSubmit={handleSubmit}>
         <div className="mx-auto max-w-sm space-y-6 pb-5">
           <div className="mt-8 space-y-2 text-left">
@@ -108,11 +109,24 @@ const SignupComponent = () => {
                 value={formState.password}
                 onChange={handleChange}
                 required
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="on"
               />
             </div>
-            <div className=" mt-10">
+            <div className="flex select-none items-center justify-between">
+              <div className="flex items-center">
+                <input
+                  id="showPassword"
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  onChange={() => setShowPassword(!showPassword)}
+                />
+                <label htmlFor="showPassword" className="ml-2 block items-baseline text-sm text-gray-900">
+                  Afficher le mot de passe
+                </label>
+              </div>
+            </div>
+            <div className="mt-10 ">
               {isLoading ? (
                 <Button disabled className="w-full">
                   <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
