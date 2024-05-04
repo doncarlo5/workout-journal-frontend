@@ -35,7 +35,7 @@ export function HomePage() {
           <div className="flex flex-col gap-4 pb-4">
             <div className="flex flex-col rounded-lg bg-slate-100 px-4 py-2 shadow-lg">
               <div className="">
-                <h2 className="text-lg font-bold">Dernière séance </h2>
+                <h2 className="text-lg font-bold dark:text-gray-800 ">Dernière séance </h2>
                 <div>
                   <div className="flex gap-2 text-xs text-gray-500 dark:text-gray-400">
                     <span>{session[0]?.date_session && format(new Date(session[0]?.date_session), "dd/MM/yyyy")}</span>
@@ -62,9 +62,9 @@ export function HomePage() {
                   strokeWidth={1.5}
                 />
                 <p className="tab tab-whishlist block text-sm dark:text-gray-900 ">
-                  Crée un <span className="font-bold "> exercice</span>, ajoute un temps de repos, des répétitions et un
-                  conseil.
+                  Crée un <span className="font-bold "> exercice</span>{" "}
                 </p>
+                <p>ajoute un temps de repos, des répétitions et un conseil.</p>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
               <LucideArrowRight className="inline-block " color="rgb(107 114 128)" height={40} width={80} />
