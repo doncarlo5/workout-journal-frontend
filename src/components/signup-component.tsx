@@ -1,7 +1,8 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "@/context/context-wrapper"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { useNavigate } from "react-router-dom"
+import { Home } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -66,8 +67,8 @@ const SignupComponent = () => {
             <p className="text-gray-500 dark:text-gray-400">Inscrit toi pour continuer.</p>
           </div>
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
+            <div className="flex flex-col gap-2">
+              <div className="space-y-1">
                 <Label htmlFor="firstName">Prénom</Label>
                 <Input
                   id="firstName"
@@ -121,7 +122,10 @@ const SignupComponent = () => {
                   className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   onChange={() => setShowPassword(!showPassword)}
                 />
-                <label htmlFor="showPassword" className="ml-2 block items-baseline text-sm text-gray-900">
+                <label
+                  htmlFor="showPassword"
+                  className="ml-2 block items-baseline text-sm text-gray-900 dark:text-gray-200"
+                >
                   Afficher le mot de passe
                 </label>
               </div>
@@ -143,6 +147,13 @@ const SignupComponent = () => {
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
+            </div>
+            <div className="flex justify-center">
+              <Link to="/">
+                <Button variant={"outline"} className="">
+                  <Home size={20} strokeWidth={1.1} />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
