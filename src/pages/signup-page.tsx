@@ -1,7 +1,8 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "@/context/context-wrapper"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { useNavigate } from "react-router-dom"
+import { Home } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
 
 import myApi from "@/lib/api-handler"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -9,7 +10,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Navbar } from "@/components/navbar"
 
 import SignupComponent from "../components/signup-component"
 
@@ -60,14 +60,8 @@ const SignupPage = () => {
 
   return (
     <div className="">
-      <Navbar />
-      <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
-        <Tabs
-          value={tab}
-          onValueChange={onTabChange}
-          defaultValue={tab}
-          className="my-auto flex flex-col items-center md:px-6"
-        >
+      <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col ">
+        <Tabs value={tab} onValueChange={onTabChange} defaultValue={tab} className="pt-5 md:px-6">
           <TabsList className="grid w-full max-w-2xl grid-cols-2 rounded-xl ">
             <TabsTrigger value="login">Connexion</TabsTrigger>
             <TabsTrigger value="signup">Inscription</TabsTrigger>
@@ -124,7 +118,7 @@ const SignupPage = () => {
                           className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                           onChange={() => setShowPassword(!showPassword)}
                         />
-                        <label htmlFor="showPassword" className="ml-2 block text-sm text-gray-900">
+                        <label htmlFor="showPassword" className="ml-2 block text-sm text-gray-900 dark:text-gray-200 ">
                           Afficher le mot de passe
                         </label>
                       </div>
@@ -149,6 +143,13 @@ const SignupPage = () => {
                   </div>
                 </div>
               </form>
+              <div className="flex justify-center">
+                <Link to="/">
+                  <Button variant={"outline"} className="mt-5">
+                    <Home size={20} strokeWidth={1.1} />
+                  </Button>
+                </Link>
+              </div>
             </>
           </TabsContent>
           <TabsContent value="signup">
