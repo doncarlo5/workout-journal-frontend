@@ -42,6 +42,9 @@ const AuthContextWrapper = ({ children }: WrapperProps) => {
       }
     } catch (error) {
       console.error(error)
+      setIsLoading(false)
+      setIsLoggedIn(false)
+      setUser(null)
     }
   }
 
