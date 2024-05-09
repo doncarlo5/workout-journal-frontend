@@ -62,7 +62,7 @@ const SignupComponent = () => {
     <div className="">
       <form onSubmit={handleSubmit}>
         <div className="mx-auto max-w-sm space-y-6 pb-5">
-          <div className="mt-8 space-y-2 text-left">
+          <div className="mt-5 space-y-2 text-left">
             <h1 className="text-3xl font-bold">S'inscrire</h1>
             <p className="text-gray-500 dark:text-gray-400">Inscrit toi pour continuer.</p>
           </div>
