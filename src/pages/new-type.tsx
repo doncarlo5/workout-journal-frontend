@@ -156,7 +156,7 @@ const NewType = () => {
                 <Input
                   required
                   id="repRange1"
-                  placeholder="4-6"
+                  placeholder="Ex: 4-6"
                   value={formState.repRange1}
                   onChange={handleChange}
                   type="text"
@@ -170,7 +170,7 @@ const NewType = () => {
                 <Input
                   required
                   id="repRange2"
-                  placeholder="6-8"
+                  placeholder="Ex: 6-8"
                   value={formState.repRange2}
                   onChange={handleChange}
                   type="text"
@@ -185,14 +185,13 @@ const NewType = () => {
                 <Input
                   required
                   id="repRange3"
-                  placeholder="8-10"
+                  placeholder="Ex: 8-10"
                   value={formState.repRange3}
                   onChange={handleChange}
                   type="text"
                 />
               </div>
             </div>
-            <div className="grid grid-flow-col grid-rows-3"></div>
             <div className="col-span-2 resize space-y-2">
               <Label htmlFor="advice">Conseil / Note</Label>
               <Textarea
