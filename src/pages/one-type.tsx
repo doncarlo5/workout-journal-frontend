@@ -127,7 +127,7 @@ const OneType = () => {
       const response = await myApi.delete(`/api/exercise-type/${id}`)
       console.log(response)
       fetchOneType()
-      navigate("/profile/")
+      navigate("/type/")
     } catch (error) {
       console.error("Fetch error: ", error)
     }
