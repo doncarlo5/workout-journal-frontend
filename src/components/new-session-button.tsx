@@ -63,13 +63,13 @@ function NewSessionButton({ Children }: { Children: any }) {
         {Children}
       </DrawerTrigger>
       <DrawerContent className="select-none ">
-        <div className="mx-auto w-full max-w-sm">
+        <div className="w-full max-w-sm mx-auto">
           <DrawerHeader className="text-left ">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
             <DrawerDescription className="flex items-center gap-1 ">
               <LucidePencilRuler className="ml-1 " size={16} />{" "}
               <Link className="flex items-center " to="/type/new-type">
-                ou créer un <span className="ml-1 underline">exercice</span>.{" "}
+                Ou crée un <span className="ml-1 underline">exercice</span>.{" "}
               </Link>
             </DrawerDescription>
           </DrawerHeader>
@@ -81,7 +81,7 @@ function NewSessionButton({ Children }: { Children: any }) {
                 size="icon"
                 className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
-                <p className="mb-1 mt-4 text-lg">Upper A</p>
+                <p className="mt-4 mb-1 text-lg">Upper A</p>
                 <IconChest className="mt-3" />
                 <span className="sr-only">Upper A</span>
               </Button>
@@ -91,7 +91,7 @@ function NewSessionButton({ Children }: { Children: any }) {
                 size="icon"
                 className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
-                <p className="mb-1 mt-4 text-lg">Lower</p>
+                <p className="mt-4 mb-1 text-lg">Lower</p>
                 <IconLegs className="mt-3" />
                 <span className="sr-only">Lower</span>
               </Button>
@@ -101,12 +101,12 @@ function NewSessionButton({ Children }: { Children: any }) {
                 size="icon"
                 className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
-                <p className="mb-1 mt-4 text-lg">Upper B</p>
+                <p className="mt-4 mb-1 text-lg">Upper B</p>
                 <IconChest className="mt-3" />
                 <span className="sr-only">Upper B</span>
               </Button>
             </div>
-            <div className="mt-3 h-2"></div>
+            <div className="h-2 mt-3"></div>
           </div>
         </div>
       </DrawerContent>
@@ -119,10 +119,10 @@ function NewSessionButton({ Children }: { Children: any }) {
                 Combien pèses-tu ?
               </DialogTitle>
               <DialogDescription>
-                <p className="text-left text-gray-500  dark:text-gray-400">Renseigne ton poids pour continuer.</p>
+                <p className="text-left text-gray-500 dark:text-gray-400">Renseigne ton poids pour continuer.</p>
               </DialogDescription>
               <DialogDescription className="flex justify-center py-2 ">
-                <div className="flex w-3/5 items-end justify-center gap-2 text-xl font-light ">
+                <div className="flex items-end justify-center w-3/5 gap-2 text-xl font-light ">
                   <Input
                     className="w-1/4 "
                     type="number"
