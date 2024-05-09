@@ -151,13 +151,13 @@ const DoExercisePage = () => {
             </AlertDialogTrigger>
             <AlertDialogContent className="w-10/12 rounded-md">
               <AlertDialogHeader>
-                <AlertDialogTitle>Annuler l'exercice?</AlertDialogTitle>
+                <AlertDialogTitle>Êtes-vous sur de retourner à la page précédente ?</AlertDialogTitle>
                 <AlertDialogDescription>Les données seront perdues.</AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Retour</AlertDialogCancel>
+                <AlertDialogCancel>Annuler</AlertDialogCancel>
                 <AlertDialogAction variant="destructive">
-                  <Link to={`/history/session/${sessionId}`}>Annuler</Link>
+                  <Link to={`/history/session/${sessionId}`}>Continuer</Link>
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
@@ -173,7 +173,7 @@ const DoExercisePage = () => {
         </div>
 
         <Select onValueChange={onExerciseTypeChange}>
-          <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700">
+          <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700 dark:data-[placeholder]:text-white ">
             <SelectValue className="" placeholder="Sélectionne un exercice..." />
           </SelectTrigger>
           <SelectContent>
@@ -181,11 +181,11 @@ const DoExercisePage = () => {
               {allExerciseTypes.map((type) => (
                 <SelectItem key={type._id} value={type}>
                   {isLoadingTypes ? (
-                    <div role="status" className="max-w-sm animate-pulse items-center flex">
+                    <div role="status" className="flex max-w-sm animate-pulse items-center">
                       <div className="mb-2 h-4 w-64 rounded-full bg-gray-200 dark:bg-gray-700"></div>
                     </div>
                   ) : (
-                    type.name
+                    <p className="dark:text-white"> {type.name}</p>
                   )}
                 </SelectItem>
               ))}
@@ -207,14 +207,14 @@ const DoExercisePage = () => {
         )}
         {oneExerciseType && (
           <form onSubmit={handleSubmit} className="">
-            <div className="flex justify-center rounded-2xl bg-slate-50 py-4 md:text-lg">
+            <div className="flex justify-center rounded-2xl bg-slate-50 py-4 dark:bg-slate-900 dark:bg-opacity-40 md:text-lg">
               <div className="flex gap-2">
                 <div className="flex flex-col gap-1 text-center">
                   <p className="pb-1 text-sm text-gray-500 ">Série</p>
                   <p className="flex h-9 w-9 items-center justify-center rounded-md bg-slate-200 bg-transparent px-3 py-1 font-mono text-sm text-gray-900 ">
                     <label className="relative flex cursor-pointer items-center rounded-full " htmlFor="teal">
                       <input
-                      placeholder={lastExercise?.rep[0]}
+                        placeholder={lastExercise?.rep[0]}
                         type="checkbox"
                         className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-7 w-7 cursor-pointer appearance-none rounded-sm border transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-8 before:w-8 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-teal-500 checked:bg-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
                         id="teal"
@@ -478,7 +478,11 @@ const DoExercisePage = () => {
                 </Button> */}
             </div>
             <div className="pt-5 ">
-              <Accordion type="single" collapsible className="mb-5 rounded-2xl bg-slate-50">
+              <Accordion
+                type="single"
+                collapsible
+                className="mb-5 rounded-2xl bg-slate-50 dark:bg-slate-900 dark:bg-opacity-40"
+              >
                 <AccordionItem value="comment">
                   <AccordionTrigger className="flex h-10 gap-2 px-5 text-left text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-2">
