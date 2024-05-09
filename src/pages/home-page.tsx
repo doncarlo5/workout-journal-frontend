@@ -11,6 +11,7 @@ import useAuth from "../context/use-auth"
 
 export function HomePage() {
   const { user } = useAuth()
+  console.log("user", user)
   const [session, setSession] = useState([] as any)
 
   const fetchLastSession = async () => {

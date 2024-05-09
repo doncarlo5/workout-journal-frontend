@@ -152,12 +152,12 @@ const DoExercisePage = () => {
             <AlertDialogContent className="w-10/12 rounded-md">
               <AlertDialogHeader>
                 <AlertDialogTitle>Annuler l'exercice?</AlertDialogTitle>
-                <AlertDialogDescription>Les seront données seront perdues.</AlertDialogDescription>
+                <AlertDialogDescription>Les données seront perdues.</AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Annuler</AlertDialogCancel>
+                <AlertDialogCancel>Retour</AlertDialogCancel>
                 <AlertDialogAction variant="destructive">
-                  <Link to={`/history/session/${sessionId}`}>Confirmer</Link>
+                  <Link to={`/history/session/${sessionId}`}>Annuler</Link>
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
