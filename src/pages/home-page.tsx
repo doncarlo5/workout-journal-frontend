@@ -61,10 +61,12 @@ export function HomePage() {
                   width={80}
                   strokeWidth={1.5}
                 />
-                <p className="tab tab-whishlist block text-sm dark:text-gray-900 ">
-                  Crée un <span className="font-bold "> exercice</span>{" "}
-                </p>
-                <p>ajoute un temps de repos, des répétitions et un conseil.</p>
+                <div className="flex flex-col">
+                  <p className="tab tab-whishlist block text-sm dark:text-gray-900 ">
+                    Crée un <span className="font-bold "> exercice</span>{" "}
+                  </p>
+                  <p className="text-xs tracking-tighter ">Ajoute temps de repos, répétitions et conseils.</p>
+                </div>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
               <LucideArrowRight className="inline-block " color="rgb(107 114 128)" height={40} width={80} />
@@ -81,10 +83,15 @@ export function HomePage() {
                       width={80}
                       strokeWidth={1.5}
                     />
-                    <p className="tab tab-whishlist block text-sm dark:text-gray-900">
-                      Réalise une <span className="font-bold "> séance </span> <span className="italic ">Upper </span>{" "}
-                      ou <span className="italic ">Lower</span> avec tes exercices types personnalisés.
-                    </p>
+                    <div>
+                      <p className="tab tab-whishlist block text-sm dark:text-gray-900">
+                        Réalise une <span className="font-bold "> séance </span>
+                      </p>
+                      <p className="text-xs tracking-tighter ">
+                        <span className="font-medium ">Upper</span> ou <span className="font-medium ">Lower</span> avec
+                        tes exercices personnalisés.
+                      </p>
+                    </div>
                   </div>
                   <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
                   <LucideArrowRight className="inline-block" color="rgb(107 114 128)" height={40} width={80} />
@@ -104,10 +111,12 @@ export function HomePage() {
                   width={80}
                   strokeWidth={1.5}
                 />
-                <p className="tab tab-whishlist block text-sm dark:text-gray-900">
-                  Consulte ton <span className="font-bold "> profil </span> pour voir tes statistiques et tes derniers
-                  trophées obtenus.
-                </p>
+                <div>
+                  <p className="tab tab-whishlist block text-sm dark:text-gray-900">
+                    Consulte ton <span className="font-bold "> profil </span>
+                  </p>
+                  <p className="text-xs tracking-tighter ">Voir tes statistiques et tes derniers trophées obtenus.</p>
+                </div>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
               <LucideArrowRight className="inline-block " color="rgb(107 114 128)" height={40} width={80} />
@@ -124,9 +133,12 @@ export function HomePage() {
                   width={80}
                   strokeWidth={1.5}
                 />
-                <p className="tab tab-whishlist block text-sm dark:text-gray-900">
-                  Retrouve une séance à l'aide de ton <span className="font-bold "> historique</span>.
-                </p>
+                <div>
+                  <p className="tab tab-whishlist block text-sm dark:text-gray-900">
+                    Explore ton<span className="font-bold "> historique</span>
+                  </p>
+                  <p className="text-xs tracking-tighter ">Retrouve tes séances et exercices passés.</p>
+                </div>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
               <LucideArrowRight className="inline-block " color="rgb(107 114 128)" height={40} width={80} />
