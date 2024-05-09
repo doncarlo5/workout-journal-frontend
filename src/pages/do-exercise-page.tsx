@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Accordion, AccordionItem } from "@radix-ui/react-accordion"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { ChevronLeft, Edit, LucideCheckCircle, LucideInfo, LucideLoader2 } from "lucide-react"
+import { ChevronLeft, Edit, LucideCheckCircle, LucideInfo } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion"
