@@ -18,8 +18,8 @@ const SignupPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [formState, setFormState] = useState({
-    email: "",
-    password: "",
+    email: "pro.julien.thomas@gmail.com",
+    password: "password",
   })
   const [showPassword, setShowPassword] = useState(false)
 
