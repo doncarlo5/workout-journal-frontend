@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { CalendarIcon } from "@radix-ui/react-icons"
+import { CalendarIcon, InfoCircledIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
@@ -186,6 +186,47 @@ const OneSession = () => {
             <h1 className="ml-5 text-2xl font-medium md:text-4xl">Ta séance </h1>
             <h1 className="ml-5 text-2xl font-bold md:text-4xl">{session?.type_session}</h1>
           </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="ghost" size="icon" className="ml-5">
+                <InfoCircledIcon />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-48 p-4" align="start">
+              <p className="text-sm text-gray-500">
+                {formState.type_session === "Upper A" && (
+                  <ol className="list-inside list-[upper-roman] ">
+                    <li>Développé Incliné</li>
+                    <li>Tractions Lestées</li>
+                    <li>Élévations Frontales</li>
+                    <li>Curl Incliné</li>
+                    <li>Haltères</li>
+                    <li>Élévations Latérales</li>
+                  </ol>
+                )}
+                {formState.type_session === "Lower" && (
+                  <ol className="list-inside list-[upper-roman] ">
+                    <li>High Bar Squat ou Deadlift</li>
+                    <li>Romanian Deadlift ou Fentes</li>
+                    <li>Leg Curl Superset</li>
+                    <li>Leg Extension</li>
+                    <li>Extensions Mollets</li>
+                    <li>Upright Row Penché</li>
+                  </ol>
+                )}
+                {formState.type_session === "Upper B" && (
+                  <ol className="list-inside list-[upper-roman] ">
+                    <li>Overhead Press</li>
+                    <li>Développé Couché</li>
+                    <li>Tractions Neutres</li>
+                    <li>Focus Bras</li>
+                    <li>Oiseau Assis Prise Neutre</li>
+                    <li>Upright Row</li>
+                  </ol>
+                )}
+              </p>
+            </PopoverContent>
+          </Popover>
         </div>
 
         <div className="space-y-4">
@@ -280,11 +321,11 @@ const OneSession = () => {
                   className="h-full w-4/5"
                 />
                 {formState.comment ? (
-                  <Button className="h-full rounded-full" onClick={handleSaveComment}>
+                  <Button className="h-full w-1/6 rounded-full" onClick={handleSaveComment}>
                     <SaveIcon className="size-5 " />
                   </Button>
                 ) : (
-                  <Button disabled className="h-full rounded-full opacity-50">
+                  <Button disabled className="h-full w-1/6 rounded-full opacity-50">
                     <SaveIcon className="size-5 text-gray-200 " />
                   </Button>
                 )}
