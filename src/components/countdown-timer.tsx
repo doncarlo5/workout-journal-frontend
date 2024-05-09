@@ -66,7 +66,7 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
           strokeWidth={17}
           isPlaying={isTimerPlaying}
           duration={exerciseTypeTimer}
-          colors={["#D19F55", "#D19F55", "#D19F55", "#D19F55"]}
+          colors={["#0f766e", "#D19F55", "#D19F55", "#D19F55"]}
           colorsTime={[7, 5, 2, 0]}
           onComplete={() => ({ shouldRepeat: false, delay: 1, newInitialRemainingTime: exerciseTypeTimer })}
         >
@@ -76,14 +76,14 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
       <div className="flex items-center justify-center pb-3">
         {isTimerPlaying ? (
           <button
-            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-[#BF8734] px-6 py-0.5 text-[#FFF] shadow-none transition-shadow  duration-300 hover:shadow-lg  active:translate-y-0.5 active:shadow-inner "
+            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-teal-700 px-6 py-0.5 text-[#FFF] shadow-none transition-shadow hover:bg-teal-600 duration-300 hover:shadow-lg  active:translate-y-0.5 active:shadow-inner "
             onClick={() => restartFunction()}
           >
             <LucideRotateCcw className="h-6 w-6" />
           </button>
         ) : (
           <button
-            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-[#D19F55] px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:bg-[#D19F55] hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
+            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-teal-700 px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:bg-teal-600 hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
             onClick={() => setIsTimerPlaying(true)}
           >
             <LucidePlay className="h-6 w-6 stroke-white transition ease-in-out group-hover:scale-110" />
