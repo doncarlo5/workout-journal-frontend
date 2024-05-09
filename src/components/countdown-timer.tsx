@@ -8,15 +8,17 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     if (remainingTime === 0) {
-      const ding = new Audio("/public/ding.mp3")
+      const ding = new Audio("/ding.mp3")
       ding.currentTime = 0
       ding.play()
-      setKey((prevKey) => prevKey + 1)
+      setTimeout(() => {
+        setKey((prevKey) => prevKey + 1)
+      }, 3000)
       setIsTimerPlaying(false)
       return (
         <div className="flex ">
           <div className="items-center justify-center ">
-            <p className="flex select-none justify-center text-3xl font-black tracking-tighter">GO !</p>
+            <p className="flex animate-ping select-none justify-center text-3xl font-black tracking-tighter">GO !</p>
           </div>
         </div>
       )
