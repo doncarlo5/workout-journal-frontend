@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 function ExerciseCard({ exercise }: { exercise: any }) {
   return (
     <Link
-      className="mb-4 flex w-56 rounded-2xl  bg-slate-100 px-3 py-2 shadow-md active:translate-y-0.5 active:shadow-none md:text-lg"
+      className="mb-4 flex w-56 rounded-2xl  bg-slate-100 px-3 py-2 shadow-md active:translate-y-0.5 active:shadow-none md:text-lg dark:bg-slate-900 dark:bg-opacity-40"
       to={`/history/exercise/${exercise._id}`}
     >
       <div className="">
@@ -13,13 +13,13 @@ function ExerciseCard({ exercise }: { exercise: any }) {
           <div className="flex gap-2">
             <div className="flex flex-col gap-1 text-center">
               <p className="pb-1 text-sm text-gray-500 ">Série</p>
-              <p className="flex items-center justify-center rounded-md bg-slate-200 bg-transparent px-3 py-1 font-mono text-sm text-gray-900 ">
+              <p className="flex items-center justify-center rounded-md bg-slate-200 bg-transparent px-3 py-1 font-mono text-sm text-gray-900 dark:text-white ">
                 1
               </p>
-              <p className="flex items-center justify-center rounded-md bg-slate-200 bg-transparent px-3 py-1 font-mono text-sm text-gray-900 ">
+              <p className="flex items-center justify-center rounded-md bg-slate-200 bg-transparent px-3 py-1 font-mono text-sm text-gray-900 dark:text-white ">
                 2
               </p>
-              <p className="flex items-center justify-center rounded-md bg-slate-200 bg-transparent px-3 py-1 font-mono text-sm text-gray-900 ">
+              <p className="flex items-center justify-center rounded-md bg-slate-200 bg-transparent px-3 py-1 font-mono text-sm text-gray-900 dark:text-white ">
                 3
               </p>
             </div>
