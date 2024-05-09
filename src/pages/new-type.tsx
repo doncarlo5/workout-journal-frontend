@@ -146,7 +146,7 @@ const NewType = () => {
                 type="number"
               />
             </div>
-            <div className="col-span-2 space-y-2 rounded-md bg-gray-50 p-5">
+            <div className="col-span-2 space-y-2 rounded-md bg-gray-50 p-5 dark:bg-slate-900 dark:bg-opacity-40">
               <h2 className="col-span-2 text-lg font-medium">{`Objectif Répétitions [Range]`}</h2>
 
               <div className="space-y-2">
