@@ -66,7 +66,7 @@ export function HomePage() {
                   <p className="tab tab-whishlist block text-sm dark:text-gray-900 ">
                     Crée un <span className="font-bold "> exercice</span>{" "}
                   </p>
-                  <p className="text-xs tracking-tighter ">Ajoute temps de repos, répétitions et conseils.</p>
+                  <p className="text-xs tracking-tighter dark:text-gray-900 ">Ajoute temps de repos, répétitions et conseils.</p>
                 </div>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
@@ -88,8 +88,8 @@ export function HomePage() {
                       <p className="tab tab-whishlist block text-sm dark:text-gray-900">
                         Réalise une <span className="font-bold "> séance </span>
                       </p>
-                      <p className="text-xs tracking-tighter ">
-                        <span className="font-medium ">Upper</span> ou <span className="font-medium ">Lower</span> avec
+                      <p className="text-xs tracking-tighter dark:text-gray-900">
+                        <span className="font-medium  ">Upper</span> ou <span className="font-medium ">Lower</span> avec
                         tes exercices personnalisés.
                       </p>
                     </div>
@@ -116,7 +116,7 @@ export function HomePage() {
                   <p className="tab tab-whishlist block text-sm dark:text-gray-900">
                     Consulte ton <span className="font-bold "> profil </span>
                   </p>
-                  <p className="text-xs tracking-tighter ">Voir tes statistiques et tes derniers trophées obtenus.</p>
+                  <p className="text-xs tracking-tighter dark:text-gray-900">Voir tes statistiques et tes derniers trophées obtenus.</p>
                 </div>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
@@ -138,7 +138,7 @@ export function HomePage() {
                   <p className="tab tab-whishlist block text-sm dark:text-gray-900">
                     Explore ton<span className="font-bold "> historique</span>
                   </p>
-                  <p className="text-xs tracking-tighter ">Retrouve tes séances et exercices passés.</p>
+                  <p className="text-xs tracking-tighter dark:text-gray-900 ">Retrouve tes séances et exercices passés.</p>
                 </div>
               </div>
               <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
