@@ -15,7 +15,7 @@ export function HomePage() {
       <main className="container relative mx-auto my-0 flex h-dvh max-w-lg flex-col">
         <div className="my-auto flex flex-col items-center justify-center">
           <div className="text-center">
-            <h1 className="mb-2 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">Workout Journal</h1>
+            <h1 className="mb-2 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">Hero Journal</h1>
           </div>
 
           <div className="flex w-full justify-center pb-10">

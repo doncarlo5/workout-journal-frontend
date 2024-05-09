@@ -102,7 +102,7 @@ function Navbar() {
       </div>
       {/* <Link className="w-full text-3xl font-bold " to="/">
         <FlagIcon className="" />
-        <span className="hidden text-xl font-bold ">Workout Journal</span>
+        <span className="hidden text-xl font-bold ">Hero Journal</span>
       </Link> */}
       {/* <div className="flex ">
         {!isLoggedIn ? (
