@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Accordion, AccordionItem } from "@radix-ui/react-accordion"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { ChevronLeft, Edit, LucideCheckCircle, LucideInfo } from "lucide-react"
+import { ChevronLeft, Edit, LucideCheckCircle, LucideInfo, LucideLoader2 } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion"
@@ -31,6 +31,7 @@ const DoExercisePage = () => {
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
   const [session, setSession] = useState<any>({})
   const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingTypes, setIsLoadingTypes] = useState(false)
 
   const [formState, setFormState] = useState({
     rep1: lastExercise?.rep[0] || "",
@@ -76,10 +77,13 @@ const DoExercisePage = () => {
 
   const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
+      setIsLoadingTypes(true)
       const response = await myApi.get(`/api/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
       console.log("👋 fetchAllExerciseTypes", response.data)
+      setIsLoadingTypes(false)
       return response.data
     } catch (error) {
+      setIsLoadingTypes(false)
       console.error("Fetch error: ", error)
     }
   }
@@ -176,7 +180,13 @@ const DoExercisePage = () => {
             <SelectGroup>
               {allExerciseTypes.map((type) => (
                 <SelectItem key={type._id} value={type}>
-                  {type.name}
+                  {isLoadingTypes ? (
+                    <div role="status" className="max-w-sm animate-pulse items-center flex">
+                      <div className="mb-2 h-4 w-64 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+                    </div>
+                  ) : (
+                    type.name
+                  )}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -204,6 +214,7 @@ const DoExercisePage = () => {
                   <p className="flex h-9 w-9 items-center justify-center rounded-md bg-slate-200 bg-transparent px-3 py-1 font-mono text-sm text-gray-900 ">
                     <label className="relative flex cursor-pointer items-center rounded-full " htmlFor="teal">
                       <input
+                      placeholder={lastExercise?.rep[0]}
                         type="checkbox"
                         className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-7 w-7 cursor-pointer appearance-none rounded-sm border transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-8 before:w-8 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-teal-500 checked:bg-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
                         id="teal"
@@ -215,12 +226,12 @@ const DoExercisePage = () => {
                           viewBox="0 0 20 20"
                           fill="currentColor"
                           stroke="currentColor"
-                          stroke-width="1"
+                          strokeWidth="1"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           ></path>
                         </svg>
                       </span>
@@ -240,12 +251,12 @@ const DoExercisePage = () => {
                           viewBox="0 0 20 20"
                           fill="currentColor"
                           stroke="currentColor"
-                          stroke-width="1"
+                          strokeWidth="1"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           ></path>
                         </svg>
                       </span>
@@ -265,12 +276,12 @@ const DoExercisePage = () => {
                           viewBox="0 0 20 20"
                           fill="currentColor"
                           stroke="currentColor"
-                          stroke-width="1"
+                          strokeWidth="1"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           ></path>
                         </svg>
                       </span>
@@ -471,7 +482,13 @@ const DoExercisePage = () => {
                 <AccordionItem value="comment">
                   <AccordionTrigger className="flex h-10 gap-2 px-5 text-left text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-2">
-                      <Edit className="size-4" /> <p className="text-left ">Notes</p>
+                      <Edit className="size-4" /> <p>Notes</p>
+                      {lastExercise?.comment && (
+                        <span className="relative flex h-2 w-2">
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"></span>
+                          <span className="relative inline-flex h-2 w-2 rounded-full bg-teal-500"></span>
+                        </span>
+                      )}
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="px-3 pb-3 pt-1 ">
