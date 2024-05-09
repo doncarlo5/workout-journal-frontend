@@ -168,7 +168,7 @@ const OneExercise = () => {
       <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
         <div className="space-y-6 ">
           <div className="flex items-center space-y-2 pt-5">
-            <Link to="/history">
+            <Link to={`/history/session/${session._id}`}>
               <Button variant="outline" size="icon">
                 <ChevronLeft className="h-4 w-4" />
               </Button>
