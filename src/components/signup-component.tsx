@@ -142,7 +142,7 @@ const SignupComponent = () => {
                 </Button>
               )}
               {error && (
-                <Alert variant="destructive">
+                <Alert className=" mt-1" variant="destructive">
                   <AlertTitle>Erreur</AlertTitle>
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
