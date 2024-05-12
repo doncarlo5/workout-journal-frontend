@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 import { useTheme } from "@/components/theme-provider"
+import BorderRotateButton from "@/components/ui/border-rotate-button"
 
 export function HomePage() {
   const { theme, setTheme } = useTheme()
@@ -23,7 +24,8 @@ export function HomePage() {
           </div>
 
           <Link to="/signup">
-            <Button className="mt-5">Commencer</Button>
+            <BorderRotateButton />
+            {/* <Button className="mt-5">Commencer</Button> */}
           </Link>
         </div>
 
