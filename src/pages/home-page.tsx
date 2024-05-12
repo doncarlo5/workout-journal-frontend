@@ -12,16 +12,21 @@ import useAuth from "../context/use-auth"
 export function HomePage() {
   const { user } = useAuth()
   console.log("user", user)
-  
-
 
   const [session, setSession] = useState([] as any)
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchLastSession = async () => {
+    try {
+    setIsLoading(true)
     const response = await myApi.get("/api/sessions?limit=1&sort=-date_session")
     setSession(response.data)
     console.log("fetchLastSession", response.data)
-  }
+  }  catch (error: any) {
+    console.log(error)
+  } finally {
+    setIsLoading(false)
+  }}
 
   useEffect(() => {
     fetchLastSession()
@@ -39,12 +44,21 @@ export function HomePage() {
           <div className="flex flex-col gap-4 pb-4">
             <div className="flex flex-col rounded-lg bg-slate-100 px-4 py-2 shadow-lg dark:bg-slate-900 dark:bg-opacity-80">
               <div className="">
-                <h2 className="text-lg font-bold ">Dernière séance </h2>
-                <div>
-                  <div className="flex gap-2 text-xs text-gray-500 dark:text-gray-400">
+{ session[0] ?(               <h2 className="text-lg font-bold ">Dernière séance </h2>) : (
+                <h2 className="text-lg font-bold ">Aucune séance</h2>
+              )
+              
+}                <div>
+                 {!isLoading ? ( <div className="flex gap-2 text-xs text-gray-500 dark:text-gray-400">
                     <span>{session[0]?.date_session && format(new Date(session[0]?.date_session), "dd/MM/yyyy")}</span>
                     <span>{session[0]?.type_session && session[0]?.type_session}</span>
-                  </div>
+                  </div>) : (
+                    <div role="status" className="max-w-sm animate-pulse">
+                    <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                    </div>
+                  )
+                  
+                }
                 </div>
               </div>
               <Link to="/history">
