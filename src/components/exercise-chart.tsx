@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
+import { LucideLoader2 } from "lucide-react"
 import { Area, AreaChart, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 import myApi from "@/lib/api-handler"
@@ -9,6 +10,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 function ExerciseChart() {
   const [exercise, setExercise] = useState([] as any[])
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
+  const [isLoading, setIsLoading] = useState(true)
   // const [isSelected, setIsSelected] = useState(false)
 
   const fetchAllExerciseTypes = async () => {
@@ -17,6 +19,8 @@ function ExerciseChart() {
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -29,10 +33,8 @@ function ExerciseChart() {
   }, [])
 
   const AllExercisesTypeChange = async (value: any) => {
-    // setIsSelected(true)
     const response = await myApi.get(`/api/exercise-user?limit=1000&sort=createdAt&type=${value._id}`)
     setExercise(response.data)
-    console.log("OneExercise 😀", exercise)
 
     return response.data
   }
@@ -59,22 +61,23 @@ function ExerciseChart() {
         </SelectContent>
       </Select>
 
-      {/* <LineChart width={500} height={300} data={exercise} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-        {exercise.map((sym) => (
-          <Line
-            type="monotone"
-            dataKey={(sym) => sym.value.find((e: any) => e.session === sym).date_session}
-            name={sym}
-            stroke="#8884d8"
-            dot={false}
-          />
-        ))}
-        <XAxis dataKey="date_session" />
-        <Legend />
-        <YAxis />
-      </LineChart> */}
+      {isLoading && (
+        <main className="flex flex-1 items-center justify-center">
+          <div className="container flex flex-col items-center justify-center p-20">
+            <div className="">
+              <LucideLoader2 className=" animate-spin" size={32} />
+            </div>
+          </div>
+        </main>
+      )}
 
-      <ResponsiveContainer width="100%" height="75%">
+      {exercise.length === 0 && !isLoading && (
+        <div className="mt-5 text-center">
+          <p>Aucun historique pour cet exercice.</p>
+        </div>
+      )}
+
+      <ResponsiveContainer className="mt-4" width="100%" height="75%">
         <AreaChart
           width={500}
           height={300}
@@ -86,22 +89,15 @@ function ExerciseChart() {
             bottom: 5,
           }}
         >
-          {exercise.map((sym) => {
-            console.log("sym", sym)
-            return (
-              <>
-                <defs>
-                  <linearGradient id={sym.session} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#B99C70" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#B99C70" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey={sym.session} tickFormatter={(tick) => formatXAxis(tick)} />
-              </>
-            )
-          })}
+          <defs>
+            <linearGradient id="date_session" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#38b2ac" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#38b2ac" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis dataKey="session.date_session" tickFormatter={(tick) => formatXAxis(tick)} />
 
-          <YAxis name="Kg" domain={["auto", "auto"]}>
+          <YAxis name="Weight" domain={["auto", "auto"]}>
             <Label
               style={{
                 textAnchor: "middle",
@@ -109,7 +105,8 @@ function ExerciseChart() {
                 fill: "#666666",
               }}
               position="left"
-              value={"KG"}
+              value={"Charge (kg)"}
+              angle={-90}
               offset={-2}
               dx={-10}
               dy={-10}
@@ -117,6 +114,7 @@ function ExerciseChart() {
               fontStretch={"ultra-condensed"}
             />
           </YAxis>
+
           <Tooltip
             labelFormatter={(value) => {
               return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
@@ -125,11 +123,12 @@ function ExerciseChart() {
           />
 
           <Area
-            name="Poids"
+            name="Charge (kg)"
             dot={false}
             type="monotone"
             dataKey="weight[0]"
-            stroke="#B99C70"
+            fill="url(#date_session)" // Use the gradient fill
+            stroke="#38b2ac" // You can set stroke color separately if needed
             strokeWidth={2}
             fillOpacity={1}
             activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
