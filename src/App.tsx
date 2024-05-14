@@ -1,7 +1,7 @@
 // import SessionPage from "./pages/session-page"
 import { Route, Routes } from "react-router-dom"
 
-import { ThemeProvider } from "./components/theme-provider"
+// import { ThemeProvider } from "./components/theme-provider"
 import DoExercisePage from "./pages/do-exercise-page"
 import ErrorBoundary from "./pages/error-boundary"
 import { HistoryPage } from "./pages/history-page"
@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="flex-1 overflow-scroll">
       <ErrorBoundary>
-        <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+        {/* <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme"> */}
           <Routes>
             <Route element={<IsNotAuthenticated />}>
               <Route path="/signup" element={<SignupPage />} />
@@ -55,7 +55,7 @@ function App() {
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </ErrorBoundary>
     </div>
   )

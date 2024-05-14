@@ -1,16 +1,16 @@
-import { Moon, Sun } from "lucide-react"
+// import { Moon, Sun } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import { Button } from "@/components/ui/button"
-import { useTheme } from "@/components/theme-provider"
+// import { Button } from "@/components/ui/button"
+// import { useTheme } from "@/components/theme-provider"
 import BorderRotateButton from "@/components/ui/border-rotate-button"
 
 export function HomePage() {
-  const { theme, setTheme } = useTheme()
+  // const { theme, setTheme } = useTheme()
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light")
-  }
+  // const toggleTheme = () => {
+  //   setTheme(theme === "light" ? "dark" : "light")
+  // }
   return (
     <div className="">
       <main className="container relative mx-auto my-0 flex h-dvh max-w-lg flex-col">
@@ -29,7 +29,7 @@ export function HomePage() {
           </Link>
         </div>
 
-        <div className="absolute bottom-0 right-0 mb-8 mr-8">
+        {/* <div className="absolute bottom-0 right-0 mb-8 mr-8">
           <Button variant={"outline"} className="rounded-full px-4 py-5" onClick={toggleTheme}>
             {theme === "light" ? (
               <>
@@ -42,7 +42,7 @@ export function HomePage() {
             )}
             <span className="sr-only">Toggle theme</span>
           </Button>
-        </div>
+        </div> */}
       </main>
     </div>
   )

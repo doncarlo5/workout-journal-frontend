@@ -2,16 +2,16 @@ import useAuth from "@/context/use-auth"
 import { LucideLineChart, LucideLogOut, LucideTimer, LucideTrophy, LucideUserRoundCog, Moon, Sun } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import { useTheme } from "./theme-provider"
+// import { useTheme } from "./theme-provider"
 import { Button } from "./ui/button"
 
 function DashboardComponent() {
   const { handleLogout } = useAuth()
-  const { theme, setTheme } = useTheme()
+  // const { theme, setTheme } = useTheme()
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light")
-  }
+  // const toggleTheme = () => {
+  //   setTheme(theme === "light" ? "dark" : "light")
+  // }
 
   return (
     <div className="">
@@ -48,7 +48,7 @@ function DashboardComponent() {
             </div>
           </Link>
         </Button>
-        <Button variant={"outline"} className="h-24 " onClick={toggleTheme}>
+        {/* <Button variant={"outline"} className="h-24 " onClick={toggleTheme}>
           {theme === "light" ? (
             <div className="flex flex-col gap-1">
               <Moon strokeWidth={1.1} size={40} />
@@ -61,7 +61,7 @@ function DashboardComponent() {
             </div>
           )}
           <span className="sr-only">Toggle theme</span>
-        </Button>
+        </Button> */}
         <Button variant={"outline"} onClick={handleLogout} className="flex h-24 flex-col gap-1">
           <LucideLogOut strokeWidth={1.1} size={40} />
           Déconnexion
