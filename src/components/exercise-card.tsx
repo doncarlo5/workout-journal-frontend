@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 function ExerciseCard({ exercise }: { exercise: any }) {
   return (
     <Link
-      className="mb-4 flex w-56 rounded-2xl  bg-slate-100 px-3 py-2 shadow-md active:translate-y-0.5 active:shadow-none md:text-lg dark:bg-slate-900 dark:bg-opacity-40"
+      className="flex w-11/12 rounded-2xl justify-center  bg-slate-100 px-3 py-2 shadow-md active:translate-y-0.5 active:shadow-none md:text-lg dark:bg-slate-900 dark:bg-opacity-40"
       to={`/history/exercise/${exercise._id}`}
     >
       <div className="">

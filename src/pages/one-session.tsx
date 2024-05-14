@@ -230,64 +230,62 @@ const OneSession = () => {
         </div>
 
         <div className="space-y-4">
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 pb-14">
-            <div className="flex flex-col space-y-2">
-              <Label htmlFor="session_date">Date</Label>
-              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-36 pl-3 text-left font-normal",
-                      !formState.date_session && "text-muted-foreground"
-                    )}
-                  >
-                    {formState.date_session ? (
-                      format(formState.date_session, "PPP", { locale: fr })
-                    ) : (
-                      <span>Choisir une date</span>
-                    )}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    locale={fr}
-                    id="session_date"
-                    mode="single"
-                    selected={formState.date_session ? new Date(formState.date_session) : undefined}
-                    onSelect={handleSelectDate}
-                    disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
+          <form onSubmit={handleSubmit} className="pb-14">
+            <div className="flex gap-20 mb-5 ">
+              <div className="flex-1 flex flex-col justify-between gap-2">
+                <Label htmlFor="session_date">Date</Label>
+                <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full pl-3 text-left font-normal",
+                        !formState.date_session && "text-muted-foreground"
+                      )}
+                    >
+                      {formState.date_session ? (
+                        format(formState.date_session, "PPP", { locale: fr })
+                      ) : (
+                        <span>Choisir une date</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      locale={fr}
+                      id="session_date"
+                      mode="single"
+                      selected={formState.date_session ? new Date(formState.date_session) : undefined}
+                      onSelect={handleSelectDate}
+                      disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
 
-            <div className="space-y-2"></div>
+              <div className=" flex-1 flex flex-col justify-between gap-2">
+                <Label htmlFor="body_weight">{`Ta pesée (KG)`}</Label>
+                <div className="relative w-full">
+                  <Input
+                    id="body_weight"
+                    placeholder={`${formState.body_weight}`}
+                    value={formState.body_weight}
+                    onChange={handleSelectWeight}
+                    required
+                    type="number"
+                    onWheel={(e) => e.currentTarget.blur()}
+                    className="pr-9"
 
-            <div className="w-36 space-y-2">
-              <Label htmlFor="body_weight">{`Ta pesée (KG)`}</Label>
-              <div className="relative w-full">
-                <Input
-                  id="body_weight"
-                  placeholder={`${formState.body_weight}`}
-                  value={formState.body_weight}
-                  onChange={handleSelectWeight}
-                  required
-                  type="number"
-                  onWheel={(e) => e.currentTarget.blur()}
-                  className="pr-9"
-
-                  // disabled={!isEditable}
-                />{" "}
-                <Weight className="absolute right-1.5 top-0 m-2.5 h-4 w-4 text-muted-foreground opacity-50" />
+                    // disabled={!isEditable}
+                  />{" "}
+                  <Weight className="absolute right-1.5 top-0 m-2.5 h-4 w-4 text-muted-foreground opacity-50" />
+                </div>
               </div>
             </div>
 
-            <div className="grid grid-flow-col grid-rows-3"></div>
-
-            <div className="col-span-2 flex flex-col items-center justify-center ">
+            <div className=" flex flex-col items-center justify-center ">
               {isLoading ? (
                 <div className="container flex flex-col items-center justify-center p-20 md:grid md:grid-cols-2">
                   <div className="">
@@ -299,10 +297,10 @@ const OneSession = () => {
                   <ExerciseCard exercise={exercise} key={exercise._id} />
                 ))
               )}
-              <div className="px-4">
+              <div>
                 <Link to={`/history/session/${sessionId}/do-exercise`}>
-                  <Button className="w-full ">
-                    {" "}
+                  <Button className=" mt-4">
+                  
                     <LucidePlusCircle className="mr-2 size-5" />
                     Ajouter un exercice{" "}
                   </Button>
