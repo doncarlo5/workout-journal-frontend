@@ -8,14 +8,15 @@ const BorderRotateButton = () => {
         scale: 1,
         padding: '3px',
       }}
-      whileTap={{
-        scale: 0.95,
-        padding: '0px',
-      }}
-      whileHover={{
-        padding: '0px',
-        scale: 1.05,
-      }}
+      
+      // whileTap={{
+      //   scale: 0.95,
+      //   padding: '0px',
+      // }}
+      // whileHover={{
+      //   padding: '0px',
+      //   scale: 1.05,
+      // }}
       transition={{
         stiffness: 500,
         damping: 20,
