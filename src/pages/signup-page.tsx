@@ -143,13 +143,13 @@ const SignupPage = () => {
                   </div>
                 </div>
               </form>
-              <div className="flex justify-center">
+              {/* <div className="flex justify-center">
                 <Link to="/">
                   <Button variant={"outline"} className="mt-5">
                     <Home size={20} strokeWidth={1.1} />
                   </Button>
                 </Link>
-              </div>
+              </div> */}
             </>
           </TabsContent>
           <TabsContent value="signup">

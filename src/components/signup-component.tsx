@@ -148,13 +148,13 @@ const SignupComponent = () => {
                 </Alert>
               )}
             </div>
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <Link to="/">
                 <Button variant={"outline"} className="">
                   <Home size={20} strokeWidth={1.1} />
                 </Button>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </form>
