@@ -1,5 +1,5 @@
 import useAuth from "@/context/use-auth"
-import { LucideCircleUser, LucideHistory, LucideHome, LucidePencilRuler, LucideRocket } from "lucide-react"
+import { LucideCircleUser, LucideHistory, LucideHome, LucideListChecks, LucidePencilRuler, LucideRocket } from "lucide-react"
 import { NavLink } from "react-router-dom"
 
 import NewSessionButton from "./new-session-button"
@@ -62,39 +62,24 @@ function Navbar() {
                     (isActive ? activeLink : inactiveLink) +
                     " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
                   }
+                  to="/history"
+                >
+                  <LucideListChecks className="mb-1 inline-block" size={24} />
+                  <span className="tab tab-whishlist block text-xs">Séances</span>
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    (isActive ? activeLink : inactiveLink) +
+                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
+                  }
                   to="/profile"
                 >
                   <LucideCircleUser className="mb-1 inline-block" size={24} />
                   <span className="tab tab-whishlist block text-xs">Profil</span>
                 </NavLink>
-                <NavLink
-                  className={({ isActive }) =>
-                    (isActive ? activeLink : inactiveLink) +
-                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
-                  }
-                  to="/type"
-                >
-                  <LucidePencilRuler strokeWidth={1.8} className="mb-1 inline-block" size={24} />
-                  <span className="tab tab-whishlist block text-xs">Exercices</span>
-                </NavLink>
-                <NavLink
-                  className={({ isActive }) =>
-                    (isActive ? activeLink : inactiveLink) +
-                    " inline-block w-full justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500"
-                  }
-                  to="/history"
-                >
-                  <LucideHistory className="mb-1 inline-block" size={24} />
-                  <span className="tab tab-whishlist block text-xs">Historique</span>
-                </NavLink>
-                <NewSessionButton
-                  Children={
-                    <div className="inline-block w-full cursor-pointer justify-center pb-1 pt-2 text-center hover:text-teal-500 focus:text-teal-500">
-                      <LucideRocket className="mb-1 inline-block" size={24} />
-                      <span className="tab tab-account block text-xs">Séance</span>
-                    </div>
-                  }
-                />
+              
+            
+            
               </>
             )}
           </div>
