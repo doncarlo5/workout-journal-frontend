@@ -1,18 +1,7 @@
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
-import {
-  Activity,
-  Dumbbell,
-  LucideArrowRight,
-  LucideBadgePlus,
-  LucideCircleUser,
-  LucideHistory,
-  LucidePencilRuler,
-  Plus,
-  WeightIcon,
-  Zap,
-} from "lucide-react"
+import { LucideCircleUser, Plus } from "lucide-react"
 import { FaDumbbell, FaWeightScale } from "react-icons/fa6"
 import { Link } from "react-router-dom"
 
@@ -70,95 +59,103 @@ export function HomePage() {
             Bienvenue {user?.firstName}.
           </h1>
           <div className="flex flex-col gap-4 pb-4 ">
-            <div className="px-3 py-3 flex h-24 flex-col justify-between rounded-lg bg-slate-100  shadow-lg dark:bg-slate-900 dark:bg-opacity-80">
-              {lastSession[0] ? (
-                <h2 className="text-lg font-bold ">Dernière séance </h2>
-              ) : (
-                <h2 className="text-lg font-bold ">Aucune séance</h2>
-              )}{" "}
-              <div className="flex justify-between items-end   text-slate-600 dark:text-gray-400">
-                <span>
-                  {lastSession[0]?.date_session && format(new Date(lastSession[0]?.date_session), "dd/MM/yyyy")}
-                  {" - "}
-                  {lastSession[0]?.type_session && lastSession[0]?.type_session}
-                </span>
-                <Link className=" flex" to="/history">
-                  <span className="flex jus  text-sm text-teal-500 hover:underline">Voir tout</span>
-                </Link>
+            {isLoading ? (
+              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3">
+                <div className="mb-4 h-6 w-24 rounded-full bg-gray-200 "></div>
+                <div className="h-5 w-32 rounded-full bg-gray-200 "></div>
               </div>
-            </div>
-          </div>
-          {/* <Link
-              className="group flex items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg hover:text-teal-500 focus:text-teal-500  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
-              to="/type"
-            >
-              <div className="flex items-center gap-4 pl-4 ">
-                <LucidePencilRuler
-                  color="rgb(107 114 128)"
-                  className=" group-hover:stroke-teal-500"
-                  height={40}
-                  width={80}
-                  strokeWidth={1.5}
-                />
-                <div className="flex flex-col">
-                  <p className="tab tab-whishlist block text-sm  ">
-                    Crée un <span className="font-bold "> exercice</span>{" "}
-                  </p>
-                  <p className="text-xs tracking-tighter  ">Ajoute temps de repos, répétitions et conseils.</p>
+            ) : (
+              <div className="flex h-24 flex-col justify-between rounded-lg bg-slate-100 px-3 py-3  shadow-lg dark:bg-slate-900 dark:bg-opacity-80">
+                {lastSession[0] ? (
+                  <h2 className="text-lg font-bold ">Dernière séance </h2>
+                ) : (
+                  <h2 className="text-lg font-bold ">Aucune séance</h2>
+                )}{" "}
+                <div className="flex items-end justify-between   text-slate-600 dark:text-gray-400">
+                  <span>
+                    {lastSession[0]?.date_session && format(new Date(lastSession[0]?.date_session), "dd/MM/yyyy")}
+                    {" - "}
+                    {lastSession[0]?.type_session && lastSession[0]?.type_session}
+                  </span>
+                  <Link className=" flex" to="/history">
+                    <span className="jus flex  text-sm text-teal-500 hover:underline">Voir tout</span>
+                  </Link>
                 </div>
               </div>
-              <div className="mx-4 h-8 w-[0.1rem] rounded-full bg-gray-200"></div>
-              <LucideArrowRight className="inline-block " color="rgb(107 114 128)" height={40} width={80} />
-            </Link> */}
+            )}
+          </div>
           <div className="flex flex-col gap-4 pb-4">
             <h1 className="text-2xl font-bold ">Progression</h1>
           </div>
           <div className="grid grid-cols-2 gap-4 pb-20">
-            <Link
-              className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
-              to="/history"
-            >
-              <div className="flex items-center gap-2 text-slate-600">
-                <FaDumbbell color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
-                Séances
+            {isLoading ? (
+              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3">
+                <div className="mb-4 h-6 w-24 rounded-full bg-gray-200 "></div>
+                <div className="h-5 w-32 rounded-full bg-gray-200 "></div>
               </div>
-              <div className=" text-3xl font-extrabold">{allSessions.length}</div>
-            </Link>
-            <Link
-              className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
-              to="/history"
-            >
-              <div className="flex items-baseline gap-2 text-slate-600">
-                <FaWeightScale color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
-                Poids
-              </div>
-              <div className=" text-2xl font-medium">
-                {lastSession[0]?.body_weight} <span className=" text-xl font-extralight">KG</span>
-              </div>
-              <div className="text-xs font-extralight text-slate-600 ">
-                {lastSession[0]?.date_session &&
-                  capitalizeFirstLetter(
-                    format(new Date(lastSession[0]?.date_session), "iiii do MMMM yyyy", {
-                      locale: fr,
-                    })
-                  )}
-              </div>
-            </Link>
-
-            <Link
-              className="group col-span-2 flex h-24 w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
-              to="/profile"
-            >
-              <div className="flex items-center gap-4 pl-4">
-                <LucideCircleUser color="rgb(107 114 128)" className="" height={35} width={35} strokeWidth={1.5} />
-                <div>
-                  <p className="tab tab-whishlist block  text-slate-800">
-                    Consulte ton <span className="font-bold">profil</span>
-                  </p>
-                  <p className="text-xs text-slate-600 tracking-tighter">Voir tes statistiques et tes derniers trophées obtenus.</p>
+            ) : (
+              <Link
+                className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
+                to="/history"
+              >
+                <div className="flex items-center gap-2 text-slate-600">
+                  <FaDumbbell color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
+                  Séances
                 </div>
+                <div className=" text-3xl font-extrabold">{allSessions.length}</div>
+              </Link>
+            )}
+            {isLoading ? (
+              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3">
+                <div className="mb-4 h-6 w-24 rounded-full bg-gray-200 "></div>
+                <div className="h-5 w-32 rounded-full bg-gray-200 "></div>
               </div>
-            </Link>
+            ) : (
+              <Link
+                className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
+                to="/history"
+              >
+                <div className="flex items-baseline gap-2 text-slate-600">
+                  <FaWeightScale color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
+                  Poids
+                </div>
+                <div className=" text-2xl font-medium">
+                  {lastSession[0]?.body_weight} <span className=" text-xl font-extralight">KG</span>
+                </div>
+                <div className="text-xs font-extralight text-slate-600 ">
+                  {lastSession[0]?.date_session &&
+                    capitalizeFirstLetter(
+                      format(new Date(lastSession[0]?.date_session), "iiii do MMMM yyyy", {
+                        locale: fr,
+                      })
+                    )}
+                </div>
+              </Link>
+            )}
+
+            {isLoading ? (
+              <div className="flex flex-row gap-3 col-span-2 justify-center items-center h-24 w-full animate-pulse rounded-lg bg-slate-100 px-3 py-3">
+                <div className=" h-10 w-10 rounded-full bg-gray-200 "></div>
+                <div className="h-5 w-32 rounded-full bg-gray-200 "></div>
+              </div>
+            ) : (
+              <Link
+                className="group col-span-2 flex h-24 w-full items-center justify-center rounded-lg bg-slate-100 px-2 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
+                to="/profile"
+              >
+                <div className="flex items-center gap-4 pl-4">
+                  <LucideCircleUser color="rgb(107 114 128)" className="" height={35} width={35} strokeWidth={1.5} />
+                  <div>
+                    <p className="tab tab-whishlist block  text-slate-800">
+                      Consulte ton <span className="font-bold">profil</span>
+                    </p>
+                    <p className="text-xs tracking-tighter text-slate-600">
+                      Voir tes statistiques et tes derniers trophées obtenus.
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            )}
             <NewSessionButton
               Children={
                 <div className="fixed bottom-20 right-10 cursor-pointer">
