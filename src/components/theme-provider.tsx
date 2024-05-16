@@ -1,6 +1,6 @@
 // import { createContext, useContext, useEffect, useState } from "react"
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 // type Theme = "dark" | "light" | "system"
 
@@ -70,13 +70,13 @@ import { useEffect } from "react";
 
 
 
-useEffect(() => {
-  const root = window.document.documentElement
+// useEffect(() => {
+//   const root = window.document.documentElement
 
-  root.classList.remove("light", "dark")
+//   root.classList.remove("light", "dark")
 
   // Always set the theme to light
-  root.classList.add("light");
+  // root.classList.add("light");
 
   // You can remove the code block below if you don't need system theme handling
   // if (theme === "system") {
@@ -87,4 +87,4 @@ useEffect(() => {
   // }
 
   // root.classList.add(theme)
-}, [])
+// }, [])
