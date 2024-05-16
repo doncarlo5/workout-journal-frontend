@@ -19,7 +19,7 @@ function DashboardComponent() {
       <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/settings">
             <div className="flex flex-col items-center justify-center gap-1">
-              <LucidePencilRuler strokeWidth={1.1} size={40} />
+              <LucidePencilRuler strokeWidth={1.1} size={32} />
               Mes exercices
             </div>
           </Link>
@@ -27,7 +27,7 @@ function DashboardComponent() {
         <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/stats">
             <div className="flex flex-col items-center justify-center gap-1">
-              <LucideLineChart strokeWidth={1.1} size={40} />
+              <LucideLineChart strokeWidth={1.1} size={32} />
               Stats
             </div>
           </Link>
@@ -35,7 +35,7 @@ function DashboardComponent() {
         <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/trophy">
             <div className="flex flex-col items-center justify-center gap-1">
-              <LucideTrophy strokeWidth={1.1} size={40} />
+              <LucideTrophy strokeWidth={1.1} size={32} />
               Trophées
             </div>
           </Link>
@@ -43,7 +43,7 @@ function DashboardComponent() {
         <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/timer">
             <div className="flex flex-col items-center justify-center gap-1">
-              <LucideTimer strokeWidth={1.1} size={40} />
+              <LucideTimer strokeWidth={1.1} size={32} />
               Minuteur
             </div>
           </Link>
@@ -52,7 +52,7 @@ function DashboardComponent() {
         <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/settings">
             <div className="flex flex-col items-center justify-center gap-1">
-              <LucideUserRoundCog strokeWidth={1.1} size={40} />
+              <LucideUserRoundCog strokeWidth={1.1} size={32} />
               Informations
             </div>
           </Link>
@@ -62,19 +62,19 @@ function DashboardComponent() {
         {/* <Button variant={"outline"} className="h-24 " onClick={toggleTheme}>
           {theme === "light" ? (
             <div className="flex flex-col gap-1">
-              <Moon strokeWidth={1.1} size={40} />
+              <Moon strokeWidth={1.1} size={32} />
               Dark
             </div>
           ) : (
             <div className="flex flex-col gap-1">
-              <Sun strokeWidth={1.1} size={40} />
+              <Sun strokeWidth={1.1} size={32} />
               Light
             </div>
           )}
           <span className="sr-only">Toggle theme</span>
         </Button> */}
         <Button variant={"outline"} onClick={handleLogout} className="flex h-24 flex-col gap-1">
-          <LucideLogOut strokeWidth={1.1} size={40} />
+          <LucideLogOut strokeWidth={1.1} size={32} />
           Déconnexion
         </Button>
       </div>
