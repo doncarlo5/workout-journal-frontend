@@ -66,12 +66,12 @@ function NewSessionButton({ Children }: { Children: any }) {
         <div className="w-full max-w-sm mx-auto">
           <DrawerHeader className="text-left ">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
-            <DrawerDescription className="flex items-center gap-1 ">
+            {/* <DrawerDescription className="flex items-center gap-1 ">
               <LucidePencilRuler className="ml-1 " size={16} />{" "}
               <Link className="flex items-center " to="/type/new-type">
                 Ou crée un <span className="ml-1 underline">exercice</span>.{" "}
               </Link>
-            </DrawerDescription>
+            </DrawerDescription> */}
           </DrawerHeader>
           <div className="p-4 pb-0">
             <div className="flex items-center justify-between space-x-2">
