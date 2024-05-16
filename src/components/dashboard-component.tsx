@@ -1,5 +1,5 @@
 import useAuth from "@/context/use-auth"
-import { LucideLineChart, LucideLogOut, LucideTimer, LucideTrophy, LucideUserRoundCog, Moon, Sun } from "lucide-react"
+import { LucideLineChart, LucideLogOut, LucidePencilRuler, LucideTimer, LucideTrophy, LucideUserRoundCog, Moon, Sun } from "lucide-react"
 import { Link } from "react-router-dom"
 
 // import { useTheme } from "./theme-provider"
@@ -16,6 +16,14 @@ function DashboardComponent() {
   return (
     <div className="">
       <div className="mx-auto grid max-w-sm grid-cols-2 grid-rows-3 gap-2">
+      <Button variant={"outline"} asChild className="h-24 ">
+          <Link to="/profile/settings">
+            <div className="flex flex-col items-center justify-center gap-1">
+              <LucidePencilRuler strokeWidth={1.1} size={40} />
+              Mes exercices
+            </div>
+          </Link>
+        </Button>
         <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/stats">
             <div className="flex flex-col items-center justify-center gap-1">
@@ -40,14 +48,17 @@ function DashboardComponent() {
             </div>
           </Link>
         </Button>
+      
         <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/settings">
             <div className="flex flex-col items-center justify-center gap-1">
               <LucideUserRoundCog strokeWidth={1.1} size={40} />
-              Modifier
+              Informations
             </div>
           </Link>
         </Button>
+  
+  
         {/* <Button variant={"outline"} className="h-24 " onClick={toggleTheme}>
           {theme === "light" ? (
             <div className="flex flex-col gap-1">
