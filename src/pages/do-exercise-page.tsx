@@ -140,7 +140,6 @@ const DoExercisePage = () => {
   return (
     <>
       <Navbar />
-
       <main className="container mx-auto my-0 flex h-dvh max-w-md flex-col">
         <div className="flex items-center space-y-2 py-5">
           <AlertDialog>
