@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
 import { LucideLoader2 } from "lucide-react"
-import { Area, AreaChart, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 import myApi from "@/lib/api-handler"
 
@@ -71,70 +71,86 @@ function ExerciseChart() {
         </main>
       )}
 
-      {exercise.length === 0 && !isLoading && (
-        <div className="mt-5 text-center">
-          <p>Aucun historique pour cet exercice.</p>
-        </div>
-      )}
-
-      <ResponsiveContainer className="mt-4" width="100%" height="75%">
-        <AreaChart
-          width={500}
-          height={300}
-          data={exercise}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <defs>
-            <linearGradient id="date_session" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#38b2ac" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#38b2ac" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="session.date_session" tickFormatter={(tick) => formatXAxis(tick)} />
-
-          <YAxis name="Weight" domain={["auto", "auto"]}>
-            <Label
-              style={{
-                textAnchor: "middle",
-                fontSize: "100%",
-                fill: "#666666",
-              }}
-              position="left"
-              value={"Charge (kg)"}
-              angle={-90}
-              offset={-2}
-              dx={-10}
-              dy={-10}
-              fontWeight={"bold"}
-              fontStretch={"ultra-condensed"}
-            />
-          </YAxis>
-
-          <Tooltip
-            labelFormatter={(value) => {
-              return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
+      {exercise.length > 0 && (
+        <ResponsiveContainer className="mt-4 rounded-xl border bg-slate-50 p-4" width="100%" height="70%">
+          <AreaChart
+            width={0}
+            data={exercise}
+            margin={{
+              top: 0,
+              right: 0,
+              left: 0,
+              bottom: 0,
             }}
-            animationEasing={"ease-out"}
-          />
+          >
+            <defs>
+              <linearGradient id="date_session" x1="0" y1="0" x2="0" y2="1">
+                {/* <stop offset="5%" stopColor="#38b2ac" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#38b2ac" stopOpacity={0} /> */}
+              </linearGradient>
+            </defs>
+            <XAxis dataKey="session.date_session" tickFormatter={(tick) => formatXAxis(tick)} />
+            <CartesianGrid strokeDasharray="3 3" />
 
-          <Area
-            name="Charge (kg)"
-            dot={false}
-            type="monotone"
-            dataKey="weight[0]"
-            fill="url(#date_session)" // Use the gradient fill
-            stroke="#38b2ac" // You can set stroke color separately if needed
-            strokeWidth={2}
-            fillOpacity={1}
-            activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+            <YAxis name="Weight" width={50} domain={["dataMin - 10", "dataMax + 10"]}>
+              <Label
+                style={{
+                  textAnchor: "unset",
+                  fontSize: "90%",
+                  fill: "#666666",
+                }}
+                position={"insideTopRight"}
+                value={"Charge (kg)"}
+                dy={0}
+                dx={15}
+                fontWeight={"bold"}
+                fontStretch={"ultra-condensed"}
+              />
+            </YAxis>
+
+            <Tooltip
+              labelFormatter={(value) => {
+                return `Date: ${format(new Date(value), "dd/MM/yyyy")}`
+              }}
+              animationEasing={"ease-out"}
+            />
+
+            <Area
+              name="Série 1"
+              dot={false}
+              type="monotone"
+              dataKey="weight[0]"
+              fill="url(#date_session)" // Use the gradient fill
+              stroke="#AC38B2" // You can set stroke color separately if needed
+              strokeWidth={2}
+              fillOpacity={1}
+              activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
+            />
+            <Area
+              name="Série 2"
+              dot={false}
+              type="monotone"
+              dataKey="weight[1]"
+              fill="url(#date_session)" // Use the gradient fill
+              stroke="#B2AC38" // You can set stroke color separately if needed
+              strokeWidth={2}
+              fillOpacity={1}
+              activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
+            />
+            <Area
+              name="Série 3"
+              dot={false}
+              type="monotone"
+              dataKey="weight[2]"
+              fill="url(#date_session)" // Use the gradient fill
+              stroke="#38B2AC" // You can set stroke color separately if needed
+              strokeWidth={2}
+              fillOpacity={1}
+              activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      )}
     </>
   )
 }
