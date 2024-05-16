@@ -307,7 +307,7 @@ const OneSession = () => {
                 </Link>
               </div>
             </div>
-            <div className="col-span-2 resize space-y-2">
+            <div className="col-span-2 resize space-y-2 mb-2">
               <Label htmlFor="comment">Notes</Label>
               <div className="flex items-center gap-5 ">
                 <Textarea
