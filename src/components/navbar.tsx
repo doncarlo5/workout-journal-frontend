@@ -1,5 +1,5 @@
 import useAuth from "@/context/use-auth"
-import { LucideCircleUser, LucideHistory, LucideHome, LucideListChecks, LucidePencilRuler, LucideRocket } from "lucide-react"
+import { LucideAlignJustify, LucideCircleUser, LucideHistory, LucideHome, LucideList, LucideListChecks, LucidePencilRuler, LucideRocket } from "lucide-react"
 import { NavLink } from "react-router-dom"
 
 import NewSessionButton from "./new-session-button"
@@ -64,7 +64,7 @@ function Navbar() {
                   }
                   to="/history"
                 >
-                  <LucideListChecks className="mb-1 inline-block" size={24} />
+                  <LucideAlignJustify className="mb-1 inline-block" size={24} />
                   <span className="tab tab-whishlist block text-xs">Séances</span>
                 </NavLink>
                 <NavLink
