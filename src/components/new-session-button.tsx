@@ -1,13 +1,13 @@
 import React, { useState } from "react"
-import { LucidePencilRuler, LucideWeight } from "lucide-react"
-import { Link, useNavigate } from "react-router-dom"
+import { LucideWeight } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 import myApi from "../lib/api-handler"
 import IconChest from "./chest-icon"
 import IconLegs from "./legs-icon"
 import { Button } from "./ui/button"
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog"
-import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer"
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer"
 import { Input } from "./ui/input"
 
 function NewSessionButton({ Children }: { Children: any }) {
@@ -63,7 +63,7 @@ function NewSessionButton({ Children }: { Children: any }) {
         {Children}
       </DrawerTrigger>
       <DrawerContent className="select-none ">
-        <div className="w-full max-w-sm mx-auto">
+        <div className="mx-auto w-full max-w-sm">
           <DrawerHeader className="text-left ">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
             {/* <DrawerDescription className="flex items-center gap-1 ">
@@ -81,7 +81,7 @@ function NewSessionButton({ Children }: { Children: any }) {
                 size="icon"
                 className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
-                <p className="mt-4 mb-1 text-lg">Upper A</p>
+                <p className="mb-1 mt-4 text-lg">Upper A</p>
                 <IconChest className="mt-3" />
                 <span className="sr-only">Upper A</span>
               </Button>
@@ -91,7 +91,7 @@ function NewSessionButton({ Children }: { Children: any }) {
                 size="icon"
                 className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
-                <p className="mt-4 mb-1 text-lg">Lower</p>
+                <p className="mb-1 mt-4 text-lg">Lower</p>
                 <IconLegs className="mt-3" />
                 <span className="sr-only">Lower</span>
               </Button>
@@ -101,12 +101,12 @@ function NewSessionButton({ Children }: { Children: any }) {
                 size="icon"
                 className="flex h-24 w-24 flex-col rounded-md drop-shadow active:translate-y-0.5 active:drop-shadow-none"
               >
-                <p className="mt-4 mb-1 text-lg">Upper B</p>
+                <p className="mb-1 mt-4 text-lg">Upper B</p>
                 <IconChest className="mt-3" />
                 <span className="sr-only">Upper B</span>
               </Button>
             </div>
-            <div className="h-2 mt-3"></div>
+            <div className="mt-3 h-2"></div>
           </div>
         </div>
       </DrawerContent>
@@ -122,7 +122,7 @@ function NewSessionButton({ Children }: { Children: any }) {
                 <p className="text-left text-gray-500 dark:text-gray-400">Renseigne ton poids pour continuer.</p>
               </DialogDescription>
               <DialogDescription className="flex justify-center py-2 ">
-                <div className="flex items-end justify-center w-3/5 gap-2 text-xl font-light ">
+                <div className="flex w-3/5 items-end justify-center gap-2 text-xl font-light ">
                   <Input
                     className="w-1/4 "
                     type="number"

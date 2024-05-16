@@ -1,8 +1,6 @@
 import useAuth from "@/context/use-auth"
-import { LucideAlignJustify, LucideCircleUser, LucideHistory, LucideHome, LucideList, LucideListChecks, LucidePencilRuler, LucideRocket } from "lucide-react"
+import { LucideAlignJustify, LucideCircleUser, LucideHome, LucideRocket } from "lucide-react"
 import { NavLink } from "react-router-dom"
-
-import NewSessionButton from "./new-session-button"
 
 function Navbar() {
   const { isLoggedIn } = useAuth()
@@ -77,9 +75,6 @@ function Navbar() {
                   <LucideCircleUser className="mb-1 inline-block" size={24} />
                   <span className="tab tab-whishlist block text-xs">Profil</span>
                 </NavLink>
-              
-            
-            
               </>
             )}
           </div>
