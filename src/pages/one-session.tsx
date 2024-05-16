@@ -231,8 +231,8 @@ const OneSession = () => {
 
         <div className="space-y-4">
           <form onSubmit={handleSubmit} className="pb-14">
-            <div className="flex gap-20 mb-5 ">
-              <div className="flex-1 flex flex-col justify-between gap-2">
+            <div className="mb-5 flex gap-10 ">
+              <div className="flex flex-1 flex-col justify-between gap-2">
                 <Label htmlFor="session_date">Date</Label>
                 <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                   <PopoverTrigger asChild>
@@ -265,7 +265,7 @@ const OneSession = () => {
                 </Popover>
               </div>
 
-              <div className=" flex-1 flex flex-col justify-between gap-2">
+              <div className=" flex flex-1 flex-col justify-between gap-2">
                 <Label htmlFor="body_weight">{`Ta pesée (KG)`}</Label>
                 <div className="relative w-full">
                   <Input
@@ -300,14 +300,13 @@ const OneSession = () => {
               <div>
                 <Link to={`/history/session/${sessionId}/do-exercise`}>
                   <Button className=" mt-4">
-                  
                     <LucidePlusCircle className="mr-2 size-5" />
                     Ajouter un exercice{" "}
                   </Button>
                 </Link>
               </div>
             </div>
-            <div className="col-span-2 resize space-y-2 mb-2">
+            <div className="col-span-2 mb-2 resize space-y-2">
               <Label htmlFor="comment">Notes</Label>
               <div className="flex items-center gap-5 ">
                 <Textarea
