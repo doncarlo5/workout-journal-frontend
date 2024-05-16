@@ -23,16 +23,16 @@ function StatsPage() {
               <h1 className="ml-5 text-3xl font-medium">Statistiques</h1>
             </div>
           </div>
-          <Tabs defaultValue="weight_body">
+          <Tabs defaultValue="exercise">
             <TabsList className="my-5 grid grid-cols-2">
-              <TabsTrigger value="weight_body">Poids du corps</TabsTrigger>
               <TabsTrigger value="exercise">Exercices</TabsTrigger>
+              <TabsTrigger value="weight_body">Poids du corps</TabsTrigger>
             </TabsList>
-            <TabsContent asChild className="" value="weight_body">
-              <BodyWeightChart />
-            </TabsContent>
             <TabsContent asChild className="" value="exercise">
               <ExerciseChart />
+            </TabsContent>
+            <TabsContent asChild className="" value="weight_body">
+              <BodyWeightChart />
             </TabsContent>
           </Tabs>
         </main>
