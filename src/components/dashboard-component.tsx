@@ -17,7 +17,7 @@ function DashboardComponent() {
     <div className="">
       <div className="mx-auto grid max-w-sm grid-cols-2 grid-rows-3 gap-2">
       <Button variant={"outline"} asChild className="h-24 ">
-          <Link to="/profile/settings">
+          <Link to="/type">
             <div className="flex flex-col items-center justify-center gap-1">
               <LucidePencilRuler strokeWidth={1.1} size={32} />
               Mes exercices
