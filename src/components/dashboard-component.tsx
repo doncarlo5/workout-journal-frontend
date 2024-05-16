@@ -1,5 +1,5 @@
 import useAuth from "@/context/use-auth"
-import { LucideLineChart, LucideLogOut, LucidePencilRuler, LucideTimer, LucideTrophy, LucideUserRoundCog, Moon, Sun } from "lucide-react"
+import { LucideLineChart, LucideLogOut, LucidePencilRuler, LucideTimer, LucideTrophy, LucideUserRoundCog, } from "lucide-react"
 import { Link } from "react-router-dom"
 
 // import { useTheme } from "./theme-provider"
