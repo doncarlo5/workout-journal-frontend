@@ -37,7 +37,7 @@ export function SessionComponent() {
     <>
       {" "}
       {!isLoading && session.length !== 0 && (
-        <div className="mt-5 flex flex-col items-center justify-center ">
+        <div className="mt-5 flex flex-col items-center justify-center pb-5 ">
           <div>
             <Table>
               <TableCaption>Liste de tes séances passées</TableCaption>
