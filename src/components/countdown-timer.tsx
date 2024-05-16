@@ -66,7 +66,7 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
           strokeWidth={17}
           isPlaying={isTimerPlaying}
           duration={exerciseTypeTimer}
-          colors={["#0f766e", "#D19F55", "#D19F55", "#D19F55"]}
+          colors={["#0F766E", "#0F766E", "#0F766E", "#760f17"]}
           colorsTime={[7, 5, 2, 0]}
           onComplete={() => ({ shouldRepeat: false, delay: 1, newInitialRemainingTime: exerciseTypeTimer })}
         >
