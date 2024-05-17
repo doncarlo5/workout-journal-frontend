@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
 import { LucideLoader2 } from "lucide-react"
-import { Area, AreaChart, CartesianGrid, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, Label, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 import myApi from "@/lib/api-handler"
 
@@ -148,6 +148,7 @@ function ExerciseChart() {
               fillOpacity={1}
               activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
             />
+            <Legend wrapperStyle={{fontSize: "15px"}}/>
           </AreaChart>
         </ResponsiveContainer>
       )}
