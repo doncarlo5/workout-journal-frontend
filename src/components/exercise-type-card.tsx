@@ -5,7 +5,7 @@ import { Card } from "./ui/card"
 
 function ExerciseTypeCard({ exerciseType }: { exerciseType: any }) {
   return (
-    <Link to={`/type/${exerciseType._id}`}>
+    <Link to={`/profile/type/${exerciseType._id}`}>
       <Card className="flex h-full flex-col border-2 border-double active:translate-y-0.5">
         <div className=" flex justify-between">
           <div className="ml-1 mt-1 flex items-center gap-1 rounded-sm rounded-tl-lg border px-2">
