@@ -60,7 +60,7 @@ export function HomePage() {
           </h1>
           <div className="flex flex-col gap-4 pb-4 ">
             {isLoading ? (
-              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3">
+              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg">
                 <div className="mb-4 h-6 w-24 rounded-full bg-gray-200 "></div>
                 <div className="h-5 w-32 rounded-full bg-gray-200 "></div>
               </div>
@@ -85,11 +85,11 @@ export function HomePage() {
             )}
           </div>
           <div className="flex flex-col gap-4 pb-4">
-            <h1 className="text-2xl font-bold ">Progression</h1>
+            <h1 className="text-2xl font-bold mt-4">Progression</h1>
           </div>
           <div className="grid grid-cols-2 gap-4 pb-20">
             {isLoading ? (
-              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3">
+              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg">
                 <div className="mb-4 h-6 w-24 rounded-full bg-gray-200 "></div>
                 <div className="h-5 w-32 rounded-full bg-gray-200 "></div>
               </div>
@@ -98,24 +98,24 @@ export function HomePage() {
                 className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
                 to="/history"
               >
-                <div className="flex items-center gap-2 text-slate-600">
+                <div className="flex text-sm items-center gap-2 text-slate-600">
                   <FaDumbbell color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
-                  Séances
+                  Total séances
                 </div>
                 <div className=" text-3xl font-extrabold">{allSessions.length}</div>
               </Link>
             )}
             {isLoading ? (
-              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3">
+              <div className="flex h-24 animate-pulse flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg">
                 <div className="mb-4 h-6 w-24 rounded-full bg-gray-200 "></div>
                 <div className="h-5 w-32 rounded-full bg-gray-200 "></div>
               </div>
             ) : (
               <Link
                 className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
-                to="/history"
+                to={`/history/session/${lastSession[0]?._id}`}
               >
-                <div className="flex items-baseline gap-2 text-slate-600">
+                <div className="flex text-sm items-baseline gap-2 text-slate-600">
                   <FaWeightScale color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
                   Poids
                 </div>
@@ -134,7 +134,7 @@ export function HomePage() {
             )}
 
             {isLoading ? (
-              <div className="flex flex-row gap-3 col-span-2 justify-center items-center h-24 w-full animate-pulse rounded-lg bg-slate-100 px-3 py-3">
+              <div className="col-span-2 flex h-24 w-full animate-pulse flex-row items-center justify-center gap-3 rounded-lg bg-slate-100 px-3 py-3 shadow-lg">
                 <div className=" h-10 w-10 rounded-full bg-gray-200 "></div>
                 <div className="h-5 w-32 rounded-full bg-gray-200 "></div>
               </div>
@@ -158,7 +158,7 @@ export function HomePage() {
             )}
             <NewSessionButton
               Children={
-                <div className="fixed bottom-20 right-10 cursor-pointer">
+                <div className="fixed bottom-20 right-10 cursor-pointer  ">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 active:scale-95 active:shadow-inner">
                     <Plus color="rgb(107 114 128)" className="inline-block " height={40} width={40} strokeWidth={1.5} />
                   </div>
