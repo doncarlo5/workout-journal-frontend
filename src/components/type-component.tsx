@@ -36,7 +36,7 @@ export function TypeComponent() {
             </h1>
           </div>
           <div className="flex justify-center">
-            <Link to={`/type/new-type`}>
+            <Link to={`/profile/type/new-type`}>
               <Button className="mx-auto">
                 {" "}
                 <PlusIcon className="mr-2 size-5" />
