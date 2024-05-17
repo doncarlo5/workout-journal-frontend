@@ -5,6 +5,7 @@ import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
 import {
   ChevronLeft,
+  LucideArrowLeft,
   LucideCheckCircle,
   LucideLoader2,
   LucidePlusCircle,
@@ -65,11 +66,6 @@ const OneSession = () => {
   const { sessionId } = useParams()
   const navigate = useNavigate()
 
-  // const toggleIsEditable = (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   setIsEditable((current) => !current)
-  // }
-
   const fetchOneSession = async () => {
     try {
       const response = await myApi.get(`/api/sessions/${sessionId}`)
@@ -111,7 +107,6 @@ const OneSession = () => {
       console.log("👋 response", response)
       fetchOneSession()
       navigate("/history/")
-      // setIsEditable(false)
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
@@ -141,10 +136,6 @@ const OneSession = () => {
       console.error("Fetch error: ", error)
     }
   }
-
-  // const handleCheckboxChange: (isChecked: CheckedState) => void = (isChecked) => {
-  //   setFormState({ ...formState, is_done: Boolean(isChecked) })
-  // }
 
   const handleSelectWeight = (event: React.FormEvent<HTMLInputElement>) => {
     const { target } = event
@@ -349,10 +340,17 @@ const OneSession = () => {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-              <Button className="col-span-3 w-full" type="submit">
-                <LucideCheckCircle className="mr-2 size-5" />
-                Valider la séance
-              </Button>
+              {formState.is_done ? (
+                <Button className="col-span-3 w-full" type="submit">
+                  <LucideArrowLeft className="mr-2 size-5" />
+                  Retour
+                </Button>
+              ) : (
+                <Button className="col-span-3 w-full" type="submit">
+                  <LucideCheckCircle className="mr-2 size-5" />
+                  Valider la séance
+                </Button>
+              )}
             </div>
           </form>
         </div>
