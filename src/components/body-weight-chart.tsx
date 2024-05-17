@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
 import { LucideLoader2 } from "lucide-react"
-import { Area, AreaChart, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, Label, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 import myApi from "@/lib/api-handler"
 
@@ -61,7 +61,7 @@ function BodyWeightChart() {
             </linearGradient>
           </defs>
           <XAxis dataKey="date_session" tickFormatter={(tick) => formatXAxis(tick)} />
-          <YAxis name="Kg" domain={["dataMin - 1", "dataMax + 1"]}>
+          <YAxis name="Kg" domain={["auto", "dataMax + 5"]}>
             <Label
               style={{
                 textAnchor: "unset",
@@ -94,6 +94,7 @@ function BodyWeightChart() {
             fill="url(#date_session)"
             activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
           />
+          <Legend wrapperStyle={{ fontSize: "15px" }} />
         </AreaChart>
       </ResponsiveContainer>
     </>
