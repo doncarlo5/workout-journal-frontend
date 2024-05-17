@@ -67,7 +67,7 @@ const NewType = () => {
         advice: formState.advice,
       })
       console.log("response", response)
-      navigate(`/type`)
+      navigate(`/profile/type`)
       toast({
         title: "Type d'exercice créé.",
         description: "Vous pouvez maintenant l'ajouter à vos séances.",
@@ -84,7 +84,7 @@ const NewType = () => {
       <Navbar />
       <div className="mx-auto max-w-sm space-y-6 p-4">
         <div className="flex items-center space-y-2 text-left">
-          <Link to="/type">
+          <Link to="/profile/type">
             <Button variant="outline" size="icon">
               <ChevronLeft className="h-4 w-4" />
             </Button>
