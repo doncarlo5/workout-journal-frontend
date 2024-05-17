@@ -43,7 +43,7 @@ export function TypesList() {
               <div className="text-center">
                 <div className="flex flex-col items-center gap-5 text-sm text-gray-500 dark:text-gray-400">
                   <p>Aucun exercice.</p>
-                  <Link className="" to="/type/new-type">
+                  <Link className="" to="/profile/type/new-type">
                     <Button className="w-full ">Créer un exercice</Button>
                   </Link>
                 </div>
