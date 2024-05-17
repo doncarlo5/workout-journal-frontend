@@ -48,7 +48,7 @@ export function HistoryPage() {
         </Tabs>
         <NewSessionButton
               Children={
-                <div className="fixed bottom-20 right-10 cursor-pointer">
+                <div className="fixed bottom-20 right-10 cursor-pointer backdrop-blur-sm bg-white/30">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 active:scale-95 active:shadow-inner">
                     <Plus color="rgb(107 114 128)" className="inline-block " height={40} width={40} strokeWidth={1.5} />
                   </div>
