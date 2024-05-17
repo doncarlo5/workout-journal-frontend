@@ -60,13 +60,12 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
           isSmoothColorTransition={true}
           isGrowing={true}
           rotation="counterclockwise"
-          trailColor="#F5F5F5"
           key={key}
           size={170}
           strokeWidth={17}
           isPlaying={isTimerPlaying}
           duration={exerciseTypeTimer}
-          colors={["#0F766E", "#0F766E", "#0F766E", "#760f17"]}
+          colors={["#0F766E", "#0F766E","#760f17", "#760f17" ]}
           colorsTime={[7, 5, 2, 0]}
           onComplete={() => ({ shouldRepeat: false, delay: 1, newInitialRemainingTime: exerciseTypeTimer })}
         >
