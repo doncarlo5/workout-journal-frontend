@@ -1,5 +1,12 @@
 import useAuth from "@/context/use-auth"
-import { LucideLineChart, LucideLogOut, LucidePencilRuler, LucideTimer, LucideTrophy, LucideUserRoundCog, } from "lucide-react"
+import {
+  LucideLineChart,
+  LucideLogOut,
+  LucidePencilRuler,
+  LucideTimer,
+  LucideTrophy,
+  LucideUserRoundCog,
+} from "lucide-react"
 import { Link } from "react-router-dom"
 
 // import { useTheme } from "./theme-provider"
@@ -16,10 +23,10 @@ function DashboardComponent() {
   return (
     <div className="">
       <div className="mx-auto grid max-w-sm grid-cols-2 grid-rows-3 gap-2">
-      <Button variant={"outline"} asChild className="h-24 ">
-          <Link to="/type">
+        <Button variant={"outline"} asChild className="h-24 ">
+          <Link to="/profile/type">
             <div className="flex flex-col items-center justify-center gap-1">
-              <LucidePencilRuler strokeWidth={1.1} size={32} />
+              <LucidePencilRuler strokeWidth={1.1} size={31} />
               Mes exercices
             </div>
           </Link>
@@ -48,7 +55,7 @@ function DashboardComponent() {
             </div>
           </Link>
         </Button>
-      
+
         <Button variant={"outline"} asChild className="h-24 ">
           <Link to="/profile/settings">
             <div className="flex flex-col items-center justify-center gap-1">
@@ -57,24 +64,8 @@ function DashboardComponent() {
             </div>
           </Link>
         </Button>
-  
-  
-        {/* <Button variant={"outline"} className="h-24 " onClick={toggleTheme}>
-          {theme === "light" ? (
-            <div className="flex flex-col gap-1">
-              <Moon strokeWidth={1.1} size={32} />
-              Dark
-            </div>
-          ) : (
-            <div className="flex flex-col gap-1">
-              <Sun strokeWidth={1.1} size={32} />
-              Light
-            </div>
-          )}
-          <span className="sr-only">Toggle theme</span>
-        </Button> */}
         <Button variant={"outline"} onClick={handleLogout} className="flex h-24 flex-col gap-1">
-          <LucideLogOut strokeWidth={1.1} size={32} />
+          <LucideLogOut strokeWidth={1.1} size={31} />
           Déconnexion
         </Button>
       </div>
