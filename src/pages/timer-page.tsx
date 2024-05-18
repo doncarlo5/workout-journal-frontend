@@ -21,7 +21,7 @@ function TimerPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="ml-5 text-3xl font-medium">Minuteur</h1>
+            <h1 className="ml-5 text-3xl font-medium">Timer</h1>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center pt-5 ">

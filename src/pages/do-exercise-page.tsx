@@ -120,7 +120,7 @@ const DoExercisePage = () => {
         exercise_user_list: [...session.exercise_user_list, response.data.id],
       }
 
-      const responseSession = await myApi.put(`/api/sessions/${sessionId}`, updatedSession)
+      await myApi.put(`/api/sessions/${sessionId}`, updatedSession)
 
       navigate(`/history/session/${sessionId}`)
     } catch (error: any) {

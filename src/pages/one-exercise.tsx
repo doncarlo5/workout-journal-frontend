@@ -90,6 +90,7 @@ const OneExercise = () => {
 
   const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
+      console.log(sessionData)
       // const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
       const response = await myApi.get(`/api/exercise-type?limit=1000`)
       return response.data
@@ -119,7 +120,7 @@ const OneExercise = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await myApi.put(`/api/exercise-user/${exerciseId}`, {
+      await myApi.put(`/api/exercise-user/${exerciseId}`, {
         type: oneExerciseType,
         rep: [formState.rep1, formState.rep2, formState.rep3],
         weight: [formState.weight1, formState.weight2, formState.weight3],
@@ -141,7 +142,7 @@ const OneExercise = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/api/exercise-user/${id}`)
+      await myApi.delete(`/api/exercise-user/${id}`)
       fetchOneExercise()
       navigate(`/history/session/${session._id}`)
       toast({

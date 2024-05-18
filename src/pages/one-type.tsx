@@ -101,7 +101,7 @@ const OneType = () => {
     e.preventDefault()
     try {
       const timerValue = parseInt(formState.timer)
-      const response = await myApi.put(`/api/exercise-type/${typeId}`, {
+      await myApi.put(`/api/exercise-type/${typeId}`, {
         name: formState.name,
         advice: formState.advice,
         timer: timerValue,
@@ -120,7 +120,7 @@ const OneType = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/api/exercise-type/${id}`)
+      await myApi.delete(`/api/exercise-type/${id}`)
       fetchOneType()
       navigate("/type/")
     } catch (error) {

@@ -56,7 +56,7 @@ const NewType = () => {
     try {
       setIsLoading(true)
       const timerValue = parseInt(formState.timer)
-      const response = await myApi.post(`/api/exercise-type`, {
+      await myApi.post(`/api/exercise-type`, {
         name: formState.name,
         type_session: formState.type_session,
         timer: timerValue,

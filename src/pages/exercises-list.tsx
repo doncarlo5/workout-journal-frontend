@@ -47,7 +47,7 @@ export function ExercicesList() {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/api/exercise-user/${id}`)
+      await myApi.delete(`/api/exercise-user/${id}`)
       fetchUserExercises()
     } catch (error) {
       console.error("Fetch error: ", error)

@@ -51,7 +51,7 @@ function DashboardComponent() {
           <Link to="/profile/timer">
             <div className="flex flex-col items-center justify-center gap-1">
               <LucideTimer strokeWidth={1.1} size={32} />
-              Minuteur
+              Timer
             </div>
           </Link>
         </Button>

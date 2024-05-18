@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { LucideWeight } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
@@ -13,13 +13,10 @@ import { Input } from "./ui/input"
 function NewSessionButton({ Children }: { Children: any }) {
   const [weight, setWeight] = React.useState("")
   const [showDialog, setShowDialog] = useState(false)
-  const [typeSession, setTypeSession] = useState("")
 
   const navigate = useNavigate()
 
-  // Fetch the last exercise user to get the last weight
-
-  React.useEffect(() => {
+  useEffect(() => {
     fetchLastSessionUser()
   }, [])
 
@@ -39,7 +36,6 @@ function NewSessionButton({ Children }: { Children: any }) {
   const handleCreateSession = async (e: React.FormEvent, userChoice: string) => {
     e.preventDefault()
     try {
-      setTypeSession(userChoice)
       const response = await myApi.post("/api/sessions", {
         date_session: new Date(),
         type_session: userChoice,
@@ -48,7 +44,7 @@ function NewSessionButton({ Children }: { Children: any }) {
         is_done: false,
         comment: "",
       })
-    
+
       const newSessionId = response.data._id
       navigate(`/history/session/${newSessionId}`)
     } catch (error: any) {
@@ -65,12 +61,6 @@ function NewSessionButton({ Children }: { Children: any }) {
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader className="text-left ">
             <DrawerTitle>Nouvelle séance</DrawerTitle>
-            {/* <DrawerDescription className="flex items-center gap-1 ">
-              <LucidePencilRuler className="ml-1 " size={16} />{" "}
-              <Link className="flex items-center " to="/type/new-type">
-                Ou crée un <span className="ml-1 underline">exercice</span>.{" "}
-              </Link>
-            </DrawerDescription> */}
           </DrawerHeader>
           <div className="p-4 pb-0">
             <div className="flex items-center justify-between space-x-2">

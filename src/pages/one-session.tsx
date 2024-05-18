@@ -94,7 +94,7 @@ const OneSession = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await myApi.put(`/api/sessions/${sessionId}`, {
+      await myApi.put(`/api/sessions/${sessionId}`, {
         date_session: formState.date_session,
         type_session: formState.type_session,
         body_weight: formState.body_weight,
@@ -125,7 +125,7 @@ const OneSession = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await myApi.delete(`/api/sessions/${id}`)
+      await myApi.delete(`/api/sessions/${id}`)
       fetchOneSession()
       navigate("/history/")
     } catch (error) {
@@ -148,7 +148,7 @@ const OneSession = () => {
 
   const handleSaveComment = async () => {
     try {
-      const response = await myApi.put(`/api/sessions/${sessionId}`, {
+      await myApi.put(`/api/sessions/${sessionId}`, {
         comment: formState.comment,
       })
     } catch (error) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import myApi from "@/lib/api-handler"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -9,12 +9,10 @@ import NewSessionButton from "@/components/new-session-button"
 import { Plus } from "lucide-react"
 
 export function HistoryPage() {
-  const [session, setSession] = useState([] as any[])
 
   const fetchUserSessions = async () => {
     try {
-      const response = await myApi.get("/api/sessions?limit=1000&sort=-date_session")
-      setSession(response.data)
+      await myApi.get("/api/sessions?limit=1000&sort=-date_session")
     } catch (error) {
       console.error("Fetch error: ", error)
     }
