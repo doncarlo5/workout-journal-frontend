@@ -16,7 +16,6 @@ export function ExerciseComponent() {
     try {
       const response = await myApi.get("/api/exercise-user?limit=1000&sort=-updatedAt")
       setExercise(response.data)
-      console.log("👋 response", response.data)
       setIsLoading(false)
     } catch (error) {
       console.error("Fetch error: ", error)
