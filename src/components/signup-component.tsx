@@ -42,7 +42,6 @@ const SignupComponent = () => {
       const response = await myApi.post("/api/auth/signup", formState)
       localStorage.setItem("token", response.data.token)
       await authenticateUser()
-      console.log(response)
       navigate("/")
       toast({
         title: "Compte créé.",

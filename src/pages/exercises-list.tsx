@@ -26,7 +26,6 @@ export function ExercicesList() {
     try {
       const response = await myApi.get("/api/exercise-user?limit=1000&sort=-updatedAt")
       setExercise(response.data)
-      console.log("👋 response", response.data)
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -49,7 +48,6 @@ export function ExercicesList() {
   const handleDelete = async (id: string) => {
     try {
       const response = await myApi.delete(`/api/exercise-user/${id}`)
-      console.log(response)
       fetchUserExercises()
     } catch (error) {
       console.error("Fetch error: ", error)

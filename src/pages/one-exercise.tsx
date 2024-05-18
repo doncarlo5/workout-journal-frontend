@@ -54,7 +54,6 @@ const OneExercise = () => {
 
   const fetchOneExercise = async () => {
     try {
-      console.log("👋 exerciseId", exerciseId)
       const response = await myApi.get(`/api/exercise-user/${exerciseId}`)
 
       setFormState({
@@ -69,7 +68,6 @@ const OneExercise = () => {
         comment: response.data.comment,
       })
 
-      console.log("👋 response formstate", response.data)
 
       const newExercise = response.data.type
       setExercise(newExercise)
@@ -94,7 +92,6 @@ const OneExercise = () => {
     try {
       // const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
       const response = await myApi.get(`/api/exercise-type?limit=1000`)
-      console.log("👁️‍🗨️ sessionData Type Session", sessionData.type_session)
       return response.data
     } catch (error) {
       console.error("Fetch error: ", error)
@@ -104,10 +101,8 @@ const OneExercise = () => {
   useEffect(() => {
     const init = async () => {
       const oneExercise = await fetchOneExercise()
-      console.log("👋 oneExercise", oneExercise)
       const sessionData = await fetchOneSession(oneExercise.session)
       setSession(sessionData)
-      console.log("👋 sessionData", sessionData)
       const exerciseTypeData = await fetchAllExerciseTypes(sessionData)
       setExerciseTypes(exerciseTypeData)
     }
@@ -130,7 +125,6 @@ const OneExercise = () => {
         weight: [formState.weight1, formState.weight2, formState.weight3],
         comment: formState.comment,
       })
-      console.log(response)
       // launch toast if success
       toast({
         title: "Exercice mis à jour.",
@@ -148,7 +142,6 @@ const OneExercise = () => {
   const handleDelete = async (id: string) => {
     try {
       const response = await myApi.delete(`/api/exercise-user/${id}`)
-      console.log(response)
       fetchOneExercise()
       navigate(`/history/session/${session._id}`)
       toast({

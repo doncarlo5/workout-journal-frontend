@@ -78,7 +78,6 @@ const OneSession = () => {
         is_done: response.data.is_done,
         comment: response.data.comment,
       })
-      console.log("👋 FetchOneSession body weight", response.data.body_weight)
       const newSession = response.data
       setSession(newSession)
       setIsLoading(false)
@@ -94,7 +93,6 @@ const OneSession = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("👋 handleSubmit")
     try {
       const response = await myApi.put(`/api/sessions/${sessionId}`, {
         date_session: formState.date_session,
@@ -104,7 +102,6 @@ const OneSession = () => {
         is_done: true,
         comment: formState.comment,
       })
-      console.log("👋 response", response)
       fetchOneSession()
       navigate("/history/")
     } catch (error) {
@@ -129,7 +126,6 @@ const OneSession = () => {
   const handleDelete = async (id: string) => {
     try {
       const response = await myApi.delete(`/api/sessions/${id}`)
-      console.log(response)
       fetchOneSession()
       navigate("/history/")
     } catch (error) {
@@ -140,7 +136,6 @@ const OneSession = () => {
   const handleSelectWeight = (event: React.FormEvent<HTMLInputElement>) => {
     const { target } = event
     if (target instanceof HTMLInputElement) {
-      console.log("target", target.value)
       const { value } = target
       setFormState({ ...formState, body_weight: value })
     }
@@ -156,7 +151,6 @@ const OneSession = () => {
       const response = await myApi.put(`/api/sessions/${sessionId}`, {
         comment: formState.comment,
       })
-      console.log("👋 response", response)
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)

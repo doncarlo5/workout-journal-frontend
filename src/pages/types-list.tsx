@@ -14,7 +14,6 @@ export function TypesList() {
   const fetchTypes = async () => {
     try {
       const response = await myApi.get("/api/exercise-type?limit=1000&sort=-updatedAt")
-      console.log("👋 response data", response.data)
       setIsLoading(false)
       setType(response.data)
     } catch (error) {

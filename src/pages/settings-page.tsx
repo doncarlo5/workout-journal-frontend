@@ -36,12 +36,10 @@ function SettingsPage() {
     e.preventDefault()
     try {
       setIsLoading(true)
-      const response = await myApi.patch("/api/auth/settings", formState)
+      await myApi.patch("/api/auth/settings", formState)
       toast({
         title: "Profil mis à jour!",
       })
-
-      console.log(response)
     } catch (error: any) {
       setIsLoading(false)
       toast({

@@ -10,8 +10,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 function ExerciseChart() {
   const [exercise, setExercise] = useState([] as any[])
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
+  const [selectedExerciseType, setSelectedExerciseType] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(true)
-  // const [isSelected, setIsSelected] = useState(false)
 
   const fetchAllExerciseTypes = async () => {
     try {
@@ -26,16 +26,31 @@ function ExerciseChart() {
 
   useEffect(() => {
     const init = async () => {
-      const exerciseTypeData = await fetchAllExerciseTypes()
-      setAllExerciseTypes(exerciseTypeData)
-    }
-    init()
-  }, [])
+      setIsLoading(true); 
+      const exerciseTypeData = await fetchAllExerciseTypes();
+      setAllExerciseTypes(exerciseTypeData);
+  
+      if (exerciseTypeData.length > 0) {
+        const defaultExerciseType = exerciseTypeData[29] || exerciseTypeData[0];
+        setSelectedExerciseType(defaultExerciseType);
+        await AllExercisesTypeChange(defaultExerciseType);
+      } else {
+        setSelectedExerciseType(null);
+        setExercise([]);
+      }
+  
+      setIsLoading(false);
+    };
+  
+    init();
+  
+  }, []);
+  
 
   const AllExercisesTypeChange = async (value: any) => {
     const response = await myApi.get(`/api/exercise-user?limit=1000&sort=createdAt&type=${value._id}`)
     setExercise(response.data)
-
+    setSelectedExerciseType(value)
     return response.data
   }
 
@@ -44,11 +59,21 @@ function ExerciseChart() {
     return formattedDate
   }
 
+  const values = exercise.map((obj) => {
+    return obj.pv
+  })
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+
+  const domain = [Math.floor(min / 100) * 100 - 100, Math.ceil(max / 100) * 100 + 100];
+
   return (
     <>
-      <Select onValueChange={AllExercisesTypeChange}>
+      <Select onValueChange={AllExercisesTypeChange} value={selectedExerciseType}>
         <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700">
-          <SelectValue className="" placeholder="Sélectionne un exercice..." />
+          <SelectValue className="" placeholder="Sélectionne un exercice...">
+            {selectedExerciseType ? selectedExerciseType.name : "Sélectionne un exercice..."}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
@@ -92,7 +117,8 @@ function ExerciseChart() {
             <XAxis dataKey="session.date_session" tickFormatter={(tick) => formatXAxis(tick)} />
             <CartesianGrid strokeDasharray="3 3" />
 
-            <YAxis name="Weight" width={50} domain={["dataMin - 10", "dataMax + 10"]}>
+            {/* <YAxis name="Weight" width={50} domain={["dataMin - 10", "dataMax + 10"]}> */}
+            <YAxis name="Weight" width={50} domain={domain}>
               <Label
                 style={{
                   textAnchor: "unset",
@@ -148,10 +174,16 @@ function ExerciseChart() {
               fillOpacity={1}
               activeDot={{ stroke: "white", strokeWidth: 2, r: 5 }}
             />
-            <Legend wrapperStyle={{fontSize: "15px"}}/>
+            <Legend wrapperStyle={{ fontSize: "15px" }} />
           </AreaChart>
         </ResponsiveContainer>
       )}
+      {exercise.length === 0 && !isLoading && (
+        <div className="mt-4 text-center text-gray-500">
+          <p>Il n'y a pas de données pour cet exercice.</p>
+        </div>
+      )}
+      
     </>
   )
 }

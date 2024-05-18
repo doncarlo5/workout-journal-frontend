@@ -28,10 +28,10 @@ function StatsPage() {
               <TabsTrigger value="exercise">Exercices</TabsTrigger>
               <TabsTrigger value="weight_body">Poids du corps</TabsTrigger>
             </TabsList>
-            <TabsContent asChild className="" value="exercise">
+            <TabsContent className="h-96" value="exercise">
               <ExerciseChart />
             </TabsContent>
-            <TabsContent asChild className="" value="weight_body">
+            <TabsContent className="h-96" value="weight_body">
               <BodyWeightChart />
             </TabsContent>
           </Tabs>

@@ -15,7 +15,6 @@ export function HistoryPage() {
     try {
       const response = await myApi.get("/api/sessions?limit=1000&sort=-date_session")
       setSession(response.data)
-      console.log("session", session)
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -39,10 +38,10 @@ export function HistoryPage() {
             <TabsTrigger value="session">Séances</TabsTrigger>
             <TabsTrigger value="exercise">Exercices</TabsTrigger>
           </TabsList>
-          <TabsContent asChild className="" value="session">
+          <TabsContent value="session">
             <SessionComponent />
           </TabsContent>
-          <TabsContent asChild className="" value="exercise">
+          <TabsContent value="exercise">
             <ExerciseComponent />
           </TabsContent>
         </Tabs>

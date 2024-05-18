@@ -43,12 +43,11 @@ const SignupPage = () => {
     try {
       setIsLoading(true)
       const response = await myApi.post("/api/auth/login", formState)
-      console.log(response)
       localStorage.setItem("token", response.data.token)
       await authenticateUser()
       navigate("/")
     } catch (error: any) {
-      console.log(error)
+      console.error(error)
       setIsLoading(false)
       setError(error.response.data.message)
       setTimeout(() => {

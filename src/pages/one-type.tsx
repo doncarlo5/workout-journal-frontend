@@ -73,8 +73,6 @@ const OneType = () => {
         type_session: response.data.type_session,
       })
 
-      console.log("response data from fetch", response.data)
-
       const newType = response.data
       setType(newType)
       setIsLoading(false)
@@ -102,7 +100,6 @@ const OneType = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      console.log("send response when submit", formState)
       const timerValue = parseInt(formState.timer)
       const response = await myApi.put(`/api/exercise-type/${typeId}`, {
         name: formState.name,
@@ -113,7 +110,6 @@ const OneType = () => {
         repRange3: formState.repRange3,
         type_session: formState.type_session,
       })
-      console.log("response", response)
       fetchOneType()
       setIsEditable(false)
     } catch (error) {
@@ -125,7 +121,6 @@ const OneType = () => {
   const handleDelete = async (id: string) => {
     try {
       const response = await myApi.delete(`/api/exercise-type/${id}`)
-      console.log(response)
       fetchOneType()
       navigate("/type/")
     } catch (error) {

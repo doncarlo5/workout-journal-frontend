@@ -62,8 +62,6 @@ const DoExercisePage = () => {
     const response = await myApi.get(`/api/exercise-user?limit=1&sort=-createdAt&type=${value._id}`)
 
     setLastExercise(response.data[0])
-
-    console.log("lastExercise is:", response.data[0])
   }
 
   const fetchOneSession = async () => {
@@ -79,7 +77,6 @@ const DoExercisePage = () => {
     try {
       setIsLoadingTypes(true)
       const response = await myApi.get(`/api/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
-      console.log("👋 fetchAllExerciseTypes", response.data)
       setIsLoadingTypes(false)
       return response.data
     } catch (error) {
@@ -92,17 +89,13 @@ const DoExercisePage = () => {
     const init = async () => {
       const sessionData = await fetchOneSession()
       setSession(sessionData)
-      console.log("👋 sessionData", sessionData)
       const exerciseTypeData = await fetchAllExerciseTypes(sessionData)
       setAllExerciseTypes(exerciseTypeData)
     }
     init()
   }, [])
 
-  console.log("👋 allExerciseTypes", allExerciseTypes)
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    console.log("event.target", event.target.value)
     const { target } = event
     const key = target.id
     const value = target.value
@@ -128,12 +121,11 @@ const DoExercisePage = () => {
       }
 
       const responseSession = await myApi.put(`/api/sessions/${sessionId}`, updatedSession)
-      console.log(responseSession)
 
       navigate(`/history/session/${sessionId}`)
     } catch (error: any) {
       setIsLoading(false)
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -172,31 +164,31 @@ const DoExercisePage = () => {
         </div>
 
         <Select onValueChange={onExerciseTypeChange}>
-  <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700 dark:data-[placeholder]:text-white ">
-    <SelectValue className="" placeholder="Sélectionne un exercice..." />
-  </SelectTrigger>
-  <SelectContent>
-    {allExerciseTypes.length === 0 ? (
-      <div className="text-gray-500 text-sm py-1 px-2 dark:text-gray-400">
-        Veuillez créer un exercice pour ce type de séance.
-      </div>
-    ) : (
-      <SelectGroup>
-        {allExerciseTypes.map((type) => (
-          <SelectItem key={type._id} value={type}>
-            {isLoadingTypes ? (
-              <div role="status" className="flex max-w-sm animate-pulse items-center">
-                <div className="mb-2 h-4 w-64 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+          <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700 dark:data-[placeholder]:text-white ">
+            <SelectValue className="" placeholder="Sélectionne un exercice..." />
+          </SelectTrigger>
+          <SelectContent>
+            {allExerciseTypes.length === 0 ? (
+              <div className="px-2 py-1 text-sm text-gray-500 dark:text-gray-400">
+                Veuillez créer un exercice pour ce type de séance.
               </div>
             ) : (
-              <p className="dark:text-white">{type.name}</p>
+              <SelectGroup>
+                {allExerciseTypes.map((type) => (
+                  <SelectItem key={type._id} value={type}>
+                    {isLoadingTypes ? (
+                      <div role="status" className="flex max-w-sm animate-pulse items-center">
+                        <div className="mb-2 h-4 w-64 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+                      </div>
+                    ) : (
+                      <p className="dark:text-white">{type.name}</p>
+                    )}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
             )}
-          </SelectItem>
-        ))}
-      </SelectGroup>
-    )}
-  </SelectContent>
-</Select>
+          </SelectContent>
+        </Select>
         <div className="pt-3">{oneExerciseType && <CountDownTimer exerciseTypeTimer={oneExerciseType.timer} />}</div>
         {oneExerciseType?.advice && (
           <Accordion type="single" collapsible className="mb-5 rounded-2xl bg-slate-100">

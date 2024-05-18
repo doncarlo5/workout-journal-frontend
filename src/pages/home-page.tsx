@@ -13,7 +13,6 @@ import useAuth from "../context/use-auth"
 
 export function HomePage() {
   const { user } = useAuth()
-  console.log("user", user)
 
   const [lastSession, setLastSession] = useState([] as any)
   const [allSessions, setAllSessions] = useState([] as any)
@@ -24,9 +23,8 @@ export function HomePage() {
       setIsLoading(true)
       const response = await myApi.get("/api/sessions?limit=1&sort=-date_session")
       setLastSession(response.data)
-      console.log("fetchLastSession", response.data)
     } catch (error: any) {
-      console.log(error)
+      console.error(error)
     } finally {
       setIsLoading(false)
     }

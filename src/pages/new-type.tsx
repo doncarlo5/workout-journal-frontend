@@ -55,7 +55,6 @@ const NewType = () => {
     e.preventDefault()
     try {
       setIsLoading(true)
-      console.log("send response when submit", formState)
       const timerValue = parseInt(formState.timer)
       const response = await myApi.post(`/api/exercise-type`, {
         name: formState.name,
@@ -66,7 +65,6 @@ const NewType = () => {
         repRange3: formState.repRange3,
         advice: formState.advice,
       })
-      console.log("response", response)
       navigate(`/profile/type`)
       toast({
         title: "Type d'exercice créé.",

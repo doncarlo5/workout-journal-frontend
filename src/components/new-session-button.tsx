@@ -48,12 +48,11 @@ function NewSessionButton({ Children }: { Children: any }) {
         is_done: false,
         comment: "",
       })
-      console.log("typeSession", typeSession)
-      console.log("response is:", response)
+    
       const newSessionId = response.data._id
       navigate(`/history/session/${newSessionId}`)
     } catch (error: any) {
-      console.log(error)
+      console.error(error)
     }
   }
 
