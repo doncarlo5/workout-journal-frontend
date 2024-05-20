@@ -148,7 +148,7 @@ const DoExercisePage = () => {
               <AlertDialogFooter>
                 <AlertDialogCancel>Annuler</AlertDialogCancel>
                 <AlertDialogAction variant="destructive">
-                  <Link to={`/history/session/${sessionId}`}>Continuer</Link>
+                  <Link to={`/history/session/${session._id}`}>Continuer</Link>
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
@@ -213,7 +213,7 @@ const DoExercisePage = () => {
                       <input
                         placeholder={lastExercise?.rep[0]}
                         type="checkbox"
-                        className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-7 w-7 cursor-pointer appearance-none rounded-sm border transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-8 before:w-8 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-teal-500 checked:bg-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+                        className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-7 w-7 cursor-pointer appearance-none rounded-sm border transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-8 before:w-8 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-teal-700 checked:bg-teal-700 checked:before:bg-teal-700 hover:before:opacity-10"
                         id="teal"
                       />
                       <span className="pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
@@ -238,7 +238,7 @@ const DoExercisePage = () => {
                     <label className="relative flex cursor-pointer items-center rounded-full " htmlFor="teal">
                       <input
                         type="checkbox"
-                        className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-7 w-7 cursor-pointer appearance-none rounded-sm border transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-8 before:w-8 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-teal-500 checked:bg-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+                        className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-7 w-7 cursor-pointer appearance-none rounded-sm border transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-8 before:w-8 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-teal-700 checked:bg-teal-700 checked:before:bg-teal-700 hover:before:opacity-10"
                         id="teal"
                       />
                       <span className="pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
@@ -263,7 +263,7 @@ const DoExercisePage = () => {
                     <label className="relative flex cursor-pointer items-center rounded-full " htmlFor="teal">
                       <input
                         type="checkbox"
-                        className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-7 w-7 cursor-pointer appearance-none rounded-sm border transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-8 before:w-8 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-teal-500 checked:bg-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+                        className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-7 w-7 cursor-pointer appearance-none rounded-sm border transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-8 before:w-8 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-teal-700 checked:bg-teal-700 checked:before:bg-teal-700 hover:before:opacity-10"
                         id="teal"
                       />
                       <span className="pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
