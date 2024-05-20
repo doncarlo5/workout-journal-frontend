@@ -38,6 +38,7 @@ import ExerciseCard from "@/components/exercise-card"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
+import { toast } from "@/components/ui/use-toast"
 
 interface FormState {
   id: string
@@ -51,6 +52,7 @@ interface FormState {
 
 const OneSession = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [session, setSession] = useState<any>({})
   const [formState, setFormState] = useState<FormState>({
@@ -94,6 +96,7 @@ const OneSession = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      setIsLoadingSubmit(true)
       await myApi.put(`/api/sessions/${sessionId}`, {
         date_session: formState.date_session,
         type_session: formState.type_session,
@@ -107,6 +110,8 @@ const OneSession = () => {
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
+    } finally {
+      setIsLoadingSubmit(false)
     }
   }
 
@@ -146,14 +151,22 @@ const OneSession = () => {
     setFormState({ ...formState, comment: value })
   }
 
-  const handleSaveComment = async () => {
+  const handleSaveComment = async (e: React.FormEvent) => {
+    e.preventDefault()
     try {
       await myApi.put(`/api/sessions/${sessionId}`, {
         comment: formState.comment,
       })
+      toast({
+        title: "Commentaire enregistré.",
+      })
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de l'enregistrement du commentaire.",
+      })
     }
   }
 
@@ -180,31 +193,28 @@ const OneSession = () => {
             <PopoverContent className="w-48 p-4" align="start">
               <p className="text-sm text-gray-500">
                 {formState.type_session === "Upper A" && (
-                  <ol className="list-inside list-[upper-roman] ">
+                  <ol className="list-inside list-disc">
                     <li>Développé Incliné</li>
                     <li>Tractions Lestées</li>
                     <li>Élévations Frontales</li>
                     <li>Curl Incliné</li>
-                    <li>Haltères</li>
                     <li>Élévations Latérales</li>
                   </ol>
                 )}
                 {formState.type_session === "Lower" && (
-                  <ol className="list-inside list-[upper-roman] ">
+                  <ol className="list-inside list-disc">
                     <li>High Bar Squat ou Deadlift</li>
                     <li>Romanian Deadlift ou Fentes</li>
-                    <li>Leg Curl Superset</li>
-                    <li>Leg Extension</li>
+                    <li>Leg Curl/Leg Extension Superset</li>
                     <li>Extensions Mollets</li>
                     <li>Upright Row Penché</li>
                   </ol>
                 )}
                 {formState.type_session === "Upper B" && (
-                  <ol className="list-inside list-[upper-roman] ">
+                  <ol className="list-inside list-disc">
                     <li>Overhead Press</li>
                     <li>Développé Couché</li>
                     <li>Tractions Neutres</li>
-                    <li>Focus Bras</li>
                     <li>Oiseau Assis Prise Neutre</li>
                     <li>Upright Row</li>
                   </ol>
@@ -307,7 +317,7 @@ const OneSession = () => {
                     <SaveIcon className="size-5 " />
                   </Button>
                 ) : (
-                  <Button disabled className="h-full w-1/6 rounded-full opacity-50">
+                  <Button disabled className="h-full w-1/6 rounded-full opacity-20">
                     <SaveIcon className="size-5 text-gray-200 " />
                   </Button>
                 )}
@@ -333,8 +343,13 @@ const OneSession = () => {
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
-              </AlertDialog>
-              {formState.is_done ? (
+              </AlertDialog>{" "}
+              {isLoadingSubmit ? (
+                <Button disabled className="col-span-3 w-full">
+                  <LucideLoader2 className="mr-2 size-5" />
+                  Chargement
+                </Button>
+              ) : formState.is_done ? (
                 <Button className="col-span-3 w-full" type="submit">
                   <LucideArrowLeft className="mr-2 size-5" />
                   Retour
