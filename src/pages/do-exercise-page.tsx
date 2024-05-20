@@ -294,7 +294,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className=" text-md w-12 rounded-xl text-center [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className=" text-md w-12 rounded-xl text-center font-medium [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                   <Input
                     id="rep2"
@@ -303,7 +303,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md  w-12 rounded-xl text-center [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md font-medium  w-12 rounded-xl text-center [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                   <Input
                     id="rep3"
@@ -312,7 +312,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md  w-12 rounded-xl text-center [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md font-medium  w-12 rounded-xl text-center [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                 </div>
 
@@ -325,7 +325,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md font-medium w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                   <Input
                     id="weight2"
@@ -334,7 +334,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md  w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md font-medium  w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                   <Input
                     id="weight3"
@@ -343,7 +343,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md  w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md font-medium  w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                 </div>
                 <div className="flex flex-col gap-1 text-center">
