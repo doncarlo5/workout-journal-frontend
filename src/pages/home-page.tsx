@@ -10,6 +10,7 @@ import { Navbar } from "@/components/navbar"
 import NewSessionButton from "@/components/new-session-button"
 
 import useAuth from "../context/use-auth"
+import { AnimatedCounter } from "@/components/animated-counter"
 
 export function HomePage() {
   const { user } = useAuth()
@@ -83,7 +84,7 @@ export function HomePage() {
             )}
           </div>
           <div className="flex flex-col gap-4 pb-4">
-            <h1 className="text-2xl font-bold mt-4">Progression</h1>
+            <h1 className="mt-4 text-2xl font-bold">Progression</h1>
           </div>
           <div className="grid grid-cols-2 gap-4 pb-20">
             {isLoading ? (
@@ -96,11 +97,13 @@ export function HomePage() {
                 className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
                 to="/history"
               >
-                <div className="flex text-sm items-center gap-2 text-slate-600">
+                <div className="flex items-center gap-2 text-sm text-slate-600">
                   <FaDumbbell color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
                   Total séances
                 </div>
-                <div className=" text-3xl font-extrabold">{allSessions.length}</div>
+                <div className=" text-3xl font-extrabold">
+                  <AnimatedCounter from={0} to={allSessions.length} />
+                </div>
               </Link>
             )}
             {isLoading ? (
@@ -113,7 +116,7 @@ export function HomePage() {
                 className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
                 to={`/history/session/${lastSession[0]?._id}`}
               >
-                <div className="flex text-sm items-baseline gap-2 text-slate-600">
+                <div className="flex items-baseline gap-2 text-sm text-slate-600">
                   <FaWeightScale color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
                   Poids
                 </div>
