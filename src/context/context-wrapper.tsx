@@ -34,7 +34,6 @@ const AuthContextWrapper = ({ children }: WrapperProps) => {
         const response = await myApi.get("/api/auth/verify")
         setUser(response.data)
         setIsLoggedIn(true)
-        setIsLoading(false)
       } else {
         setIsLoading(false)
         setIsLoggedIn(false)
@@ -42,9 +41,10 @@ const AuthContextWrapper = ({ children }: WrapperProps) => {
       }
     } catch (error) {
       console.error(error)
-      setIsLoading(false)
       setIsLoggedIn(false)
       setUser(null)
+    } finally {
+      setIsLoading(false)
     }
   }
 
