@@ -18,11 +18,10 @@ function ExerciseTypeCard({ exerciseType }: { exerciseType: any }) {
           </div>
         </div>
         <div className="flex flex-col justify-center  px-3 py-2 ">
-          <div className=" text-lg font-black tracking-tighter	">{exerciseType.name}</div>
+          <div className=" text-lg font-bold 	">{exerciseType.name}</div>
           {exerciseType?.advice && (
             <>
-              {" "}
-              <div className="my-1 flex w-1/2 rounded-full border border-gray-200 dark:border-gray-800"></div>
+              <div className="my-1 flex w-full rounded-full border border-gray-200 dark:border-gray-800"></div>
               <div className="flex w-full items-center gap-1 text-gray-500 dark:text-gray-400">
                 <LucideInfo className=" flex-none" size={12} />
                 <div className=" truncate text-left text-xs">{exerciseType.advice}</div>
