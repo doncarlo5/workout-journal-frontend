@@ -38,7 +38,7 @@ const LoginPage = () => {
       navigate("/exercises/")
     } catch (error: any) {
       console.error(error)
-      setError("Mot de passe incorrect")
+      setError(error)
       setTimeout(() => {
         setError("")
       }, 3000)
