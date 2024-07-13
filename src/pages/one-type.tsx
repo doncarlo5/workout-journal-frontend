@@ -259,7 +259,7 @@ const OneType = () => {
 
               <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
                 <Edit className="mr-2 h-4 w-4 " />
-                Éditer
+                Modifier
               </Button>
 
               <div className="col-span-2 flex gap-2 pb-5 ">
