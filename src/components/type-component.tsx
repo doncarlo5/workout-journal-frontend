@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { LucideLoader2, PlusIcon } from "lucide-react"
 import { Link } from "react-router-dom"
 
+import fetchApi from "@/lib/api-handler"
 import { Button } from "@/components/ui/button"
 
 import ExerciseTypeCard from "./exercise-type-card"
-import fetchApi from "@/lib/api-handler"
 
 export function TypeComponent() {
   const [exerciseType, setExerciseType] = useState([] as any[])
@@ -43,17 +43,7 @@ export function TypeComponent() {
       {!isLoading && exerciseType.length !== 0 && (
         <div>
           <div className="pt-10 ">
-            <h1 className="mb-5 text-4xl font-semibold tracking-tighter sm:text-5xl md:text-6xl/none">
-              Mes exercices.
-            </h1>
-          </div>
-          <div className="flex justify-center">
-            <Link to={`/profile/type/new-type`}>
-              <Button className="mx-auto">
-                <PlusIcon className="mr-2 size-5" />
-                Créer un exercice
-              </Button>
-            </Link>
+            <h1 className=" text-4xl font-semibold tracking-tighter sm:text-5xl md:text-6xl/none">Mes exercices</h1>
           </div>
           <div>
             <div className="pb-10 ">
@@ -74,33 +64,42 @@ export function TypeComponent() {
                           <div className="flex gap-3 ">
                             <Button
                               variant="secondary"
-                              className={`w-1/4 border-transparent border-2 ${currentFilter === "Upper A" ? "box-border  border-2 border-slate-400 " : ""}`}
+                              className={`w-1/4 border-2 border-transparent ${currentFilter === "Upper A" ? "box-border  border-2 border-slate-400 " : ""}`}
                               onClick={() => handleFilter("Upper A")}
                             >
                               Upper A
                             </Button>
                             <Button
                               variant="secondary"
-                              className={`w-1/4 border-transparent border-2 ${currentFilter === "Lower" ? "box-border  border-2 border-slate-400" : ""}`}
+                              className={`w-1/4 border-2 border-transparent ${currentFilter === "Lower" ? "box-border  border-2 border-slate-400" : ""}`}
                               onClick={() => handleFilter("Lower")}
                             >
                               Lower
                             </Button>
                             <Button
                               variant="secondary"
-                              className={`w-1/4 border-transparent border-2 ${currentFilter === "Upper B" ? "box-border  border-2 border-slate-400" : ""}`}
+                              className={`w-1/4 border-2 border-transparent ${currentFilter === "Upper B" ? "box-border  border-2 border-slate-400" : ""}`}
                               onClick={() => handleFilter("Upper B")}
                             >
                               Upper B
                             </Button>
                             <Button
                               variant="secondary"
-                              className={`w-1/4 border-transparent border-2 ${currentFilter === null ? "box-border  border-2 border-slate-400" : ""}`}
+                              className={`w-1/4 border-2 border-transparent ${currentFilter === null ? "box-border  border-2 border-slate-400" : ""}`}
                               onClick={() => handleFilter(null)}
                             >
                               All
                             </Button>
                           </div>
+                        </div>
+                        <div className="flex justify-center">
+                          <Link
+                            to={`/profile/type/new-type`}
+                            className=" bg-slate-50 flex items-center gap-1 justify-center my-2 h-14 text-gray-600 border-dotted w-full rounded-lg border-2 active:translate-y-0.5"
+                          >
+                            <PlusIcon className="size-5" />
+                            <p>Créer un exercice</p>
+                          </Link>
                         </div>
 
                         <div className="flex flex-col gap-4">
