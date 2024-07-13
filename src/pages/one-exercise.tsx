@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { UpdateIcon } from "@radix-ui/react-icons"
+import { ReloadIcon, UpdateIcon } from "@radix-ui/react-icons"
 import { AxiosError } from "axios"
 import { format } from "date-fns"
 import { ChevronLeft, Edit, LucideCalendarClock, LucideTrash } from "lucide-react"
@@ -28,6 +28,7 @@ import myApi from "../lib/api-handler"
 
 const OneExercise = () => {
   const [isEditable, setIsEditable] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [session, setSession] = useState([] as any)
   const [exercise, setExercise] = useState<any>({})
   const [oneExerciseType, setOneExerciseType] = useState(null as any)
@@ -67,7 +68,6 @@ const OneExercise = () => {
         weight3: response.data.weight[2],
         comment: response.data.comment,
       })
-
 
       const newExercise = response.data.type
       setExercise(newExercise)
@@ -119,6 +119,7 @@ const OneExercise = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsLoading(true)
     try {
       await myApi.put(`/api/exercise-user/${exerciseId}`, {
         type: oneExerciseType,
@@ -137,6 +138,8 @@ const OneExercise = () => {
     } catch (error) {
       const err = error as AxiosError
       console.error(err.response?.data)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -309,12 +312,17 @@ const OneExercise = () => {
                 </AlertDialog>
                 {!isEditable ? (
                   <Button variant="outline" onClick={toggleIsEditable} className="col-span-2 w-full">
-                    <Edit className="mr-2 h-4 w-4 " />
+                    <Edit className="mr-2 h-4 w-4" />
                     Modifier
                   </Button>
+                ) : isLoading ? (
+                  <Button disabled className="col-span-2 w-full">
+                    <UpdateIcon className="mr-2 h-4 w-4 animate-spin" />
+                    Chargement
+                  </Button>
                 ) : (
-                  <Button disabled={!isEditable} className="col-span-2 w-full" type="submit">
-                    <UpdateIcon className="mr-2 h-4 w-4 " />
+                  <Button className="col-span-2 w-full" type="submit">
+                    <UpdateIcon className="mr-2 h-4 w-4" />
                     Mettre à jour
                   </Button>
                 )}
