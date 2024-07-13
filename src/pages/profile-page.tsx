@@ -14,7 +14,7 @@ const ProfilePage = () => {
       <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col">
         <div className="pt-10 ">
           <h1 className="mb-5 text-4xl font-semibold tracking-tighter sm:text-5xl md:text-6xl/none">
-            Profil de {user?.firstName}.
+            Profil de {user?.firstName}
           </h1>
         </div>
         <DashboardComponent />
