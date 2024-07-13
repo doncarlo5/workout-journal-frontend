@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Accordion, AccordionItem } from "@radix-ui/react-accordion"
 import { LockClosedIcon, LockOpen1Icon, ReloadIcon } from "@radix-ui/react-icons"
-import { Check, ChevronLeft, Edit, LoaderIcon, LucideInfo } from "lucide-react"
+import { Check, ChevronLeft, Edit, LoaderIcon, LucideInfo, Stars } from "lucide-react"
 import { useNavigate, useParams } from "react-router-dom"
 import useWakeLock from "react-use-wake-lock"
 
@@ -34,6 +34,7 @@ const DoExercisePage = () => {
   const [session, setSession] = useState<any>({})
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingTypes, setIsLoadingTypes] = useState(true)
+  const [showPrefillButton, setShowPrefillButton] = useState(false)
 
   const [formState, setFormState] = useState({
     rep1: lastExercise?.rep[0] || "",
@@ -121,6 +122,19 @@ const DoExercisePage = () => {
     const key = target.id
     const value = target.value
     setFormState({ ...formState, [key]: value })
+
+    if (key === "weight1") {
+      setShowPrefillButton(true)
+    }
+  }
+
+  const handlePrefillWeights = () => {
+    setFormState({
+      ...formState,
+      weight2: formState.weight1,
+      weight3: formState.weight1,
+    })
+    setShowPrefillButton(false)
   }
 
   let { sessionId } = useParams()
@@ -184,7 +198,7 @@ const DoExercisePage = () => {
           </div>
 
           <button className="" type="button" onClick={() => handleLockScreen()}>
-            {isLocked ? <LockClosedIcon className="h-8 w-8" /> : <LockOpen1Icon className="h-8 w-8" />}
+            {isLocked ? <LockClosedIcon className="h-6 w-6" /> : <LockOpen1Icon className="h-6 w-6" />}
           </button>
         </div>
 
@@ -234,6 +248,17 @@ const DoExercisePage = () => {
         )}
         {oneExerciseType && (
           <form onSubmit={handleSubmit} className="">
+                  {showPrefillButton && (
+                    <Button
+                      variant={"outline"}
+                      type="button"
+                      onClick={handlePrefillWeights}
+                      className="mb-2 w-full cursor-pointer"
+                    >
+                      <Stars className="mr-1 h-4 w-4" />
+                      Toutes les séries à {formState.weight1} KG
+                    </Button>
+                  )}
             <div className="flex justify-center rounded-2xl bg-slate-50 py-4 dark:bg-slate-900 dark:bg-opacity-40 md:text-lg">
               <div className="flex gap-2">
                 <div className="flex flex-col gap-1 text-center">
@@ -391,7 +416,7 @@ const DoExercisePage = () => {
                 </div>
               </div>
             </div>
-            <div className="pt-5 ">
+            <div className="pt-5 pb-14 ">
               <Accordion
                 type="single"
                 collapsible
