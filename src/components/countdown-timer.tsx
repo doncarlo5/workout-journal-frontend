@@ -75,17 +75,17 @@ function CountDownTimer({ exerciseTypeTimer }: { exerciseTypeTimer: number }) {
       <div className="flex items-center justify-center pb-3">
         {isTimerPlaying ? (
           <button
-            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-teal-700 px-6 py-0.5 text-[#FFF] shadow-none transition-shadow hover:bg-teal-600 duration-300 hover:shadow-lg  active:translate-y-0.5 active:shadow-inner "
+            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-teal-700 px-6 py-0.5 text-[#FFF] shadow-none transition-shadow duration-300 hover:shadow-lg  active:translate-y-0.5 active:shadow-inner "
             onClick={() => restartFunction()}
           >
             <LucideRotateCcw className="h-6 w-6" />
           </button>
         ) : (
           <button
-            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-teal-700 px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:bg-teal-600 hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
+            className="group flex h-12 min-w-20 max-w-36 cursor-pointer items-center justify-center rounded-xl bg-teal-700 px-6 py-0.5 text-gray-900 shadow-none transition-shadow duration-300 hover:shadow-lg  active:translate-y-0.5 active:shadow-inner"
             onClick={() => setIsTimerPlaying(true)}
           >
-            <LucidePlay className="h-6 w-6 stroke-white transition ease-in-out group-hover:scale-110" />
+            <LucidePlay className="h-6 w-6 stroke-white" />
           </button>
         )}
       </div>
