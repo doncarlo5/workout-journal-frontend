@@ -17,8 +17,8 @@ const SignupPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [formState, setFormState] = useState({
-    email: "pro.julien.thomas@gmail.com",
-    password: "password",
+    email: "",
+    password: "",
   })
   const [showPassword, setShowPassword] = useState(false)
 
@@ -95,7 +95,7 @@ const SignupPage = () => {
                         <Label htmlFor="email">Email</Label>
                         <Input
                           id="email"
-                          placeholder=""
+                          placeholder="Ton adresse email"
                           value={formState.email}
                           onChange={handleChange}
                           required
@@ -106,7 +106,7 @@ const SignupPage = () => {
                         <Label htmlFor="password">Mot de passe</Label>
                         <Input
                           id="password"
-                          // placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                          placeholder="*********"
                           value={formState.password}
                           onChange={handleChange}
                           required
