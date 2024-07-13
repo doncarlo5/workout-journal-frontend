@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Accordion, AccordionItem } from "@radix-ui/react-accordion"
 import { LockClosedIcon, LockOpen1Icon, ReloadIcon } from "@radix-ui/react-icons"
-import { ChevronLeft, Edit, LoaderIcon, LucideCheckCircle, LucideInfo } from "lucide-react"
+import { Check, ChevronLeft, Edit, LoaderIcon, LucideInfo } from "lucide-react"
 import { useNavigate, useParams } from "react-router-dom"
 import useWakeLock from "react-use-wake-lock"
 
@@ -390,119 +390,6 @@ const DoExercisePage = () => {
                   </p>
                 </div>
               </div>
-              {/* 
-              <Input
-                id="rep1"
-                placeholder={lastExercise?.rep[0] || "Exemple: 5"}
-                value={formState.rep1}
-                onChange={handleChange}
-                required
-                type="number"
-                className="text-md rounded-xl text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight1">Poids 1 {`(kg)`}</Label>
-              <Input
-                id="weight1"
-                placeholder={lastExercise?.weight[0] || "Exemple: 20"}
-                value={formState.weight1}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2 text-center select-none">
-              <Label htmlFor="repRange1">Série 1</Label>
-              <Badge
-                className="justify-center text-lg font-light text-gray-500 select-none min-h-9 min-w-28"
-                variant="secondary"
-              >
-                {oneExerciseType?.repRange1}
-              </Badge>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="rep2">Rep 2</Label>
-              <Input
-                id="rep2"
-                placeholder={lastExercise?.rep[1] || "Exemple: 7"}
-                value={formState.rep2}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight2">Poids 2 {`(kg)`}</Label>
-              <Input
-                id="weight2"
-                placeholder={lastExercise?.weight[1] || "Exemple: 18"}
-                value={formState.weight2}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2 text-center select-none">
-              <Label htmlFor="repRange1">Série 2</Label>
-              <Badge
-                className="justify-center text-lg font-light text-gray-500 select-none min-h-9 min-w-28"
-                variant="secondary"
-              >
-                {oneExerciseType?.repRange2}
-              </Badge>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="repRange2">Rep 3</Label>
-              <Input
-                id="rep3"
-                placeholder={lastExercise?.rep[2] || "Exemple: 10"}
-                value={formState.rep3}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight3">Poids 3 {`(kg)`}</Label>
-              <Input
-                id="weight3"
-                placeholder={lastExercise?.weight[2] || "Exemple: 16"}
-                value={formState.weight3}
-                onChange={handleChange}
-                required
-                type="number"
-              />
-            </div>
-            <div className="space-y-2 text-center select-none">
-              <Label htmlFor="repRange1">Série 3</Label>
-              <Badge
-                className="justify-center text-lg font-light text-gray-500 select-none min-h-9 min-w-28 "
-                variant="secondary"
-              >
-                {oneExerciseType?.repRange3}
-              </Badge>
-            </div>
-            <div className="col-span-3 space-y-2">
-              <Label htmlFor="comment">Notes</Label>
-              <Textarea
-                id="comment"
-                placeholder={lastExercise?.comment ? `Note précédente: ${lastExercise?.comment}` : "Pas de notes."}
-                value={formState.comment}
-                onChange={handleChange}
-                maxLength={200}
-              />
-            </div>
-            <div className="col-span-3 pt-3 pb-5 ">
-              {isLoading ? (
-                <Button disabled className="w-full">
-                  <ReloadIcon className="w-4 h-4 mr-2 animate-spin" />
-                  Chargement
-                </Button>
-              ) : (
-                <Button className="w-full" type="submit">
-                  Valider
-                </Button> */}
             </div>
             <div className="pt-5 ">
               <Accordion
@@ -538,16 +425,21 @@ const DoExercisePage = () => {
                 </AccordionItem>
               </Accordion>
             </div>
-            <div className="mb-20 ">
+
+            <div className="fixed bottom-20 right-10 cursor-pointer">
               {isLoading ? (
-                <Button disabled className="w-full">
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                  Chargement
+                <Button
+                  disabled
+                  className="flex  h-16 w-16  items-center justify-center rounded-full text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 active:scale-95 active:shadow-inner"
+                >
+                  <ReloadIcon className="h-10 w-10 animate-spin" />
                 </Button>
               ) : (
-                <Button className="w-full" type="submit">
-                  <LucideCheckCircle className="mr-2 size-5" />
-                  Valider l'exercice
+                <Button
+                  className="flex h-16 w-16 items-center justify-center rounded-full text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 active:scale-95 active:shadow-inner"
+                  type="submit"
+                >
+                  <Check className="h-10 w-10" />
                 </Button>
               )}
             </div>
