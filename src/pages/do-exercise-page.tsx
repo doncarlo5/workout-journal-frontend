@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Accordion, AccordionItem } from "@radix-ui/react-accordion"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { ChevronLeft, Edit, LucideCheckCircle, LucideInfo } from "lucide-react"
+import { ChevronLeft, Edit, LoaderIcon, LucideCheckCircle, LucideInfo } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion"
@@ -31,7 +31,7 @@ const DoExercisePage = () => {
   const [allExerciseTypes, setAllExerciseTypes] = useState([] as any[])
   const [session, setSession] = useState<any>({})
   const [isLoading, setIsLoading] = useState(false)
-  const [isLoadingTypes, setIsLoadingTypes] = useState(false)
+  const [isLoadingTypes, setIsLoadingTypes] = useState(true)
 
   const [formState, setFormState] = useState({
     rep1: lastExercise?.rep[0] || "",
@@ -75,13 +75,12 @@ const DoExercisePage = () => {
 
   const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
-      setIsLoadingTypes(true)
       const response = await myApi.get(`/api/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
-      setIsLoadingTypes(false)
       return response.data
     } catch (error) {
-      setIsLoadingTypes(false)
       console.error("Fetch error: ", error)
+    } finally {
+      setIsLoadingTypes(false)
     }
   }
 
@@ -165,7 +164,12 @@ const DoExercisePage = () => {
 
         <Select onValueChange={onExerciseTypeChange}>
           <SelectTrigger className="w-full data-[placeholder]:italic data-[placeholder]:text-gray-700 dark:data-[placeholder]:text-white ">
-            <SelectValue className="" placeholder="Sélectionne un exercice..." />
+            <SelectValue
+              onLoad={() => setIsLoadingTypes(false)}
+              placeholder={
+                isLoadingTypes ? <LoaderIcon className="mr-2 h-4 w-4 animate-spin" /> : "Sélectionner un exercice"
+              }
+            />
           </SelectTrigger>
           <SelectContent>
             {allExerciseTypes.length === 0 ? (
@@ -178,7 +182,7 @@ const DoExercisePage = () => {
                   <SelectItem key={type._id} value={type}>
                     {isLoadingTypes ? (
                       <div role="status" className="flex max-w-sm animate-pulse items-center">
-                        <div className="mb-2 h-4 w-64 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div className="mb-2 ml-3 mt-1 h-4 w-64 rounded-full bg-gray-200 dark:bg-gray-700"></div>
                       </div>
                     ) : (
                       <p className="dark:text-white">{type.name}</p>
@@ -303,7 +307,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md font-medium  w-12 rounded-xl text-center [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md w-12  rounded-xl text-center font-medium [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                   <Input
                     id="rep3"
@@ -312,7 +316,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md font-medium  w-12 rounded-xl text-center [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md w-12  rounded-xl text-center font-medium [appearance:textfield]  focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                 </div>
 
@@ -325,7 +329,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md font-medium w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md w-20 rounded-xl text-center font-medium  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                   <Input
                     id="weight2"
@@ -334,7 +338,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md font-medium  w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md w-20  rounded-xl text-center font-medium  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                   <Input
                     id="weight3"
@@ -343,7 +347,7 @@ const DoExercisePage = () => {
                     onChange={handleChange}
                     required
                     type="number"
-                    className="text-md font-medium  w-20 rounded-xl text-center  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="text-md w-20  rounded-xl text-center font-medium  [appearance:textfield] focus:bg-slate-50 focus:shadow-inner [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                 </div>
                 <div className="flex flex-col gap-1 text-center">
