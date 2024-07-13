@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { Accordion, AccordionItem } from "@radix-ui/react-accordion"
-import { ReloadIcon } from "@radix-ui/react-icons"
+import { LockClosedIcon, LockOpen1Icon, ReloadIcon } from "@radix-ui/react-icons"
 import { ChevronLeft, Edit, LoaderIcon, LucideCheckCircle, LucideInfo } from "lucide-react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import useWakeLock from "react-use-wake-lock"
 
 import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion"
 import {
@@ -20,6 +21,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/components/ui/use-toast"
 import CountDownTimer from "@/components/countdown-timer"
 import { Navbar } from "@/components/navbar"
 
@@ -44,6 +46,26 @@ const DoExercisePage = () => {
   })
 
   const navigate = useNavigate()
+  const { isLocked, request, release } = useWakeLock()
+  const { toast } = useToast()
+
+  const handleLockScreen = () => {
+    if (isLocked) {
+      release()
+      toast({
+        title: "Allumage forcé: OFF",
+        description: "Votre écran peut s'éteindre.",
+        variant: "default",
+      })
+    } else {
+      request()
+      toast({
+        title: "Allumage forcé: ON",
+        description: "Votre écran restera allumé.",
+        variant: "success",
+      })
+    }
+  }
 
   useEffect(() => {
     setFormState({
@@ -132,34 +154,38 @@ const DoExercisePage = () => {
     <>
       <Navbar />
       <main className="container mx-auto my-0 flex h-dvh max-w-md flex-col">
-        <div className="flex items-center space-y-2 py-5">
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="outline" size="icon">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent className="w-10/12 rounded-md">
-              <AlertDialogHeader>
-                <AlertDialogTitle>Êtes-vous sur de retourner à la page précédente ?</AlertDialogTitle>
-                <AlertDialogDescription>Les données seront perdues.</AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Annuler</AlertDialogCancel>
-                <AlertDialogAction variant="destructive">
-                  <Link to={`/history/session/${session._id}`}>Continuer</Link>
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+        <div className="flex items-center justify-between py-5">
+          <div className=" flex">
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="w-10/12 rounded-md">
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Retourner à la page précédente ?</AlertDialogTitle>
+                  <AlertDialogDescription>Les données seront perdues.</AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Annuler</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => navigate(`/history/session/${session._id}`)}>
+                    Continuer
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
 
-          <div>
             {oneExerciseType ? (
               <h1 className="ml-5 text-xl font-bold md:text-3xl">{oneExerciseType?.name}</h1>
             ) : (
               <h1 className="ml-5 text-xl font-medium md:text-3xl">Nouvel exercice</h1>
             )}
           </div>
+
+          <button className="" type="button" onClick={() => handleLockScreen()}>
+            {isLocked ? <LockClosedIcon className="h-8 w-8" /> : <LockOpen1Icon className="h-8 w-8" />}
+          </button>
         </div>
 
         <Select onValueChange={onExerciseTypeChange}>
