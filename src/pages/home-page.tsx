@@ -55,7 +55,7 @@ export function HomePage() {
       <main className="container mx-auto my-0 flex h-dvh max-w-lg flex-col ">
         <div className="pt-10 ">
           <h1 className="mb-5 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">
-            Bienvenue {user?.firstName}.
+            Bienvenue {user?.firstName}
           </h1>
           <div className="flex flex-col gap-4 pb-4 ">
             {isLoading ? (
