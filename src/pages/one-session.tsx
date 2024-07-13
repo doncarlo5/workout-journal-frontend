@@ -204,9 +204,9 @@ const OneSession = () => {
                 )}
                 {formState.type_session === "Lower" && (
                   <ol className="list-inside list-disc">
-                    <li>High Bar Squat ou Deadlift</li>
-                    <li>Romanian Deadlift ou Fentes</li>
-                    <li>Leg Curl/Leg Extension Superset</li>
+                    <li>Squat</li>
+                    <li>Fentes ou Presse</li>
+                    <li>Leg Curl/Leg Extension</li>
                     <li>Extensions Mollets</li>
                     <li>Upright Row Penché</li>
                   </ol>
@@ -344,7 +344,7 @@ const OneSession = () => {
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
-              </AlertDialog>{" "}
+              </AlertDialog>
               {isLoadingSubmit ? (
                 <Button disabled className="col-span-3 w-full">
                   <LucideLoader2 className="mr-2 size-5" />
