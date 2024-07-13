@@ -10,6 +10,7 @@ import {
   LucideLoader2,
   LucidePlusCircle,
   LucideTrash,
+  Plus,
   SaveIcon,
   Weight,
 } from "lucide-react"
@@ -34,11 +35,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/components/ui/use-toast"
 import ExerciseCard from "@/components/exercise-card"
 import { Navbar } from "@/components/navbar"
 
 import myApi from "../lib/api-handler"
-import { toast } from "@/components/ui/use-toast"
 
 interface FormState {
   id: string
@@ -261,7 +262,7 @@ const OneSession = () => {
               </div>
 
               <div className=" flex flex-1 flex-col justify-between gap-2">
-                <Label htmlFor="body_weight">{`Ta pesée (KG)`}</Label>
+                <Label htmlFor="body_weight">{`Ton poids (KG)`}</Label>
                 <div className="relative w-full">
                   <Input
                     id="body_weight"
@@ -292,14 +293,14 @@ const OneSession = () => {
                   <ExerciseCard exercise={exercise} key={exercise._id} />
                 ))
               )}
-              <div>
-                <Link to={`/history/session/${sessionId}/do-exercise`}>
-                  <Button className=" mt-4">
-                    <LucidePlusCircle className="mr-2 size-5" />
-                    Ajouter un exercice{" "}
-                  </Button>
-                </Link>
-              </div>
+              <Link
+                to={`/history/session/${sessionId}/do-exercise`}
+                className="relative my-2 w-11/12 flex h-14 items-center justify-center gap-2 rounded-2xl border-dotted border-2  bg-slate-100/20 px-3 py-2 shadow-md active:translate-y-0.5 active:shadow-none dark:bg-slate-900 dark:bg-opacity-40 md:text-lg"
+              >
+                <Plus className=" text-gray-600 size-5" />
+                <p className=" text-gray-600">Ajouter un exercice</p>
+                
+              </Link>
             </div>
             <div className="col-span-2 mb-2 resize space-y-2">
               <Label htmlFor="comment">Notes</Label>
