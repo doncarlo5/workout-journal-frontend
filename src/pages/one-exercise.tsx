@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
-import { ReloadIcon, UpdateIcon } from "@radix-ui/react-icons"
-import { AxiosError } from "axios"
+import { UpdateIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
 import { ChevronLeft, Edit, LucideCalendarClock, LucideTrash } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
@@ -24,7 +23,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Navbar } from "@/components/navbar"
 
-import myApi from "../lib/api-handler"
+import fetchApi from "../lib/api-handler"
 
 const OneExercise = () => {
   const [isEditable, setIsEditable] = useState(false)
@@ -55,45 +54,41 @@ const OneExercise = () => {
 
   const fetchOneExercise = async () => {
     try {
-      const response = await myApi.get(`/api/exercise-user/${exerciseId}`)
-
+      const response = await fetchApi(`/api/exercise-user/${exerciseId}`)
       setFormState({
-        id: response.data._id,
-        name: response.data.type.name,
-        rep1: response.data.rep[0],
-        rep2: response.data.rep[1],
-        rep3: response.data.rep[2],
-        weight1: response.data.weight[0],
-        weight2: response.data.weight[1],
-        weight3: response.data.weight[2],
-        comment: response.data.comment,
+        id: response._id,
+        name: response.type.name,
+        rep1: response.rep[0],
+        rep2: response.rep[1],
+        rep3: response.rep[2],
+        weight1: response.weight[0],
+        weight2: response.weight[1],
+        weight3: response.weight[2],
+        comment: response.comment,
       })
 
-      const newExercise = response.data.type
+      const newExercise = response.type
       setExercise(newExercise)
       setOneExerciseType(newExercise)
-      return response.data
-    } catch (error) {
-      const err = error as AxiosError
-      console.error(err.response?.data)
+      return response
+    } catch (error: any) {
+      console.error(error.message)
     }
   }
 
   const fetchOneSession = async (sessionId: string) => {
     try {
-      const response = await myApi.get(`/api/sessions/${sessionId}`)
-      return response.data
+      const response = await fetchApi(`/api/sessions/${sessionId}`)
+      return response
     } catch (error) {
       console.error("Fetch error: ", error)
     }
   }
 
-  const fetchAllExerciseTypes = async (sessionData: any) => {
+  const fetchAllExerciseTypes = async (_sessionData: any) => {
     try {
-      console.log(sessionData)
-      // const response = await myApi.get(`/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
-      const response = await myApi.get(`/api/exercise-type?limit=1000`)
-      return response.data
+      const response = await fetchApi(`/api/exercise-type?limit=1000`)
+      return response
     } catch (error) {
       console.error("Fetch error: ", error)
     }
@@ -121,23 +116,22 @@ const OneExercise = () => {
     e.preventDefault()
     setIsLoading(true)
     try {
-      await myApi.put(`/api/exercise-user/${exerciseId}`, {
-        type: oneExerciseType,
-        rep: [formState.rep1, formState.rep2, formState.rep3],
-        weight: [formState.weight1, formState.weight2, formState.weight3],
-        comment: formState.comment,
+      await fetchApi(`/api/exercise-user/${exerciseId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          type: oneExerciseType,
+          rep: [formState.rep1, formState.rep2, formState.rep3],
+          weight: [formState.weight1, formState.weight2, formState.weight3],
+          comment: formState.comment,
+        }),
       })
-      // launch toast if success
       toast({
         title: "Exercice mis à jour.",
       })
-
-      // fetchOneSession()
       fetchOneExercise()
       setIsEditable(false)
-    } catch (error) {
-      const err = error as AxiosError
-      console.error(err.response?.data)
+    } catch (error: any) {
+      console.error(error.message)
     } finally {
       setIsLoading(false)
     }
@@ -145,7 +139,9 @@ const OneExercise = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await myApi.delete(`/api/exercise-user/${id}`)
+      await fetchApi(`/api/exercise-user/${id}`, {
+        method: 'DELETE',
+      })
       fetchOneExercise()
       navigate(`/history/session/${session._id}`)
       toast({

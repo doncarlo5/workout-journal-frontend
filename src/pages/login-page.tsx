@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Navbar } from "@/components/navbar"
 
 import { AuthContext } from "../context/context-wrapper"
-import myApi from "../lib/api-handler"
+import fetchApi from "@/lib/api-handler"
 
 const LoginPage = () => {
   const [error, setError] = useState("")
@@ -32,13 +32,17 @@ const LoginPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await myApi.post("/api/auth/login", formState)
-      localStorage.setItem("token", response.data.token)
+      const response = await fetchApi("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify(formState),
+      })
+
+      localStorage.setItem("token", response.token)
       await authenticateUser()
       navigate("/exercises/")
     } catch (error: any) {
       console.error(error)
-      setError(error)
+      setError(error.message)
       setTimeout(() => {
         setError("")
       }, 3000)

@@ -3,9 +3,9 @@ import { format } from "date-fns"
 import { LucideArrowRight, LucideMessageSquareText } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
-import myApi from "@/lib/api-handler"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Skeleton } from "./ui/skeleton"
+import fetchApi from "@/lib/api-handler"
 
 export function ExerciseComponent() {
   const [exercise, setExercise] = useState([] as any[])
@@ -15,8 +15,8 @@ export function ExerciseComponent() {
 
   const fetchUserExercises = async () => {
     try {
-      const response = await myApi.get("/api/exercise-user?limit=1000&sort=-updatedAt")
-      setExercise(response.data)
+      const response = await fetchApi("/api/exercise-user?limit=1000&sort=-updatedAt")
+      setExercise(response)
     } catch (error) {
       console.error("Fetch error: ", error)
     } finally {

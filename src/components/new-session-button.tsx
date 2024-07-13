@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { LucideWeight } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
-import myApi from "../lib/api-handler"
+import fetchApi from "../lib/api-handler"
 import IconChest from "./chest-icon"
 import IconLegs from "./legs-icon"
 import { Button } from "./ui/button"
@@ -22,9 +22,9 @@ function NewSessionButton({ Children }: { Children: any }) {
 
   const fetchLastSessionUser = async () => {
     try {
-      const response = await myApi.get(`/api/sessions?limit=1&sort=-createdAt`)
-      if (response.data && response.data.length > 0) {
-        setWeight(response.data[0].body_weight)
+      const response = await fetchApi(`/api/sessions?limit=1&sort=-createdAt`)
+      if (response && response.length > 0) {
+        setWeight(response[0].body_weight)
       } else {
         setShowDialog(true)
       }
@@ -36,16 +36,19 @@ function NewSessionButton({ Children }: { Children: any }) {
   const handleCreateSession = async (e: React.FormEvent, userChoice: string) => {
     e.preventDefault()
     try {
-      const response = await myApi.post("/api/sessions", {
-        date_session: new Date(),
-        type_session: userChoice,
-        body_weight: weight,
-        exercise_user_list: [],
-        is_done: false,
-        comment: "",
+      const response = await fetchApi("/api/sessions", {
+        method: "POST",
+        body: JSON.stringify({
+          date_session: new Date(),
+          type_session: userChoice,
+          body_weight: weight,
+          exercise_user_list: [],
+          is_done: false,
+          comment: "",
+        }),
       })
 
-      const newSessionId = response.data._id
+      const newSessionId = response._id
       navigate(`/history/session/${newSessionId}`)
     } catch (error: any) {
       console.error(error)

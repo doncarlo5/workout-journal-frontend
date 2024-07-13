@@ -3,7 +3,7 @@ import { format } from "date-fns"
 import { LucideLoader2 } from "lucide-react"
 import { Area, AreaChart, CartesianGrid, Label, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
-import myApi from "@/lib/api-handler"
+import fetchApi from "@/lib/api-handler"
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 
@@ -15,8 +15,8 @@ function ExerciseChart() {
 
   const fetchAllExerciseTypes = async () => {
     try {
-      const response = await myApi.get(`/api/exercise-type?limit=1000`)
-      return response.data
+      const response = await fetchApi(`/api/exercise-type?limit=1000`)
+      return response
     } catch (error) {
       console.error("Fetch error: ", error)
     } finally {
@@ -26,32 +26,30 @@ function ExerciseChart() {
 
   useEffect(() => {
     const init = async () => {
-      setIsLoading(true); 
-      const exerciseTypeData = await fetchAllExerciseTypes();
-      setAllExerciseTypes(exerciseTypeData);
-  
+      setIsLoading(true)
+      const exerciseTypeData = await fetchAllExerciseTypes()
+      setAllExerciseTypes(exerciseTypeData)
+
       if (exerciseTypeData.length > 0) {
-        const defaultExerciseType = exerciseTypeData[29] || exerciseTypeData[0];
-        setSelectedExerciseType(defaultExerciseType);
-        await AllExercisesTypeChange(defaultExerciseType);
+        const defaultExerciseType = exerciseTypeData[29] || exerciseTypeData[0]
+        setSelectedExerciseType(defaultExerciseType)
+        await AllExercisesTypeChange(defaultExerciseType)
       } else {
-        setSelectedExerciseType(null);
-        setExercise([]);
+        setSelectedExerciseType(null)
+        setExercise([])
       }
-  
-      setIsLoading(false);
-    };
-  
-    init();
-  
-  }, []);
-  
+
+      setIsLoading(false)
+    }
+
+    init()
+  }, [])
 
   const AllExercisesTypeChange = async (value: any) => {
-    const response = await myApi.get(`/api/exercise-user?limit=1000&sort=createdAt&type=${value._id}`)
-    setExercise(response.data)
+    const response = await fetchApi(`/api/exercise-user?limit=1000&sort=createdAt&type=${value._id}`)
+    setExercise(response)
     setSelectedExerciseType(value)
-    return response.data
+    return response
   }
 
   const formatXAxis = (tickFormat: string) => {
@@ -65,7 +63,7 @@ function ExerciseChart() {
   const min = Math.min(...values)
   const max = Math.max(...values)
 
-  const domain = [Math.floor(min / 100) * 100 - 100, Math.ceil(max / 100) * 100 + 100];
+  const domain = [Math.floor(min / 100) * 100 - 100, Math.ceil(max / 100) * 100 + 100]
 
   return (
     <>
@@ -183,7 +181,6 @@ function ExerciseChart() {
           <p>Il n'y a pas de données pour cet exercice.</p>
         </div>
       )}
-      
     </>
   )
 }

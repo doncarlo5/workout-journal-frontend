@@ -3,7 +3,6 @@ import { AuthContext } from "@/context/context-wrapper"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { useNavigate } from "react-router-dom"
 
-import myApi from "@/lib/api-handler"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import SignupComponent from "../components/signup-component"
+import fetchApi from "@/lib/api-handler"
 
 const SignupPage = () => {
   const [tab, setTab] = useState("login")
@@ -42,14 +42,22 @@ const SignupPage = () => {
     e.preventDefault()
     try {
       setIsLoading(true)
-      const response = await myApi.post("/api/auth/login", formState)
-      localStorage.setItem("token", response.data.token)
+      const response = await fetchApi("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify(formState),
+      })
+
+      localStorage.setItem("token", response.token)
       await authenticateUser()
       navigate("/")
     } catch (error: any) {
       console.error(error)
       setIsLoading(false)
-      setError(error.response.data.message)
+
+      // Check if the error response has a message
+      const errorMessage = error.message || "An error occurred!"
+      setError(errorMessage)
+
       setTimeout(() => {
         setError("")
       }, 3000)

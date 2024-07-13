@@ -4,12 +4,11 @@ import { ReloadIcon, UpdateIcon } from "@radix-ui/react-icons"
 import { ChevronLeft } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import myApi from "@/lib/api-handler"
-
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
 import { useToast } from "../components/ui/use-toast"
+import fetchApi from "@/lib/api-handler"
 
 function SettingsPage() {
   const { toast } = useToast()
@@ -36,18 +35,23 @@ function SettingsPage() {
     e.preventDefault()
     try {
       setIsLoading(true)
-      await myApi.patch("/api/auth/settings", formState)
+      await fetchApi("/api/auth/settings", {
+        method: "PATCH",
+        body: JSON.stringify(formState),
+      })
+
       toast({
         title: "Profil mis à jour!",
       })
     } catch (error: any) {
       setIsLoading(false)
+      const errorMessage = error.message || "Une erreur est survenue!"
       toast({
         variant: "destructive",
         title: "Une erreur est survenue! ❌",
-        description: error.response.data.message,
+        description: errorMessage,
       })
-      setError(error.response.data.message)
+      setError(errorMessage)
       setTimeout(() => {
         setError("")
       }, 3000)

@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { AxiosError } from "axios"
 import { ChevronLeft } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
@@ -12,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Navbar } from "@/components/navbar"
 
-import myApi from "../lib/api-handler"
+import fetchApi from "../lib/api-handler"
 
 interface FormState {
   id: string
@@ -56,24 +55,26 @@ const NewType = () => {
     try {
       setIsLoading(true)
       const timerValue = parseInt(formState.timer)
-      await myApi.post(`/api/exercise-type`, {
-        name: formState.name,
-        type_session: formState.type_session,
-        timer: timerValue,
-        repRange1: formState.repRange1,
-        repRange2: formState.repRange2,
-        repRange3: formState.repRange3,
-        advice: formState.advice,
+      await fetchApi(`/api/exercise-type`, {
+        method: 'POST',
+        body: JSON.stringify({
+          name: formState.name,
+          type_session: formState.type_session,
+          timer: timerValue,
+          repRange1: formState.repRange1,
+          repRange2: formState.repRange2,
+          repRange3: formState.repRange3,
+          advice: formState.advice,
+        }),
       })
       navigate(`/profile/type`)
       toast({
         title: "Type d'exercice créé.",
         description: "Vous pouvez maintenant l'ajouter à vos séances.",
       })
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false)
-      const err = error as AxiosError
-      console.error(err.response?.data)
+      console.error(error.message)
     }
   }
 

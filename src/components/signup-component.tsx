@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-import myApi from "../lib/api-handler"
+import fetchApi from "../lib/api-handler"
 import { toast } from "./ui/use-toast"
 
 const SignupComponent = () => {
@@ -39,8 +39,13 @@ const SignupComponent = () => {
     e.preventDefault()
     try {
       setIsLoading(true)
-      const response = await myApi.post("/api/auth/signup", formState)
-      localStorage.setItem("token", response.data.token)
+
+      const response = await fetchApi("/api/auth/signup", {
+        method: "POST",
+        body: JSON.stringify(formState),
+      })
+
+      localStorage.setItem("token", response.token)
       await authenticateUser()
       navigate("/")
       toast({
@@ -49,7 +54,7 @@ const SignupComponent = () => {
       })
     } catch (error: any) {
       setIsLoading(false)
-      setError(error.response.data.message)
+      setError(error.message)
       setTimeout(() => {
         setError("")
       }, 3000)

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { UpdateIcon } from "@radix-ui/react-icons"
-import { AxiosError } from "axios"
 import { ChevronLeft, Edit, LucideLoader2, LucideTrash } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -22,7 +21,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { Navbar } from "@/components/navbar"
 
-import myApi from "../lib/api-handler"
+import fetchApi from "../lib/api-handler"
 
 interface FormState {
   id: string
@@ -60,25 +59,21 @@ const OneType = () => {
 
   const fetchOneType = async () => {
     try {
-      const response = await myApi.get(`/api/exercise-type/${typeId}`)
-
+      const response = await fetchApi(`/api/exercise-type/${typeId}`)
       setFormState({
-        id: response.data._id,
-        name: response.data.name,
-        advice: response.data.advice,
-        timer: response.data.timer,
-        repRange1: response.data.repRange1,
-        repRange2: response.data.repRange2,
-        repRange3: response.data.repRange3,
-        type_session: response.data.type_session,
+        id: response._id,
+        name: response.name,
+        advice: response.advice,
+        timer: response.timer,
+        repRange1: response.repRange1,
+        repRange2: response.repRange2,
+        repRange3: response.repRange3,
+        type_session: response.type_session,
       })
-
-      const newType = response.data
-      setType(newType)
+      setType(response)
       setIsLoading(false)
-    } catch (error) {
-      const err = error as AxiosError
-      console.error(err.response?.data)
+    } catch (error: any) {
+      console.error(error.message)
     }
   }
 
@@ -101,26 +96,30 @@ const OneType = () => {
     e.preventDefault()
     try {
       const timerValue = parseInt(formState.timer)
-      await myApi.put(`/api/exercise-type/${typeId}`, {
-        name: formState.name,
-        advice: formState.advice,
-        timer: timerValue,
-        repRange1: formState.repRange1,
-        repRange2: formState.repRange2,
-        repRange3: formState.repRange3,
-        type_session: formState.type_session,
+      await fetchApi(`/api/exercise-type/${typeId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: formState.name,
+          advice: formState.advice,
+          timer: timerValue,
+          repRange1: formState.repRange1,
+          repRange2: formState.repRange2,
+          repRange3: formState.repRange3,
+          type_session: formState.type_session,
+        }),
       })
       fetchOneType()
       setIsEditable(false)
-    } catch (error) {
-      const err = error as AxiosError
-      console.error(err.response?.data)
+    } catch (error: any) {
+      console.error(error.message)
     }
   }
 
   const handleDelete = async (id: string) => {
     try {
-      await myApi.delete(`/api/exercise-type/${id}`)
+      await fetchApi(`/api/exercise-type/${id}`, {
+        method: 'DELETE',
+      })
       fetchOneType()
       navigate("/type/")
     } catch (error) {

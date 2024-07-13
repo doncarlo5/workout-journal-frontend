@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { LucideLoader2 } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import myApi from "@/lib/api-handler"
 import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import TypeComponent from "@/components/type-component"
+import fetchApi from "@/lib/api-handler"
 
 export function TypesList() {
   const [type, setType] = useState([] as any[])
@@ -13,11 +13,12 @@ export function TypesList() {
 
   const fetchTypes = async () => {
     try {
-      const response = await myApi.get("/api/exercise-type?limit=1000&sort=-updatedAt")
+      const response = await fetchApi("/api/exercise-type?limit=1000&sort=-updatedAt")
       setIsLoading(false)
-      setType(response.data)
-    } catch (error) {
+      setType(response)
+    } catch (error: any) {
       console.error("Fetch error: ", error)
+      setIsLoading(false)
     }
   }
 

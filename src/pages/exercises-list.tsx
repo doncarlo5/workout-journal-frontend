@@ -3,7 +3,7 @@ import { format } from "date-fns"
 import { LucideArrowRightCircle, LucideMessageSquareText, LucideTrash2 } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import myApi from "@/lib/api-handler"
+import fetchApi from "@/lib/api-handler"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,32 +24,24 @@ export function ExercicesList() {
 
   const fetchUserExercises = async () => {
     try {
-      const response = await myApi.get("/api/exercise-user?limit=1000&sort=-updatedAt")
-      setExercise(response.data)
-    } catch (error) {
+      const response = await fetchApi("/api/exercise-user?limit=1000&sort=-updatedAt")
+      setExercise(response)
+    } catch (error: any) {
       console.error("Fetch error: ", error)
     }
   }
 
-  // const fetchOneSession = async () => {
-  //   try {
-  //     const response = await myApi.get(`/sessions/${exercise.session}`)
-  //     return response.data[0]
-  //   } catch (error) {
-  //     console.error("Fetch error: ", error)
-  //   }
-  // }
-
   useEffect(() => {
     fetchUserExercises()
-    // fetchOneSession()
   }, [])
 
   const handleDelete = async (id: string) => {
     try {
-      await myApi.delete(`/api/exercise-user/${id}`)
+      await fetchApi(`/api/exercise-user/${id}`, {
+        method: "DELETE",
+      })
       fetchUserExercises()
-    } catch (error) {
+    } catch (error: any) {
       console.error("Fetch error: ", error)
     }
   }

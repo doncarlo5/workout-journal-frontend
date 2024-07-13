@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react"
 
 import { User } from "@/types/user"
-import myApi from "@/lib/api-handler"
+import fetchApi from "@/lib/api-handler"
 
 type WrapperProps = {
   children: React.ReactNode
@@ -31,8 +31,8 @@ const AuthContextWrapper = ({ children }: WrapperProps) => {
     const token = localStorage.getItem("token")
     try {
       if (token) {
-        const response = await myApi.get("/api/auth/verify")
-        setUser(response.data)
+        const response = await fetchApi("/api/auth/verify")
+        setUser(response)
         setIsLoggedIn(true)
       } else {
         setIsLoading(false)

@@ -5,12 +5,12 @@ import { LucideCircleUser, Plus } from "lucide-react"
 import { FaDumbbell, FaWeightScale } from "react-icons/fa6"
 import { Link } from "react-router-dom"
 
-import myApi from "@/lib/api-handler"
+import fetchApi from "@/lib/api-handler"
+import { AnimatedCounter } from "@/components/animated-counter"
 import { Navbar } from "@/components/navbar"
 import NewSessionButton from "@/components/new-session-button"
 
 import useAuth from "../context/use-auth"
-import { AnimatedCounter } from "@/components/animated-counter"
 
 export function HomePage() {
   const { user } = useAuth()
@@ -22,8 +22,8 @@ export function HomePage() {
   const fetchLastSession = async () => {
     try {
       setIsLoading(true)
-      const response = await myApi.get("/api/sessions?limit=1&sort=-date_session")
-      setLastSession(response.data)
+      const response = await fetchApi("/api/sessions?limit=1&sort=-date_session")
+      setLastSession(response[0])
     } catch (error: any) {
       console.error(error)
     } finally {
@@ -37,9 +37,9 @@ export function HomePage() {
 
   const fetchAllSessions = async () => {
     try {
-      const response = await myApi.get("/api/sessions?limit=1000&sort=-date_session")
-      setAllSessions(response.data)
-    } catch (error) {
+      const response = await fetchApi("/api/sessions?limit=1000&sort=-date_session")
+      setAllSessions(response)
+    } catch (error: any) {
       console.error("Fetch error: ", error)
     }
   }
@@ -65,16 +65,16 @@ export function HomePage() {
               </div>
             ) : (
               <div className="flex h-24 flex-col justify-between rounded-lg bg-slate-100 px-3 py-3  shadow-lg dark:bg-slate-900 dark:bg-opacity-80">
-                {lastSession[0] ? (
+                {lastSession ? (
                   <h2 className="text-lg font-bold ">Dernière séance </h2>
                 ) : (
                   <h2 className="text-lg font-bold ">Aucune séance</h2>
                 )}{" "}
                 <div className="flex items-end justify-between   text-slate-600 dark:text-gray-400">
                   <span>
-                    {lastSession[0]?.date_session && format(new Date(lastSession[0]?.date_session), "dd/MM/yyyy")}
+                    {lastSession?.date_session && format(new Date(lastSession?.date_session), "dd/MM/yyyy")}
                     {" - "}
-                    {lastSession[0]?.type_session && lastSession[0]?.type_session}
+                    {lastSession?.type_session && lastSession?.type_session}
                   </span>
                   <Link className=" flex" to="/history">
                     <span className="jus flex  text-sm text-teal-500 hover:underline">Voir tout</span>
@@ -114,19 +114,19 @@ export function HomePage() {
             ) : (
               <Link
                 className="group flex h-24 w-full  flex-col justify-between rounded-lg bg-slate-100 px-3 py-3 shadow-lg  active:translate-y-0.5 active:shadow-inner dark:bg-slate-900 dark:bg-opacity-80"
-                to={`/history/session/${lastSession[0]?._id}`}
+                to={`/history/session/${lastSession?._id}`}
               >
                 <div className="flex items-baseline gap-2 text-sm text-slate-600">
                   <FaWeightScale color="rgb(71 85 105)" className="" height={17} width={17} strokeWidth={2.2} />
                   Poids
                 </div>
                 <div className=" text-2xl font-medium">
-                  {lastSession[0]?.body_weight} <span className=" text-xl font-extralight">KG</span>
+                  {lastSession?.body_weight} <span className=" text-xl font-extralight">KG</span>
                 </div>
                 <div className="text-xs font-extralight text-slate-600 ">
-                  {lastSession[0]?.date_session &&
+                  {lastSession?.date_session &&
                     capitalizeFirstLetter(
-                      format(new Date(lastSession[0]?.date_session), "iiii do MMMM yyyy", {
+                      format(new Date(lastSession?.date_session), "iiii do MMMM yyyy", {
                         locale: fr,
                       })
                     )}

@@ -5,6 +5,7 @@ import { Check, ChevronLeft, Edit, LoaderIcon, LucideInfo, Stars } from "lucide-
 import { useNavigate, useParams } from "react-router-dom"
 import useWakeLock from "react-use-wake-lock"
 
+import fetchApi from "@/lib/api-handler"
 import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion"
 import {
   AlertDialog,
@@ -24,8 +25,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
 import CountDownTimer from "@/components/countdown-timer"
 import { Navbar } from "@/components/navbar"
-
-import myApi from "../lib/api-handler"
 
 const DoExercisePage = () => {
   const [oneExerciseType, setOneExerciseType] = useState(null as any)
@@ -82,25 +81,28 @@ const DoExercisePage = () => {
 
   const onExerciseTypeChange = async (value: any) => {
     setOneExerciseType(value)
-    const response = await myApi.get(`/api/exercise-user?limit=1&sort=-createdAt&type=${value._id}`)
-
-    setLastExercise(response.data[0])
+    try {
+      const response = await fetchApi(`/api/exercise-user?limit=1&sort=-createdAt&type=${value._id}`)
+      setLastExercise(response[0])
+    } catch (error: any) {
+      console.error("Fetch error: ", error)
+    }
   }
 
   const fetchOneSession = async () => {
     try {
-      const response = await myApi.get(`/api/sessions/${sessionId}`)
-      return response.data
-    } catch (error) {
+      const response = await fetchApi(`/api/sessions/${sessionId}`)
+      return response
+    } catch (error: any) {
       console.error("Fetch error: ", error)
     }
   }
 
   const fetchAllExerciseTypes = async (sessionData: any) => {
     try {
-      const response = await myApi.get(`/api/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
-      return response.data
-    } catch (error) {
+      const response = await fetchApi(`/api/exercise-type?type_session=${sessionData.type_session}&limit=1000`)
+      return response
+    } catch (error: any) {
       console.error("Fetch error: ", error)
     } finally {
       setIsLoadingTypes(false)
@@ -143,24 +145,32 @@ const DoExercisePage = () => {
     e.preventDefault()
     try {
       setIsLoading(true)
-      const response = await myApi.post("/api/exercise-user", {
-        type: oneExerciseType._id,
-        rep: [formState.rep1, formState.rep2, formState.rep3],
-        weight: [formState.weight1, formState.weight2, formState.weight3],
-        comment: formState.comment,
-        session: sessionId,
+
+      const response = await fetchApi("/api/exercise-user", {
+        method: "POST",
+        body: JSON.stringify({
+          type: oneExerciseType._id,
+          rep: [formState.rep1, formState.rep2, formState.rep3],
+          weight: [formState.weight1, formState.weight2, formState.weight3],
+          comment: formState.comment,
+          session: sessionId,
+        }),
       })
 
       const updatedSession = {
-        exercise_user_list: [...session.exercise_user_list, response.data.id],
+        exercise_user_list: [...session.exercise_user_list, response._id],
       }
 
-      await myApi.put(`/api/sessions/${sessionId}`, updatedSession)
+      await fetchApi(`/api/sessions/${sessionId}`, {
+        method: "PUT",
+        body: JSON.stringify(updatedSession),
+      })
 
       navigate(`/history/session/${sessionId}`)
     } catch (error: any) {
-      setIsLoading(false)
       console.error(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -248,17 +258,17 @@ const DoExercisePage = () => {
         )}
         {oneExerciseType && (
           <form onSubmit={handleSubmit} className="">
-                  {showPrefillButton && (
-                    <Button
-                      variant={"outline"}
-                      type="button"
-                      onClick={handlePrefillWeights}
-                      className="mb-2 w-full cursor-pointer"
-                    >
-                      <Stars className="mr-1 h-4 w-4" />
-                      Toutes les séries à {formState.weight1} KG
-                    </Button>
-                  )}
+            {showPrefillButton && (
+              <Button
+                variant={"outline"}
+                type="button"
+                onClick={handlePrefillWeights}
+                className="mb-2 w-full cursor-pointer"
+              >
+                <Stars className="mr-1 h-4 w-4" />
+                Toutes les séries à {formState.weight1} KG
+              </Button>
+            )}
             <div className="flex justify-center rounded-2xl bg-slate-50 py-4 dark:bg-slate-900 dark:bg-opacity-40 md:text-lg">
               <div className="flex gap-2">
                 <div className="flex flex-col gap-1 text-center">
@@ -416,7 +426,7 @@ const DoExercisePage = () => {
                 </div>
               </div>
             </div>
-            <div className="pt-5 pb-14 ">
+            <div className="pb-14 pt-5 ">
               <Accordion
                 type="single"
                 collapsible

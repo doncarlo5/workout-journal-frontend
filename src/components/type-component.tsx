@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { LucideLoader2, PlusIcon } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import myApi from "@/lib/api-handler"
 import { Button } from "@/components/ui/button"
 
 import ExerciseTypeCard from "./exercise-type-card"
+import fetchApi from "@/lib/api-handler"
 
 export function TypeComponent() {
   const [exerciseType, setExerciseType] = useState([] as any[])
@@ -15,9 +15,9 @@ export function TypeComponent() {
 
   const fetchTypes = async () => {
     try {
-      const response = await myApi.get("/api/exercise-type?limit=1000&sort=-updatedAt")
-      setExerciseType(response.data)
-      setFilteredExerciseType(response.data)
+      const response = await fetchApi("/api/exercise-type?limit=1000&sort=-updatedAt")
+      setExerciseType(response)
+      setFilteredExerciseType(response)
       setIsLoading(false)
     } catch (error) {
       console.error("Fetch error: ", error)

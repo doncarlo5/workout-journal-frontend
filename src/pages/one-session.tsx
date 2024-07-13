@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { CalendarIcon, InfoCircledIcon } from "@radix-ui/react-icons"
-import { AxiosError } from "axios"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale/fr"
 import {
@@ -8,7 +7,6 @@ import {
   LucideArrowLeft,
   LucideCheckCircle,
   LucideLoader2,
-  LucidePlusCircle,
   LucideTrash,
   Plus,
   SaveIcon,
@@ -39,7 +37,7 @@ import { toast } from "@/components/ui/use-toast"
 import ExerciseCard from "@/components/exercise-card"
 import { Navbar } from "@/components/navbar"
 
-import myApi from "../lib/api-handler"
+import fetchApi from "../lib/api-handler"
 
 interface FormState {
   id: string
@@ -71,22 +69,20 @@ const OneSession = () => {
 
   const fetchOneSession = async () => {
     try {
-      const response = await myApi.get(`/api/sessions/${sessionId}`)
+      const response = await fetchApi(`/api/sessions/${sessionId}`)
       setFormState({
-        id: response.data._id,
-        date_session: response.data.date_session,
-        type_session: response.data.type_session,
-        body_weight: response.data.body_weight,
-        exercise_user_list: response.data.exercise_user_list,
-        is_done: response.data.is_done,
-        comment: response.data.comment,
+        id: response._id,
+        date_session: response.date_session,
+        type_session: response.type_session,
+        body_weight: response.body_weight,
+        exercise_user_list: response.exercise_user_list,
+        is_done: response.is_done,
+        comment: response.comment,
       })
-      const newSession = response.data
-      setSession(newSession)
+      setSession(response)
       setIsLoading(false)
-    } catch (error) {
-      const err = error as AxiosError
-      console.error(err.response?.data)
+    } catch (error: any) {
+      console.error(error.message)
     }
   }
 
@@ -98,19 +94,21 @@ const OneSession = () => {
     e.preventDefault()
     try {
       setIsLoadingSubmit(true)
-      await myApi.put(`/api/sessions/${sessionId}`, {
-        date_session: formState.date_session,
-        type_session: formState.type_session,
-        body_weight: formState.body_weight,
-        exercise_user_list: formState.exercise_user_list,
-        is_done: true,
-        comment: formState.comment,
+      await fetchApi(`/api/sessions/${sessionId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          date_session: formState.date_session,
+          type_session: formState.type_session,
+          body_weight: formState.body_weight,
+          exercise_user_list: formState.exercise_user_list,
+          is_done: true,
+          comment: formState.comment,
+        }),
       })
       fetchOneSession()
       navigate("/history/")
-    } catch (error) {
-      const err = error as AxiosError
-      console.error(err.response?.data)
+    } catch (error: any) {
+      console.error(error.message)
     } finally {
       setIsLoadingSubmit(false)
     }
@@ -119,19 +117,21 @@ const OneSession = () => {
   const handleSelectDate: SelectSingleEventHandler = async (date: Date | undefined) => {
     setFormState({ ...formState, date_session: date?.toString() || "" })
     try {
-      await myApi.put(`/api/sessions/${sessionId}`, {
-        date_session: date,
+      await fetchApi(`/api/sessions/${sessionId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ date_session: date }),
       })
-    } catch (error) {
-      const err = error as AxiosError
-      console.error(err.response?.data)
+    } catch (error: any) {
+      console.error(error.message)
     }
     setIsCalendarOpen(false)
   }
 
   const handleDelete = async (id: string) => {
     try {
-      await myApi.delete(`/api/sessions/${id}`)
+      await fetchApi(`/api/sessions/${id}`, {
+        method: 'DELETE',
+      })
       fetchOneSession()
       navigate("/history/")
     } catch (error) {
@@ -155,15 +155,15 @@ const OneSession = () => {
   const handleSaveComment = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      await myApi.put(`/api/sessions/${sessionId}`, {
-        comment: formState.comment,
+      await fetchApi(`/api/sessions/${sessionId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ comment: formState.comment }),
       })
       toast({
         title: "Commentaire enregistré.",
       })
-    } catch (error) {
-      const err = error as AxiosError
-      console.error(err.response?.data)
+    } catch (error: any) {
+      console.error(error.message)
       toast({
         title: "Erreur",
         description: "Une erreur est survenue lors de l'enregistrement du commentaire.",

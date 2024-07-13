@@ -3,7 +3,7 @@ import { format } from "date-fns"
 import { LucideLoader2 } from "lucide-react"
 import { Area, AreaChart, Label, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
-import myApi from "@/lib/api-handler"
+import fetchApi from "@/lib/api-handler"
 
 function BodyWeightChart() {
   const [session, setSession] = useState([] as any[])
@@ -11,14 +11,15 @@ function BodyWeightChart() {
 
   const fetchUserSessions = async () => {
     try {
-      const response = await myApi.get("/api/sessions?limit=1000&sort=date_session")
-      setSession(response.data)
+      const response = await fetchApi("/api/sessions?limit=1000&sort=date_session");
+      setSession(response);
     } catch (error) {
-      console.error("Fetch error: ", error)
+      console.error("Fetch error: ", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
+  
 
   const formatXAxis = (tickFormat: string) => {
     const formattedDate = format(new Date(tickFormat), "dd/MM/yyyy")
