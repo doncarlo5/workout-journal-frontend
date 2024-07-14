@@ -1,4 +1,4 @@
-# Hero Journal 🏋️‍♂️ - by Julien THOMAS ~ Frontend
+# Hero App 🏋️‍♂️ - by Julien THOMAS ~ Frontend
 
 <a href="https://workout-journal-pro.netlify.app/"><img src="public/cover-img.png" width="60%" /></a>
 
@@ -26,4 +26,4 @@ A React app to track your progress at the gym for specific exercises.
 # 🌐 Credits
 
 - Shadcn : [Website](https://ui.shadcn.com/)
-- Hero Journal Backend : [GitHub Repo](https://github.com/doncarlo5/workout-journal-backend)
+- Hero App Backend : [GitHub Repo](https://github.com/doncarlo5/workout-journal-backend)

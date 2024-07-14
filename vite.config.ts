@@ -12,7 +12,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
       manifest: {
-        name: "Hero Journal",
+        name: "Hero App",
         short_name: "WJ App",
         theme_color: "#ffffff",
         icons: [
